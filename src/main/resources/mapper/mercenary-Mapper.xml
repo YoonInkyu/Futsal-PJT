@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 모든 SQL문을 mapper태그 안에 작성 -->
+<mapper namespace="mercenaryMapper">
+	<resultMap type="com.kh.project.mercenary.vo.MercenaryVO" id="mercenary">
+		<id column="MERCENARY_APPLY_CODE" 				property="mercenaryApplyCode"/>
+		<result column="MERCENARY_APPLY_TITLE" 			property="mercenaryApplyTitle"/>
+		<result column="MERCENARY_APPLY_WRITER" 		property="mercenaryApplyWriter"/>
+		<result column="MERCENARY_APPLY_REGDATE" 		property="mercenaryApplyRegdate"/>
+		<result column="MERCENARY_APPLY_NUMBERMEMBER" 	property="mercenaryApplyNumbermember"/>
+		<result column="MERCENARY_APPLY_POSIBLE" 		property="mercenaryApplyPosible"/>
+		<result column="MEMBER_CODE" 					property="memberCode"/>
+		<result column="MATCH_CODE" 					property="matchCode"/>
+		<result column="MERCENARY_APPLY_INTRO" 			property="mercenaryApplyIntro"/>
+		<result column="MERCENARY_BOARD_CODE" 			property="mercenaryBoardCode"/>
+		<result column="MERCENARY_BOARD_TITLE" 			property="mercenaryBoardTitle"/>
+		<result column="MERCENARY_BOARD_WRITER" 		property="mercenaryBoardWriter"/>
+		<result column="MERCENARY_BOARD_REGDATE" 		property="mercenaryBoardRegdate"/>
+		<result column="MERCENARY_BOARD_NUMBERMEMBER" 	property="mercenaryBoardNumbermember"/>
+		<result column="TEAM_CODE" 						property="teamCode"/>
+		<result column="MERCENARY_BOARD_POSIBLE" 		property="mercenaryBoardPosible"/>
+		<result column="MERCENARY_BOARD_INTRO" 			property="mercenaryBoardIntro"/>
+	</resultMap>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

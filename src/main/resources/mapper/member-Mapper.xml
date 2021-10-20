@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 모든 SQL문을 mapper태그 안에 작성 -->
+<mapper namespace="memberMapper">
+	<resultMap type="com.kh.project.member.vo.MemberVO" id="member">
+		<id column="MEMBER_CODE" 			property="memberCode"/>
+        <result column="MEMBER_ID" 			property="memberId"/>
+       	<result column="MEMBER_PW" 			property="memberPw"/>
+       	<result column="MEMBER_NAME" 		property="memberName"/>
+       	<result column="MEMBER_BIRTH" 		property="memberBirth"/>
+       	<result column="MEMBER_GENDER" 		property="memberGender"/>
+       	<result column="MEMBER_TELL" 		property="memberTell"/>
+       	<result column="IS_ADMIN" 			property="isAdmin"/>
+       	<result column="TEAM_CODE" 			property="teamCode"/>
+       	<result column="POSITION" 			property="position"/>
+       	<result column="MEMBER_JOIN_DATE" 	property="memberJoinDate"/>
+	</resultMap>
+	
+	<select id="join" resultMap="member">
+		INSERT INTO MEMBER (
+			MEMBER_CODE
+			, MEMBER_ID
+			, MEMBER_PW
+			, MEMBER_NAME
+			, MEMBER_BIRTH
+			, MEMBER_GENDER
+			, MEMBER_TELL
+			, POSITION
+		) VALUES (
+			(SELECT 'MEMBER_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MEMBER_CODE,8,4))),0)+1,4,'0')AS MEMBER_CODE FROM MEMBER)
+			, #{memberId}
+			, #{memberPw}
+			, #{memberName}
+			, #{memberBirth}
+			, #{memberGender}
+			, #{memberTell}
+			, #{position}
+		)
+	</select>
+	
+	<select id="login" resultMap="member">
+		SELECT MEMBER_NAME
+			, IS_ADMIN
+			, TEAM_CODE
+		FROM MEMBER 
+		WHERE MEMBER_ID = #{memberId} 
+		AND MEMBER_PW = #{memberPw}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

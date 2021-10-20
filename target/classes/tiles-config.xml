@@ -2,18 +2,36 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	
-	<!--페이지 설정 -->
-	<definition name="baseLayout" template="/WEB-INF/views/template/base_template.jsp">
-		<put-attribute name="title" value="Project"/>
-		<put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp"/>
-		<put-attribute name="body" value=""/>
+
+
+	<definition name="mainPageLayout" template="/WEB-INF/views/template/main_page_template.jsp">
+		<put-attribute name="title" value="FootBall" />
+		<put-attribute name="menu" value="/WEB-INF/views/template/top_menu.jsp" />
+		<put-attribute name="body" value="" />
 	</definition>
 
-	<definition name="*/*" extends="baseLayout">
-		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+
+
+	<!--페이지 설정 -->
+	<definition name="baseLayout" template="/WEB-INF/views/template/template.jsp">
+		<put-attribute name="title" value="FootBall" />
+		<put-attribute name="menu" value="/WEB-INF/views/template/top_menu.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/template/side_menu.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/views/template/buttom_menu.jsp" />
+		<put-attribute name="body" value="" />
 	</definition>
-	
+
+
+	<definition name="mainPage/*" extends="mainPageLayout">
+		<put-attribute name="body" value="/WEB-INF/views/mainPage/{1}.jsp" />
+	</definition>
+
+
+
+	<definition name="*/*" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+
 </tiles-definitions>
 
 
