@@ -10,6 +10,7 @@
 	<mappers>
 		<mapper resource="/mapper/sample-Mapper.xml"/>
 		<mapper resource="/mapper/member-Mapper.xml"/>
+		<mapper resource="/mapper/team-Mapper.xml"/>
 	</mappers>
 </configuration>
 

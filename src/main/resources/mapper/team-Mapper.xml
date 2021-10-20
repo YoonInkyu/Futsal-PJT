@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 모든 SQL문을 mapper태그 안에 작성 -->
+<mapper namespace="teamMapper">
+	<resultMap type="com.kh.project.team.vo.TeamVO" id="team">
+		<id column="TEAM_CODE" 						property="teamCode"/>
+		<result column="TEAM_NAME" 					property="teamName"/>
+		<result column="MEMBER_CODE" 				property="memberCode"/>
+		<result column="TEAM_ADMIN" 				property="teamAdmin"/>
+		<result column="TEAM_LOCATION" 				property="teamLocation"/>
+		<result column="TEAM_LOGO_IMG_CODE" 		property="teamLogoImgCode"/>
+		<result column="TEAM_LOGO_IMG_NAME" 		property="teamLogoImgName"/>
+	</resultMap>
+	
+	
+	<insert id="insertTeam">
+		INSERT INTO TEAM(
+			TEAM_CODE
+			, TEAM_NAME
+			, MEMBER_CODE
+			, TEAM_LOCATION
+		) VALUES(
+			#{teamCode}
+			, #{teamName}
+			, #{memberCode}
+			, #{teamLocation}
+		)
+	</insert>
+	
+	<select id="selectNextTeamCode" resultType="String">
+		SELECT 'TEAM_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(TEAM_CODE, 6, 3))), 0)+1, 3, '0') FROM TEAM
+	</select>
+	
+	<insert id="insertTeamLogoImg">
+		INSERT INTO TEAM_LOGO_IMG
+		VALUES(
+			(SELECT 'TEAM_IMG_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(TEAM_LOGO_IMG_CODE, 10, 3))), 0)+1, 3, '0') FROM TEAM_LOGO_IMG)
+			#{teamLogoImgName}
+			#{teamCode}
+		)
+		
+	</insert>
+	
+</mapper>
+
+
