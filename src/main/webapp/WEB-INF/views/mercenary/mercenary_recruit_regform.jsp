@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:forward page="/templateLayout/main_page" />
+용병모집 폼화면
 </body>
 </html>

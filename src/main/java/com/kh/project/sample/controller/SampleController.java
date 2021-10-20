@@ -66,14 +66,4 @@ public class SampleController {
 		return "board/submenu_helpdesk_qna";
 	}
 
-	@GetMapping("/login")
-	public String login() {
-		return "member/login";
-	}
-
-	@GetMapping("/join")
-	public String join() {
-		return "member/join";
-	}
-
 }
