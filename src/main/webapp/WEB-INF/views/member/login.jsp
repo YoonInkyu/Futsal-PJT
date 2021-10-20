@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,31 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	<br>로그인
-	
-	<br>
-	<br>
-	<br>
-	<br>
-	<a href="/sample/join">계정 생성</a>
-	
+<form action="goLogin" method="post">
+아이디<input type="text" name="memberId"> <br>
+비밀번호<input type="text" name="memberPw"> <br>
+<input type="submit" value="로그인">
+</form>
 </body>
 </html>
