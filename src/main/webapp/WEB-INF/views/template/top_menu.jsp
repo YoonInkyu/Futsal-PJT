@@ -44,8 +44,8 @@
 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">용병</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-							<li><a class="dropdown-item" href="/sample/submenu_mercenary_recruit">용병 구인</a></li>
-							<li><a class="dropdown-item" href="/sample/submenu_mercenary_submit">용병 구직</a></li>
+							<li><a class="dropdown-item" href="/mercenary/recruit">용병 구인</a></li>
+							<li><a class="dropdown-item" href="/mercenary/apply">용병 구직</a></li>
 						</ul></li>
 
 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">팀 관리</a>

@@ -13,7 +13,7 @@
 
 	<div class="row my-5">
 
-		<div class="col-2 mx-auto" style="font-size: 40px; text-align: center; border-bottom: 3px solid black;">용병 구인</div>
+		<div class="col-2 mx-auto" style="font-size: 40px; text-align: center; border-bottom: 3px solid black;">용병 구직</div>
 
 	</div>
 
@@ -27,7 +27,7 @@
 			<div class="col-8 mx-auto">
 
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-					<button class="btn btn-primary col-3" type="button" style="font-size: 30px;">매치등록</button>
+					<button class="btn btn-primary col-3" type="button" style="font-size: 30px;">용병 등록</button>
 				</div>
 
 				<table class="table table-striped table-hover">
