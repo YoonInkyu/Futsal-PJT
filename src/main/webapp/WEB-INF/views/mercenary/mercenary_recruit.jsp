@@ -18,8 +18,7 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th scope="col">매치형태</th>
-							<th scope="col">지점구분</th>
+							<th scope="col">지역</th>
 							<th scope="col">매치일자</th>
 							<th scope="col">신청가능팀</th>
 							<th scope="col">작성자</th>
@@ -29,7 +28,6 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>6 vs 6</td>
 							<td>창원점</td>
 							<td>2021.10.18(월) 18:00 ~ 19:00</td>
 							<td>1팀</td>
@@ -37,98 +35,6 @@
 							<td>2021.10.15</td>
 							<td><button type="button" class="btn btn-danger">마감</button></td>
 						</tr>
-
-						<tr>
-							<td>5 vs 5</td>
-							<td>동대문점</td>
-							<td>2021.10.20(수) 18:00 ~ 19:00</td>
-							<td>2팀</td>
-							<td>제훈</td>
-							<td>2021.10.15</td>
-							<td><button type="button" class="btn btn-danger">마감</button></td>
-						</tr>
-
-						<tr>
-							<td>6 vs 6</td>
-							<td>창원점</td>
-							<td>2021.10.18(월) 18:00 ~ 19:00</td>
-							<td>1팀</td>
-							<td>제훈</td>
-							<td>2021.10.15</td>
-							<td><button type="button" class="btn btn-primary">가능</button></td>
-						</tr>
-
-						<tr>
-							<td>6 vs 6</td>
-							<td>창원점</td>
-							<td>2021.10.18(월) 18:00 ~ 19:00</td>
-							<td>1팀</td>
-							<td>제훈</td>
-							<td>2021.10.15</td>
-							<td><button type="button" class="btn btn-danger">마감</button></td>
-						</tr>
-
-						<tr>
-							<td>6 vs 6</td>
-							<td>창원점</td>
-							<td>2021.10.18(월) 18:00 ~ 19:00</td>
-							<td>1팀</td>
-							<td>제훈</td>
-							<td>2021.10.15</td>
-							<td><button type="button" class="btn btn-danger">마감</button></td>
-						</tr>
-
-						<tr>
-							<td>6 vs 6</td>
-							<td>창원점</td>
-							<td>2021.10.18(월) 18:00 ~ 19:00</td>
-							<td>1팀</td>
-							<td>제훈</td>
-							<td>2021.10.15</td>
-							<td><button type="button" class="btn btn-danger">마감</button></td>
-						</tr>
-
-						<tr>
-							<td>5 vs 5</td>
-							<td>동대문점</td>
-							<td>2021.10.20(수) 18:00 ~ 19:00</td>
-							<td>2팀</td>
-							<td>제훈</td>
-							<td>2021.10.15</td>
-							<td><button type="button" class="btn btn-danger">마감</button></td>
-						</tr>
-
-						<tr>
-							<td>6 vs 6</td>
-							<td>창원점</td>
-							<td>2021.10.18(월) 18:00 ~ 19:00</td>
-							<td>1팀</td>
-							<td>제훈</td>
-							<td>2021.10.15</td>
-							<td><button type="button" class="btn btn-primary">가능</button></td>
-						</tr>
-
-						<tr>
-							<td>6 vs 6</td>
-							<td>창원점</td>
-							<td>2021.10.18(월) 18:00 ~ 19:00</td>
-							<td>1팀</td>
-							<td>제훈</td>
-							<td>2021.10.15</td>
-							<td><button type="button" class="btn btn-danger">마감</button></td>
-						</tr>
-
-						<tr>
-							<td>6 vs 6</td>
-							<td>창원점</td>
-							<td>2021.10.18(월) 18:00 ~ 19:00</td>
-							<td>1팀</td>
-							<td>제훈</td>
-							<td>2021.10.15</td>
-							<td><button type="button" class="btn btn-danger">마감</button></td>
-						</tr>
-
-
 					</tbody>
 
 				</table>

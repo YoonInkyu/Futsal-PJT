@@ -3,25 +3,67 @@
 <!-- 모든 SQL문을 mapper태그 안에 작성 -->
 <mapper namespace="mercenaryMapper">
 	<resultMap type="com.kh.project.mercenary.vo.MercenaryVO" id="mercenary">
+		<!-- 용병 구직 -->
 		<id column="MERCENARY_APPLY_CODE" 				property="mercenaryApplyCode"/>
 		<result column="MERCENARY_APPLY_TITLE" 			property="mercenaryApplyTitle"/>
 		<result column="MERCENARY_APPLY_WRITER" 		property="mercenaryApplyWriter"/>
 		<result column="MERCENARY_APPLY_REGDATE" 		property="mercenaryApplyRegdate"/>
 		<result column="MERCENARY_APPLY_NUMBERMEMBER" 	property="mercenaryApplyNumbermember"/>
 		<result column="MERCENARY_APPLY_POSIBLE" 		property="mercenaryApplyPosible"/>
-		<result column="MEMBER_CODE" 					property="memberCode"/>
-		<result column="MATCH_CODE" 					property="matchCode"/>
 		<result column="MERCENARY_APPLY_INTRO" 			property="mercenaryApplyIntro"/>
+		<!-- 용병 구인 -->
 		<result column="MERCENARY_BOARD_CODE" 			property="mercenaryBoardCode"/>
 		<result column="MERCENARY_BOARD_TITLE" 			property="mercenaryBoardTitle"/>
 		<result column="MERCENARY_BOARD_WRITER" 		property="mercenaryBoardWriter"/>
 		<result column="MERCENARY_BOARD_REGDATE" 		property="mercenaryBoardRegdate"/>
 		<result column="MERCENARY_BOARD_NUMBERMEMBER" 	property="mercenaryBoardNumbermember"/>
-		<result column="TEAM_CODE" 						property="teamCode"/>
 		<result column="MERCENARY_BOARD_POSIBLE" 		property="mercenaryBoardPosible"/>
 		<result column="MERCENARY_BOARD_INTRO" 			property="mercenaryBoardIntro"/>
+		<!-- 공용 -->
+		<result column="MATCH_CODE" 					property="matchCode"/>
+		<result column="TEAM_CODE" 						property="teamCode"/>
+		<result column="MEMBER_CODE" 					property="memberCode"/>
 	</resultMap>
 	
+	<!-- 용병 구인 게시글 등록 -->
+	<insert id="insertMercRecruit">
+		INSERT INTO MERCENARY_BOARD (
+			MERCENARY_BOARD_CODE
+			, MERCENARY_BOARD_TITLE
+			, MERCENARY_BOARD_WRITER
+			, MERCENARY_BOARD_INTRO
+			, MERCENARY_BOARD_POSIBLE
+			, TEAM_CODE
+			<!-- 매치코드, 매치날짜 추가 여부 확인 -->
+		) VALUES (
+			(SELECT 'MERC_RC_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERCENARY_BOARD_CODE, 6, 4))), 0)+1, 4, '0') FROM MERCENARY_BOARD)
+			, #{mercenaryBoardTitle}
+			, #{mercenaryBoardWriter}
+			, #{mercenaryBoardIntro}
+			, #{mercenaryBoardPosible}
+			, #{teamCode}
+		)
+	</insert>
+	
+	<!-- 용병 구직 게시글 등록 -->
+	<insert id="insertMercApply">
+		INSERT INTO MERCENARY_APPLY_BOARD (
+			MERCENARY_APPLY_CODE
+			, MERCENARY_APPLY_TITLE
+			, MERCENARY_APPLY_WRITER
+			, MERCENARY_APPLY_INTRO
+			, MERCENARY_APPLY_POSIBLE
+			, MEMBER_CODE
+			<!-- 매치코드, 매치날짜 추가 여부 확인 -->
+		) VALUES (
+			(SELECT 'MERC_AP_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERCENARY_APPLY_CODE, 6, 4))), 0)+1, 4, '0') FROM MERCENARY_APPLY_BOARD)
+			, #{mercenaryBoardTitle}
+			, #{mercenaryBoardWriter}
+			, #{mercenaryBoardIntro}
+			, #{mercenaryBoardPosible}
+			, #{memberCode}
+		)
+	</insert>
 	
 </mapper>
 
