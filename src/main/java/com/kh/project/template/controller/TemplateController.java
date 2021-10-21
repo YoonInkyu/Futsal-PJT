@@ -11,7 +11,7 @@ public class TemplateController {
 	// 메인 화면 레이아웃
 	@GetMapping("/main_page")
 	public String templateLayout() {
-		return "mainPage/main_page";
+		return "templateLayout/main_page";
 	}
 
 	// 로그인 화면 레이아웃
