@@ -32,21 +32,26 @@ body {
 	font-size: 18px;
 }
 
-.menu1 {
-	background-color: yellow;
-}
-
 .side1 {
 	background-color: red;
 }
 
 .body1 {
-	background-color: gray;
+/* 	background-color: gray; */
 }
 
 .bottom1 {
-	background-color: orange;
+	background-color: #2a2a2a;
+	color: #a9a9a9;
 }
+
+.menu1 {
+
+height: 10rem;
+/* background-color: yellow; */
+
+}
+
 </style>
 
 
@@ -55,9 +60,9 @@ body {
 
 	<div class="container-fluid">
 
-		<div class="row menu1">
+		<div class="row">
 
-			<div class="col">
+			<div class="col menu1">
 
 				<tiles:insertAttribute name="menu" />
 
@@ -83,7 +88,7 @@ body {
 
 		<div class="row bottom1">
 
-			<div class="col p-5">
+			<div class="col p-3">
 
 				<tiles:insertAttribute name="bottom" />
 
