@@ -1,9 +1,17 @@
+// 10월 20일 송영준
+
+
+
 package com.kh.project.team.service;
+
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import com.kh.project.team.vo.TeamLogoImgVO;
 import com.kh.project.team.vo.TeamVO;
 
 
@@ -27,8 +35,14 @@ public class TeamServiceImpl implements TeamService{
 	
 	// 팀생성시 팀로고 업로드
 	@Override
-	public void insertTeamLogoImg(TeamVO teamVO) {
-		sqlSession.insert("teamMapper.insertTeamLogoImg", teamVO);
+	public void insertTeamLogoImg(TeamLogoImgVO teamLogoImgVO) {
+		sqlSession.insert("teamMapper.insertTeamLogoImg", teamLogoImgVO);
+	}
+	
+	// 팀리스트 조회
+	@Override
+	public List<TeamVO> selectTeamList(Model model) {
+		return sqlSession.selectList("teamMapper.selectTeamList", model);
 	}
 
 	

@@ -1,3 +1,6 @@
+// 10월 20일 송영준
+
+
 package com.kh.project.team.vo;
 
 public class TeamVO {
@@ -6,23 +9,16 @@ public class TeamVO {
 	private String memberCode;
 	private String teamAdmin;
 	private String teamLocation;
-	private String teamLogoImgCode;
-	private String teamLogoImgName;
+	private String teamIntro;
 	
 	
-	public String getTeamLogoImgCode() {
-		return teamLogoImgCode;
-	}
-	public void setTeamLogoImgCode(String teamLogoImgCode) {
-		this.teamLogoImgCode = teamLogoImgCode;
-	}
-	public String getTeamLogoImgName() {
-		return teamLogoImgName;
-	}
-	public void setTeamLogoImgName(String teamLogoImgName) {
-		this.teamLogoImgName = teamLogoImgName;
-	}
 	
+	public String getTeamIntro() {
+		return teamIntro;
+	}
+	public void setTeamIntro(String teamIntro) {
+		this.teamIntro = teamIntro;
+	}
 	public String getTeamCode() {
 		return teamCode;
 	}
