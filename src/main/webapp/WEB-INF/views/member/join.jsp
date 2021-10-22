@@ -38,7 +38,7 @@
 							<label for="inputId" class="form-label">아이디</label>
 
 							<div class="col mb-5 d-grid gap-2 d-md-flex">
-								<input type="text" class="form-control" id="inputId memberId" placeholder="1~16 글자수 생성 가능"> <input class="btn btn-primary" type="submit" value="중복 체크">
+								<input type="text" class="form-control" id="inputId memberId" name="memberId" required placeholder="1~16 글자수 생성 가능"> <input class="btn btn-primary" type="submit" value="중복 체크">
 							</div>
 
 						</div>
@@ -46,7 +46,7 @@
 
 
 						<div class="col-12 mb-5">
-							<label for="inputPw" class="form-label">비밀번호</label> <input type="password" class="form-control" id="inputPw memberPw" placeholder="비밀번호 입력">
+							<label for="inputPw" class="form-label">비밀번호</label> <input type="password" class="form-control" id="inputPw memberPw" name="memberPw" placeholder="비밀번호 입력" required>
 						</div>
 
 
@@ -58,25 +58,21 @@
 
 
 						<div class="col-12 mb-5">
-							<label for="inputName" class="form-label">이름</label> <input type="text" class="form-control" id="inputName memberPwCrheck" placeholder="이름을 입력">
+							<label for="inputName" class="form-label">이름</label> <input type="text" class="form-control" id="inputName memberPwCrheck" name="memberName" required placeholder="이름을 입력">
 						</div>
-
-
 
 						<div class="col-12 mb-5">
-							<label for="inputBirth" class="form-label">생년월일</label> <input type="date" class="form-control" id="inputBirth memberBirth">
+							<label for="inputBirth" class="form-label">생년월일</label> <input type="text" class="form-control" id="inputBirth memberBirth" name="memberBirth" required placeholder="앞6자리 예시)880425">
 						</div>
-
-
 
 						<div class="col-12 mb-5">
 
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="남" checked> <label class="form-check-label" for="inlineRadio1">남</label>
+								<input class="form-check-input gender" type="radio" name="memberGender" id="inlineRadio1" value="남자" checked> <label class="form-check-label" for="inlineRadio1">남</label>
 							</div>
 
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="여"> <label class="form-check-label" for="inlineRadio2">여</label>
+								<input class="form-check-input gender" type="radio" name="memberGender" id="inlineRadio2" value="여자"> <label class="form-check-label" for="inlineRadio2">여</label>
 							</div>
 
 						</div>
@@ -90,21 +86,15 @@
 								<label for="inputTell" class="form-label">연락처</label>
 
 								<div class="col">
-
-									<select class="form-select" aria-label="Default select example">
-										<option value="010" selected>010</option>
-										<option value="011">011</option>
-										<option value="012">012</option>
-										<option value="013">013</option>
-									</select>
+									<input type="text" class="form-control" id="inputTell tells" name="tells">
 								</div>
 
 								<div class="col">
-									<input type="text" class="form-control" id="inputTell tells">
+									<input type="text" class="form-control" id="inputTell tells" name="tells">
 								</div>
 
 								<div class="col">
-									<input type="text" class="form-control" id="inputTell tells">
+									<input type="text" class="form-control" id="inputTell tells" name="tells">
 								</div>
 
 							</div>
@@ -114,17 +104,19 @@
 
 
 						<div class="col-12 mb-5">
-
+							<div class="col">
+							<label for="inputTell" class="form-label">포지션</label>
+							</div>
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="공격"> <label class="form-check-label align-middle pt-1" for="inlineCheckbox1">공격</label>
+								<input class="form-check-input" type="radio" id="inlineCheckbox1" value="공격" name="position" class="position"> <label class="form-check-label align-middle pt-1" for="inlineCheckbox1">공격</label>
 							</div>
 
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="수비"> <label class="form-check-label align-middle pt-1" for="inlineCheckbox2">수비</label>
+								<input class="form-check-input" type="radio" id="inlineCheckbox2" value="수비" name="position" class="position"> <label class="form-check-label align-middle pt-1" for="inlineCheckbox2">수비</label>
 							</div>
 
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="키퍼"> <label class="form-check-label align-middle pt-1" for="inlineCheckbox3">키퍼</label>
+								<input class="form-check-input" type="radio" id="inlineCheckbox3" value="키퍼" name="position" class="position"> <label class="form-check-label align-middle pt-1" for="inlineCheckbox3">키퍼</label>
 							</div>
 
 						</div>

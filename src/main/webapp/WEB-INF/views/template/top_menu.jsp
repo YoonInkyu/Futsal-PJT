@@ -73,8 +73,8 @@
 				</ul>
 
 				<div style="text-align: right;">
-					<a class="navbar-brand" href="/templateLayout/templateLayout_login"><img src="/resources/img/common/login.png" width="11%" height="">JOIN</a>
-					<a class="navbar-brand" href="/templateLayout/templateLayout_login"><img src="/resources/img/common/login.png" width="11%" height=""> LOGIN</a>
+					<a class="navbar-brand" href="/member/goJoin"><img src="/resources/img/common/login.png" width="11%" height="">JOIN</a>
+					<a class="navbar-brand" href="/member/goLogin"><img src="/resources/img/common/login.png" width="11%" height=""> LOGIN</a>
 				</div>
 
 			</div>
