@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class MemberController {
 	@PostMapping("/join")
 	public String join(MemberVO memberVO) {
 		memberService.join(memberVO);
-		return  "member/sample";
+		return  "mainPage/main_page";
 	}
 	//로그인 페이지로 이동
 	@GetMapping("/goLogin")
@@ -43,13 +44,34 @@ public class MemberController {
 	public String Login(MemberVO memberVO, HttpSession session) {
 		MemberVO loginInfo = memberService.login(memberVO);
 		session.setAttribute("loginInfo", loginInfo);
-		return  "member/sample";
+		return  "mainPage/main_page";
 	}
 	//로그아웃 하기
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginInfo");
-		return  "member/sample";
+		return  "mainPage/main_page";
+	}
+	//마이페이지 가기
+	@GetMapping("/myPage")
+	public String mypage(HttpSession session, Model model) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
+		model.addAttribute("member",memberService.myPage(memberVO.getMemberCode()));
+		return  "member/my_page";
+	}
+	//마이페이지 가기
+	@GetMapping("/goCorrectionMember")
+	public String correctionMemberInfo(HttpSession session, Model model) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
+		model.addAttribute("member",memberService.myPage(memberVO.getMemberCode()));
+		return  "member/correction_member_info";
+	}
+	//멤버 블랙리스트 관리페이지
+	@GetMapping("/goMemberBlacklist")
+	public String goMemberBlacklist(HttpSession session, Model model) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
+		model.addAttribute("black",memberService.memberBlackList(memberVO.getMemberCode()));
+		return  "member/member_blacklist";
 	}
 }
 

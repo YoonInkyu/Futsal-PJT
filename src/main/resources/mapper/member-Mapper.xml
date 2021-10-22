@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 모든 SQL문을 mapper태그 안에 작성 -->
 <mapper namespace="memberMapper">
+
 	<resultMap type="com.kh.project.member.vo.MemberVO" id="member">
 		<id column="MEMBER_CODE" 			property="memberCode"/>
         <result column="MEMBER_ID" 			property="memberId"/>
@@ -16,6 +17,32 @@
        	<result column="MEMBER_JOIN_DATE" 	property="memberJoinDate"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.project.member.vo.MemberImgVO" id="memberImg">
+		<id column="MEMBER_IMG_CODE" 			property="memberImgCode"/>
+		<result column="MEMBER_IMG_NAME" 			property="memberImgName"/>
+		<result column="MEMBER_CODE" 			property="memberCode"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.project.member.vo.MemberVO" id="memberView">
+		<id column="MEMBER_CODE" 							property="memberCode"/>
+        <result column="MEMBER_ID" 							property="memberId"/>
+       	<result column="MEMBER_NAME" 						property="memberName"/>
+       	<result column="MEMBER_BIRTH" 						property="memberBirth"/>
+       	<result column="MEMBER_GENDER" 						property="memberGender"/>
+       	<result column="MEMBER_TELL" 						property="memberTell"/>
+       	<result column="TEAM_CODE" 							property="teamCode"/>
+       	<result column="TEAM_NAME" 							property="teamName"/>
+       	<result column="POSITION" 							property="position"/>
+       	<result column="MEMBER_IMG_ATTACHED_NAME" 			property="memberImgAttachedName"/>
+	</resultMap>
+
+	<resultMap type="com.kh.project.member.vo.MemberBlacklistVO" id="memberBlacklistView">
+		<id column="MEMBER_CODE" 					property="memberCode"/>
+        <result column="BLACKMEMBER_CODE" 			property="blackmemberCode"/>
+       	<result column="BLACK_COMMENT" 				property="blackComment"/>
+       	<result column="BLACK_TEAM" 				property="blackTeam"/>
+       	<result column="BLACK_NAME" 				property="blackName"/>
+	</resultMap>	
 	<select id="join" resultMap="member">
 		INSERT INTO MEMBER (
 			MEMBER_CODE
@@ -39,12 +66,45 @@
 	</select>
 	
 	<select id="login" resultMap="member">
-		SELECT MEMBER_NAME
+		SELECT MEMBER_CODE
+			, MEMBER_NAME
 			, IS_ADMIN
 			, TEAM_CODE
+			, TEAM_ADMIN
 		FROM MEMBER 
 		WHERE MEMBER_ID = #{memberId} 
 		AND MEMBER_PW = #{memberPw}
+	</select>
+	
+	<select id="selectMemberInfo" resultMap="memberView">
+		SELECT MEMBER_ID
+			, MEMBER_NAME
+			, MEMBER_BIRTH
+			, MEMBER_GENDER
+			, MEMBER_TELL
+			, POSITION
+			, TEAM_CODE
+			, TEAM_NAME 
+			, MEMBER_IMG_ATTACHED_NAME
+		FROM MEMBER_VIEW
+		WHERE MEMBER_CODE = #{memberCode}
+	</select>
+	
+	<update id="">
+		UPDATE MEMBER SET 
+		POSITION = #{position}
+		WHERE MEMBER_CODE = #{memberCode}
+	</update>
+	
+	<select id="memberBlackList" resultMap="memberBlacklistView">
+		SELECT M.MEMBER_CODE
+        	, BLACKMEMBER_CODE
+        	, BLACK_COMMENT
+        	,(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_CODE = MB.BLACKMEMBER_CODE) AS BLACK_NAME
+        	,(SELECT TEAM_NAME FROM TEAM WHERE MEMBER_CODE = MB.BLACKMEMBER_CODE) AS BLACK_TEAM 
+		FROM MEMBER M, MEMBER_BLACKLIST MB 
+		WHERE M.MEMBER_CODE  = MB.MEMBER_CODE (+)
+			
 	</select>
 </mapper>
 

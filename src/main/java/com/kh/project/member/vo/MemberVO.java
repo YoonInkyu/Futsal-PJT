@@ -13,8 +13,23 @@ public class MemberVO {
 	private String position;
 	private String memberJoinDate;
 	private String[] tells;
+	private String teamName;
+	private String memberImgAttachedName;
 	
 	
+	
+	public String getTeamName() {
+		return teamName;
+	}
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+	public String getMemberImgAttachedName() {
+		return memberImgAttachedName;
+	}
+	public void setMemberImgAttachedName(String memberImgAttachedName) {
+		this.memberImgAttachedName = memberImgAttachedName;
+	}
 	public String[] getTells() {
 		return tells;
 	}
