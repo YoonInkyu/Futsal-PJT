@@ -13,5 +13,4 @@ public class MainPageController {
 		return "mainPage/main_page";
 	}
 
-
 }

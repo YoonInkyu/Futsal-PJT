@@ -4,6 +4,7 @@
 <tiles-definitions>
 
 
+	<!-- 메인 페이지(탑 메뉴와 바디 만 있는 템플릿) -->
 	<definition name="mainPageLayout" template="/WEB-INF/views/template/main_page_template.jsp">
 		<put-attribute name="title" value="FootBall" />
 		<put-attribute name="menu" value="/WEB-INF/views/template/top_menu.jsp" />
@@ -11,8 +12,15 @@
 	</definition>
 
 
+	<!-- 로그인 페이지(바디 만 있는 템플릿) -->
+	<definition name="loginLayout" template="/WEB-INF/views/template/login_template.jsp">
+		<put-attribute name="title" value="FootBall" />
+		<put-attribute name="body" value="" />
+	</definition>
 
-	<!--페이지 설정 -->
+
+
+	<!-- 예외 제외 전체 템플릿 -->
 	<definition name="baseLayout" template="/WEB-INF/views/template/template.jsp">
 		<put-attribute name="title" value="FootBall" />
 		<put-attribute name="menu" value="/WEB-INF/views/template/top_menu.jsp" />
@@ -22,12 +30,19 @@
 	</definition>
 
 
-	<definition name="mainPage/*" extends="mainPageLayout">
-		<put-attribute name="body" value="/WEB-INF/views/mainPage/{1}.jsp" />
+	<!-- 메인 페이지(탑 메뉴와 바디 만 있는 템플릿) -->
+	<definition name="templateLayout/*" extends="mainPageLayout">
+		<put-attribute name="body" value="/WEB-INF/views/admin/{1}.jsp" />
 	</definition>
 
 
+	<!-- 로그인 페이지(바디 만 있는 템플릿) -->
+	<definition name="templateLayout/*/*" extends="loginLayout">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
 
+
+	<!-- 예외 제외 전체 템플릿 -->
 	<definition name="*/*" extends="baseLayout">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
