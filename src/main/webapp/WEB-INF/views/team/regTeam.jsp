@@ -1,3 +1,5 @@
+<!--  10월 20 일 송영준    -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,34 +19,27 @@
  -->
 <div>
 	<div>
-		<form action="/team/regTeam" method="post">
+		<form action="/team/regTeam" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>
-						<input name="teamRogo" type="file" accept="image/*" onchange="setThumbnail(event);">
-						
+						팀 로고 등록
+						<input type="file" name="teamLogo" onchange="readURL(this);" >
+						<img id="preview" />
+						<!-- 업로드되는 팀로고 미리보기 -->
 						<script type="text/javascript">
-						function setThumbnail(event) {
-							var reader = new FileReader(); 
-							
-							reader.onload = function(event) { 
-								var img = document.createElement("img"); 
-								img.setAttribute("src", event.target.result);
-								document.querySelector("div#image_container").appendChild(img); 
-							}; 
-							
-							reader.readAsDataURL(event.target.files[0]); 
-						
-						}
-
+							function readURL(input) {
+								  if (input.files && input.files[0]) {
+								    var reader = new FileReader();
+								    reader.onload = function(e) {
+								      document.getElementById('preview').src = e.target.result;
+								    };
+								    reader.readAsDataURL(input.files[0]);
+								  } else {
+								    document.getElementById('preview').src = "";
+								}
+							}
 						</script>
-						
-						
-						<label for=""> 팀 로고 등록</label>
-						<div class="text-center">
-							<img src="..." class="rounded" alt="...">
-						</div>
-						팀 로고 등록<input type="file">
 					</td>
 				</tr>
 				<tr>
@@ -61,7 +56,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>팀 소개 <textarea rows="30px" cols="30px" name="intro"></textarea> </td>
+					<td>팀 소개 <textarea rows="30px" cols="30px" name="teamIntro"></textarea> </td>
 				</tr>
 				<tr>
 					<td><input type="submit" value="팀생성"> </td>

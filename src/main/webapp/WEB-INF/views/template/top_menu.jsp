@@ -60,7 +60,7 @@
 							<li><a class="dropdown-item" href="/sample/submenu_team_manage">나 의 팀(팀장)</a></li>
 							<li><a class="dropdown-item" href="/sample/submenu_member">나 의 팀(팀원)</a></li>
 							<li><a class="dropdown-item" href="/sample/submenu_team_create">팀 생성</a></li>
-							<li><a class="dropdown-item" href="/sample/submenu_team_list">팀 목록</a></li>
+							<li><a class="dropdown-item" href="/team/selectTeamList">팀 목록</a></li>
 						</ul></li>
 
 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>

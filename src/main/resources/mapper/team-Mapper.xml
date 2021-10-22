@@ -8,22 +8,28 @@
 		<result column="MEMBER_CODE" 				property="memberCode"/>
 		<result column="TEAM_ADMIN" 				property="teamAdmin"/>
 		<result column="TEAM_LOCATION" 				property="teamLocation"/>
-		<result column="TEAM_LOGO_IMG_CODE" 		property="teamLogoImgCode"/>
-		<result column="TEAM_LOGO_IMG_NAME" 		property="teamLogoImgName"/>
+		<result column="TEAM_INTRO" 				property="teamIntro"/>
 	</resultMap>
-	
+	<resultMap type="com.kh.project.team.vo.TeamLogoImgVO" id="teamLogoImg">
+		<id column="TEAM_LOGO_IMG_CODE" 				property="teamLogoImgCode"/>
+		<result column="TEAM_LOGO_IMG_ORIGNNAME" 		property="teamLogoImgOrignName"/>
+		<result column="TEAM_LOGO_IMG_ATTACHEDNAME" 	property="teamLogoImgAttachedName"/>
+		<result column="TEAM_CODE"						property="teamCode"/>
+	</resultMap>
 	
 	<insert id="insertTeam">
 		INSERT INTO TEAM(
 			TEAM_CODE
 			, TEAM_NAME
-			, MEMBER_CODE
+			<!-- , MEMBER_CODE -->
 			, TEAM_LOCATION
+			, TEAM_INTRO
 		) VALUES(
 			#{teamCode}
 			, #{teamName}
-			, #{memberCode}
+			<!-- , #{memberCode} -->
 			, #{teamLocation}
+			, #{teamIntro}
 		)
 	</insert>
 	
@@ -35,11 +41,22 @@
 		INSERT INTO TEAM_LOGO_IMG
 		VALUES(
 			(SELECT 'TEAM_IMG_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(TEAM_LOGO_IMG_CODE, 10, 3))), 0)+1, 3, '0') FROM TEAM_LOGO_IMG)
-			#{teamLogoImgName}
-			#{teamCode}
+			, #{teamLogoImgAttachedName}
+			, #{teamLogoImgOrignName}
+			, #{teamCode}
 		)
-		
 	</insert>
+	
+	<select id="selectTeamList" resultMap="team">
+		SELECT T.TEAM_CODE
+			, TEAM_NAME
+			, TEAM_LOCATION
+			, TEAM_INTRO
+			, TEAM_LOGO_IMG_ATTACHED_NAME
+		FROM TEAM T 
+			 , TEAM_LOGO_IMG B
+		WHERE T.TEAM_CODE = B.TEAM_CODE
+	</select>
 	
 </mapper>
 

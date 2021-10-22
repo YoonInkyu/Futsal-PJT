@@ -1,4 +1,7 @@
+<!--  10 월 21일 송영준 -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,34 +55,19 @@
 								<div class="col">랭 킹</div>
 
 							</div>
-
-						</div>
-					</div>
-				</div>
-
-
-
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-							<img alt="" src="">랭킹? 팀명?
-						</button>
-					</h2>
-
-					<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-						<div class="accordion-body">
-
+							<c:forEach items="${teamList }" var="teamList">
 							<div class="row">
 
 								<div class="col">
 									<img alt="" src="">이미지
 								</div>
-								<div class="col">팀 명</div>
-								<div class="col">인원수</div>
+								<div class="col">${teamList.teamName}</div>
+								<div class="col">${teamList.teamLocation}</div>
 								<div class="col">팀 소개</div>
 								<div class="col">랭 킹</div>
 
 							</div>
+							</c:forEach>
 
 						</div>
 					</div>
@@ -87,32 +75,6 @@
 
 
 
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="panelsStayOpen-headingThree">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-							<img alt="" src="">랭킹? 팀명?
-						</button>
-					</h2>
-
-					<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-						<div class="accordion-body">
-
-
-							<div class="row">
-
-								<div class="col">
-									<img alt="" src="">이미지
-								</div>
-								<div class="col">팀 명</div>
-								<div class="col">인원수</div>
-								<div class="col">팀 소개</div>
-								<div class="col">랭 킹</div>
-
-							</div>
-
-						</div>
-					</div>
-				</div>
 
 
 
