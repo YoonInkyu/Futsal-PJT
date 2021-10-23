@@ -71,12 +71,18 @@
 						</ul></li>
 
 				</ul>
-
+				<c:if test="${empty sessionScope.loginInfo }">
 				<div style="text-align: right;">
 					<a class="navbar-brand" href="/member/goJoin"><img src="/resources/img/common/login.png" width="11%" height="">JOIN</a>
 					<a class="navbar-brand" href="/member/goLogin"><img src="/resources/img/common/login.png" width="11%" height=""> LOGIN</a>
 				</div>
-
+				</c:if>
+				<c:if test="${not empty sessionScope.loginInfo }">
+				<div style="text-align: right;">
+					<a class="navbar-brand" href="/member/myPage"><img src="/resources/img/common/login.png" width="11%" height="">MYPAGE</a>
+					<a class="navbar-brand" href="/member/logout"><img src="/resources/img/common/login.png" width="11%" height=""> LOGOUT</a>
+				</div>
+				</c:if>
 			</div>
 
 		</div>
