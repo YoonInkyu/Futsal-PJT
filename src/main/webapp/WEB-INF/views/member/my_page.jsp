@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- 사진 -->
+<img alt="" src="/resources/img/member/${member.memberImgAttachedName }"><br>
 ${member.memberId }<br>
 ${member.memberName }<br>
 ${member.memberBirth }<br>

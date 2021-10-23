@@ -23,12 +23,12 @@
 
 
 
-					<form action="/member/join" method="post">
+					<form action="/member/join" method="post" enctype="multipart/form-data">
 
 
 
 						<div class="input-group mb-5">
-							<label class="input-group-text bg-primary text-white" for="inputGroupFile01">선수 사진 등록</label> <input type="file" class="form-control" id="inputGroupFile01">
+							<label class="input-group-text bg-primary text-white" for="inputGroupFile01">선수 사진 등록</label> <input type="file" class="form-control" id="inputGroupFile01" name="memberImg">
 						</div>
 
 
@@ -108,7 +108,7 @@
 							<label for="inputTell" class="form-label">포지션</label>
 							</div>
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" id="inlineCheckbox1" value="공격" name="position" class="position"> <label class="form-check-label align-middle pt-1" for="inlineCheckbox1">공격</label>
+								<input class="form-check-input" type="radio" id="inlineCheckbox1" value="공격" name="position" class="position" checked> <label class="form-check-label align-middle pt-1" for="inlineCheckbox1">공격</label>
 							</div>
 
 							<div class="form-check form-check-inline">
@@ -124,7 +124,7 @@
 
 
 						<div class="d-grid gap-2">
-							<input class="btn btn-primary" type="submit" value="회원 가입">
+							<input class="btn btn-primary" type="submit" value="회원 가입" >
 						</div>
 
 

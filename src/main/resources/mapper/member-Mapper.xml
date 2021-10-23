@@ -18,9 +18,10 @@
 	</resultMap>
 	
 	<resultMap type="com.kh.project.member.vo.MemberImgVO" id="memberImg">
-		<id column="MEMBER_IMG_CODE" 			property="memberImgCode"/>
-		<result column="MEMBER_IMG_NAME" 			property="memberImgName"/>
-		<result column="MEMBER_CODE" 			property="memberCode"/>
+		<id column="MEMBER_IMG_CODE" 					property="memberImgCode"/>
+		<result column="MEMBER_IMG_ORIGN_NAME" 			property="memberImgOrignName"/>
+		<result column="MEMBER_IMG_ATTACHED_NAME" 		property="memberImgAttachedName"/>
+		<result column="MEMBER_CODE" 					property="memberCode"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.member.vo.MemberVO" id="memberView">
@@ -36,14 +37,15 @@
        	<result column="MEMBER_IMG_ATTACHED_NAME" 			property="memberImgAttachedName"/>
 	</resultMap>
 
-	<resultMap type="com.kh.project.member.vo.MemberBlacklistVO" id="memberBlacklistView">
+	<resultMap type="com.kh.project.member.vo.MemberBlacklistVO" id="memberBlacklist">
 		<id column="MEMBER_CODE" 					property="memberCode"/>
         <result column="BLACKMEMBER_CODE" 			property="blackmemberCode"/>
        	<result column="BLACK_COMMENT" 				property="blackComment"/>
        	<result column="BLACK_TEAM" 				property="blackTeam"/>
        	<result column="BLACK_NAME" 				property="blackName"/>
 	</resultMap>	
-	<select id="join" resultMap="member">
+	<!-- 회원가입 -->
+	<insert id="join">
 		INSERT INTO MEMBER (
 			MEMBER_CODE
 			, MEMBER_ID
@@ -63,8 +65,21 @@
 			, #{memberTell}
 			, #{position}
 		)
+	</insert>
+	<!-- 이미지 인설트 -->
+	<insert id="insertMemberImg">
+		INSERT INTO MEMBER_IMG VALUES (
+			(SELECT 'MEMBER_IMG_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MEMBER_IMG_CODE,12,4))),0)+1,4,'0')AS MEMBER_IMG_CODE FROM MEMBER_IMG)
+			, #{memberImgOrignName}
+			, #{memberImgAttachedName}
+			, #{memberCode}
+		)
+	</insert>
+	<!-- 다음 회원코드 조회 -->
+	<select id="nextMemberCode" resultType="String">
+		SELECT 'MEMBER_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MEMBER_CODE,8,4))),0)+1,4,'0')AS MEMBER_CODE FROM MEMBER
 	</select>
-	
+	<!-- 로그인 -->
 	<select id="login" resultMap="member">
 		SELECT MEMBER_CODE
 			, MEMBER_NAME
@@ -75,7 +90,7 @@
 		WHERE MEMBER_ID = #{memberId} 
 		AND MEMBER_PW = #{memberPw}
 	</select>
-	
+	<!-- session 정보 -->
 	<select id="selectMemberInfo" resultMap="memberView">
 		SELECT MEMBER_ID
 			, MEMBER_NAME
@@ -90,13 +105,8 @@
 		WHERE MEMBER_CODE = #{memberCode}
 	</select>
 	
-	<update id="">
-		UPDATE MEMBER SET 
-		POSITION = #{position}
-		WHERE MEMBER_CODE = #{memberCode}
-	</update>
-	
-	<select id="memberBlackList" resultMap="memberBlacklistView">
+	<!-- 멤버 블랙리스트 보기 -->
+	<select id="memberBlackList" resultMap="memberBlacklist">
 		SELECT M.MEMBER_CODE
         	, BLACKMEMBER_CODE
         	, BLACK_COMMENT
@@ -104,8 +114,14 @@
         	,(SELECT TEAM_NAME FROM TEAM WHERE MEMBER_CODE = MB.BLACKMEMBER_CODE) AS BLACK_TEAM 
 		FROM MEMBER M, MEMBER_BLACKLIST MB 
 		WHERE M.MEMBER_CODE  = MB.MEMBER_CODE (+)
-			
 	</select>
+	
+	<!-- 멤버 블랙리스트 삭제 -->
+	<delete id="deleteMemberBlack">
+		DELETE MEMBER_BLACKLIST 
+		WHERE MEMBER_CODE = #{memberCode}
+		AND BLACKMEMBER_CODE = #{blackmemberCode}
+	</delete>
 </mapper>
 
 

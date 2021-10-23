@@ -30,7 +30,7 @@
 			<td>${blackInfo.blackName }</td>
 			<td>${blackInfo.blackComment }</td>
 			<td>${blackInfo.blackTeam }</td>
-			<td><input type="button" value="삭제" onclick="location.href='/member/deleteMemberBlack?';"></td>
+			<td><input type="button" value="삭제" onclick="location.href='/member/deleteMemberBlack?blackmemberCode=${blackInfo.blackmemberCode}';"></td>
 		</tr>
 		</c:if>
 	</c:forEach>

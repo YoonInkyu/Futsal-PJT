@@ -2,20 +2,28 @@ package com.kh.project.member.vo;
 
 public class MemberImgVO {
    private String memberImgCode;
-   private String memberImgName;
+   private String memberImgOrignName;
+   private String memberImgAttachedName;
    private String memberCode;
+
    
-public String getMemberImgCode() {
+   public String getMemberImgCode() {
 	return memberImgCode;
 }
 public void setMemberImgCode(String memberImgCode) {
 	this.memberImgCode = memberImgCode;
 }
-public String getMemberImgName() {
-	return memberImgName;
+public String getMemberImgOrignName() {
+	return memberImgOrignName;
 }
-public void setMemberImgName(String memberImgName) {
-	this.memberImgName = memberImgName;
+public void setMemberImgOrignName(String memberImgOrignName) {
+	this.memberImgOrignName = memberImgOrignName;
+}
+public String getMemberImgAttachedName() {
+	return memberImgAttachedName;
+}
+public void setMemberImgAttachedName(String memberImgAttachedName) {
+	this.memberImgAttachedName = memberImgAttachedName;
 }
 public String getMemberCode() {
 	return memberCode;
@@ -23,6 +31,5 @@ public String getMemberCode() {
 public void setMemberCode(String memberCode) {
 	this.memberCode = memberCode;
 }
-   
    
 }

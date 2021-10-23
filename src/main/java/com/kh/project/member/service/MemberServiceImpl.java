@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.project.member.vo.MemberBlacklistVO;
+import com.kh.project.member.vo.MemberImgVO;
 import com.kh.project.member.vo.MemberVO;
 
 @Service("memberService")
@@ -17,6 +18,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void join(MemberVO memberVO) {
 		sqlSession.insert("memberMapper.join", memberVO);
+		
+	}
+	
+	@Override
+	public void insertMemberImg(MemberImgVO memberImgVO) {
+		sqlSession.insert("memberMapper.insertMemberImg", memberImgVO);
 		
 	}
 
@@ -34,5 +41,17 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberBlacklistVO> memberBlackList(String memberCode) {
 		return sqlSession.selectList("memberMapper.memberBlackList", memberCode);
 	}
+
+	@Override
+	public void deleteMemberBlack(MemberBlacklistVO memberBlacklistVO) {
+		sqlSession.delete("memberMapper.deleteMemberBlack", memberBlacklistVO);
+		
+	}
+
+	@Override
+	public String nextMemberCode() {
+		return sqlSession.selectOne("memberMapper.nextMemberCode");
+	}
+
 	
 }
