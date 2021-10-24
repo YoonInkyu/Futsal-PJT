@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,52 +21,48 @@
 						<tr>
 							<th scope="col">지역</th>
 							<th scope="col">매치일자</th>
-							<th scope="col">신청가능팀</th>
+							<th scope="col">신청가능인원</th>
 							<th scope="col">작성자</th>
 							<th scope="col">작성일자</th>
 							<th scope="col">신청</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>창원점</td>
-							<td>2021.10.18(월) 18:00 ~ 19:00</td>
-							<td>1팀</td>
-							<td>제훈</td>
-							<td>2021.10.15</td>
-							<td><button type="button" class="btn btn-danger">마감</button></td>
+						<c:forEach items="${mercRecruitList }" var="mercRecruit">
+						<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercRecruit.mercenaryBoardCode}')">
+							<td>${mercRecruit.mercenaryBoardLocation }</td>
+							<td>${mercRecruit.mercenaryBoardDate } ${mercRecruit.mercenaryBoardStartTime } ~ ${mercRecruit.mercenaryBoardEndTime }</td>
+							<td>${mercRecruit.mercenaryBoardNumberMember }명</td>
+							<td>${mercRecruit.mercenaryBoardWriter }</td>
+							<td>${mercRecruit.mercenaryBoardRegdate }</td>
+							<c:choose>
+								<c:when test="${mercRecruit.mercenaryBoardPosible eq '1' }">
+									<td><button type="button" class="btn btn-info">신청</button></td>
+								</c:when>
+								<c:otherwise>
+									<td><button type="button" class="btn btn-danger">마감</button></td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
+						</c:forEach>
 					</tbody>
-
 				</table>
-
 			</div>
-
 		</div>
 		<!-- 검색관련 내용 -->
 		<div class="row mt-5">
 			<div class="col-6 mx-auto m-0 p-0">
 				<div class="row mx-auto">
 					<div class="col-2">
-						<select class="form-select form-select" aria-label=".form-select-lg example">
+						<select class="form-select form-select" aria-label=".form-select-lg example" name="searchKeyword">
 							<option selected>지점</option>
-							<option value="1">동대문점</option>
-							<option value="2">시흥점</option>
-							<option value="3">서수원점</option>
-							<option value="4">안산 고잔점</option>
-							<option value="5">인천 청라점</option>
-							<option value="6">일산점</option>
-						</select>
-					</div>
-					<div class="col-3">
-						<select class="form-select form-select" aria-label=".form-select-lg example">
-							<option selected>매치형태</option>
-							<option value="1">5 vs 5</option>
-							<option value="1">6 vs 6</option>
+							<option value="서울">서울</option>
+							<option value="대구">대구</option>
+							<option value="대전">대전</option>
 						</select>
 					</div>
 					<div class="col">
-						<input class="form-control" type="search" placeholder="Search" aria-label="Search">
+						<input class="form-control" type="search" placeholder="Search" aria-label="Search" name="searchValue">
 					</div>
 					<div class="col-1">
 						<button class="btn btn-primary " type="submit">Search</button>
@@ -94,6 +91,21 @@
 						</a></li>
 					</ul>
 				</nav>
+			</div>
+		</div>
+	</div>
+	<!-- js파일 새로 만들어서 넣어야 함. -->
+	<script type="text/javascript">
+	    function recruitInfo(mercenaryBoardCode){
+			$(".modal-content").load("/mercenary/recruitDetail?mercenaryBoardCode=" + mercenaryBoardCode);
+		}
+	</script>
+	<!-- tr 클릭시 상세보기 모달창이고, div content안 내용은 mercenary_recruit_detail.jsp을 불러옴
+		모달창에 사이드메뉴, 푸터 안나오게 하는 방법 찾아야 함.
+	 -->
+	<div class="modal fade" tabindex="-1" id="recruitDetailModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
 			</div>
 		</div>
 	</div>
