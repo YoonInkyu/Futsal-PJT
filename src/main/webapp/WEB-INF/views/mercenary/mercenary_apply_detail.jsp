@@ -6,20 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-$(document).ready(function() {
-	//처음 모달은 제거 되는데... 모달창 닫고 다시열면 보임 ㅠㅠㅠㅠ
-	//상세보기 모달 사이드바 제거
-	$('.mercDetail').children().last().children().last().remove()
-	//상세보기 모달 푸터 제거
-	$('.mercDetail').children().last().children().last().children().last().remove()
-});
-</script>
 </head>
 <body>
 <!-- 용병 구인 상세보기 모달 내용 -->
 	<div class="modal-header">
-		<h3 class="modal-title">용병 구인 상세보기</h3>
+		<h3 class="modal-title">용병 구직 상세보기</h3>
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
 	<form action="" method="post">
@@ -28,24 +19,24 @@ $(document).ready(function() {
 				<tbody>
 					<tr>
 						<th scope="row">작성자</th>
-						<td class="al_left">${mercVO.mercenaryBoardWriter }</td>
+						<td class="al_left">${mercVO.mercenaryApplyWriter }</td>
 					</tr>
 					<tr>
 						<th scope="row">지역</th>
-						<td class="al_left" colspan="3">${mercVO.mercenaryBoardLocation }</td>
+						<td class="al_left" colspan="3">${mercVO.mercenaryApplyLocation }</td>
 					</tr>
 					<tr>
 						<th scope="row">매치일자</th>
-						<td class="al_left" colspan="3">${mercVO.mercenaryBoardDate } ${mercVO.mercenaryBoardStartTime } ~ ${mercVO.mercenaryBoardEndTime } </td>
+						<td class="al_left" colspan="3">${mercVO.mercenaryApplyDate } ${mercVO.mercenaryApplyStartTime } ~ ${mercVO.mercenaryApplyEndTime } </td>
 					</tr>
 					<tr>
-						<th scope="row">신청한 사람</th>
-						<td class="al_left">${mercVO.mercenaryBoardNumberMember }명</td>
+						<th scope="row">신청한 팀</th>
+						<td class="al_left">${mercVO.mercenaryApplyNumberTeam }팀</td>
 					</tr>
 					<tr>
 						<th scope="row">신청가능여부</th>
 						<c:choose>
-							<c:when test="${mercVO.mercenaryBoardPosible eq '1' }">
+							<c:when test="${mercVO.mercenaryApplyPosible eq '1' }">
 								<td>가능</td>
 							</c:when>
 							<c:otherwise>
@@ -54,7 +45,7 @@ $(document).ready(function() {
 						</c:choose>
 					</tr>
 					<tr>
-						<td class="al_left" colspan="4"><div class="match_meno">${mercVO.mercenaryBoardIntro }</div></td>
+						<td class="al_left" colspan="4"><div class="match_meno">${mercVO.mercenaryApplyIntro }</div></td>
 					</tr>
 				</tbody>
 			</table>

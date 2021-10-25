@@ -21,7 +21,7 @@
 						<tr>
 							<th scope="col">지역</th>
 							<th scope="col">매치일자</th>
-							<th scope="col">신청가능인원</th>
+							<th scope="col">신청 인원</th>
 							<th scope="col">작성자</th>
 							<th scope="col">작성일자</th>
 							<th scope="col">신청</th>
@@ -100,12 +100,12 @@
 			$(".modal-content").load("/mercenary/recruitDetail?mercenaryBoardCode=" + mercenaryBoardCode);
 		}
 	</script>
-	<!-- tr 클릭시 상세보기 모달창이고, div content안 내용은 mercenary_recruit_detail.jsp을 불러옴
-		모달창에 사이드메뉴, 푸터 안나오게 하는 방법 찾아야 함.
+	<!-- tr 클릭시 상세보기 모달창이고, mercenary_recruit_detail.jsp을 불러와서 div class=content안에 내용 넣음 
+		모달창에 사이드메뉴, 푸터 안나오게 하는 방법 찾아야 함.(detail.jsp에서 사이드,푸터 js로 없애면 될듯?)
 	 -->
 	<div class="modal fade" tabindex="-1" id="recruitDetailModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content mercDetail">
 			</div>
 		</div>
 	</div>

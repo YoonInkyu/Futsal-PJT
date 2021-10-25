@@ -26,4 +26,7 @@ public interface MercenaryService {
 	//용병 구직 게시글 리스트 조회
 	public List<MercenaryVO> selectMercApplyList();
 	
+	//용병 구인 상세보기
+	public MercenaryVO selectMercApplyDetail(String mercenaryApplyCode);
+	
 }
