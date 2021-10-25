@@ -21,7 +21,7 @@
 		<div class="b-example-divider"></div>
 
 		<div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
-			<a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"> <img alt="" src="/resources/img/common/1.png" width="30%" height="30%"> <span class="fs-5 fw-semibold">뭉찬 FC</span>
+			<a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"> <img alt="" src="/resources/img/common/1.png" width="30%" height="30%"> <span class="fs-5 fw-semibold">울산 FC</span>
 			</a>
 
 			<ul class="list-unstyled ps-0">

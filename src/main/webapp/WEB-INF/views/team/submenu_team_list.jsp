@@ -119,9 +119,9 @@
 
 														</div>
 
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+														<div class="modal-footer justify-content-between">
 															<button type="button" class="btn btn-outline-success">경기 요청</button>
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 														</div>
 
 													</div>
@@ -182,9 +182,9 @@
 
 														</div>
 
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+														<div class="modal-footer justify-content-between">
 															<button type="button" class="btn btn-outline-success">경기 요청</button>
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 														</div>
 
 													</div>
@@ -291,9 +291,9 @@
 
 														</div>
 
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+														<div class="modal-footer justify-content-between">
 															<button type="button" class="btn btn-outline-success">경기 요청</button>
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 														</div>
 
 													</div>
@@ -355,9 +355,9 @@
 
 														</div>
 
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+														<div class="modal-footer justify-content-between">
 															<button type="button" class="btn btn-outline-success">경기 요청</button>
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 														</div>
 
 													</div>
