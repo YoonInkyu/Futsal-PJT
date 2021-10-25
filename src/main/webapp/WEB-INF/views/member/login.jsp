@@ -69,7 +69,7 @@ a {
 
 						<div>
 
-							<a href="#">아이디 찾기</a> <span class="mx-3"> | </span> <a href="#">비밀번호 찾기</a> <span class="mx-3"> | </span> <a href="/templateLayout/templateLayout_join">회원 가입</a>
+							<a href="#">아이디 찾기</a> <span class="mx-3"> | </span> <a href="#">비밀번호 찾기</a> <span class="mx-3"> | </span> <a href="/member/goJoin">회원 가입</a>
 
 						</div>
 
