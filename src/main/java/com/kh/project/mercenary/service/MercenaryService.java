@@ -29,4 +29,11 @@ public interface MercenaryService {
 	//용병 구인 상세보기
 	public MercenaryVO selectMercApplyDetail(String mercenaryApplyCode);
 	
+	//용병 구인 신청하기
+	public int insertMercRecruitList(MercenaryVO mercenaryVO);
+	
+	//용병 구직 신청하기
+	public int insertMercApplyList(MercenaryVO mercenaryVO);
+	
+	
 }

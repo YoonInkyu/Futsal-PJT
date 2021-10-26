@@ -53,13 +53,11 @@
 		<div class="modal-footer">
 			<!-- 버튼 아직 미구현 -->
 			<c:choose>
-				<c:when test="${loginInfo.memberID eq mercVO.mercenaryBoardWriter }">
-					글쓴이면 수정하기만 보이고 > submit이 아니라 js로 해야 할듯?
+				<c:when test="${sessionScope.loginInfo.memberName eq mercVO.mercenaryBoardWriter }">
 					<input type="submit" class="btn btn-primary" value="수정하기">
 				</c:when>
 				<c:otherwise>
-					글쓴이가 아니라면 신청하기만 보이기 마찬가지로 js로 해야 할듯?
-					<input type="submit" class="btn btn-primary" value="신청하기">
+					<input type="button" class="btn btn-primary" value="신청하기" onclick="">
 				</c:otherwise>
 			</c:choose> 
 		</div>

@@ -45,6 +45,11 @@ public class TeamServiceImpl implements TeamService{
 		return sqlSession.selectList("teamMapper.selectTeamList");
 	}
 
+	@Override
+	public TeamVO teamManage(String teamCode) {
+		return sqlSession.selectOne("teamMapper.selectTeamManage", teamCode);
+	}
+
 	
 	
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.kh.project.member.service.MemberService;
 import com.kh.project.member.vo.MemberVO;
 import com.kh.project.team.service.TeamService;
 import com.kh.project.team.vo.TeamLogoImgVO;
@@ -35,11 +36,16 @@ public class TeamController {
 		return "team/submenu_team_create";
 	} 
 	
-	// 팀생성 페이지로 이동
-	@GetMapping("/teamManage")
-	public String teamManage_admin() {
-		return "team/team_manage";
-	} 
+	/*
+	 * // 나의팀 관리
+	 * 
+	 * @GetMapping("/teamManage") public String teamManage_admin(HttpSession
+	 * session, Model model) { session.getAttribute("loginInfo"); String teamCode =
+	 * ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+	 * model.addAttribute("member",MemberServicece.myPage(memberCode));
+	 * 
+	 * return "team/team_manage"; }
+	 */
 	
 	
 	// 팀 생성
@@ -87,7 +93,7 @@ public class TeamController {
 		// 팀로고 등록
 		teamService.insertTeamLogoImg(teamLogoImg);
 		
-		return "templateLayout/main_page";
+		return "mainPage/main_page";
 	}
 	
 	// 팀 리스트 조회 

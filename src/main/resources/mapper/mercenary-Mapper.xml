@@ -46,24 +46,6 @@
 		<result column="TEAM_CODE" 						property="teamCode"/>
 	</resultMap>
 	
-	<resultMap type="com.kh.project.member.vo.MemberVO" id="member">
-		<id column="MEMBER_CODE" 						property="memberCode"/>
-        <result column="MEMBER_ID" 						property="memberId"/>
-       	<result column="MEMBER_NAME" 					property="memberName"/>
-       	<result column="TEAM_CODE" 						property="teamCode"/>
-	</resultMap>
-	
-	<!-- 로그인 정보 가져오기 왜 안돼?? -->
-	<select id="selectLoginInfo" resultMap="member">
-		SELECT MEMBER_CODE
-		    , MEMBER_ID
-		    , MEMBER_NAME
-		    , TEAM_CODE
-		    , MEMBER_TELL
-		FROM MEMBER
-		WHERE MEMBER_CODE = ${memberCode}
-	</select>
-	
 	<!-- 용병 구인 게시글 등록 -->
 	<insert id="insertMercRecruit">
 		INSERT INTO MERCENARY_BOARD (
@@ -79,8 +61,7 @@
 		) VALUES (
 			(SELECT 'MERC_RC_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERCENARY_BOARD_CODE, 14, 4))), 0)+1, 4, '0') FROM MERCENARY_BOARD)
 			, #{mercenaryBoardTitle}
-			, 'admin'
-			<!-- , #{mercenaryBoardWriter} -->
+			, #{mercenaryBoardWriter}
 			, #{mercenaryBoardIntro}
 			, #{mercenaryBoardPosible}
 			, #{mercenaryBoardDate}
@@ -125,19 +106,16 @@
 			, MERCENARY_APPLY_START_TIME
 			, MERCENARY_APPLY_END_TIME
 			, MERCENARY_APPLY_LOCATION
-			<!-- , MEMBER_CODE 인설트 필요 없어 WHY? 로그인정보 가져와서 member 먼저 셀렉트 먼저해서 그 정보를 WRITER에 넣어야지-->
 		) VALUES (
 			(SELECT 'MERC_AP_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERCENARY_APPLY_CODE, 14, 4))), 0)+1, 4, '0') FROM MERCENARY_APPLY_BOARD)
 			, #{mercenaryApplyTitle}
-			, 'admin' <!-- 로그인 처리하고 수정해야함 -->
-			<!-- , #{mercenaryApplyWriter} -->
+			, #{mercenaryApplyWriter}
 			, #{mercenaryApplyIntro}
 			, #{mercenaryApplyPosible}
 			, #{mercenaryApplyDate}
 			, #{mercenaryApplyStartTime}
 			, #{mercenaryApplyEndTime}
 			, #{mercenaryApplyLocation}
-			<!-- , #{memberCode} 위 주석 참고 -->
 		)
 	</insert>
 	
@@ -176,17 +154,37 @@
 		)
 	</insert>
 	
+	<select id="selectMercRecruitList" resultMap="mercenaryList">
+		SELECT 
+	</select>
+	
+	<!-- 용병 구인 멤버 수 UPDATE -->
+	<update id="updateMemberCnt">
+		UPDATE MERCENARY_BOARD
+		SET
+		MERCENARY_BOARD_NUMBERMEMBER = MERCENARY_BOARD_NUMBERMEMBER + 1
+        WHERE MERCENARY_BOARD_CODE = #{mercenaryBoardCode}
+	</update>
+	
 	<!-- 용병 구직 지원 INSERT -->
 	<insert id="insertMercApplyList">
 		INSERT INTO MERC_APPLYLIST
 		VALUES (
 			(SELECT 'MERC_AM_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERC_APPLYLIST_CODE, 14, 4))), 0)+1, 4, '0') FROM MERC_APPLYLIST)
 			<!-- 상세보기하고 있는 보드코드 -->
-			, #{mercenaryBoardCode}
+			, #{mercenaryApplyCode}
 			<!-- 로그인 한 사람 팀코드 -->
 			, #{teamCode} 
 		)
 	</insert>
+	
+	<!-- 용병 구직 멤버 수 UPDATE -->
+	<update id="updateTeamCnt">
+		UPDATE MERCENARY_APPLY_BOARD
+		SET
+		MERCENARY_APPLY_NUMBERTEAM = MERCENARY_APPLY_NUMBERTEAM + 1
+        WHERE MERCENARY_APPLY_CODE = #{mercenaryApplyCode}
+	</update>
 	
 </mapper>
 

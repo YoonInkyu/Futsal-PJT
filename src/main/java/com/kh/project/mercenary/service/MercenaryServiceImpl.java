@@ -59,10 +59,18 @@ public class MercenaryServiceImpl implements MercenaryService{
 		return sqlSession.selectOne("mercenaryMapper.selectMercApplyDetail", mercenaryApplyCode);
 	}
 
-	
+	//용병 구인 신청하기
+	@Override
+	public int insertMercRecruitList(MercenaryVO mercenaryVO) {
+		sqlSession.update("mercenaryMapper.updateMemberCnt", mercenaryVO);
+		return sqlSession.insert("mercenaryMapper.insertMercRecruitList", mercenaryVO);
+	}
 
-	
+	//용병 구직 신청하기
+	@Override
+	public int insertMercApplyList(MercenaryVO mercenaryVO) {
+		return sqlSession.insert("mercenaryMapper.insertMercApplyList", mercenaryVO);
+	}
 
-	
 	
 }
