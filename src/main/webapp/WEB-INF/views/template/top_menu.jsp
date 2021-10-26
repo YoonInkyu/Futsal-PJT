@@ -88,8 +88,15 @@
 				<div class="d-flex flex-wrap ">
 
 					<div class="dropdown" style="text-align: right;">
-						<a href="#" class="navbar-brand d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+						<a href="#" class="navbar-brand d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+						<c:choose> 
+						<c:when test="${sessionScope.loginInfo.memberImgAttachedName != null }">
 						<img src="/resources/img/member/${sessionScope.loginInfo.memberImgAttachedName }" alt="mdo" width="32" height="32" class="rounded-circle"> ${sessionScope.loginInfo.memberName } 님 환영합니다.
+						</c:when>
+						<c:otherwise>
+						<img src="/resources/img/member/nullImg.png" alt="mdo" width="32" height="32" class="rounded-circle"> ${sessionScope.loginInfo.memberName } 님 환영합니다.
+						</c:otherwise>
+						</c:choose>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownUser1">
 							<li><a class="dropdown-item" href="/member/myPage">마이페이지</a></li>
