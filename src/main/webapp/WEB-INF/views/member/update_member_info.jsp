@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="/resources/member/js/join.js?ver=2"></script>
 </head>
 <body>
-<form action="/member/correctionMember" method="post">
+<form action="/member/updateMemberInfo" method="post">
 	<!-- 이미지 파일 넣는곳 -->
 	<input type="file" name="memberImg" onchange="readURL(this);" >
 	<img id="preview" />
@@ -27,20 +28,24 @@
 		}
 	</script> <br>
 <!-- 아이디 중복체크,영문&숫자 15개 이하??  -->
-id<input type="text" name="memberId" value="${member.memberId }" readonly> <br>
+<div id="checkIdDiv">
+id<input type="text" id="memberId" name="memberId" value="${member.memberId }">
+<input type="button" value="중복확인" onclick="checkId();">
+</div>
 
 <!-- 한글 정규식? -->
-이름<input type="text" name="memberName" value="${member.memberName }" readonly> <br>
+이름<input type="text" name="memberName" value="${member.memberName }"> <br>
 <!-- 숫자 6개 -->
 생년월일<input type="text" name="memberBirth" value="${member.memberBirth }" readonly> <br>
-성별<input type="radio" checked name="memberGender" value="남자">남 
-	<input type="radio" name="memberGender" value="여자">여 <br>
+성별<input type="radio" checked name="memberGender" value="남자" disabled<c:if test="${member.memberGender eq '남자'}">checked</c:if>>남 
+	<input type="radio" name="memberGender" value="여자" disabled<c:if test="${member.memberGender eq '여자'}">checked</c:if>>여 <br>
 <!-- 숫자만 가능 -->
-연락처<input type="text" name="tells" value="${member.memberTell }" readonly><br>
+연락처<input type="text" name="memberTell" value="${member.memberTell }"><br>
 <!-- 중복체크가능 -->
 포지션<input type="radio" value="공격" name="position" <c:if test="${member.position eq '공격'}">checked</c:if>>공격
 	  <input type="radio" value="수비" name="position" <c:if test="${member.position eq '수비'}">checked</c:if>>수비
 	  <input type="radio" value="키퍼" name="position" <c:if test="${member.position eq '키퍼'}">checked</c:if>>키퍼 <br>
+<input type="hidden" value="${member.memberCode }">	  
 <input type="submit" value="수정하기">
 </form>
 </body>

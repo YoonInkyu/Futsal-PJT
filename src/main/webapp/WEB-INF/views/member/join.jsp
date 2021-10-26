@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="/resources/member/js/join.js?ver=1"></script>
 </head>
 <body>
 
@@ -37,32 +38,37 @@
 
 							<label for="inputId" class="form-label">아이디</label>
 
-							<div class="col mb-5 d-grid gap-2 d-md-flex">
-								<input type="text" class="form-control" id="inputId memberId" name="memberId" required placeholder="1~16 글자수 생성 가능"> <input class="btn btn-primary" type="submit" value="중복 체크">
+							<div class="col mb-5 d-grid gap-2 d-md-flex" id="checkIdDiv">
+								<input type="text" class="form-control" id="memberId" name="memberId" required placeholder="1~16 글자수 생성 가능">
+								<input class="btn btn-primary" type="button" value="중복 체크" id="checkButt" onclick="checkId();">
 							</div>
+							<div id="idButtCheck" style="color: red; font-size: 12px; margin-top: 2px;">중복체크바랍니다.</div>
+						</div>
+						
 
+
+						<div class="col-12 mb-5">
+							<label for="inputPw" class="form-label">비밀번호</label> <input type="password" class="form-control" id="memberPw" name="memberPw" placeholder="비밀번호 입력" required>
+							<div id="pwJDiv" style="color: red; font-size: 12px; margin-top: 2px;"></div>
 						</div>
 
 
 
 						<div class="col-12 mb-5">
-							<label for="inputPw" class="form-label">비밀번호</label> <input type="password" class="form-control" id="inputPw memberPw" name="memberPw" placeholder="비밀번호 입력" required>
+							<label for="inputPwCheck" class="form-label">비밀번호 확인</label> <input type="password" class="form-control" id="memberPwCheck" placeholder="비밀번호 확인">
+							<div id="pwCheckDiv" style="color: red; font-size: 12px; margin-top: 2px;"></div>
 						</div>
 
 
 
 						<div class="col-12 mb-5">
-							<label for="inputPwCheck" class="form-label">비밀번호 확인</label> <input type="password" class="form-control" id="inputPwCheck memberPwCrheck" placeholder="비밀번호 확인">
-						</div>
-
-
-
-						<div class="col-12 mb-5">
-							<label for="inputName" class="form-label">이름</label> <input type="text" class="form-control" id="inputName memberPwCrheck" name="memberName" required placeholder="이름을 입력">
+							<label for="inputName" class="form-label">이름</label> <input type="text" class="form-control" id="memberName" name="memberName" required placeholder="이름을 입력">
+							<div id="nameJDiv" style="color: red; font-size: 12px; margin-top: 2px;"></div>
 						</div>
 
 						<div class="col-12 mb-5">
-							<label for="inputBirth" class="form-label">생년월일</label> <input type="text" class="form-control" id="inputBirth memberBirth" name="memberBirth" required placeholder="앞6자리 예시)880425">
+							<label for="inputBirth" class="form-label">생년월일</label> <input type="text" class="form-control" id="memberBirth" name="memberBirth" required placeholder="주민번호 앞6자리 예시)880425">
+							<div id="birthJDiv" style="color: red; font-size: 12px; margin-top: 2px;"></div>
 						</div>
 
 						<div class="col-12 mb-5">
@@ -86,18 +92,19 @@
 								<label for="inputTell" class="form-label">연락처</label>
 
 								<div class="col">
-									<input type="text" class="form-control" id="inputTell tells" name="tells">
+									<input type="text" class="form-control tells" id="tell1" name="tells">
 								</div>
 
 								<div class="col">
-									<input type="text" class="form-control" id="inputTell tells" name="tells">
+									<input type="text" class="form-control tells" id="tell2" name="tells">
 								</div>
 
 								<div class="col">
-									<input type="text" class="form-control" id="inputTell tells" name="tells">
+									<input type="text" class="form-control tells" id="tell3" name="tells">
 								</div>
 
 							</div>
+							<div id="tellJDiv" style="color: red; font-size: 12px; margin-top: 2px;"></div>
 
 						</div>
 
@@ -124,7 +131,7 @@
 
 
 						<div class="d-grid gap-2">
-							<input class="btn btn-primary" type="submit" value="회원 가입" >
+							<input class="btn btn-primary disabled" type="submit" value="회원 가입" id="joinButt">
 						</div>
 
 

@@ -66,6 +66,10 @@
 			, #{position}
 		)
 	</insert>
+	<!-- 아이디 중복체크 -->
+	<select id="checkId" resultType="String">
+		SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{memberId}
+	</select>
 	<!-- 이미지 인설트 -->
 	<insert id="insertMemberImg">
 		INSERT INTO MEMBER_IMG VALUES (
@@ -90,6 +94,28 @@
 		WHERE MEMBER_ID = #{memberId} 
 		AND MEMBER_PW = #{memberPw}
 	</select>
+	<!-- 회원정보 수정하기 -->
+	<update id="updateMemberInfo">
+		UPDATE MEMBER SET 
+			MEMBER_ID = #{memberId}
+			, MEMBER_NAME = #{memberName}
+			, MEMBER_TELL = #{memberTell}
+			, POSITION = #{position} 
+		WHERE MEMBER_CODE = #{memberCode}
+	</update>
+	<!-- 회원 사진유무 확인 -->
+	<select id="checkMemberImg" resultMap="memberView">
+		SELECT MEMBER_IMG_ATTACHED_NAME 
+		FROM MEMBER_VIEW
+		WHERE MEMBER_CODE = #{memberCode}
+	</select>
+	<!-- 회원사진 수정하기 -->
+		<update id="updateMemberImg">
+		UPDATE MEMBER_IMG SET 
+			MEMBER_IMG_ORIGN_NAME = #{memberImgOrignName}
+			, MEMBER_IMG_ATTACHED_NAME = #{memberImgAttachedName}
+		WHERE MEMBER_CODE = #{memberCode}
+	</update>
 	<!-- session 정보 -->
 	<select id="selectMemberInfo" resultMap="memberView">
 		SELECT MEMBER_ID

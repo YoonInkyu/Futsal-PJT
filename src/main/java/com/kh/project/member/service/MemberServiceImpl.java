@@ -16,9 +16,14 @@ public class MemberServiceImpl implements MemberService{
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public void join(MemberVO memberVO) {
-		sqlSession.insert("memberMapper.join", memberVO);
+	public int join(MemberVO memberVO) {
+		return sqlSession.insert("memberMapper.join", memberVO);
 		
+	}
+	@Override
+	public boolean checkId(String memberId) {
+		String result = sqlSession.selectOne("memberMapper.checkId", memberId);
+		return result == null ? false : true;
 	}
 	
 	@Override
@@ -52,6 +57,21 @@ public class MemberServiceImpl implements MemberService{
 	public String nextMemberCode() {
 		return sqlSession.selectOne("memberMapper.nextMemberCode");
 	}
+	@Override
+	public void updateMemberInfo(MemberVO memberVO) {
+		sqlSession.update("memberMapper.updateMemberInfo", memberVO);
+		
+	}
+	@Override
+	public void updateMemberImg(MemberImgVO memberImgVO) {
+		sqlSession.update("memberMapper.udateMemberImg", memberImgVO);
+		
+	}
+	@Override
+	public String checkMemberImg(String memberCode) {
+		return sqlSession.selectOne("memberMapper.checkMemberImg", memberCode);
+	}
+
 
 	
 }
