@@ -44,7 +44,8 @@ public class MercenaryController {
 		//model.addAttribute("loginInfo", mercenaryService.selectLoginInfo(memberVO.getMemberCode()));
 		//구인 상세보기 조회
 		model.addAttribute("mercVO", mercenaryService.selectMercDetail(mercenaryBoardCode));
-		return "mercenary/mercenary_recruit_detail";
+		//상세보기 모달창 사이드,푸터 없애기 위해 리턴값에 logPage/ 추가 
+		return "logPage/mercenary/mercenary_recruit_detail";
 	}
 	//용병 모집(구인) 등록 페이지로 이동
 	@GetMapping("/recruitRegForm")
@@ -86,7 +87,7 @@ public class MercenaryController {
 	public String applyDetail(Model model, String mercenaryApplyCode) {
 		//구인 상세보기 조회
 		model.addAttribute("mercVO", mercenaryService.selectMercApplyDetail(mercenaryApplyCode));
-		return "mercenary/mercenary_apply_detail";
+		return "logPage/mercenary/mercenary_apply_detail";
 	}
 	
 }

@@ -100,8 +100,10 @@
 			$(".modal-content").load("/mercenary/recruitDetail?mercenaryBoardCode=" + mercenaryBoardCode);
 		}
 	</script>
-	<!-- tr 클릭시 상세보기 모달창이고, mercenary_recruit_detail.jsp을 불러와서 div class=content안에 내용 넣음 
+	<!-- 
+		tr 클릭시 상세보기 모달창이고, mercenary_recruit_detail.jsp을 불러와서 div class=content안에 내용 넣음 
 		모달창에 사이드메뉴, 푸터 안나오게 하는 방법 찾아야 함.(detail.jsp에서 사이드,푸터 js로 없애면 될듯?)
+		컨트롤러에서 로그인 레이아웃은 사이드, 푸터가 없어서 로그인 레이아웃 사용함. js 사용X
 	 -->
 	<div class="modal fade" tabindex="-1" id="recruitDetailModal">
 		<div class="modal-dialog modal-lg">

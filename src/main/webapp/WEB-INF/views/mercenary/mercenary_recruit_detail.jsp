@@ -6,15 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-$(document).ready(function() {
-	//처음 모달은 제거 되는데... 모달창 닫고 다시열면 보임 ㅠㅠㅠㅠ
-	//상세보기 모달 사이드바 제거
-	$('.mercDetail').children().last().children().last().remove()
-	//상세보기 모달 푸터 제거
-	$('.mercDetail').children().last().children().last().children().last().remove()
-});
-</script>
 </head>
 <body>
 <!-- 용병 구인 상세보기 모달 내용 -->

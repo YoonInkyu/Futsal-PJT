@@ -164,6 +164,30 @@
 		WHERE MERCENARY_APPLY_CODE = #{mercenaryApplyCode}
 	</select>
 	
+	<!-- 용병 구인 지원 INSERT -->
+	<insert id="insertMercRecruitList">
+		INSERT INTO MERC_RECRUITLIST
+		VALUES (
+			(SELECT 'MERC_RM_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERC_RECRUITLIST_CODE, 14, 4))), 0)+1, 4, '0') FROM MERC_RECRUITLIST)
+			<!-- 상세보기하고 있는 보드코드 -->
+			, #{mercenaryBoardCode}
+			<!-- 로그인 한 사람 멤버코드 -->
+			, #{memberCode} 
+		)
+	</insert>
+	
+	<!-- 용병 구직 지원 INSERT -->
+	<insert id="insertMercApplyList">
+		INSERT INTO MERC_APPLYLIST
+		VALUES (
+			(SELECT 'MERC_AM_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERC_APPLYLIST_CODE, 14, 4))), 0)+1, 4, '0') FROM MERC_APPLYLIST)
+			<!-- 상세보기하고 있는 보드코드 -->
+			, #{mercenaryBoardCode}
+			<!-- 로그인 한 사람 팀코드 -->
+			, #{teamCode} 
+		)
+	</insert>
+	
 </mapper>
 
 
