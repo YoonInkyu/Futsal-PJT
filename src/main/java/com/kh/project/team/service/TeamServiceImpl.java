@@ -41,8 +41,8 @@ public class TeamServiceImpl implements TeamService{
 	
 	// 팀리스트 조회
 	@Override
-	public List<TeamVO> selectTeamList(Model model) {
-		return sqlSession.selectList("teamMapper.selectTeamList", model);
+	public List<TeamVO> selectTeamList() {
+		return sqlSession.selectList("teamMapper.selectTeamList");
 	}
 
 	

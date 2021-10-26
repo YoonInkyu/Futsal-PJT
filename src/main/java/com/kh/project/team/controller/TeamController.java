@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.kh.project.member.vo.MemberVO;
 import com.kh.project.team.service.TeamService;
 import com.kh.project.team.vo.TeamLogoImgVO;
 import com.kh.project.team.vo.TeamVO;
@@ -30,13 +32,19 @@ public class TeamController {
 	// 팀생성 페이지로 이동
 	@GetMapping("/regTeam")
 	public String goRegTeam() {
-		return "team/regTeam";
+		return "team/submenu_team_create";
+	} 
+	
+	// 팀생성 페이지로 이동
+	@GetMapping("/teamManage")
+	public String teamManage_admin() {
+		return "team/team_manage";
 	} 
 	
 	
 	// 팀 생성
 	@PostMapping("/regTeam")
-	public String regTeam(TeamVO teamVO, MultipartHttpServletRequest multi) {
+	public String regTeam(TeamVO teamVO, MultipartHttpServletRequest multi, HttpSession session) {
 		
 		//파일이 첨부되는 input 태그의 name 속성 값 가져오는 객체
 		//Iterator<String> inputName = multi.getFileNames();
@@ -69,22 +77,23 @@ public class TeamController {
 		
 		// 팀코드 VO에 입력
 		teamVO.setTeamCode(selectTeamCode);
-		System.out.println(teamVO.getTeamCode());
+		
+		// 회원정보 가져와서 VO에 SET (윤인규,10/22 수정)
+		MemberVO memberInfo = (MemberVO)session.getAttribute("loginInfo");
+		teamVO.setMemberCode(memberInfo.getMemberCode());
+		
 		// 팀 생성 정보 insert
 		teamService.insertTeam(teamVO);
 		// 팀로고 등록
 		teamService.insertTeamLogoImg(teamLogoImg);
 		
-		
-		// 회원정보 가져오기(회원코드 필요)
-		
-		return "/mainPage/main_page";
+		return "templateLayout/main_page";
 	}
 	
-	// 팀 리스트 조회
+	// 팀 리스트 조회 
 	@GetMapping("/selectTeamList")
 	public String selectTeamList(Model model) {
-		model.addAttribute("teamList", teamService.selectTeamList(model));
+		model.addAttribute("teamList", teamService.selectTeamList());
 	return "team/submenu_team_list";
 	}
 	

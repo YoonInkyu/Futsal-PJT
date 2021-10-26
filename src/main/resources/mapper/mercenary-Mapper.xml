@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 모든 SQL문을 mapper태그 안에 작성 -->
+<!-- 윤인규 10/23 용병 구인구직 게시글 등록 구현중-->
+<!-- 윤인규 10/25 용병 구인구직 게시글 지원자 vo 작성 -->
 <mapper namespace="mercenaryMapper">
 	<resultMap type="com.kh.project.mercenary.vo.MercenaryVO" id="mercenary">
 		<!-- 용병 구직 -->
@@ -8,22 +10,59 @@
 		<result column="MERCENARY_APPLY_TITLE" 			property="mercenaryApplyTitle"/>
 		<result column="MERCENARY_APPLY_WRITER" 		property="mercenaryApplyWriter"/>
 		<result column="MERCENARY_APPLY_REGDATE" 		property="mercenaryApplyRegdate"/>
-		<result column="MERCENARY_APPLY_NUMBERMEMBER" 	property="mercenaryApplyNumbermember"/>
+		<result column="MERCENARY_APPLY_NUMBERTEAM" 	property="mercenaryApplyNumberTeam"/>
 		<result column="MERCENARY_APPLY_POSIBLE" 		property="mercenaryApplyPosible"/>
 		<result column="MERCENARY_APPLY_INTRO" 			property="mercenaryApplyIntro"/>
+		<result column="MERCENARY_APPLY_DATE" 			property="mercenaryApplyDate"/>
+		<result column="MERCENARY_APPLY_START_TIME" 	property="mercenaryApplyStartTime"/>
+		<result column="MERCENARY_APPLY_END_TIME" 		property="mercenaryApplyEndTime"/>
+		<result column="MERCENARY_APPLY_LOCATION" 		property="mercenaryApplyLocation"/>
 		<!-- 용병 구인 -->
 		<result column="MERCENARY_BOARD_CODE" 			property="mercenaryBoardCode"/>
 		<result column="MERCENARY_BOARD_TITLE" 			property="mercenaryBoardTitle"/>
 		<result column="MERCENARY_BOARD_WRITER" 		property="mercenaryBoardWriter"/>
 		<result column="MERCENARY_BOARD_REGDATE" 		property="mercenaryBoardRegdate"/>
-		<result column="MERCENARY_BOARD_NUMBERMEMBER" 	property="mercenaryBoardNumbermember"/>
+		<result column="MERCENARY_BOARD_NUMBERMEMBER" 	property="mercenaryBoardNumberMember"/>
 		<result column="MERCENARY_BOARD_POSIBLE" 		property="mercenaryBoardPosible"/>
 		<result column="MERCENARY_BOARD_INTRO" 			property="mercenaryBoardIntro"/>
+		<result column="MERCENARY_BOARD_DATE" 			property="mercenaryBoardDate"/>
+		<result column="MERCENARY_BOARD_START_TIME" 	property="mercenaryBoardStartTime"/>
+		<result column="MERCENARY_BOARD_END_TIME" 		property="mercenaryBoardEndTime"/>
+		<result column="MERCENARY_BOARD_LOCATION" 		property="mercenaryBoardLocation"/>
 		<!-- 공용 -->
 		<result column="MATCH_CODE" 					property="matchCode"/>
 		<result column="TEAM_CODE" 						property="teamCode"/>
 		<result column="MEMBER_CODE" 					property="memberCode"/>
 	</resultMap>
+	
+	<resultMap type="com.kh.project.mercenary.vo.MercenaryListVO" id="mercenaryList">
+		<!-- 용병 구인 지원 리스트 -->
+		<id column="MERC_RECRUITLIST_CODE" 				property="mercRecruitlistCode"/>
+		<result column="MERCENARY_BOARD_CODE" 			property="mercenaryBoardCode"/>
+		<result column="MEMBER_CODE" 					property="memberCode"/>
+		<!-- 용병 구직 지원 리스트 -->
+		<result column="MERC_APPLYLIST_CODE" 			property="mercApplylistCode"/>
+		<result column="MERCENARY_APPLY_CODE" 			property="mercenaryApplyCode"/>
+		<result column="TEAM_CODE" 						property="teamCode"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.project.member.vo.MemberVO" id="member">
+		<id column="MEMBER_CODE" 						property="memberCode"/>
+        <result column="MEMBER_ID" 						property="memberId"/>
+       	<result column="MEMBER_NAME" 					property="memberName"/>
+       	<result column="TEAM_CODE" 						property="teamCode"/>
+	</resultMap>
+	
+	<!-- 로그인 정보 가져오기 왜 안돼?? -->
+	<select id="selectLoginInfo" resultMap="member">
+		SELECT MEMBER_CODE
+		    , MEMBER_ID
+		    , MEMBER_NAME
+		    , TEAM_CODE
+		    , MEMBER_TELL
+		FROM MEMBER
+		WHERE MEMBER_CODE = ${memberCode}
+	</select>
 	
 	<!-- 용병 구인 게시글 등록 -->
 	<insert id="insertMercRecruit">
@@ -31,19 +70,48 @@
 			MERCENARY_BOARD_CODE
 			, MERCENARY_BOARD_TITLE
 			, MERCENARY_BOARD_WRITER
-			, MERCENARY_BOARD_INTRO
+			, MERCENARY_BOARD_INTRO	
 			, MERCENARY_BOARD_POSIBLE
-			, TEAM_CODE
-			<!-- 매치코드, 매치날짜 추가 여부 확인 -->
+			, MERCENARY_BOARD_DATE
+			, MERCENARY_BOARD_START_TIME
+			, MERCENARY_BOARD_END_TIME
+			, MERCENARY_BOARD_LOCATION
 		) VALUES (
-			(SELECT 'MERC_RC_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERCENARY_BOARD_CODE, 6, 4))), 0)+1, 4, '0') FROM MERCENARY_BOARD)
+			(SELECT 'MERC_RC_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERCENARY_BOARD_CODE, 14, 4))), 0)+1, 4, '0') FROM MERCENARY_BOARD)
 			, #{mercenaryBoardTitle}
-			, #{mercenaryBoardWriter}
+			, 'admin'
+			<!-- , #{mercenaryBoardWriter} -->
 			, #{mercenaryBoardIntro}
 			, #{mercenaryBoardPosible}
-			, #{teamCode}
+			, #{mercenaryBoardDate}
+			, #{mercenaryBoardStartTime}
+			, #{mercenaryBoardEndTime}
+			, #{mercenaryBoardLocation}
 		)
 	</insert>
+	
+	<!-- 용병 구인 게시글 리스트 조회 -->
+	<select id="selectMercBoardList" resultMap="mercenary">
+		SELECT MERCENARY_BOARD_CODE
+			, MERCENARY_BOARD_LOCATION
+			, MERCENARY_BOARD_TITLE
+			, MERCENARY_BOARD_WRITER
+			, MERCENARY_BOARD_POSIBLE
+			, MERCENARY_BOARD_DATE
+			, MERCENARY_BOARD_START_TIME
+			, MERCENARY_BOARD_END_TIME
+			, TO_CHAR(MERCENARY_BOARD_REGDATE, 'YYYY-MM-DD') AS MERCENARY_BOARD_REGDATE
+			, MERCENARY_BOARD_NUMBERMEMBER
+		FROM MERCENARY_BOARD
+		ORDER BY MERCENARY_BOARD_CODE DESC
+	</select>
+	
+	<!-- 용병 구인 상세보기 -->
+	<select id="selectMercDetail" resultMap="mercenary">
+		SELECT *
+		FROM MERCENARY_BOARD
+		WHERE MERCENARY_BOARD_CODE = #{mercenaryBoardCode}
+	</select>
 	
 	<!-- 용병 구직 게시글 등록 -->
 	<insert id="insertMercApply">
@@ -53,17 +121,48 @@
 			, MERCENARY_APPLY_WRITER
 			, MERCENARY_APPLY_INTRO
 			, MERCENARY_APPLY_POSIBLE
-			, MEMBER_CODE
-			<!-- 매치코드, 매치날짜 추가 여부 확인 -->
+			, MERCENARY_APPLY_DATE
+			, MERCENARY_APPLY_START_TIME
+			, MERCENARY_APPLY_END_TIME
+			, MERCENARY_APPLY_LOCATION
+			<!-- , MEMBER_CODE 인설트 필요 없어 WHY? 로그인정보 가져와서 member 먼저 셀렉트 먼저해서 그 정보를 WRITER에 넣어야지-->
 		) VALUES (
-			(SELECT 'MERC_AP_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERCENARY_APPLY_CODE, 6, 4))), 0)+1, 4, '0') FROM MERCENARY_APPLY_BOARD)
-			, #{mercenaryBoardTitle}
-			, #{mercenaryBoardWriter}
-			, #{mercenaryBoardIntro}
-			, #{mercenaryBoardPosible}
-			, #{memberCode}
+			(SELECT 'MERC_AP_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERCENARY_APPLY_CODE, 14, 4))), 0)+1, 4, '0') FROM MERCENARY_APPLY_BOARD)
+			, #{mercenaryApplyTitle}
+			, 'admin' <!-- 로그인 처리하고 수정해야함 -->
+			<!-- , #{mercenaryApplyWriter} -->
+			, #{mercenaryApplyIntro}
+			, #{mercenaryApplyPosible}
+			, #{mercenaryApplyDate}
+			, #{mercenaryApplyStartTime}
+			, #{mercenaryApplyEndTime}
+			, #{mercenaryApplyLocation}
+			<!-- , #{memberCode} 위 주석 참고 -->
 		)
 	</insert>
+	
+	<!-- 용병 구직 게시글 리스트 조회 -->
+	<select id="selectMercApplyList" resultMap="mercenary">
+		SELECT MERCENARY_APPLY_CODE
+			, MERCENARY_APPLY_LOCATION
+			, MERCENARY_APPLY_TITLE
+			, MERCENARY_APPLY_WRITER
+			, MERCENARY_APPLY_POSIBLE
+			, MERCENARY_APPLY_DATE
+			, MERCENARY_APPLY_START_TIME
+			, MERCENARY_APPLY_END_TIME
+			, TO_CHAR(MERCENARY_APPLY_REGDATE, 'YYYY-MM-DD') AS MERCENARY_APPLY_REGDATE
+			, MERCENARY_APPLY_NUMBERTEAM
+		FROM MERCENARY_APPLY_BOARD
+		ORDER BY MERCENARY_APPLY_CODE DESC
+	</select>
+	
+	<!-- 용병 구직 상세보기 -->
+	<select id="selectMercApplyDetail" resultMap="mercenary">
+		SELECT *
+		FROM MERCENARY_APPLY_BOARD
+		WHERE MERCENARY_APPLY_CODE = #{mercenaryApplyCode}
+	</select>
 	
 </mapper>
 

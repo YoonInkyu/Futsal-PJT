@@ -1,3 +1,10 @@
+//박성환 10/25 : 로그인 조인 경로 변경
+
+
+
+
+
+
 package com.kh.project.member.controller;
 
 import java.io.File;
@@ -30,7 +37,7 @@ public class MemberController {
 	//회원가입 페이지로 이동
 	@GetMapping("/goJoin")
 	public String goJoin() {
-		return  "templateLayout/member/join";
+		return  "logPage/member/join";
 	}
 	//회원가입 하기
 	@PostMapping("/join")
@@ -79,20 +86,20 @@ public class MemberController {
 	//로그인 페이지로 이동
 	@GetMapping("/goLogin")
 	public String goLogin() {
-		return  "templateLayout/member/login";
+		return  "logPage/member/login";
 	}
 	//로그인 하기
 	@PostMapping("/goLogin")
 	public String Login(MemberVO memberVO, HttpSession session) {
 		MemberVO loginInfo = memberService.login(memberVO);
 		session.setAttribute("loginInfo", loginInfo);
-		return  "templateLayout/main_page";
+		return  "mainPage/main_page";
 	}
 	//로그아웃 하기
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginInfo");
-		return  "templateLayout/main_page";
+		return  "mainPage/main_page";
 	}
 	//마이페이지 가기
 	@GetMapping("/myPage")

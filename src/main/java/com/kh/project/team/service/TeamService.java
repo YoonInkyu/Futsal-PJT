@@ -23,7 +23,7 @@ public interface TeamService {
 	void insertTeamLogoImg(TeamLogoImgVO teamLogoImgVO);
 	
 	// 팀리스트
-	List<TeamVO> selectTeamList(Model model);
+	List<TeamVO> selectTeamList();
 	
 	
 }
