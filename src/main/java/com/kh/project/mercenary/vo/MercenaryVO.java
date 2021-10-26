@@ -1,5 +1,7 @@
 package com.kh.project.mercenary.vo;
 
+import com.kh.project.member.vo.MemberVO;
+
 // 윤인규, 1020 작성
 // 윤인규, 1023 변수 추가(각각 Date, Time 데이터 DB와 프로젝트에 추가)
 public class MercenaryVO {

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kh.project.common.util.CurrentDateTime;
 import com.kh.project.member.service.MemberService;
 import com.kh.project.member.vo.MemberVO;
 import com.kh.project.mercenary.service.MercenaryService;
@@ -27,21 +26,14 @@ public class MercenaryController {
 	
 	//용병 구인 페이지로 이동
 	@GetMapping("/recruit")
-	public String goMercenaryRecruit(Model model, HttpSession session, MercenaryVO mercenaryVO) {
+	public String goMercenaryRecruit(Model model, MercenaryVO mercenaryVO) {
 		//구인 리스트 셀렉트
 		model.addAttribute("mercRecruitList", mercenaryService.selectMercBoardList());
 		return "mercenary/mercenary_recruit";
 	}
 	//용병 구인 상세보기 (모달)
 	@GetMapping("/recruitDetail")
-	public String recruitDetail(Model model, String mercenaryBoardCode, HttpSession session, MercenaryVO mercenaryVO) {
-		//로그인 한 사람과 게시글 작성자 구분하여 버튼 따로 주려고 하는데,
-		//로그인한 사람 정보 셀렉트해보려 했으나 안됨.. 멤버코드는 제대로 들고 오는데...
-		//매개변수가 멤버코드인데... memberVO, mercenaryVO 멤버코드에 담아서 셀렉트해도 안됨.... 뭐가 문제지ㅣㅣㅣㅣㅣㅣ??????
-		//MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
-		//System.out.println(memberVO.getMemberCode());
-		//mercenaryVO.setMemberCode(memberVO.getMemberCode());
-		//model.addAttribute("loginInfo", mercenaryService.selectLoginInfo(memberVO.getMemberCode()));
+	public String recruitDetail(Model model, String mercenaryBoardCode, MercenaryVO mercenaryVO) {
 		//구인 상세보기 조회
 		model.addAttribute("mercVO", mercenaryService.selectMercDetail(mercenaryBoardCode));
 		//상세보기 모달창 사이드,푸터 없애기 위해 리턴값에 logPage/ 추가 
@@ -55,12 +47,25 @@ public class MercenaryController {
 	//용병 모집(구인) 등록
 	@PostMapping("/recruitReg")
 	public String recruitRegBoard(HttpSession session, MercenaryVO mercenaryVO, Model model) {
+		//로그인한 사람 이름 가져와서 VO에 set
+		String memberName = ((MemberVO)session.getAttribute("loginInfo")).getMemberName();
+		mercenaryVO.setMercenaryBoardWriter(memberName);
+		
 		//게시글 등록 쿼리 실행
 		mercenaryService.insertMercRecruit(mercenaryVO);
 		
 		//용병 구인 리스트 페이지로 이동
 		return "redirect:/mercenary/recruit";
 	}
+	//용병 구인 신청하기
+	@GetMapping("/updateRecruitCnt")
+	public String updateRecruitCnt(Model model, MercenaryVO mercenaryVO) {
+		//mercenaryService.updateMemberCnt(mercenaryVO);
+		mercenaryService.insertMercRecruitList(mercenaryVO);
+		return "redirect:/mercenary/recruit";
+	}
+	
+	
 	//용병 구직 페이지로 이동
 	@GetMapping("/apply")
 	public String goMercenaryApply(Model model) {
@@ -76,6 +81,10 @@ public class MercenaryController {
 	//용병 신청(구직) 등록
 	@PostMapping("/applyReg")
 	public String applyRegBoard(HttpSession session, MercenaryVO mercenaryVO, Model model) {
+		//로그인한 사람 이름 가져와서 VO에 set
+		String memberName = ((MemberVO)session.getAttribute("loginInfo")).getMemberName();
+		mercenaryVO.setMercenaryApplyWriter(memberName);
+		
 		//게시글 등록 쿼리 실행
 		mercenaryService.insertMercApply(mercenaryVO);
 		
@@ -89,5 +98,4 @@ public class MercenaryController {
 		model.addAttribute("mercVO", mercenaryService.selectMercApplyDetail(mercenaryApplyCode));
 		return "logPage/mercenary/mercenary_apply_detail";
 	}
-	
 }
