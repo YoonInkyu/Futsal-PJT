@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -33,7 +34,7 @@ public class MemberController {
 	}
 	//회원가입 하기
 	@PostMapping("/join")
-	public String join(MemberVO memberVO, MultipartHttpServletRequest multi) {
+	public String join(MemberVO memberVO, MultipartHttpServletRequest multi, Model model) {
 
 		//파일이 첨부되는 input 태그의 name 속성 값 가져오는 객체
 		//Iterator<String> inputName = multi.getFileNames();
@@ -41,31 +42,39 @@ public class MemberController {
 		// 첨부될 폴더 경로 지정
 		String uploadPath = "C:\\Users\\PC\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\member\\";
 		
-		// regTeam.jsp input파일의 name값 가져옴
+		// join.jsp input파일의 name값 가져옴
 		MultipartFile file = multi.getFile("memberImg");
-		String memberImgAttachedName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 		
-		try {
-			file.transferTo(new File(uploadPath + memberImgAttachedName));
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// 첨부파일 정보가 들어갈 공간
-		MemberImgVO memberImgVO = new MemberImgVO();
-		memberImgVO.setMemberCode(memberService.nextMemberCode());
-		memberImgVO.setMemberImgOrignName(file.getOriginalFilename());
-		memberImgVO.setMemberImgAttachedName(memberImgAttachedName);
-		
-		memberService.join(memberVO);
-		if (file != null) {
+		;
+		model.addAttribute("result",memberService.join(memberVO));
+		if (!file.getOriginalFilename().equals("")) {
+			String memberImgAttachedName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			// 첨부파일 정보가 들어갈 공간
+			
+			try {
+				file.transferTo(new File(uploadPath + memberImgAttachedName));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			MemberImgVO memberImgVO = new MemberImgVO();
+			memberImgVO.setMemberCode(memberService.nextMemberCode());
+			memberImgVO.setMemberImgOrignName(file.getOriginalFilename());
+			memberImgVO.setMemberImgAttachedName(memberImgAttachedName);
 			memberService.insertMemberImg(memberImgVO);
 		}
 		
-		return  "redirect:/member/goLogin";
+		return  "member/join_result";
+	}
+	//id 중복 체크
+	@ResponseBody
+	@PostMapping("/checkId")
+	public boolean checkId(String memberId) {
+		//기존 가입 : true, 미가입 : false
+		return memberService.checkId(memberId);
 	}
 	//로그인 페이지로 이동
 	@GetMapping("/goLogin")
@@ -88,22 +97,58 @@ public class MemberController {
 	//마이페이지 가기
 	@GetMapping("/myPage")
 	public String mypage(HttpSession session, Model model) {
-		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
-		model.addAttribute("member",memberService.myPage(memberVO.getMemberCode()));
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+		model.addAttribute("member",memberService.myPage(memberCode));
 		return  "member/my_page";
 	}
-	//마이페이지 가기
+	//회원정보 수정페이지 가기
 	@GetMapping("/goUpdateMember")
-	public String correctionMemberInfo(HttpSession session, Model model) {
-		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
-		model.addAttribute("member",memberService.myPage(memberVO.getMemberCode()));
+	public String goUpdateMember(HttpSession session, Model model) {
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+		model.addAttribute("member",memberService.myPage(memberCode));
+		return  "member/update_member_info";
+	}
+	//회원정보 수정하기
+	@GetMapping("/UpdateMember")
+	public String UpdateMember(MemberVO memberVO, MultipartHttpServletRequest multi) {
+		memberService.updateMemberInfo(memberVO);
+		// 첨부될 폴더 경로 지정
+		String uploadPath = "C:\\Users\\PC\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\member\\";
+		
+		// join.jsp input파일의 name값 가져옴
+		MultipartFile file = multi.getFile("memberImg");
+		System.out.println(file);
+		if (!file.getOriginalFilename().equals("")) {
+			String memberImgAttachedName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			// 첨부파일 정보가 들어갈 공간
+			
+			try {
+				file.transferTo(new File(uploadPath + memberImgAttachedName));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			MemberImgVO memberImgVO = new MemberImgVO();
+			memberImgVO.setMemberCode(memberVO.getMemberCode());
+			memberImgVO.setMemberImgOrignName(file.getOriginalFilename());
+			memberImgVO.setMemberImgAttachedName(memberImgAttachedName);
+			if(memberService.checkMemberImg(memberVO.getMemberCode())==null) {
+				memberService.insertMemberImg(memberImgVO);
+			}
+			else {
+				memberService.updateMemberImg(memberImgVO);
+			}
+		}
 		return  "member/update_member_info";
 	}
 	//멤버 블랙리스트 관리페이지
 	@GetMapping("/goMemberBlacklist")
 	public String goMemberBlacklist(HttpSession session, Model model) {
-		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
-		model.addAttribute("black",memberService.memberBlackList(memberVO.getMemberCode()));
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+		model.addAttribute("black",memberService.memberBlackList(memberCode));
 		return  "member/member_blacklist";
 	}
 	//멤버블랙 삭제하기
