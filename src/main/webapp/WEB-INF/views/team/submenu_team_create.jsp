@@ -28,10 +28,12 @@
 
 			<div class="row my-4 ">
 
-				<div class="col-4">
-					<img src="" id="preview" class="img-thumbnail" height="300px;">
-					
+
+
+				<div class="col-4 embed-responsive embed-responsive-4by3">
+					<iframe src="" id="preview" class="img-thumbnail embed-responsive-item" height="300px;"></iframe>
 				</div>
+				
 				<div class="col-8">
 					<div class="row">
 						<label for="inputId" class="form-label">팀 명</label>
