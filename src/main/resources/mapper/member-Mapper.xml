@@ -97,8 +97,7 @@
 	<!-- 회원정보 수정하기 -->
 	<update id="updateMemberInfo">
 		UPDATE MEMBER SET 
-			MEMBER_ID = #{memberId}
-			, MEMBER_NAME = #{memberName}
+			MEMBER_NAME = #{memberName}
 			, MEMBER_TELL = #{memberTell}
 			, POSITION = #{position} 
 		WHERE MEMBER_CODE = #{memberCode}

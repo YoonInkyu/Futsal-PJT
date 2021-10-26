@@ -116,7 +116,7 @@ public class MemberController {
 		return  "member/update_member_info";
 	}
 	//회원정보 수정하기
-	@GetMapping("/UpdateMember")
+	@PostMapping("/updateMemberInfo")
 	public String UpdateMember(MemberVO memberVO, MultipartHttpServletRequest multi) {
 		memberService.updateMemberInfo(memberVO);
 		// 첨부될 폴더 경로 지정
@@ -124,7 +124,6 @@ public class MemberController {
 		
 		// join.jsp input파일의 name값 가져옴
 		MultipartFile file = multi.getFile("memberImg");
-		System.out.println(file);
 		if (!file.getOriginalFilename().equals("")) {
 			String memberImgAttachedName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 			// 첨부파일 정보가 들어갈 공간
@@ -142,7 +141,7 @@ public class MemberController {
 			memberImgVO.setMemberCode(memberVO.getMemberCode());
 			memberImgVO.setMemberImgOrignName(file.getOriginalFilename());
 			memberImgVO.setMemberImgAttachedName(memberImgAttachedName);
-			if(memberService.checkMemberImg(memberVO.getMemberCode())==null) {
+			if(memberService.checkMemberImg(memberVO.getMemberCode()) == null) {
 				memberService.insertMemberImg(memberImgVO);
 			}
 			else {

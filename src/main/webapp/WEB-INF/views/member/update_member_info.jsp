@@ -9,7 +9,7 @@
 <script type="text/javascript" src="/resources/member/js/join.js?ver=2"></script>
 </head>
 <body>
-<form action="/member/updateMemberInfo" method="post">
+<form action="/member/updateMemberInfo" method="post" enctype="multipart/form-data">
 	<!-- 이미지 파일 넣는곳 -->
 	<input type="file" name="memberImg" onchange="readURL(this);" >
 	<img id="preview" />
@@ -29,8 +29,7 @@
 	</script> <br>
 <!-- 아이디 중복체크,영문&숫자 15개 이하??  -->
 <div id="checkIdDiv">
-id<input type="text" id="memberId" name="memberId" value="${member.memberId }">
-<input type="button" value="중복확인" onclick="checkId();">
+id<input type="text" id="memberId" name="memberId" value="${member.memberId }" readonly>
 </div>
 
 <!-- 한글 정규식? -->
