@@ -15,6 +15,5 @@ ${member.memberTell }<br>
 ${member.position }<br>
 ${member.teamName }<br>
 <input type="button" value="회원정보 수정하기" onclick="location.href='/member/goUpdateMember';">
-<input type="button" value="블랙리스트 관리" onclick="location.href='/member/goMemberBlacklist';">
 </body>
 </html>

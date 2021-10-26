@@ -44,7 +44,7 @@ id<input type="text" id="memberId" name="memberId" value="${member.memberId }" r
 포지션<input type="radio" value="공격" name="position" <c:if test="${member.position eq '공격'}">checked</c:if>>공격
 	  <input type="radio" value="수비" name="position" <c:if test="${member.position eq '수비'}">checked</c:if>>수비
 	  <input type="radio" value="키퍼" name="position" <c:if test="${member.position eq '키퍼'}">checked</c:if>>키퍼 <br>
-<input type="hidden" value="${member.memberCode }">	  
+<input type="hidden" value="${member.memberCode }" name="memberCode">	  
 <input type="submit" value="수정하기">
 </form>
 </body>

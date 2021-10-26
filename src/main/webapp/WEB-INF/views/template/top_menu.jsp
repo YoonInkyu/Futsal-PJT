@@ -89,11 +89,11 @@
 
 					<div class="dropdown" style="text-align: right;">
 						<a href="#" class="navbar-brand d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-						<img src="/resources/img/common/3.jpg" alt="mdo" width="32" height="32" class="rounded-circle"> 원빈 님 환영합니다.
+						<img src="/resources/img/member/${sessionScope.loginInfo.memberImgAttachedName }" alt="mdo" width="32" height="32" class="rounded-circle"> ${sessionScope.loginInfo.memberName } 님 환영합니다.
 						</a>
 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownUser1">
-							<li><a class="dropdown-item" href="/member/myPage">MYPAGE</a></li>
-							<li><a class="dropdown-item" href="#">입력 2</a></li>
+							<li><a class="dropdown-item" href="/member/myPage">마이페이지</a></li>
+							<li><a class="dropdown-item" href="/member/goMemberBlacklist">블랙리스트 관리</a></li>
 							<li><a class="dropdown-item" href="#">입력 3</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="/member/logout">LOGOUT</a></li>

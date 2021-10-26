@@ -15,9 +15,16 @@ public class MemberVO {
 	private String[] tells;
 	private String teamName;
 	private String memberImgAttachedName;
+	private String teamAdmin;
 	
 	
 	
+	public String getTeamAdmin() {
+		return teamAdmin;
+	}
+	public void setTeamAdmin(String teamAdmin) {
+		this.teamAdmin = teamAdmin;
+	}
 	public String getTeamName() {
 		return teamName;
 	}

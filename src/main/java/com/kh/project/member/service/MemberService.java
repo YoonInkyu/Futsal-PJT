@@ -14,6 +14,7 @@ public interface MemberService {
 	String nextMemberCode();
 	//로그인
 	MemberVO login(MemberVO memberVO);
+	MemberVO selectMemberInfo(String memberCode);
 	//마이페이지
 	MemberVO myPage(String memberCode);
 	//회원정보 수정하기

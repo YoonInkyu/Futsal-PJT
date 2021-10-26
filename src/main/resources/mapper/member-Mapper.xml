@@ -13,6 +13,7 @@
        	<result column="MEMBER_TELL" 		property="memberTell"/>
        	<result column="IS_ADMIN" 			property="isAdmin"/>
        	<result column="TEAM_CODE" 			property="teamCode"/>
+       	<result column="TEAM_ADMIN" 		property="teamAdmin"/>
        	<result column="POSITION" 			property="position"/>
        	<result column="MEMBER_JOIN_DATE" 	property="memberJoinDate"/>
 	</resultMap>
@@ -31,8 +32,10 @@
        	<result column="MEMBER_BIRTH" 						property="memberBirth"/>
        	<result column="MEMBER_GENDER" 						property="memberGender"/>
        	<result column="MEMBER_TELL" 						property="memberTell"/>
+       	<result column="IS_ADMIN" 							property="isAdmin"/>
        	<result column="TEAM_CODE" 							property="teamCode"/>
        	<result column="TEAM_NAME" 							property="teamName"/>
+       	<result column="TEAM_ADMIN" 						property="teamAdmin"/>
        	<result column="POSITION" 							property="position"/>
        	<result column="MEMBER_IMG_ATTACHED_NAME" 			property="memberImgAttachedName"/>
 	</resultMap>
@@ -117,14 +120,17 @@
 	</update>
 	<!-- session 정보 -->
 	<select id="selectMemberInfo" resultMap="memberView">
-		SELECT MEMBER_ID
+		SELECT MEMBER_CODE
+			, MEMBER_ID
 			, MEMBER_NAME
 			, MEMBER_BIRTH
 			, MEMBER_GENDER
 			, MEMBER_TELL
+			, IS_ADMIN
 			, POSITION
 			, TEAM_CODE
-			, TEAM_NAME 
+			, TEAM_NAME
+			, TEAM_ADMIN 
 			, MEMBER_IMG_ATTACHED_NAME
 		FROM MEMBER_VIEW
 		WHERE MEMBER_CODE = #{memberCode}

@@ -71,6 +71,10 @@ public class MemberServiceImpl implements MemberService{
 	public String checkMemberImg(String memberCode) {
 		return sqlSession.selectOne("memberMapper.checkMemberImg", memberCode);
 	}
+	@Override
+	public MemberVO selectMemberInfo(String memberCode) {
+		return sqlSession.selectOne("memberMapper.selectMemberInfo", memberCode);
+	}
 
 
 	

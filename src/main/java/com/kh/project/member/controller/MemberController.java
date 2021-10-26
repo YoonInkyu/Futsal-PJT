@@ -91,8 +91,9 @@ public class MemberController {
 	//로그인 하기
 	@PostMapping("/goLogin")
 	public String Login(MemberVO memberVO, HttpSession session) {
-		MemberVO loginInfo = memberService.login(memberVO);
-		session.setAttribute("loginInfo", loginInfo);
+		MemberVO login = memberService.login(memberVO);
+		session.setAttribute("loginInfo", memberService.selectMemberInfo(login.getMemberCode()));
+		
 		return  "mainPage/main_page";
 	}
 	//로그아웃 하기
@@ -148,7 +149,7 @@ public class MemberController {
 				memberService.updateMemberImg(memberImgVO);
 			}
 		}
-		return  "member/update_member_info";
+		return  "redirect:/member/myPage";
 	}
 	//멤버 블랙리스트 관리페이지
 	@GetMapping("/goMemberBlacklist")
