@@ -25,5 +25,8 @@ public interface TeamService {
 	// 팀리스트
 	List<TeamVO> selectTeamList();
 	
+	// 나의팀 관리
+	TeamVO teamManage(String teamCode);
+	
 	
 }

@@ -47,7 +47,7 @@
 		)
 	</insert>
 	
-	<select id="selectTeamList" resultMap="team">
+	<!-- <select id="selectTeamList" resultMap="team">
 		SELECT T.TEAM_CODE
 			, TEAM_NAME
 			, TEAM_LOCATION
@@ -57,6 +57,10 @@
 			 , TEAM_LOGO_IMG B
 		WHERE T.TEAM_CODE = B.TEAM_CODE
 	</select>
+	
+	<select id="">
+		SELECT 
+	</select> -->
 	
 </mapper>
 
