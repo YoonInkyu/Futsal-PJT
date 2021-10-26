@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 모든 SQL문을 mapper태그 안에 작성 -->
 <!-- 윤인규 10/23 용병 구인구직 게시글 등록 구현중-->
+<!-- 윤인규 10/25 용병 구인구직 게시글 지원자 vo 작성 -->
 <mapper namespace="mercenaryMapper">
 	<resultMap type="com.kh.project.mercenary.vo.MercenaryVO" id="mercenary">
 		<!-- 용병 구직 -->
@@ -34,14 +35,25 @@
 		<result column="MEMBER_CODE" 					property="memberCode"/>
 	</resultMap>
 	
-	<resultMap type="com.kh.project.member.vo.MemberVO" id="member">
-		<id column="MEMBER_CODE" 			property="memberCode"/>
-        <result column="MEMBER_ID" 			property="memberId"/>
-       	<result column="MEMBER_NAME" 		property="memberName"/>
-       	<result column="TEAM_CODE" 			property="teamCode"/>
+	<resultMap type="com.kh.project.mercenary.vo.MercenaryListVO" id="mercenaryList">
+		<!-- 용병 구인 지원 리스트 -->
+		<id column="MERC_RECRUITLIST_CODE" 				property="mercRecruitlistCode"/>
+		<result column="MERCENARY_BOARD_CODE" 			property="mercenaryBoardCode"/>
+		<result column="MEMBER_CODE" 					property="memberCode"/>
+		<!-- 용병 구직 지원 리스트 -->
+		<result column="MERC_APPLYLIST_CODE" 			property="mercApplylistCode"/>
+		<result column="MERCENARY_APPLY_CODE" 			property="mercenaryApplyCode"/>
+		<result column="TEAM_CODE" 						property="teamCode"/>
 	</resultMap>
 	
-	<!-- 로그인 정보 가져오기 -->
+	<resultMap type="com.kh.project.member.vo.MemberVO" id="member">
+		<id column="MEMBER_CODE" 						property="memberCode"/>
+        <result column="MEMBER_ID" 						property="memberId"/>
+       	<result column="MEMBER_NAME" 					property="memberName"/>
+       	<result column="TEAM_CODE" 						property="teamCode"/>
+	</resultMap>
+	
+	<!-- 로그인 정보 가져오기 왜 안돼?? -->
 	<select id="selectLoginInfo" resultMap="member">
 		SELECT MEMBER_CODE
 		    , MEMBER_ID
@@ -58,7 +70,7 @@
 			MERCENARY_BOARD_CODE
 			, MERCENARY_BOARD_TITLE
 			, MERCENARY_BOARD_WRITER
-			, MERCENARY_BOARD_INTRO
+			, MERCENARY_BOARD_INTRO	
 			, MERCENARY_BOARD_POSIBLE
 			, MERCENARY_BOARD_DATE
 			, MERCENARY_BOARD_START_TIME
@@ -143,6 +155,13 @@
 			, MERCENARY_APPLY_NUMBERTEAM
 		FROM MERCENARY_APPLY_BOARD
 		ORDER BY MERCENARY_APPLY_CODE DESC
+	</select>
+	
+	<!-- 용병 구직 상세보기 -->
+	<select id="selectMercApplyDetail" resultMap="mercenary">
+		SELECT *
+		FROM MERCENARY_APPLY_BOARD
+		WHERE MERCENARY_APPLY_CODE = #{mercenaryApplyCode}
 	</select>
 	
 </mapper>

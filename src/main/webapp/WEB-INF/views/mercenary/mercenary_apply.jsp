@@ -22,7 +22,7 @@
 						<tr>
 							<th scope="col">지점구분</th>
 							<th scope="col">매치일자</th>
-							<th scope="col">신청가능팀</th>
+							<th scope="col">신청팀</th>
 							<th scope="col">작성자</th>
 							<th scope="col">작성일자</th>
 							<th scope="col">신청</th>
@@ -30,7 +30,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${mercApplyList }" var="mercApply">
-						<tr>
+						<tr data-bs-toggle="modal" data-bs-target="#applyDetailModal" onclick="applyInfo('${mercApply.mercenaryApplyCode}')">
 							<td>${mercApply.mercenaryApplyLocation }</td>
 							<td>${mercApply.mercenaryApplyDate } ${mercApply.mercenaryApplyStartTime } ~ ${mercApply.mercenaryApplyEndTime }</td>
 							<td>${mercApply.mercenaryApplyNumberTeam }팀</td>
@@ -90,6 +90,21 @@
 						</a></li>
 					</ul>
 				</nav>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	    function applyInfo(mercenaryApplyCode){
+			$(".modal-content").load("/mercenary/applyDetail?mercenaryApplyCode=" + mercenaryApplyCode);
+		}
+	</script>
+	<!-- tr 클릭시 상세보기 모달창이고, mercenary_apply_detail.jsp을 불러와서 div class=content안에 내용 넣음 
+		모달창에 사이드메뉴, 푸터 안나오게 하는 방법 찾아야 함.
+		detail.jsp에서 사이드,푸터 js로 없애니까 모달 사이드,푸터 말고 밖 사이드,푸터도 없어짐..
+	 -->
+	<div class="modal fade" tabindex="-1" id="applyDetailModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
 			</div>
 		</div>
 	</div>

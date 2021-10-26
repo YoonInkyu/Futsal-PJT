@@ -12,8 +12,8 @@
 	</resultMap>
 	<resultMap type="com.kh.project.team.vo.TeamLogoImgVO" id="teamLogoImg">
 		<id column="TEAM_LOGO_IMG_CODE" 				property="teamLogoImgCode"/>
-		<result column="TEAM_LOGO_IMG_ORIGNNAME" 		property="teamLogoImgOrignName"/>
-		<result column="TEAM_LOGO_IMG_ATTACHEDNAME" 	property="teamLogoImgAttachedName"/>
+		<result column="TEAM_LOGO_IMG_ORIGN_NAME" 		property="teamLogoImgOrignName"/>
+		<result column="TEAM_LOGO_IMG_ATTACHED_NAME" 	property="teamLogoImgAttachedName"/>
 		<result column="TEAM_CODE"						property="teamCode"/>
 	</resultMap>
 	
@@ -21,13 +21,13 @@
 		INSERT INTO TEAM(
 			TEAM_CODE
 			, TEAM_NAME
-			<!-- , MEMBER_CODE -->
+			, MEMBER_CODE
 			, TEAM_LOCATION
 			, TEAM_INTRO
 		) VALUES(
 			#{teamCode}
 			, #{teamName}
-			<!-- , #{memberCode} -->
+			, #{memberCode}
 			, #{teamLocation}
 			, #{teamIntro}
 		)
