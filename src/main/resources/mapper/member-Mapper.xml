@@ -76,7 +76,7 @@
 	<!-- 이미지 인설트 -->
 	<insert id="insertMemberImg">
 		INSERT INTO MEMBER_IMG VALUES (
-			(SELECT 'MEMBER_IMG_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MEMBER_IMG_CODE,12,4))),0)+1,4,'0')AS MEMBER_IMG_CODE FROM MEMBER_IMG)
+			(SELECT 'MEMBER_IMG_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MEMBER_IMG_CODE,12,4))),0)+1,4,'0')AS MEMBER_IMG_CODE FROM MEMBER_IMG) 
 			, #{memberImgOrignName}
 			, #{memberImgAttachedName}
 			, #{memberCode}

@@ -8,7 +8,7 @@ import com.kh.project.member.vo.MemberVO;
 
 public interface MemberService {
 	//회원가입
-	int join (MemberVO memberVO);
+	void join (MemberVO memberVO);
 	boolean checkId (String memberId);
 	void insertMemberImg(MemberImgVO memberImgVO);
 	String nextMemberCode();

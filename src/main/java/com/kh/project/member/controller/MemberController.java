@@ -53,7 +53,6 @@ public class MemberController {
 		MultipartFile file = multi.getFile("memberImg");
 		
 		;
-		model.addAttribute("result",memberService.join(memberVO));
 		if (!file.getOriginalFilename().equals("")) {
 			String memberImgAttachedName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 			// 첨부파일 정보가 들어갈 공간
@@ -71,7 +70,11 @@ public class MemberController {
 			memberImgVO.setMemberCode(memberService.nextMemberCode());
 			memberImgVO.setMemberImgOrignName(file.getOriginalFilename());
 			memberImgVO.setMemberImgAttachedName(memberImgAttachedName);
+			memberService.join(memberVO);
 			memberService.insertMemberImg(memberImgVO);
+		}
+		else {
+			memberService.join(memberVO);
 		}
 		
 		return  "member/join_result";
