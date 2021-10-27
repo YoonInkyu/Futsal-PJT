@@ -26,7 +26,7 @@ a {
 
 					<div class="my-3 text-center">
 
-						<a class="navbar-brand" href="/templateLayout/main_page"><img src="/resources/img/common/logo.png" width="50%" height=""></a>
+						<a class="navbar-brand" href="/templateLayout/main_page"><img src="/resources/img/common/logo.png" width="50%" height=""></a>	
 
 					</div>
 
