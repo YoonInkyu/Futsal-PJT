@@ -74,7 +74,7 @@ $(document).ready(function(){
 		if(memberId == ''){
 			var comment = $('#checkIdDiv').next().attr('id');
 			if(comment != 'comment'){
-			$('#checkIdDiv').after('<div id = "comment" style="color: red; font-size: 12px; margin-top: 2px;">아이디를 입력하세요.</div>');
+			$('#checkIdDiv').after('<div class="mt-2 mb-5" id = "comment" style="color: red; font-size: 12px; margin-top: 2px;">아이디를 입력하세요.</div>');
 			}
 			return ;
 		}
@@ -91,7 +91,7 @@ $(document).ready(function(){
                if(result){
 					if(comment != 'comment'){
 						$('#idButtCheck').remove();
-						$('#checkIdDiv').after('<div Id = "comment" style="color: red; font-size: 12px; margin-top: 2px;">중복된 아이디입니다.</div>');
+						$('#checkIdDiv').after('<div class="mt-2 mb-5" Id = "comment" style="color: red; font-size: 12px; margin-top: 2px;">중복된 아이디입니다.</div>');
 					}
 					
 				}
@@ -99,11 +99,11 @@ $(document).ready(function(){
 					if(comment != 'comment'){
 						if(idJ.test($('#memberId').val())){
 							$('#idButtCheck').remove();
-							$('#checkIdDiv').after('<div id = "comment" style="color: green; font-size: 12px; margin-top: 2px;">사용가능한 아이디입니다.</div>');
+							$('#checkIdDiv').after('<div class="mt-2 mb-5" id = "comment" style="color: green; font-size: 12px; margin-top: 2px;">사용가능한 아이디입니다.</div>');
 							$('#joinButt').removeClass('disabled');
 						}else{
 							$('#idButtCheck').remove();
-							$('#checkIdDiv').after('<div Id = "comment" style="color: red; font-size: 12px; margin-top: 2px;">소문자영문 및 숫자 4~12자리 입력!</div>');
+							$('#checkIdDiv').after('<div class="mt-2 mb-5" Id = "comment" style="color: red; font-size: 12px; margin-top: 2px;">소문자영문 및 숫자 4~12자리 입력!</div>');
 						}
 					}
 					
