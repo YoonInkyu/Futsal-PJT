@@ -5,185 +5,139 @@
 <!-- 윤인규 10/25 용병 구인구직 게시글 지원자 vo 작성 -->
 <mapper namespace="mercenaryMapper">
 	<resultMap type="com.kh.project.mercenary.vo.MercenaryVO" id="mercenary">
-		<!-- 용병 구직 -->
-		<id column="MERCENARY_APPLY_CODE" 				property="mercenaryApplyCode"/>
-		<result column="MERCENARY_APPLY_TITLE" 			property="mercenaryApplyTitle"/>
-		<result column="MERCENARY_APPLY_WRITER" 		property="mercenaryApplyWriter"/>
-		<result column="MERCENARY_APPLY_REGDATE" 		property="mercenaryApplyRegdate"/>
-		<result column="MERCENARY_APPLY_NUMBERTEAM" 	property="mercenaryApplyNumberTeam"/>
-		<result column="MERCENARY_APPLY_POSIBLE" 		property="mercenaryApplyPosible"/>
-		<result column="MERCENARY_APPLY_INTRO" 			property="mercenaryApplyIntro"/>
-		<result column="MERCENARY_APPLY_DATE" 			property="mercenaryApplyDate"/>
-		<result column="MERCENARY_APPLY_START_TIME" 	property="mercenaryApplyStartTime"/>
-		<result column="MERCENARY_APPLY_END_TIME" 		property="mercenaryApplyEndTime"/>
-		<result column="MERCENARY_APPLY_LOCATION" 		property="mercenaryApplyLocation"/>
-		<!-- 용병 구인 -->
-		<result column="MERCENARY_BOARD_CODE" 			property="mercenaryBoardCode"/>
-		<result column="MERCENARY_BOARD_TITLE" 			property="mercenaryBoardTitle"/>
-		<result column="MERCENARY_BOARD_WRITER" 		property="mercenaryBoardWriter"/>
-		<result column="MERCENARY_BOARD_REGDATE" 		property="mercenaryBoardRegdate"/>
-		<result column="MERCENARY_BOARD_NUMBERMEMBER" 	property="mercenaryBoardNumberMember"/>
-		<result column="MERCENARY_BOARD_POSIBLE" 		property="mercenaryBoardPosible"/>
-		<result column="MERCENARY_BOARD_INTRO" 			property="mercenaryBoardIntro"/>
-		<result column="MERCENARY_BOARD_DATE" 			property="mercenaryBoardDate"/>
-		<result column="MERCENARY_BOARD_START_TIME" 	property="mercenaryBoardStartTime"/>
-		<result column="MERCENARY_BOARD_END_TIME" 		property="mercenaryBoardEndTime"/>
-		<result column="MERCENARY_BOARD_LOCATION" 		property="mercenaryBoardLocation"/>
-		<!-- 공용 -->
-		<result column="MATCH_CODE" 					property="matchCode"/>
-		<result column="TEAM_CODE" 						property="teamCode"/>
-		<result column="MEMBER_CODE" 					property="memberCode"/>
+		<!-- 용병 구인구직 -->
+		<id column="MERC_BOARD_CODE" 				property="mercBoardCode"/>
+		<result column="MERC_BOARD_SORT" 			property="mercBoardSort"/>
+		<result column="MERC_BOARD_WRITER" 			property="mercBoardWriter"/>
+		<result column="MERC_BOARD_INTRO" 			property="mercBoardIntro"/>
+		<result column="MERC_BOARD_REGDATE" 		property="mercBoardRegdate"/>
+		<result column="MERC_BOARD_APPLYNUMBER" 	property="mercBoardApplyNumber"/>
+		<result column="MERC_BOARD_POSSIBLE" 		property="mercBoardPossible"/>
+		<result column="MERC_BOARD_DATE" 			property="mercBoardDate"/>
+		<result column="MERC_BOARD_START_TIME" 		property="mercBoardStartTime"/>
+		<result column="MERC_BOARD_END_TIME" 		property="mercBoardEndTime"/>
+		<result column="MERC_BOARD_LOCATION" 		property="mercBoardLocation"/>
+		<result column="TEAM_CODE" 					property="teamCode"/>
+		<result column="MEMBER_CODE" 				property="memberCode"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.mercenary.vo.MercenaryListVO" id="mercenaryList">
-		<!-- 용병 구인 지원 리스트 -->
-		<id column="MERC_RECRUITLIST_CODE" 				property="mercRecruitlistCode"/>
-		<result column="MERCENARY_BOARD_CODE" 			property="mercenaryBoardCode"/>
-		<result column="MEMBER_CODE" 					property="memberCode"/>
-		<!-- 용병 구직 지원 리스트 -->
-		<result column="MERC_APPLYLIST_CODE" 			property="mercApplylistCode"/>
-		<result column="MERCENARY_APPLY_CODE" 			property="mercenaryApplyCode"/>
-		<result column="TEAM_CODE" 						property="teamCode"/>
+		<!-- 용병 구인구직 지원 리스트 -->
+		<id column="MERC_LIST_CODE" 				property="mercListCode"/>
+		<result column="MERC_BOARD_CODE" 			property="mercBoardCode"/>
+		<result column="MEMBER_CODE" 				property="memberCode"/>
+		<result column="TEAM_CODE" 					property="teamCode"/>
+		<result column="MEMBER_NAME" 				property="memberName"/>
+		<result column="POSITION" 					property="position"/>
+		<result column="MERC_LIST_RESPONSE" 		property="mercListResponse"/>
 	</resultMap>
 	
-	<!-- 용병 구인 게시글 등록 -->
-	<insert id="insertMercRecruit">
+	<!-- 용병 구인구직 게시글 등록 -->
+	<insert id="insertMercBoard">
 		INSERT INTO MERCENARY_BOARD (
-			MERCENARY_BOARD_CODE
-			, MERCENARY_BOARD_TITLE
-			, MERCENARY_BOARD_WRITER
-			, MERCENARY_BOARD_INTRO	
-			, MERCENARY_BOARD_POSIBLE
-			, MERCENARY_BOARD_DATE
-			, MERCENARY_BOARD_START_TIME
-			, MERCENARY_BOARD_END_TIME
-			, MERCENARY_BOARD_LOCATION
+			MERC_BOARD_CODE
+			, MERC_BOARD_SORT
+			, MERC_BOARD_WRITER
+			, MERC_BOARD_INTRO	
+			, MERC_BOARD_POSSIBLE
+			, MERC_BOARD_DATE
+			, MERC_BOARD_START_TIME
+			, MERC_BOARD_END_TIME
+			, MERC_BOARD_LOCATION
 		) VALUES (
-			(SELECT 'MERC_RC_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERCENARY_BOARD_CODE, 14, 4))), 0)+1, 4, '0') FROM MERCENARY_BOARD)
-			, #{mercenaryBoardTitle}
-			, #{mercenaryBoardWriter}
-			, #{mercenaryBoardIntro}
-			, #{mercenaryBoardPosible}
-			, #{mercenaryBoardDate}
-			, #{mercenaryBoardStartTime}
-			, #{mercenaryBoardEndTime}
-			, #{mercenaryBoardLocation}
+			(SELECT 'MERC_BD_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERC_BOARD_CODE, 14, 4))), 0)+1, 4, '0') FROM MERCENARY_BOARD)
+			, #{mercBoardSort}
+			, #{mercBoardWriter}
+			, #{mercBoardIntro}
+			, #{mercBoardPossible}
+			, #{mercBoardDate}
+			, #{mercBoardStartTime}
+			, #{mercBoardEndTime}
+			, #{mercBoardLocation}
 		)
 	</insert>
 	
-	<!-- 용병 구인 게시글 리스트 조회 -->
+	<!-- 용병 구인구직 게시글 리스트 조회 -->
 	<select id="selectMercBoardList" resultMap="mercenary">
-		SELECT MERCENARY_BOARD_CODE
-			, MERCENARY_BOARD_LOCATION
-			, MERCENARY_BOARD_TITLE
-			, MERCENARY_BOARD_WRITER
-			, MERCENARY_BOARD_POSIBLE
-			, MERCENARY_BOARD_DATE
-			, MERCENARY_BOARD_START_TIME
-			, MERCENARY_BOARD_END_TIME
-			, TO_CHAR(MERCENARY_BOARD_REGDATE, 'YYYY-MM-DD') AS MERCENARY_BOARD_REGDATE
-			, MERCENARY_BOARD_NUMBERMEMBER
+		SELECT MERC_BOARD_CODE
+			, MERC_BOARD_SORT
+			, MERC_BOARD_LOCATION
+			, MERC_BOARD_WRITER
+			, MERC_BOARD_POSSIBLE
+			, MERC_BOARD_DATE
+			, MERC_BOARD_START_TIME
+			, MERC_BOARD_END_TIME
+			, TO_CHAR(MERC_BOARD_REGDATE, 'YYYY-MM-DD') AS MERC_BOARD_REGDATE
+			, MERC_BOARD_APPLYNUMBER
 		FROM MERCENARY_BOARD
-		ORDER BY MERCENARY_BOARD_CODE DESC
+		ORDER BY MERC_BOARD_CODE DESC
 	</select>
 	
-	<!-- 용병 구인 상세보기 -->
+	<!-- 용병 구인구직 상세보기 -->
 	<select id="selectMercDetail" resultMap="mercenary">
 		SELECT *
 		FROM MERCENARY_BOARD
-		WHERE MERCENARY_BOARD_CODE = #{mercenaryBoardCode}
+		WHERE MERC_BOARD_CODE = #{mercBoardCode}
 	</select>
 	
-	<!-- 용병 구직 게시글 등록 -->
-	<insert id="insertMercApply">
-		INSERT INTO MERCENARY_APPLY_BOARD (
-			MERCENARY_APPLY_CODE
-			, MERCENARY_APPLY_TITLE
-			, MERCENARY_APPLY_WRITER
-			, MERCENARY_APPLY_INTRO
-			, MERCENARY_APPLY_POSIBLE
-			, MERCENARY_APPLY_DATE
-			, MERCENARY_APPLY_START_TIME
-			, MERCENARY_APPLY_END_TIME
-			, MERCENARY_APPLY_LOCATION
-		) VALUES (
-			(SELECT 'MERC_AP_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERCENARY_APPLY_CODE, 14, 4))), 0)+1, 4, '0') FROM MERCENARY_APPLY_BOARD)
-			, #{mercenaryApplyTitle}
-			, #{mercenaryApplyWriter}
-			, #{mercenaryApplyIntro}
-			, #{mercenaryApplyPosible}
-			, #{mercenaryApplyDate}
-			, #{mercenaryApplyStartTime}
-			, #{mercenaryApplyEndTime}
-			, #{mercenaryApplyLocation}
+	<!-- 용병 구인구직 지원하기 -->
+	<insert id="insertMercList">
+		INSERT INTO MERC_APPLYLIST (
+			MERC_LIST_CODE
+			, MERC_BOARD_CODE
+			, MEMBER_CODE
 		)
-	</insert>
-	
-	<!-- 용병 구직 게시글 리스트 조회 -->
-	<select id="selectMercApplyList" resultMap="mercenary">
-		SELECT MERCENARY_APPLY_CODE
-			, MERCENARY_APPLY_LOCATION
-			, MERCENARY_APPLY_TITLE
-			, MERCENARY_APPLY_WRITER
-			, MERCENARY_APPLY_POSIBLE
-			, MERCENARY_APPLY_DATE
-			, MERCENARY_APPLY_START_TIME
-			, MERCENARY_APPLY_END_TIME
-			, TO_CHAR(MERCENARY_APPLY_REGDATE, 'YYYY-MM-DD') AS MERCENARY_APPLY_REGDATE
-			, MERCENARY_APPLY_NUMBERTEAM
-		FROM MERCENARY_APPLY_BOARD
-		ORDER BY MERCENARY_APPLY_CODE DESC
-	</select>
-	
-	<!-- 용병 구직 상세보기 -->
-	<select id="selectMercApplyDetail" resultMap="mercenary">
-		SELECT *
-		FROM MERCENARY_APPLY_BOARD
-		WHERE MERCENARY_APPLY_CODE = #{mercenaryApplyCode}
-	</select>
-	
-	<!-- 용병 구인 지원 INSERT -->
-	<insert id="insertMercRecruitList">
-		INSERT INTO MERC_RECRUITLIST
 		VALUES (
-			(SELECT 'MERC_RM_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERC_RECRUITLIST_CODE, 14, 4))), 0)+1, 4, '0') FROM MERC_RECRUITLIST)
+			(SELECT 'MERC_LT_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERC_LIST_CODE, 14, 4))), 0)+1, 4, '0') FROM MERC_APPLYLIST)
 			<!-- 상세보기하고 있는 보드코드 -->
-			, #{mercenaryBoardCode}
+			, #{mercBoardCode}
 			<!-- 로그인 한 사람 멤버코드 -->
-			, #{memberCode} 
+			, #{memberCode}
 		)
 	</insert>
 	
-	<select id="selectMercRecruitList" resultMap="mercenaryList">
-		SELECT 
-	</select>
-	
-	<!-- 용병 구인 멤버 수 UPDATE -->
+	<!-- 용병 구인구직 멤버 수 올리기 -->
 	<update id="updateMemberCnt">
 		UPDATE MERCENARY_BOARD
 		SET
-		MERCENARY_BOARD_NUMBERMEMBER = MERCENARY_BOARD_NUMBERMEMBER + 1
-        WHERE MERCENARY_BOARD_CODE = #{mercenaryBoardCode}
+		MERC_BOARD_APPLYNUMBER = MERC_BOARD_APPLYNUMBER + 1
+        WHERE MERC_BOARD_CODE = #{mercBoardCode}
 	</update>
 	
-	<!-- 용병 구직 지원 INSERT -->
-	<insert id="insertMercApplyList">
-		INSERT INTO MERC_APPLYLIST
-		VALUES (
-			(SELECT 'MERC_AM_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERC_APPLYLIST_CODE, 14, 4))), 0)+1, 4, '0') FROM MERC_APPLYLIST)
-			<!-- 상세보기하고 있는 보드코드 -->
-			, #{mercenaryApplyCode}
-			<!-- 로그인 한 사람 팀코드 -->
-			, #{teamCode} 
-		)
-	</insert>
+	<!-- 용병 구인구직 지원 리스트 조회 -->
+	<select id="selectMercRecruitList" resultMap="mercenaryList">
+		SELECT MERC_LIST_CODE
+			, M.MEMBER_CODE
+		    , MEMBER_NAME
+		    , POSITION
+		    , MERC_LIST_RESPONSE
+		FROM MEMBER M, MERC_APPLYLIST A
+		WHERE M.MEMBER_CODE = A.MEMBER_CODE
+		AND MERC_BOARD_CODE = #{mercBoardCode}
+	</select>
 	
-	<!-- 용병 구직 멤버 수 UPDATE -->
-	<update id="updateTeamCnt">
-		UPDATE MERCENARY_APPLY_BOARD
+	<!-- 용병 지원 수락 쿼리 -->
+	<update id="updateResponse">
+		UPDATE MERC_APPLYLIST
 		SET
-		MERCENARY_APPLY_NUMBERTEAM = MERCENARY_APPLY_NUMBERTEAM + 1
-        WHERE MERCENARY_APPLY_CODE = #{mercenaryApplyCode}
+		MERC_LIST_RESPONSE = '수락'
+		WHERE MERC_LIST_CODE = #{mercListCode}
+	</update>
+	<update id="updateRespnseRefuse"> <!-- 수락 누른애 제외 모두 거절로 변경 쿼리 -->
+		UPDATE MERC_APPLYLIST
+		SET
+		MERC_LIST_RESPONSE = '거절'
+		WHERE MERC_BOARD_CODE = #{mercBoardCode}
+		AND MERC_LIST_RESPONSE IN (SELECT MERC_LIST_RESPONSE 
+		              FROM MERC_APPLYLIST
+		              WHERE MERC_BOARD_CODE = #{mercBoardCode}
+		              AND MERC_LIST_RESPONSE = '응답중')
+	</update>
+	<update id="updatePossible"> <!-- 보드 테이블 지원 불가능 업데이트 쿼리 -->
+		UPDATE MERCENARY_BOARD
+		SET
+		MERC_BOARD_POSSIBLE = '2'
+		WHERE MERC_BOARD_CODE = #{mercBoardCode}
 	</update>
 	
 </mapper>

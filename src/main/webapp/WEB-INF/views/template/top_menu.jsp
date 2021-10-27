@@ -40,15 +40,13 @@
 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">매치</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-							<li><a class="dropdown-item" href="/sample/submenu_match_submit">매치 신청</a></li>
-							<li><a class="dropdown-item" href="/sample/submenu_match_manage">매치 관리</a></li>
+							<li><a class="dropdown-item" href="/match/matchList">매치 신청</a></li>
 						</ul></li>
 
 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">용병</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
 							<li><a class="dropdown-item" href="/mercenary/recruit">용병 구인</a></li>
-							<li><a class="dropdown-item" href="/mercenary/apply">용병 구직</a></li>
 						</ul></li>
 
 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">팀 관리</a>

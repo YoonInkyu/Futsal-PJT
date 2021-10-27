@@ -1,28 +1,47 @@
 package com.kh.project.mercenary.vo;
 
 // 윤인규, 1025 작성
+// 수정 윤인규, 1026 구인구직 테이블 합침
 public class MercenaryListVO {
-	// 용병 구직 지원 리스트 변수
-	private String mercRecruitlistCode;
-	private String mercenaryBoardCode;
+	// 용병 구인구직 지원 리스트 변수
+	private String mercListCode;
+	private String mercBoardCode;
 	private String memberCode;
-	
-	// 용병 구인 변수
-	private String mercApplylistCode;
-	private String mercenaryApplyCode;
 	private String teamCode;
+	private String memberName;
+	private String position;
+	private String mercListResponse;
 	
-	public String getMercRecruitlistCode() {
-		return mercRecruitlistCode;
+	
+	public String getMercListResponse() {
+		return mercListResponse;
 	}
-	public void setMercRecruitlistCode(String mercRecruitlistCode) {
-		this.mercRecruitlistCode = mercRecruitlistCode;
+	public void setMercListResponse(String mercListResponse) {
+		this.mercListResponse = mercListResponse;
 	}
-	public String getMercenaryBoardCode() {
-		return mercenaryBoardCode;
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setMercenaryBoardCode(String mercenaryBoardCode) {
-		this.mercenaryBoardCode = mercenaryBoardCode;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	public String getMercListCode() {
+		return mercListCode;
+	}
+	public void setMercListCode(String mercListCode) {
+		this.mercListCode = mercListCode;
+	}
+	public String getMercBoardCode() {
+		return mercBoardCode;
+	}
+	public void setMercBoardCode(String mercBoardCode) {
+		this.mercBoardCode = mercBoardCode;
 	}
 	public String getMemberCode() {
 		return memberCode;
@@ -30,24 +49,11 @@ public class MercenaryListVO {
 	public void setMemberCode(String memberCode) {
 		this.memberCode = memberCode;
 	}
-	public String getMercApplylistCode() {
-		return mercApplylistCode;
-	}
-	public void setMercApplylistCode(String mercApplylistCode) {
-		this.mercApplylistCode = mercApplylistCode;
-	}
-	public String getMercenaryApplyCode() {
-		return mercenaryApplyCode;
-	}
-	public void setMercenaryApplyCode(String mercenaryApplyCode) {
-		this.mercenaryApplyCode = mercenaryApplyCode;
-	}
 	public String getTeamCode() {
 		return teamCode;
 	}
 	public void setTeamCode(String teamCode) {
 		this.teamCode = teamCode;
 	}
-	
 	
 }

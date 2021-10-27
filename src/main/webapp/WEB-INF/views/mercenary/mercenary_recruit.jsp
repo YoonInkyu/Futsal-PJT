@@ -8,17 +8,18 @@
 </head>
 <body>
 	<div class="row my-5">
-		<div class="col-2 mx-auto" style="font-size: 40px; text-align: center; border-bottom: 3px solid black;">용병 구인</div>
+		<div class="col-3 mx-auto" style="font-size: 40px; text-align: center; border-bottom: 3px solid black;">용병 게시판</div>
 	</div>
 	<div class="row">
 		<div class="row mt-5">
 			<div class="col-8 mx-auto">
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-					<button class="btn btn-primary col-3" type="button" style="font-size: 30px;" onclick="location.href='/mercenary/recruitRegForm'">용병 모집</button>
+					<button class="btn btn-primary col-3" type="button" style="font-size: 30px;" onclick="location.href='/mercenary/recruitRegForm'">등록하기</button>
 				</div>
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
+							<th scope="col">구분</th>
 							<th scope="col">지역</th>
 							<th scope="col">매치일자</th>
 							<th scope="col">신청 인원</th>
@@ -28,15 +29,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${mercRecruitList }" var="mercRecruit">
-						<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercRecruit.mercenaryBoardCode}')">
-							<td>${mercRecruit.mercenaryBoardLocation }</td>
-							<td>${mercRecruit.mercenaryBoardDate } ${mercRecruit.mercenaryBoardStartTime } ~ ${mercRecruit.mercenaryBoardEndTime }</td>
-							<td>${mercRecruit.mercenaryBoardNumberMember }명</td>
-							<td>${mercRecruit.mercenaryBoardWriter }</td>
-							<td>${mercRecruit.mercenaryBoardRegdate }</td>
+						<c:forEach items="${mercBoardList }" var="mercBoard">
+						<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">
+							<td>${mercBoard.mercBoardSort }</td>
+							<td>${mercBoard.mercBoardLocation }</td>
+							<td>${mercBoard.mercBoardDate } ${mercBoard.mercBoardStartTime } ~ ${mercBoard.mercBoardEndTime }</td>
+							<td>${mercBoard.mercBoardApplyNumber }명</td>
+							<td>${mercBoard.mercBoardWriter }</td>
+							<td>${mercBoard.mercBoardRegdate }</td>
 							<c:choose>
-								<c:when test="${mercRecruit.mercenaryBoardPosible eq '1' }">
+								<c:when test="${mercBoard.mercBoardPossible eq '1' }">
 									<td><button type="button" class="btn btn-info">신청</button></td>
 								</c:when>
 								<c:otherwise>
@@ -96,8 +98,8 @@
 	</div>
 	<!-- js파일 새로 만들어서 넣어야 함. -->
 	<script type="text/javascript">
-	    function recruitInfo(mercenaryBoardCode){
-			$(".modal-content").load("/mercenary/recruitDetail?mercenaryBoardCode=" + mercenaryBoardCode);
+	    function recruitInfo(mercBoardCode){
+			$(".modal-content").load("/mercenary/recruitDetail?mercBoardCode=" + mercBoardCode);
 		}
 	</script>
 	<!-- 

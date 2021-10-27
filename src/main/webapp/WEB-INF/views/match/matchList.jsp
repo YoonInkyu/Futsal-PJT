@@ -1,6 +1,5 @@
-<!-- 윤인규 10/23 게시글 리스트 조회 작업중 -->
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,36 +7,37 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="row my-5">
-		<div class="col-2 mx-auto" style="font-size: 40px; text-align: center; border-bottom: 3px solid black;">용병 구직</div>
+<div class="row my-5">
+		<div class="col-3 mx-auto" style="font-size: 40px; text-align: center; border-bottom: 3px solid black;">매치 게시판</div>
 	</div>
 	<div class="row">
 		<div class="row mt-5">
 			<div class="col-8 mx-auto">
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-					<button class="btn btn-primary col-3" type="button" style="font-size: 30px;" onclick="location.href='/mercenary/applyRegForm'">용병 등록</button>
+					<button class="btn btn-primary col-3" type="button" style="font-size: 30px;" onclick="location.href='/match/goMatchRegForm'">등록하기</button>
 				</div>
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th scope="col">지점구분</th>
+							<th scope="col">지역</th>
 							<th scope="col">매치일자</th>
 							<th scope="col">신청팀</th>
-							<th scope="col">작성자</th>
+							<th scope="col">작성팀</th>
 							<th scope="col">작성일자</th>
 							<th scope="col">신청</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${mercApplyList }" var="mercApply">
-						<tr data-bs-toggle="modal" data-bs-target="#applyDetailModal" onclick="applyInfo('${mercApply.mercenaryApplyCode}')">
-							<td>${mercApply.mercenaryApplyLocation }</td>
-							<td>${mercApply.mercenaryApplyDate } ${mercApply.mercenaryApplyStartTime } ~ ${mercApply.mercenaryApplyEndTime }</td>
-							<td>${mercApply.mercenaryApplyNumberTeam }팀</td>
-							<td>${mercApply.mercenaryApplyWriter }</td>
-							<td>${mercApply.mercenaryApplyRegdate }</td>
+						<%-- <c:forEach items="${mercBoardList }" var="mercBoard">
+						<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">
+							<td>${mercBoard.mercBoardSort }</td>
+							<td>${mercBoard.mercBoardLocation }</td>
+							<td>${mercBoard.mercBoardDate } ${mercBoard.mercBoardStartTime } ~ ${mercBoard.mercBoardEndTime }</td>
+							<td>${mercBoard.mercBoardApplyNumber }명</td>
+							<td>${mercBoard.mercBoardWriter }</td>
+							<td>${mercBoard.mercBoardRegdate }</td>
 							<c:choose>
-								<c:when test="${mercApply.mercenaryApplyPosible eq '1' }">
+								<c:when test="${mercBoard.mercBoardPossible eq '1' }">
 									<td><button type="button" class="btn btn-info">신청</button></td>
 								</c:when>
 								<c:otherwise>
@@ -45,11 +45,12 @@
 								</c:otherwise>
 							</c:choose>
 						</tr>
-						</c:forEach>
+						</c:forEach> --%>
 					</tbody>
 				</table>
 			</div>
 		</div>
+		<!-- 검색관련 내용 -->
 		<div class="row mt-5">
 			<div class="col-6 mx-auto m-0 p-0">
 				<div class="row mx-auto">
@@ -70,6 +71,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- 페이징 처리 -->
 		<div class="row mt-5">
 			<div class="col">
 				<nav aria-label="Page navigation example">
@@ -93,20 +95,22 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-	    function applyInfo(mercenaryApplyCode){
-			$(".modal-content").load("/mercenary/applyDetail?mercenaryApplyCode=" + mercenaryApplyCode);
+	<!-- js파일 새로 만들어서 넣어야 함. -->
+	<!-- <script type="text/javascript">
+	    function recruitInfo(mercBoardCode){
+			$(".modal-content").load("/mercenary/recruitDetail?mercBoardCode=" + mercBoardCode);
 		}
 	</script>
-	<!-- tr 클릭시 상세보기 모달창이고, mercenary_apply_detail.jsp을 불러와서 div class=content안에 내용 넣음 
-		모달창에 사이드메뉴, 푸터 안나오게 하는 방법 찾아야 함.
-		detail.jsp에서 사이드,푸터 js로 없애니까 모달 사이드,푸터 말고 밖 사이드,푸터도 없어짐..
-	 -->
-	<div class="modal fade" tabindex="-1" id="applyDetailModal">
+	
+		tr 클릭시 상세보기 모달창이고, mercenary_recruit_detail.jsp을 불러와서 div class=content안에 내용 넣음 
+		모달창에 사이드메뉴, 푸터 안나오게 하는 방법 찾아야 함.(detail.jsp에서 사이드,푸터 js로 없애면 될듯?)
+		컨트롤러에서 로그인 레이아웃은 사이드, 푸터가 없어서 로그인 레이아웃 사용함. js 사용X
+	
+	<div class="modal fade" tabindex="-1" id="recruitDetailModal">
 		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
+			<div class="modal-content mercDetail">
 			</div>
 		</div>
-	</div>
+	</div> -->
 </body>
 </html>

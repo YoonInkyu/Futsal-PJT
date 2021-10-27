@@ -1,94 +1,90 @@
 package com.kh.project.mercenary.vo;
 
-import com.kh.project.member.vo.MemberVO;
-
 // 윤인규, 1020 작성
 // 윤인규, 1023 변수 추가(각각 Date, Time 데이터 DB와 프로젝트에 추가)
+// 수정 윤인규, 1026 구인구직 테이블 합침
 public class MercenaryVO {
-	// 용병 구직 변수
-	private String mercenaryApplyCode;
-	private String mercenaryApplyTitle;
-	private String mercenaryApplyWriter;
-	private String mercenaryApplyRegdate;
-	private String mercenaryApplyNumberTeam;
-	private String mercenaryApplyDate;
-	private String mercenaryApplyStartTime;
-	private String mercenaryApplyEndTime;
-	private String mercenaryApplyPosible;
-	private String mercenaryApplyIntro;
-	private String mercenaryApplyLocation;
-	
-	// 용병 구인 변수
-	private String mercenaryBoardCode;
-	private String mercenaryBoardTitle;
-	private String mercenaryBoardWriter;
-	private String mercenaryBoardRegdate;
-	private String mercenaryBoardNumberMember;
-	private String mercenaryBoardDate;
-	private String mercenaryBoardStartTime;
-	private String mercenaryBoardEndTime;
-	private String mercenaryBoardPosible;
-	private String mercenaryBoardIntro;
-	private String mercenaryBoardLocation;
-	
-	// 공통 변수
+	// 용병 구인구직 변수
+	private String mercBoardCode;
+	private String mercBoardSort;
+	private String mercBoardWriter;
+	private String mercBoardIntro;
+	private String mercBoardRegdate;
+	private String mercBoardApplyNumber;
+	private String mercBoardDate;
+	private String mercBoardStartTime;
+	private String mercBoardEndTime;
+	private String mercBoardPossible;
+	private String mercBoardLocation;
 	private String memberCode;
-	private String matchCode;
 	private String teamCode;
 	
-	public String getMercenaryApplyCode() {
-		return mercenaryApplyCode;
+	
+	public String getMercBoardSort() {
+		return mercBoardSort;
 	}
-	public void setMercenaryApplyCode(String mercenaryApplyCode) {
-		this.mercenaryApplyCode = mercenaryApplyCode;
+	public void setMercBoardSort(String mercBoardSort) {
+		this.mercBoardSort = mercBoardSort;
 	}
-	public String getMercenaryApplyTitle() {
-		return mercenaryApplyTitle;
+	public String getMercBoardCode() {
+		return mercBoardCode;
 	}
-	public void setMercenaryApplyTitle(String mercenaryApplyTitle) {
-		this.mercenaryApplyTitle = mercenaryApplyTitle;
+	public void setMercBoardCode(String mercBoardCode) {
+		this.mercBoardCode = mercBoardCode;
 	}
-	public String getMercenaryApplyWriter() {
-		return mercenaryApplyWriter;
+	public String getMercBoardWriter() {
+		return mercBoardWriter;
 	}
-	public void setMercenaryApplyWriter(String mercenaryApplyWriter) {
-		this.mercenaryApplyWriter = mercenaryApplyWriter;
+	public void setMercBoardWriter(String mercBoardWriter) {
+		this.mercBoardWriter = mercBoardWriter;
 	}
-	public String getMercenaryApplyRegdate() {
-		return mercenaryApplyRegdate;
+	public String getMercBoardIntro() {
+		return mercBoardIntro;
 	}
-	public void setMercenaryApplyRegdate(String mercenaryApplyRegdate) {
-		this.mercenaryApplyRegdate = mercenaryApplyRegdate;
+	public void setMercBoardIntro(String mercBoardIntro) {
+		this.mercBoardIntro = mercBoardIntro;
 	}
-	public String getMercenaryApplyNumberTeam() {
-		return mercenaryApplyNumberTeam;
+	public String getMercBoardRegdate() {
+		return mercBoardRegdate;
 	}
-	public void setMercenaryApplyNumberTeam(String mercenaryApplyNumberTeam) {
-		this.mercenaryApplyNumberTeam = mercenaryApplyNumberTeam;
+	public void setMercBoardRegdate(String mercBoardRegdate) {
+		this.mercBoardRegdate = mercBoardRegdate;
 	}
-	public String getMercenaryApplyDate() {
-		return mercenaryApplyDate;
+	public String getMercBoardApplyNumber() {
+		return mercBoardApplyNumber;
 	}
-	public void setMercenaryApplyDate(String mercenaryApplyDate) {
-		this.mercenaryApplyDate = mercenaryApplyDate;
+	public void setMercBoardApplyNumber(String mercBoardApplyNumber) {
+		this.mercBoardApplyNumber = mercBoardApplyNumber;
 	}
-	public String getMercenaryApplyStartTime() {
-		return mercenaryApplyStartTime;
+	public String getMercBoardDate() {
+		return mercBoardDate;
 	}
-	public void setMercenaryApplyStartTime(String mercenaryApplyStartTime) {
-		this.mercenaryApplyStartTime = mercenaryApplyStartTime;
+	public void setMercBoardDate(String mercBoardDate) {
+		this.mercBoardDate = mercBoardDate;
 	}
-	public String getMercenaryApplyEndTime() {
-		return mercenaryApplyEndTime;
+	public String getMercBoardStartTime() {
+		return mercBoardStartTime;
 	}
-	public void setMercenaryApplyEndTime(String mercenaryApplyEndTime) {
-		this.mercenaryApplyEndTime = mercenaryApplyEndTime;
+	public void setMercBoardStartTime(String mercBoardStartTime) {
+		this.mercBoardStartTime = mercBoardStartTime;
 	}
-	public String getMercenaryApplyPosible() {
-		return mercenaryApplyPosible;
+	public String getMercBoardEndTime() {
+		return mercBoardEndTime;
 	}
-	public void setMercenaryApplyPosible(String mercenaryApplyPosible) {
-		this.mercenaryApplyPosible = mercenaryApplyPosible;
+	public void setMercBoardEndTime(String mercBoardEndTime) {
+		this.mercBoardEndTime = mercBoardEndTime;
+	}
+	public String getMercBoardPossible() {
+		return mercBoardPossible;
+	}
+	public void setMercBoardPossible(String mercBoardPossible) {
+		this.mercBoardPossible = mercBoardPossible;
+	}
+	public String getMercBoardLocation() {
+		return mercBoardLocation;
+	}
+	public void setMercBoardLocation(String mercBoardLocation) {
+		this.mercBoardLocation = mercBoardLocation;
 	}
 	public String getMemberCode() {
 		return memberCode;
@@ -96,94 +92,14 @@ public class MercenaryVO {
 	public void setMemberCode(String memberCode) {
 		this.memberCode = memberCode;
 	}
-	public String getMatchCode() {
-		return matchCode;
-	}
-	public void setMatchCode(String matchCode) {
-		this.matchCode = matchCode;
-	}
-	public String getMercenaryApplyIntro() {
-		return mercenaryApplyIntro;
-	}
-	public void setMercenaryApplyIntro(String mercenaryApplyIntro) {
-		this.mercenaryApplyIntro = mercenaryApplyIntro;
-	}
-	public String getMercenaryApplyLocation() {
-		return mercenaryApplyLocation;
-	}
-	public void setMercenaryApplyLocation(String mercenaryApplyLocation) {
-		this.mercenaryApplyLocation = mercenaryApplyLocation;
-	}
-	public String getMercenaryBoardCode() {
-		return mercenaryBoardCode;
-	}
-	public void setMercenaryBoardCode(String mercenaryBoardCode) {
-		this.mercenaryBoardCode = mercenaryBoardCode;
-	}
-	public String getMercenaryBoardTitle() {
-		return mercenaryBoardTitle;
-	}
-	public void setMercenaryBoardTitle(String mercenaryBoardTitle) {
-		this.mercenaryBoardTitle = mercenaryBoardTitle;
-	}
-	public String getMercenaryBoardWriter() {
-		return mercenaryBoardWriter;
-	}
-	public void setMercenaryBoardWriter(String mercenaryBoardWriter) {
-		this.mercenaryBoardWriter = mercenaryBoardWriter;
-	}
-	public String getMercenaryBoardRegdate() {
-		return mercenaryBoardRegdate;
-	}
-	public void setMercenaryBoardRegdate(String mercenaryBoardRegdate) {
-		this.mercenaryBoardRegdate = mercenaryBoardRegdate;
-	}
-	public String getMercenaryBoardNumberMember() {
-		return mercenaryBoardNumberMember;
-	}
-	public void setMercenaryBoardNumberMember(String mercenaryBoardNumberMember) {
-		this.mercenaryBoardNumberMember = mercenaryBoardNumberMember;
-	}
-	public String getMercenaryBoardDate() {
-		return mercenaryBoardDate;
-	}
-	public void setMercenaryBoardDate(String mercenaryBoardDate) {
-		this.mercenaryBoardDate = mercenaryBoardDate;
-	}
-	public String getMercenaryBoardStartTime() {
-		return mercenaryBoardStartTime;
-	}
-	public void setMercenaryBoardStartTime(String mercenaryBoardStartTime) {
-		this.mercenaryBoardStartTime = mercenaryBoardStartTime;
-	}
-	public String getMercenaryBoardEndTime() {
-		return mercenaryBoardEndTime;
-	}
-	public void setMercenaryBoardEndTime(String mercenaryBoardEndTime) {
-		this.mercenaryBoardEndTime = mercenaryBoardEndTime;
-	}
-	public String getMercenaryBoardPosible() {
-		return mercenaryBoardPosible;
-	}
-	public void setMercenaryBoardPosible(String mercenaryBoardPosible) {
-		this.mercenaryBoardPosible = mercenaryBoardPosible;
-	}
 	public String getTeamCode() {
 		return teamCode;
 	}
 	public void setTeamCode(String teamCode) {
 		this.teamCode = teamCode;
 	}
-	public String getMercenaryBoardIntro() {
-		return mercenaryBoardIntro;
-	}
-	public void setMercenaryBoardIntro(String mercenaryBoardIntro) {
-		this.mercenaryBoardIntro = mercenaryBoardIntro;
-	}
-	public String getMercenaryBoardLocation() {
-		return mercenaryBoardLocation;
-	}
-	public void setMercenaryBoardLocation(String mercenaryBoardLocation) {
-		this.mercenaryBoardLocation = mercenaryBoardLocation;
-	}
+	
+	
+	
+	
 }
