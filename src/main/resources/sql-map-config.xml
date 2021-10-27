@@ -12,6 +12,8 @@
 		<mapper resource="/mapper/member-Mapper.xml"/>
 		<mapper resource="/mapper/team-Mapper.xml"/>
 		<mapper resource="/mapper/mercenary-Mapper.xml"/>
+		<mapper resource="/mapper/board-Mapper.xml"/>
+		<mapper resource="/mapper/reply-Mapper.xml"/>
 	</mappers>
 </configuration>
 
