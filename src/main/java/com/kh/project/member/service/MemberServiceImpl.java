@@ -25,7 +25,17 @@ public class MemberServiceImpl implements MemberService{
 		String result = sqlSession.selectOne("memberMapper.checkId", memberId);
 		return result == null ? false : true;
 	}
+	@Override
+	public boolean checkPw(MemberVO memberVO) {
+		String result = sqlSession.selectOne("memberMapper.checkPw", memberVO);
+		return result == null ? false : true;
+	}
 	
+	@Override
+	public boolean changePw(MemberVO memberVO) {
+		int result = sqlSession.update("memberMapper.changePw", memberVO);
+		return result == 0 ? false : true;
+	}
 	@Override
 	public void insertMemberImg(MemberImgVO memberImgVO) {
 		sqlSession.insert("memberMapper.insertMemberImg", memberImgVO);

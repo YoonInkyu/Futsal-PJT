@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,45 +8,38 @@
 <script type="text/javascript" src="/resources/member/js/join.js?ver=1"></script>
 </head>
 <body>
-
+	<form action="/member/join" method="post" enctype="multipart/form-data">
 	<div class="row">
-
 		<div class="col-4 mx-auto justify-content-center">
-
 			<div class="row">
-
 				<div class="col mx-auto">
-
 					<div class="my-3 text-center">
-
 						<a class="navbar-brand" href="/templateLayout/main_page"><img src="/resources/img/common/logo.png" width="50%" height=""></a>
-
 					</div>
-
-
-
-					<form action="/member/join" method="post" enctype="multipart/form-data">
-
-
-
-
-
-
 						<div class="text-center mb-5">
-							<img src="/resources/img/common/addImg.PNG" id="" class="img-thumbnail" width="200px;">
+							<i class="bi bi-camera-fill"></i>
+							<img src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="50%;" height="50%;">
 						</div>
-
-
 						<div class="input-group mb-5">
-							<label class="input-group-text bg-primary text-white" for="inputGroupFile01">선수 사진 등록</label> <input type="file" class="form-control" id="inputGroupFile01" name="memberImg" value="memberImg">
+								<label class="input-group-text bg-primary text-white" for="inputGroupFile01">선수 사진 등록</label>
+								<input type="file" class="form-control" id="inputGroupFile01" name="memberImg" onchange="readURL(this);">
+								<!-- 업로드되는 회원사진 미리보기 -->
+								<script type="text/javascript">
+									function readURL(input) {
+										if (input.files && input.files[0]) {
+											var reader = new FileReader();
+											reader.onload = function(e) {
+												document.getElementById('preview').src = e.target.result;
+											};
+											reader.readAsDataURL(input.files[0]);
+										} else {
+											document.getElementById('preview').src = "";
+										}
+									}
+								</script>
 						</div>
-
-
-
 						<div class="row">
-
 							<label for="inputId" class="form-label">아이디</label>
-
 							<div class="col d-grid gap-2 d-md-flex" id="checkIdDiv">
 								<input type="text" class="form-control" id="memberId" name="memberId" required placeholder="1~16 글자수 생성 가능"> <input class="btn btn-primary" type="button" value="중복 체크" id="checkButt" onclick="checkId();">
 							</div>
@@ -140,29 +134,11 @@
 						<div class="d-grid gap-2">
 							<input class="btn btn-primary disabled" type="submit" value="회원 가입" id="joinButt">
 						</div>
-
-
-
-					</form>
-
-
-
 					<div style="height: 10rem;"></div>
-
-
 				</div>
-
 			</div>
-
-
 		</div>
-
 	</div>
-
-
-
-
-
-
+</form>
 </body>
 </html>

@@ -86,6 +86,21 @@ public class MemberController {
 		//기존 가입 : true, 미가입 : false
 		return memberService.checkId(memberId);
 	}
+	//비밀번호 체크
+	@ResponseBody
+	@PostMapping("/checkPw")
+	public boolean checkPw(String memberPw, String memberCode) {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMemberPw(memberPw);
+		memberVO.setMemberCode(memberCode);
+		//일치 : true, 불일치 : false
+		return  memberService.checkPw(memberVO);
+	}
+	@ResponseBody
+	@PostMapping("/changePw")
+	public boolean changePw(MemberVO memberVO) {
+		return memberService.changePw(memberVO);
+	}
 	//로그인 페이지로 이동
 	@GetMapping("/goLogin")
 	public String goLogin() {
