@@ -9,6 +9,9 @@
 		<result column="TEAM_ADMIN" 				property="teamAdmin"/>
 		<result column="TEAM_LOCATION" 				property="teamLocation"/>
 		<result column="TEAM_INTRO" 				property="teamIntro"/>
+		<result column="TEAM_LOGO_IMG_ATTACHED_NAME" 	property="teamLogoImgAttachedName"/>
+		<result column="TEAM_LOGO_IMG_ORIGN_NAME" 	property="teamLogoImgOrignName"/>
+		<result column="TEAM_LOGO_IMG_CODE" 	property="teamLogoImgCode"/>
 	</resultMap>
 	<resultMap type="com.kh.project.team.vo.TeamLogoImgVO" id="teamLogoImg">
 		<id column="TEAM_LOGO_IMG_CODE" 				property="teamLogoImgCode"/>
@@ -47,20 +50,41 @@
 		)
 	</insert>
 	
-	<select id="selectTeamList" resultMap="team">
+	<select id="selectTeamManage" resultMap="team">
 		SELECT T.TEAM_CODE
 			, TEAM_NAME
-			, TEAM_LOCATION
+			, MEMBER_CODE
 			, TEAM_INTRO
-			, TEAM_LOGO_IMG_ATTACHED_NAME
-		FROM TEAM T 
-			 , TEAM_LOGO_IMG B
-		WHERE T.TEAM_CODE = B.TEAM_CODE
+			, TEAM_LOCATION
+			, I.TEAM_LOGO_IMG_ATTACHED_NAME
+			, I.TEAM_LOGO_IMG_ORIGN_NAME
+			, I.TEAM_LOGO_IMG_CODE
+		FROM TEAM T, TEAM_LOGO_IMG I
+		WHERE T.TEAM_CODE = I.TEAM_CODE
+		AND T.TEAM_CODE = #{teamCode}
 	</select>
 	
-	<select id="">
+	<!-- 팀 수정하기 -->
+	<update id="updateInfo">
+		UPDATE TEAM SET 
+			TEAM_NAME = #{teamName}
+			, TEAM_INTRO = #{teamIntro}
+			, TEAM_LOCATION = #{teamLocation} 
+		WHERE TEAM_CODE = #{teamCode}
+	</update>
+	
+	<!-- 팀 사진 수정하기 -->
+		<update id="updateImgInfo">
+		UPDATE TEAM_LOGO_IMG SET 
+			TEAM_LOGO_IMG_ORIGN_NAME = #{teamLogoImgOrignName}
+			, TEAM_LOGO_IMG_ATTACHED_NAME = #{teamLogoImgAttachedName}
+		WHERE TEAM_LOGO_IMG_CODE = #{teamLogoImgCode}
+	</update>
+ 
+	
+	<!-- <select id="">
 		SELECT 
-	</select>
+	</select> -->
 	
 </mapper>
 

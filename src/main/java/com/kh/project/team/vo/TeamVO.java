@@ -10,9 +10,30 @@ public class TeamVO {
 	private String teamAdmin;
 	private String teamLocation;
 	private String teamIntro;
+	private String teamLogoImgAttachedName;
+	private String teamLogoImgOrignName;
+	private String teamLogoImgCode;
 	
 	
 	
+	public String getTeamLogoImgOrignName() {
+		return teamLogoImgOrignName;
+	}
+	public void setTeamLogoImgOrignName(String teamLogoImgOrignName) {
+		this.teamLogoImgOrignName = teamLogoImgOrignName;
+	}
+	public String getTeamLogoImgCode() {
+		return teamLogoImgCode;
+	}
+	public void setTeamLogoImgCode(String teamLogoImgCode) {
+		this.teamLogoImgCode = teamLogoImgCode;
+	}
+	public String getTeamLogoImgAttachedName() {
+		return teamLogoImgAttachedName;
+	}
+	public void setTeamLogoImgAttachedName(String teamLogoImgAttachedName) {
+		this.teamLogoImgAttachedName = teamLogoImgAttachedName;
+	}
 	public String getTeamIntro() {
 		return teamIntro;
 	}

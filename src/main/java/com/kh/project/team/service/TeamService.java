@@ -28,5 +28,10 @@ public interface TeamService {
 	// 나의팀 관리
 	TeamVO teamManage(String teamCode);
 	
+	// 팀정보 수정 
+	int updateInfo(TeamVO teamVO);
+	
+	
+	
 	
 }

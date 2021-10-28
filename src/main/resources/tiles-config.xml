@@ -20,13 +20,13 @@
 
 
 	<!-- 나의 팀 페이지(좌측 사이드 메뉴 포함 템플릿) -->
-	<definition name="myTeamLayout" template="/WEB-INF/views/template/my_team_template.jsp">
+	<definition name="myTeamLayout/*/*" template="/WEB-INF/views/template/my_team_template.jsp">
 		<put-attribute name="title" value="FootBall" />
 		<put-attribute name="menu" value="/WEB-INF/views/template/top_menu.jsp" />
 		<put-attribute name="leftSide" value="/WEB-INF/views/template/my_team_side_menu.jsp" />
 		<put-attribute name="side" value="/WEB-INF/views/template/side_menu.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/views/template/buttom_menu.jsp" />
-		<put-attribute name="body" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
 
 

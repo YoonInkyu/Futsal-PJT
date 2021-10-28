@@ -44,10 +44,16 @@ public class TeamServiceImpl implements TeamService{
 	public List<TeamVO> selectTeamList() {
 		return sqlSession.selectList("teamMapper.selectTeamList");
 	}
-
+	// 나의팀 조회
 	@Override
 	public TeamVO teamManage(String teamCode) {
 		return sqlSession.selectOne("teamMapper.selectTeamManage", teamCode);
+	}
+	// 팀정보 수정
+	@Override
+	public int updateInfo(TeamVO teamVO) {
+		sqlSession.update("teamMapper.updateInfo", teamVO);
+		return sqlSession.update("teamMapper.updateImgInfo", teamVO);
 	}
 
 	

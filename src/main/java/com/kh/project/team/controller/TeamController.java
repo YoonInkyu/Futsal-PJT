@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -31,21 +32,72 @@ public class TeamController {
 	private TeamService teamService;
 	
 	// 팀생성 페이지로 이동
-	@GetMapping("/regTeam")
+	@GetMapping("/goRegTeam")
 	public String goRegTeam() {
 		return "team/submenu_team_create";
 	} 
 	
-	/*
-	 * // 나의팀 관리
-	 * 
-	 * @GetMapping("/teamManage") public String teamManage_admin(HttpSession
-	 * session, Model model) { session.getAttribute("loginInfo"); String teamCode =
-	 * ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
-	 * model.addAttribute("member",MemberServicece.myPage(memberCode));
-	 * 
-	 * return "team/team_manage"; }
-	 */
+	// My 팀 페이지 이동
+	@GetMapping("/submenuTeamManage") 
+	public String teamManage_admin() { 
+		
+		return "myTeamLayout/team/submenu_team_manage";
+	}
+	
+	//나의팀 -> (서브메뉴)팀정보 페이지 이동
+	@GetMapping("/teamInfo")
+	public String teamInfo(HttpSession session, Model model) {
+		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		
+		model.addAttribute("myTeam", teamService.teamManage(teamCode));
+		return "myTeamLayout/team/team_info";
+	} 
+	
+	//나의팀 -> 팀정보 -> 팀 정보 수정 아약스
+	@ResponseBody
+	@PostMapping("/changeInfo")
+	public TeamVO changeInfo(HttpSession session, Model model) {
+		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		return teamService.teamManage(teamCode);
+	} 
+	
+	// 나의팀->팀관리 -> 팀정보 수정
+	@PostMapping("/updateInfo") 
+	public String updateInfo(TeamVO teamVO, HttpSession session, MultipartHttpServletRequest multi) { 
+		// 첨부될 폴더 경로 지정
+		String uploadPath = "C:\\Users\\kh202-30\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\team\\";
+		//String uploadPath = "C:\\Users\\User\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\team\\";
+		
+		// regTeam.jsp input파일의 name값 가져옴
+		MultipartFile file = multi.getFile("teamLogo");
+		String teamLogoImgAttachedName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+		
+		try {
+			file.transferTo(new File(uploadPath + teamLogoImgAttachedName));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// 로그인 회원의 팀코드 가지고옴
+		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		// 가지고온 팀코드를 teamVO에 업로드
+		teamVO.setTeamCode(teamCode);
+		// 수정된 이미지파일 teamVO에 업로드
+		teamVO.setTeamLogoImgAttachedName(teamLogoImgAttachedName);
+		teamVO.setTeamLogoImgOrignName(file.getOriginalFilename());
+		
+		// 업데이트 실행
+		teamService.updateInfo(teamVO);
+		
+		
+		return "redirect:/team/teamInfo";
+	}
+	
+	
+		
 	
 	
 	// 팀 생성
@@ -56,7 +108,8 @@ public class TeamController {
 		//Iterator<String> inputName = multi.getFileNames();
 		
 		// 첨부될 폴더 경로 지정
-		String uploadPath = "C:\\Users\\User\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\";
+		String uploadPath = "C:\\Users\\kh202-30\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\team\\";
+		//String uploadPath = "C:\\Users\\User\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\team\\";
 		
 		// regTeam.jsp input파일의 name값 가져옴
 		MultipartFile file = multi.getFile("teamLogo");
@@ -98,8 +151,8 @@ public class TeamController {
 	
 	// 팀 리스트 조회 
 	@GetMapping("/selectTeamList")
-	public String selectTeamList(Model model) {
-		model.addAttribute("teamList", teamService.selectTeamList());
+	public String selectTeamList() {
+		/* model.addAttribute("teamList", teamService.selectTeamList()); */
 	return "team/submenu_team_list";
 	}
 	

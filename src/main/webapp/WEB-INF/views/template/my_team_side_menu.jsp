@@ -27,41 +27,16 @@
 			<ul class="list-unstyled ps-0">
 
 				<li class="mb-3">
-					<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">팀 정보</button>
+					<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">My Team</button>
 					<div class="collapse show" id="home-collapse">
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li class="mt-1"><a href="/templateLayout/templateLayout_myTeam" class="link-dark rounded">구 성</a></li>
-							<li class="my-3"><a href="#" class="link-dark rounded">지 역</a></li>
-							<li><a href="#" class="link-dark rounded">소 개</a></li>
+							<li class="mt-1"><a href="/team/teamInfo" class="link-dark rounded">팀 정보</a></li>
+							<li class="my-3"><a href="/team/submenuTeamManage" class="link-dark rounded">팀 관리</a></li>
+							<li><a href="#" class="link-dark rounded">매치 관리</a></li>
 						</ul>
 					</div>
 				</li>
 
-
-
-				<li class="mb-3">
-					<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">메뉴2</button>
-					<div class="collapse" id="dashboard-collapse">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li class="mt-1"><a href="#" class="link-dark rounded">내용1</a></li>
-							<li class="my-3"><a href="#" class="link-dark rounded">내용2</a></li>
-							<li><a href="#" class="link-dark rounded">내용3</a></li>
-						</ul>
-					</div>
-				</li>
-
-
-
-				<li class="mb-3">
-					<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">메뉴3</button>
-					<div class="collapse" id="orders-collapse">
-						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li class="mt-1"><a href="#" class="link-dark rounded">내용1</a></li>
-							<li class="my-3"><a href="#" class="link-dark rounded">내용2</a></li>
-							<li><a href="#" class="link-dark rounded">내용3</a></li>
-						</ul>
-					</div>
-				</li>
 
 				<li class="border-top my-3"></li>
 
