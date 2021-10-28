@@ -12,7 +12,14 @@ public class MatchVO {
 	private String matchEndTime;
 	private String matchPossible;
 	private String matchLocation;
+	private String matchApplyNum;
 	
+	public String getMatchApplyNum() {
+		return matchApplyNum;
+	}
+	public void setMatchApplyNum(String matchApplyNum) {
+		this.matchApplyNum = matchApplyNum;
+	}
 	public String getMatchCode() {
 		return matchCode;
 	}

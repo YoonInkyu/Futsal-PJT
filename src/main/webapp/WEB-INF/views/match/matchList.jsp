@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,22 +23,21 @@
 							<th scope="col">지역</th>
 							<th scope="col">매치일자</th>
 							<th scope="col">신청팀</th>
-							<th scope="col">작성팀</th>
+							<th scope="col">작성자</th>
 							<th scope="col">작성일자</th>
 							<th scope="col">신청</th>
 						</tr>
 					</thead>
 					<tbody>
-						<%-- <c:forEach items="${mercBoardList }" var="mercBoard">
-						<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">
-							<td>${mercBoard.mercBoardSort }</td>
-							<td>${mercBoard.mercBoardLocation }</td>
-							<td>${mercBoard.mercBoardDate } ${mercBoard.mercBoardStartTime } ~ ${mercBoard.mercBoardEndTime }</td>
-							<td>${mercBoard.mercBoardApplyNumber }명</td>
-							<td>${mercBoard.mercBoardWriter }</td>
-							<td>${mercBoard.mercBoardRegdate }</td>
+						<c:forEach items="${matchList }" var="match">
+						<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${match.matchCode}')">
+							<td>${match.matchLocation }</td>
+							<td>${match.matchDate } ${match.matchStartTime } ~ ${match.matchEndTime }</td>
+							<td>${match.matchApplyNum }명</td>
+							<td>${match.matchWriter }</td>
+							<td>${match.matchRegdate }</td>
 							<c:choose>
-								<c:when test="${mercBoard.mercBoardPossible eq '1' }">
+								<c:when test="${match.matchPossible eq '1' }">
 									<td><button type="button" class="btn btn-info">신청</button></td>
 								</c:when>
 								<c:otherwise>
@@ -45,7 +45,7 @@
 								</c:otherwise>
 							</c:choose>
 						</tr>
-						</c:forEach> --%>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

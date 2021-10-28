@@ -16,8 +16,43 @@
 		<result column="MATCH_END_TIME" 		property="matchEndTime"/>
 		<result column="MATCH_POSSIBLE" 		property="matchPossible"/>
 		<result column="MATCH_LOCATION" 		property="matchLocation"/>
+		<result column="MATCH_APPLYNUM" 		property="matchApplyNum"/>
 	</resultMap>
 	
+	<insert id="insertMatchBoard">
+		INSERT INTO MATCH (
+			MATCH_CODE
+			, MATCH_WRITER
+			, MATCH_INTRO	
+			, MATCH_DATE
+			, MATCH_START_TIME
+			, MATCH_END_TIME
+			, MATCH_POSSIBLE
+			, MATCH_LOCATION
+		) VALUES (
+			(SELECT 'MATCH_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MATCH_CODE, 12, 4))), 0)+1, 4, '0') FROM MATCH)
+			, #{matchWriter}
+			, #{matchIntro}
+			, #{matchDate}
+			, #{matchStartTime}
+			, #{matchEndTime}
+			, #{matchPossible}
+			, #{matchLocation}
+		)
+	</insert>
 	
+	<select id="selectMatchList" resultMap="match">
+		SELECT MATCH_CODE
+			, MATCH_LOCATION
+			, MATCH_DATE
+			, MATCH_START_TIME
+			, MATCH_END_TIME
+			, MATCH_APPLYNUM
+			, MATCH_WRITER
+			, TO_CHAR(MATCH_REGDATE, 'YYYY-MM-DD') AS MATCH_REGDATE
+			, MATCH_POSSIBLE
+		FROM MATCH
+		ORDER BY MATCH_CODE DESC
+	</select>
 	
 </mapper>

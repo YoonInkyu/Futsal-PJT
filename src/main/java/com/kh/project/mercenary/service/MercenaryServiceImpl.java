@@ -61,5 +61,11 @@ public class MercenaryServiceImpl implements MercenaryService{
 		return sqlSession.update("mercenaryMapper.updatePossible", mercenaryListVO);
 	}
 
+	//용병 구인구직 상세보기 수정
+	@Override
+	public int updateMercBoard(MercenaryVO mercenaryVO) {
+		return sqlSession.update("mercenaryMapper.updateMercBoard", mercenaryVO);
+	}
+
 	
 }

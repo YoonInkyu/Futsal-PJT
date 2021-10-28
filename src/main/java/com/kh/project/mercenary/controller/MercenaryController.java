@@ -52,6 +52,12 @@ public class MercenaryController {
 		return mercenaryService.selectMercDetail(mercBoardCode);
 	}
 	
+	//상세보기 수정
+	@PostMapping("/detailUpdate")
+	public String detailUpdate(MercenaryVO mercenaryVO) {
+		mercenaryService.updateMercBoard(mercenaryVO);
+		return "redirect:/mercenary/recruit";
+	}
 	
 	//용병 구인구직 등록 페이지로 이동
 	@GetMapping("/recruitRegForm")

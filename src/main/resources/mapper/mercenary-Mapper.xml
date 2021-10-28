@@ -57,6 +57,18 @@
 		)
 	</insert>
 	
+	<!-- 게시글 수정 -->
+	<update id="updateMercBoard">
+		UPDATE MERCENARY_BOARD
+		SET
+		MERC_BOARD_LOCATION = #{mercBoardLocation}
+			, MERC_BOARD_DATE = #{mercBoardDate}
+			, MERC_BOARD_START_TIME = #{mercBoardStartTime}
+			, MERC_BOARD_END_TIME = #{mercBoardEndTime}
+			, MERC_BOARD_INTRO = #{mercBoardIntro}
+		WHERE MERC_BOARD_CODE = #{mercBoardCode}
+	</update>
+	
 	<!-- 용병 구인구직 게시글 리스트 조회 -->
 	<select id="selectMercBoardList" resultMap="mercenary">
 		SELECT MERC_BOARD_CODE

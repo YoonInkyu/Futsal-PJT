@@ -19,6 +19,9 @@ public interface MercenaryService {
 	//용병 구인 상세보기
 	public MercenaryVO selectMercDetail(String mercBoardCode);
 	
+	//용병 구인 상세보기 수정
+	public int updateMercBoard(MercenaryVO mercenaryVO);
+	
 	//용병 구인 신청하기
 	public int insertMercList(MercenaryVO mercenaryVO);
 	

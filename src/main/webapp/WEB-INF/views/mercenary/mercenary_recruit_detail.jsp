@@ -17,28 +17,41 @@ $(document).ready(function() {
 	        data:{'mercBoardCode':mercBoardCode}, //필요한 데이터
 	        success: function(result) {
 	        	//ajax 실행 성공 시 실행되는 구간
-	        	//셀렉트바로 수정해야 함.
 	        	$('.location').remove()
 	        	var str='';
-	        	str += '<td><input type="text" class="form-control" value="' + result.mercBoardLocation + '"></td>';
+	        	str += '<td>';
+	        	str += '<select class="form-select" name="mercBoardLocation">'
+	        	str += '<option selected value="' + result.mercBoardLocation + '">' + result.mercBoardLocation + '</option>';
+	        	//선택된 애는 option에 안나오게 어떻게 하는고임..??
+	        	str += '<option value="서울">서울</option>';
+	        	str += '<option value="경기">경기</option>';
+	        	str += '<option value="대전">대전</option>';
+	        	str += '<option value="대구">대구</option>';
+	        	str += '</select>';
+	        	str += '</td>';
 	        	$('.locationTr').append(str);
-	        	//input type date랑 time으로 수정해야 함.
+	        	
 	        	$('.matchDate').remove()
 	        	var str1='';
-	        	str1 += '<td><input type="text" class="form-control" value="' + result.mercBoardDate + ' ' + result.mercBoardStartTime + ' ~ ' +result.mercBoardEndTime + '"></td>';
+	        	str1 += '<td><input type="date" name="mercBoardDate" class="form-control" value="' + result.mercBoardDate + '">';
+	        	str1 += '<input type="time" name="mercBoardStartTime" class="form-control" value="' + result.mercBoardStartTime + '">';
+	        	str1 += '<input type="time" name="mercBoardEndTime" class="form-control" value="' + result.mercBoardEndTime + '"></td>';
 	        	$('.matchDateTr').append(str1);
 	        	
 	        	$('.intro').remove()
 	        	var str2='';
-	        	str2 += '<td><textarea rows="10px" class="form-control" >' + result.mercBoardIntro + '</textarea></td>';
+	        	str2 += '<td><textarea rows="10px" name="mercBoardIntro" class="form-control" >' + result.mercBoardIntro + '</textarea></td>';
 	        	$('.introTr').append(str2);
+	        	
+	        	$('#change').val('수정')
+	        	$('#formAt').attr('action', '/mercenary/detailUpdate?mercBoardCode=' + result.mercBoardCode)
+	        	$('#change').attr('type', 'submit')
 	        },
 	        error: function(){
 	        	//ajax 실행 실패 시 실행되는 구간
 	        	alert('실패');
 	        }
 	  });
-
 	});
 });
 </script>
@@ -49,7 +62,7 @@ $(document).ready(function() {
 		<h3 class="modal-title">상세보기</h3>
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
-	<form action="" method="post">
+	<form action="" method="post" id="formAt">
 		<div class="modal-body">
 			<table class="table">
 				<tbody>
