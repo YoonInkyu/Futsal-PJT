@@ -6,14 +6,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kh.project.board.service.BoardService;
+import com.kh.project.board.service.BoardFreeService;
+import com.kh.project.board.service.BoardNoticeService;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 
-	@Resource(name = "boardService")
-	private BoardService boardService;
+	@Resource(name = "boardFreeService")
+	private BoardFreeService boardFreeService;
+
+	@Resource(name = "boardNoticeService")
+	private BoardNoticeService boardNoticeService;
 
 	@GetMapping("/noticeList")
 	public String noticeList() {
