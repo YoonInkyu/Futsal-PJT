@@ -46,6 +46,11 @@
        	<result column="BLACK_COMMENT" 				property="blackComment"/>
        	<result column="BLACK_TEAM" 				property="blackTeam"/>
        	<result column="BLACK_NAME" 				property="blackName"/>
+       	<result column="BLACK_DATE" 				property="blackDate"/>
+       	<result column="BLACK_IMG" 					property="blackImg"/>
+       	<result column="BLACK_TEAM_LOG" 			property="blackTeamLog"/>
+       	<result column="BLACK_POSITION" 			property="blackPosition"/>
+       	<result column="BLACK_TEAM_LOCATION" 		property="blackTeamLocation"/>
 	</resultMap>	
 	<!-- 회원가입 -->
 	<insert id="join">
@@ -99,13 +104,8 @@
 	<select id="nextMemberCode" resultType="String">
 		SELECT 'MEMBER_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MEMBER_CODE,8,4))),0)+1,4,'0')AS MEMBER_CODE FROM MEMBER
 	</select>
-	<!-- 로그인 -->
-	<select id="login" resultMap="member">
-		SELECT MEMBER_CODE
-			, MEMBER_NAME
-			, IS_ADMIN
-			, TEAM_CODE
-			, TEAM_ADMIN
+	<select id="checkLogin" resultType="String">
+		SELECT MEMBER_CODE 
 		FROM MEMBER 
 		WHERE MEMBER_ID = #{memberId} 
 		AND MEMBER_PW = #{memberPw}
@@ -119,9 +119,9 @@
 		WHERE MEMBER_CODE = #{memberCode}
 	</update>
 	<!-- 회원 사진유무 확인 -->
-	<select id="checkMemberImg" resultMap="memberView">
+	<select id="checkMemberImg" resultMap="memberImg">
 		SELECT MEMBER_IMG_ATTACHED_NAME 
-		FROM MEMBER_VIEW
+		FROM MEMBER_IMG
 		WHERE MEMBER_CODE = #{memberCode}
 	</select>
 	<!-- 회원사진 수정하기 -->
@@ -154,10 +154,16 @@
 		SELECT M.MEMBER_CODE
         	, BLACKMEMBER_CODE
         	, BLACK_COMMENT
+            , TO_CHAR(BLACK_DATE,'YYYY.MM.DD') AS BLACK_DATE
         	,(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_CODE = MB.BLACKMEMBER_CODE) AS BLACK_NAME
+        	,(SELECT POSITION FROM MEMBER WHERE MEMBER_CODE = MB.BLACKMEMBER_CODE) AS BLACK_POSITION
+            ,(SELECT MEMBER_IMG_ATTACHED_NAME FROM MEMBER_VIEW WHERE MEMBER_CODE = MB.BLACKMEMBER_CODE) AS BLACK_IMG
+            ,(SELECT TEAM_LOGO_IMG_ATTACHED_NAME FROM TEAM_LOGO_IMG WHERE TEAM_CODE = (SELECT TEAM_CODE FROM MEMBER WHERE MEMBER_CODE = MB.MEMBER_CODE)) AS BLACK_TEAM_LOG 
         	,(SELECT TEAM_NAME FROM TEAM WHERE MEMBER_CODE = MB.BLACKMEMBER_CODE) AS BLACK_TEAM 
+        	,(SELECT TEAM_LOCATION FROM TEAM WHERE MEMBER_CODE = MB.BLACKMEMBER_CODE) AS BLACK_TEAM_LOCATION 
 		FROM MEMBER M, MEMBER_BLACKLIST MB 
-		WHERE M.MEMBER_CODE  = MB.MEMBER_CODE (+)
+		WHERE M.MEMBER_CODE  = MB.MEMBER_CODE(+)
+        AND M.MEMBER_CODE = #{memberCode}
 	</select>
 	
 	<!-- 멤버 블랙리스트 삭제 -->

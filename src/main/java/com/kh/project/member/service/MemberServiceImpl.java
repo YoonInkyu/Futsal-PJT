@@ -43,10 +43,14 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO login(MemberVO memberVO) {
-		return sqlSession.selectOne("memberMapper.login", memberVO);
+	public boolean checkLogin(MemberVO memberVO) {
+		String result = sqlSession.selectOne("memberMapper.checkLogin", memberVO);
+		return result == null ? false : true;
 	}
-
+	@Override
+	public String login(MemberVO memberVO) {
+		return sqlSession.selectOne("memberMapper.checkLogin", memberVO);
+	}
 	@Override
 	public MemberVO myPage(String memberCode) {
 		return sqlSession.selectOne("memberMapper.selectMemberInfo", memberCode);
@@ -74,12 +78,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 	@Override
 	public void updateMemberImg(MemberImgVO memberImgVO) {
-		sqlSession.update("memberMapper.udateMemberImg", memberImgVO);
+		sqlSession.update("memberMapper.updateMemberImg", memberImgVO);
 		
 	}
 	@Override
-	public String checkMemberImg(String memberCode) {
-		return sqlSession.selectOne("memberMapper.checkMemberImg", memberCode);
+	public boolean checkMemberImg(String memberCode) {
+		return sqlSession.selectOne("memberMapper.checkMemberImg", memberCode) == null ? true : false;
 	}
 	@Override
 	public MemberVO selectMemberInfo(String memberCode) {

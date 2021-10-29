@@ -6,6 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+$(document).ready(function() {
+	var matchDetailModal = document.getElementById('matchDetailModal');
+	//모달 닫히면 페이지 리로드
+	//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
+	matchDetailModal.addEventListener('hidden.bs.modal', function (event) {
+		location.reload();
+	})
+});
+</script>
 </head>
 <body>
 <div class="row my-5">
@@ -23,14 +33,14 @@
 							<th scope="col">지역</th>
 							<th scope="col">매치일자</th>
 							<th scope="col">신청팀</th>
-							<th scope="col">작성자</th>
+							<th scope="col">작성팀</th>
 							<th scope="col">작성일자</th>
 							<th scope="col">신청</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${matchList }" var="match">
-						<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${match.matchCode}')">
+						<tr data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo('${match.matchCode}')">
 							<td>${match.matchLocation }</td>
 							<td>${match.matchDate } ${match.matchStartTime } ~ ${match.matchEndTime }</td>
 							<td>${match.matchApplyNum }명</td>
@@ -96,21 +106,17 @@
 		</div>
 	</div>
 	<!-- js파일 새로 만들어서 넣어야 함. -->
-	<!-- <script type="text/javascript">
-	    function recruitInfo(mercBoardCode){
-			$(".modal-content").load("/mercenary/recruitDetail?mercBoardCode=" + mercBoardCode);
+	<script type="text/javascript">
+	    function recruitInfo(matchCode){
+			$(".modal-content").load("/match/matchDetail?matchCode=" + matchCode);
 		}
 	</script>
-	
-		tr 클릭시 상세보기 모달창이고, mercenary_recruit_detail.jsp을 불러와서 div class=content안에 내용 넣음 
-		모달창에 사이드메뉴, 푸터 안나오게 하는 방법 찾아야 함.(detail.jsp에서 사이드,푸터 js로 없애면 될듯?)
-		컨트롤러에서 로그인 레이아웃은 사이드, 푸터가 없어서 로그인 레이아웃 사용함. js 사용X
-	
-	<div class="modal fade" tabindex="-1" id="recruitDetailModal">
+		<!-- tr 클릭시 상세보기 모달창이고, match_detail.jsp을 불러와서 div class=content안에 내용 넣음 --> 
+	<div class="modal fade" tabindex="-1" id="matchDetailModal">
 		<div class="modal-dialog modal-lg">
-			<div class="modal-content mercDetail">
+			<div class="modal-content matchDetail">
 			</div>
 		</div>
-	</div> -->
+	</div>
 </body>
 </html>

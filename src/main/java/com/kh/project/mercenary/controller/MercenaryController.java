@@ -44,21 +44,20 @@ public class MercenaryController {
 		//상세보기 모달창 사이드,푸터 없애기 위해 리턴값에 logPage/ 추가 
 		return "logPage/mercenary/mercenary_recruit_detail";
 	}
-	
-	//상세보기 수정 ajax처리..
+	//상세보기 수정 ajax처리
 	@ResponseBody
 	@PostMapping("/recruitDetailAjax")
 	public MercenaryVO recruitDetailAjax(String mercBoardCode) {
+		//상세보기 데이터 ajax reusult 값으로 넘김
 		return mercenaryService.selectMercDetail(mercBoardCode);
 	}
-	
 	//상세보기 수정
 	@PostMapping("/detailUpdate")
 	public String detailUpdate(MercenaryVO mercenaryVO) {
+		//ajax에서 submit 한 데이터 업데이트
 		mercenaryService.updateMercBoard(mercenaryVO);
 		return "redirect:/mercenary/recruit";
 	}
-	
 	//용병 구인구직 등록 페이지로 이동
 	@GetMapping("/recruitRegForm")
 	public String goRecruitRegForm() {
@@ -67,11 +66,11 @@ public class MercenaryController {
 	//용병 구인구직 등록
 	@PostMapping("/recruitReg")
 	public String recruitRegBoard(HttpSession session, MercenaryVO mercenaryVO, Model model) {
-		//로그인한 사람 이름 가져와서 VO에 set
+		//로그인한 사람 이름과 팀코드 가져와서 VO에 set
 		String memberName = ((MemberVO)session.getAttribute("loginInfo")).getMemberName();
 		mercenaryVO.setMercBoardWriter(memberName);
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
-		System.out.println(teamCode);
+		mercenaryVO.setTeamCode(teamCode);
 		
 		//게시글 등록 쿼리 실행
 		mercenaryService.insertMercBoard(mercenaryVO);

@@ -10,206 +10,80 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-
-
-
 	<div class="container">
-
 		<div class="row my-3 align-items-center">
-		
 			<div class="col-3 text-end">
 				<img alt="" src="/resources/img/common/Death_Note.png" width="40%;" class="pr-5">
 			</div>
-			
 			<div class="col-7" >
 				<h1 style="border-bottom: 3px solid gray;">BLACK LIST</h1>
 			</div>
-
 		</div>
-
-
 		<div class="row">
-
 			<div class="row mt-5">
-
 				<div class="col-8 mx-auto">
-
-					<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-						<button class="btn btn-outline-info col-2" type="button">추 가</button>
-					</div>
-
 					<table class="table table-striped table-hover">
-
 						<thead>
-
 							<tr>
 								<th scope="col" width="15%">사 진</th>
 								<th scope="col" width="15%">이 름</th>
-								<th scope="col" width="15%">팀 마크</th>
-								<th scope="col" width="15%">팀 명</th>
 								<th scope="col">등록 날짜</th>
-								<th scope="col" width="15%">상세 정보</th>
+								<th scope="col" width="15%">상세보기</th>
 							</tr>
-
 						</thead>
-
 						<tbody>
-
-
+						<c:forEach items="${black }" var="blackInfo">
+							<c:if test="${blackInfo.blackName != null }">
 							<tr>
+							<c:if test="${not empty blackInfo.blackImg }">
+								<td><img src="/resources/img/member/${blackInfo.blackImg }" width="30%"></td>
+							</c:if>
+							<c:if test="${empty blackInfo.blackImg }">
 								<td><img src="/resources/img/member/nullImg.png" width="30%"></td>
-
-								<td>박성환</td>
-
-								<td><img src="/resources/img/common/1.png" width="30%"></td>
-
-								<td>울산 FC</td>
-
-								<td>2021-11-11 14:20</td>
-
+							</c:if>
+								<td>${blackInfo.blackName }</td>
+								<td>${blackInfo.blackDate }</td>
 								<td>
 									<!-- Button trigger modal -->
 									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Detail</button> <!-- Modal -->
 									<div class="modal fade  " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-
 										<div class="modal-dialog">
-
 											<div class="modal-content">
-
 												<div class="modal-header">
-													<h3 class="modal-title" id="staticBackdropLabel">박성환 상세 정보</h3>
+													<h3 class="modal-title" id="staticBackdropLabel">블랙 상세 정보</h3>
 													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
-
 												<div class="modal-body">
-
-													<p>나이 : 1977 / 11 / 10 (43세)</p>
-
-													<p>지역 : 울산</p>
-
-													<p>성별 : 남자</p>
-
-													<p>포지션 : 공격</p>
-
-													<p>팀 명 : 울산 FC</p>
-
+													<p>이름 : ${blackInfo.blackName }</p>
+													<p>포지션 : ${blackInfo.blackPosition }</p>
+													<p>블랙등록일 : ${blackInfo.blackDate }</p>
+													<p>팀 명 : ${blackInfo.blackTeam }</p>
+													<p>팀 활동지역 : ${blackInfo.blackTeamLocation }</p>
+													<p>팀 랭킹 : </p>
 													<div class="form-floating">
-														<textarea name="teamIntro" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px"></textarea>
-														<label for="floatingTextarea2">블럭 사유</label>
+														<textarea name="teamIntro" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px" readonly></textarea>
+														<label for="floatingTextarea2" >${blackInfo.blackComment }</label>
 													</div>
-
 												</div>
-
-												<div class="modal-footer d-flex justify-content-between">
+												<div class="modal-footer d-flex justify-content-between" onclick="location.href='/member/deleteMemberBlack?blackmemberCode=${blackInfo.blackmemberCode}';">
 													<button type="button" class="btn btn-outline-danger">블럭 삭제</button>
 													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 												</div>
-
 											</div>
-
 										</div>
-
 									</div>
-
 								</td>
-
 							</tr>
-
-
-
-
-
-							<tr>
-								<td><img src="/resources/img/member/nullImg.png" width="30%"></td>
-
-								<td>박성환</td>
-
-								<td><img src="/resources/img/common/1.png" width="30%"></td>
-
-								<td>울산 FC</td>
-
-								<td>2021-11-11 14:20</td>
-
-								<td>
-									<!-- Button trigger modal -->
-									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Detail</button> <!-- Modal -->
-									<div class="modal fade  " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-
-										<div class="modal-dialog">
-
-											<div class="modal-content">
-
-												<div class="modal-header">
-													<h5 class="modal-title" id="staticBackdropLabel">박성환 상세 정보</h5>
-													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-												</div>
-
-												<div class="modal-body">
-
-													<p>이름 : 원빈</p>
-
-													<p>나이 : 1977 / 11 / 10 (43세)</p>
-
-													<p>지역 : 울산</p>
-
-													<p>성별 : 남자</p>
-
-													<p>포지션 : 공격</p>
-
-													<p>팀 명 : 울산 FC</p>
-
-													<div class="form-floating">
-														<textarea name="teamIntro" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px"></textarea>
-														<label for="floatingTextarea2">블럭 사유</label>
-													</div>
-
-												</div>
-
-												<div class="modal-footer d-flex justify-content-between">
-													<button type="button" class="btn btn-outline-danger">블럭 삭제</button>
-													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-												</div>
-
-											</div>
-
-										</div>
-
-									</div>
-
-								</td>
-
-							</tr>
-
-
-
-
-
-
-
-
-
+							</c:if>
+						</c:forEach>
 						</tbody>
-
 					</table>
-
 				</div>
-
 			</div>
-
-
-
-
-
-
 			<div class="row mt-5">
-
 				<div class="col">
-
 					<nav aria-label="Page navigation example">
-
 						<ul class="pagination justify-content-center m-0 p-0">
-
 							<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
 							<li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -217,54 +91,11 @@
 							<li class="page-item"><a class="page-link" href="#">3</a></li>
 							<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
-
 						</ul>
-
 					</nav>
-
 				</div>
-
 			</div>
-
-
-
 		</div>
-
 	</div>
-
-
-
-
-
-
-	<!-- 승수씨 자료 -->
-	<table style="text-align: center;">
-		<colgroup>
-			<col width="20%">
-			<col width="40%">
-			<col width="20%">
-			<col width="20%">
-		</colgroup>
-		<thead>
-			<tr>
-				<th>블랙이름</th>
-				<th>코맨트</th>
-				<th>블랙팀</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${black }" var="blackInfo">
-				<c:if test="${blackInfo.blackName != null }">
-					<tr>
-						<td>${blackInfo.blackName }</td>
-						<td>${blackInfo.blackComment }</td>
-						<td>${blackInfo.blackTeam }</td>
-						<td><input type="button" value="삭제" onclick="location.href='/member/deleteMemberBlack?blackmemberCode=${blackInfo.blackmemberCode}';"></td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</tbody>
-	</table>
 </body>
 </html>

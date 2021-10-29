@@ -47,8 +47,7 @@ public class MemberController {
 		//Iterator<String> inputName = multi.getFileNames();
 		
 		// 첨부될 폴더 경로 지정
-		String uploadPath = "C:\\Users\\PC\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\member\\";
-		
+		String uploadPath = "D:\\자바\\workspaceSTS\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Football\\resources\\img\\member\\";
 		// join.jsp input파일의 name값 가져옴
 		MultipartFile file = multi.getFile("memberImg");
 		
@@ -101,17 +100,20 @@ public class MemberController {
 	public boolean changePw(MemberVO memberVO) {
 		return memberService.changePw(memberVO);
 	}
-	//로그인 페이지로 이동
-	@GetMapping("/goLogin")
-	public String goLogin() {
-		return  "logPage/member/login";
+	@ResponseBody
+	@PostMapping("/checkLogin")
+	public boolean checkLogin(String memberId, String memberPw) {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMemberId(memberId);
+		memberVO.setMemberPw(memberPw);
+		boolean result = memberService.checkLogin(memberVO);
+		return result;
 	}
+
 	//로그인 하기
-	@PostMapping("/goLogin")
-	public String Login(MemberVO memberVO, HttpSession session) {
-		MemberVO login = memberService.login(memberVO);
-		session.setAttribute("loginInfo", memberService.selectMemberInfo(login.getMemberCode()));
-		
+	@PostMapping("/login")
+	public String login(MemberVO memberVO, HttpSession session) {
+		session.setAttribute("loginInfo", memberService.selectMemberInfo(memberService.login(memberVO)));
 		return  "mainPage/main_page";
 	}
 	//로그아웃 하기
@@ -136,10 +138,10 @@ public class MemberController {
 	}
 	//회원정보 수정하기
 	@PostMapping("/updateMemberInfo")
-	public String UpdateMember(MemberVO memberVO, MultipartHttpServletRequest multi) {
+	public String UpdateMember(MemberVO memberVO, MultipartHttpServletRequest multi, Model model, HttpSession session) {
 		memberService.updateMemberInfo(memberVO);
 		// 첨부될 폴더 경로 지정
-		String uploadPath = "C:\\Users\\PC\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\member\\";
+		String uploadPath = "D:\\자바\\workspaceSTS\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Football\\resources\\img\\member\\";
 		
 		// join.jsp input파일의 name값 가져옴
 		MultipartFile file = multi.getFile("memberImg");
@@ -160,13 +162,14 @@ public class MemberController {
 			memberImgVO.setMemberCode(memberVO.getMemberCode());
 			memberImgVO.setMemberImgOrignName(file.getOriginalFilename());
 			memberImgVO.setMemberImgAttachedName(memberImgAttachedName);
-			if(memberService.checkMemberImg(memberVO.getMemberCode()) == null) {
+			if(memberService.checkMemberImg(memberVO.getMemberCode())) {
 				memberService.insertMemberImg(memberImgVO);
 			}
 			else {
 				memberService.updateMemberImg(memberImgVO);
 			}
 		}
+		session.setAttribute("loginInfo", memberService.selectMemberInfo(memberVO.getMemberCode()));
 		return  "redirect:/member/myPage";
 	}
 	//멤버 블랙리스트 관리페이지

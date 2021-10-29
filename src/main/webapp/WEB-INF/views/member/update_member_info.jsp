@@ -73,7 +73,7 @@
 							<div class="row">
 								<label for="inputTell" class="form-label">연락처</label>
 								<div class="col">
-									<input type="text" class="form-control tells" id="tell" name="tell" required value="${member.memberTell}">
+									<input type="text" class="form-control tells" id="memberTell" name="memberTell" value="${member.memberTell}" required >
 								</div>
 							</div>
 							<div class="mt-2" id="tellJDiv" style="color: red; font-size: 12px; margin-top: 2px;"></div>
