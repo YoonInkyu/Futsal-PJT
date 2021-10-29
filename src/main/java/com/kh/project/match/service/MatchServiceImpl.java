@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.project.match.vo.MatchManageVO;
 import com.kh.project.match.vo.MatchVO;
 
 //윤인규, 1028 매치 구현중
@@ -26,6 +27,26 @@ public class MatchServiceImpl implements MatchService {
 	public List<MatchVO> selectMatchList() {
 		return sqlSession.selectList("matchMapper.selectMatchList");
 	}
+	
+	//매치 상세보기
+	@Override
+	public MatchVO selectMatchDetail(String matchCode) {
+		return sqlSession.selectOne("matchMapper.selectMatchDetail", matchCode);
+	}
+
+	//매치 신청하기
+	@Override
+	public int insertApplyMatch(MatchManageVO matchManageVO) {
+		sqlSession.insert("matchMapper.insertApplyMatch", matchManageVO);
+		return sqlSession.update("matchMapper.updateTeamCnt", matchManageVO);
+	}
+
+	//매치 신청팀 보기
+	@Override
+	public List<MatchManageVO> matchApplyList(String matchCode) {
+		return sqlSession.selectList("matchMapper.matchApplyList", matchCode);
+	}
+	
 	
 	
 }

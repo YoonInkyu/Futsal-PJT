@@ -13,7 +13,15 @@ public class MatchVO {
 	private String matchPossible;
 	private String matchLocation;
 	private String matchApplyNum;
+	private String teamName;
 	
+	
+	public String getTeamName() {
+		return teamName;
+	}
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
 	public String getMatchApplyNum() {
 		return matchApplyNum;
 	}
