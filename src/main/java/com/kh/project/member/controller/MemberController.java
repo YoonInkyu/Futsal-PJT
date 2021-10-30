@@ -132,7 +132,14 @@ public class MemberController {
 	@GetMapping("/goUpdateMember")
 	public String goUpdateMember(HttpSession session, Model model) {
 		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
-		model.addAttribute("member",memberService.myPage(memberCode));
+		MemberVO memberVO = new MemberVO(); 
+		memberVO = memberService.myPage(memberCode);
+		
+		String memberTell = memberVO.getMemberTell();
+		String[] updateTells = memberTell.split("-");
+		
+		memberVO.setUpdateTells(updateTells);
+		model.addAttribute("member",memberVO);
 		return  "member/update_member_info";
 	}
 	//회원정보 수정하기

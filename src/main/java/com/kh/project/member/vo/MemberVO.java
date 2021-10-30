@@ -16,9 +16,17 @@ public class MemberVO {
 	private String teamName;
 	private String memberImgAttachedName;
 	private String teamAdmin;
+	private String[] updateTells;
 	
 	
 	
+	
+	public String[] getUpdateTells() {
+		return updateTells;
+	}
+	public void setUpdateTells(String[] updateTells) {
+		this.updateTells = updateTells;
+	}
 	public String getTeamAdmin() {
 		return teamAdmin;
 	}
