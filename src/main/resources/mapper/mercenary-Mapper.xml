@@ -84,7 +84,22 @@
 		FROM MERCENARY_BOARD
 		ORDER BY MERC_BOARD_CODE DESC
 	</select>
-	
+	<!-- 나의 용병 구인구직 게시글보기-->
+	<select id="MyMercBoard" resultMap="mercenary">
+		SELECT MERC_BOARD_CODE
+			, MERC_BOARD_SORT
+			, MERC_BOARD_LOCATION
+			, MERC_BOARD_WRITER
+			, MERC_BOARD_POSSIBLE
+			, MERC_BOARD_DATE
+			, MERC_BOARD_START_TIME
+			, MERC_BOARD_END_TIME
+			, TO_CHAR(MERC_BOARD_REGDATE, 'YYYY-MM-DD') AS MERC_BOARD_REGDATE
+			, MERC_BOARD_APPLYNUMBER
+		FROM MERCENARY_BOARD 
+		WHERE MEMBER_CODE = #{memberCode}
+		ORDER BY MERC_BOARD_CODE DESC
+	</select>
 	<!-- 용병 구인구직 상세보기 -->
 	<select id="selectMercDetail" resultMap="mercenary">
 		SELECT *

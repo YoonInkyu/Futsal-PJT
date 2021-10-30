@@ -31,4 +31,7 @@ public interface MercenaryService {
 	//용병 신청자 수락
 	public int updateResponse(MercenaryListVO mercenaryListVO);
 	
+	//나의 용병 게시글 보기
+	public MercenaryVO MyMercBoard(String memberCode);
+	
 }

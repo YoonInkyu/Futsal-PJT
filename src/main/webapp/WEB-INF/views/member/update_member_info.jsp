@@ -70,13 +70,26 @@
 							</div>
 						</div>
 						<div class="col-12 mb-5">
+
 							<div class="row">
+
 								<label for="inputTell" class="form-label">연락처</label>
+
 								<div class="col">
-									<input type="text" class="form-control tells" id="memberTell" name="memberTell" value="${member.memberTell}" required >
+									<input type="text" class="form-control tells" id="tell1" name="tells" value="${member.updateTells[0] }" required>
 								</div>
+
+								<div class="col">
+									<input type="text" class="form-control tells" id="tell2" name="tells" value="${member.updateTells[1] }" required>
+								</div>
+
+								<div class="col">
+									<input type="text" class="form-control tells" id="tell3" name="tells" value="${member.updateTells[2] }" required>
+								</div>
+
 							</div>
 							<div class="mt-2" id="tellJDiv" style="color: red; font-size: 12px; margin-top: 2px;"></div>
+
 						</div>
 						<div class="col-12 mb-5">
 							<div class="col">

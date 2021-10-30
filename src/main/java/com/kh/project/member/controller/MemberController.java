@@ -26,7 +26,6 @@ import com.kh.project.member.service.MemberService;
 import com.kh.project.member.vo.MemberBlacklistVO;
 import com.kh.project.member.vo.MemberImgVO;
 import com.kh.project.member.vo.MemberVO;
-import com.kh.project.team.vo.TeamLogoImgVO;
 
 @Controller
 @RequestMapping("/member")
@@ -133,7 +132,14 @@ public class MemberController {
 	@GetMapping("/goUpdateMember")
 	public String goUpdateMember(HttpSession session, Model model) {
 		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
-		model.addAttribute("member",memberService.myPage(memberCode));
+		MemberVO memberVO = new MemberVO(); 
+		memberVO = memberService.myPage(memberCode);
+		
+		String memberTell = memberVO.getMemberTell();
+		String[] updateTells = memberTell.split("-");
+		
+		memberVO.setUpdateTells(updateTells);
+		model.addAttribute("member",memberVO);
 		return  "member/update_member_info";
 	}
 	//회원정보 수정하기
@@ -179,6 +185,7 @@ public class MemberController {
 		model.addAttribute("black",memberService.memberBlackList(memberCode));
 		return  "member/member_blacklist";
 	}
+
 	//멤버블랙 삭제하기
 	@GetMapping("/deleteMemberBlack")
 	public String deleteMemberBlack(HttpSession session, Model model, String blackmemberCode) {

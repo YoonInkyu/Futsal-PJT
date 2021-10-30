@@ -66,6 +66,11 @@ public class MercenaryServiceImpl implements MercenaryService{
 	public int updateMercBoard(MercenaryVO mercenaryVO) {
 		return sqlSession.update("mercenaryMapper.updateMercBoard", mercenaryVO);
 	}
+	//나의 용병 게시글 보기
+	@Override
+	public MercenaryVO MyMercBoard(String memberCode) {
+		return sqlSession.selectOne("mercenaryMapper.MyMercBoard", memberCode);
+	}
 
 	
 }
