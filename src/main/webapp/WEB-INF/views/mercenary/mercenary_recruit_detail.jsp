@@ -43,9 +43,9 @@ $(document).ready(function() {
 	        	str2 += '<td><textarea rows="10px" name="mercBoardIntro" class="form-control" >' + result.mercBoardIntro + '</textarea></td>';
 	        	$('.introTr').append(str2);
 	        	
-	        	$('#change').val('수정')
-	        	$('#formAt').attr('action', '/mercenary/detailUpdate?mercBoardCode=' + result.mercBoardCode)
-	        	$('#change').attr('type', 'submit')
+	        	$('.change').val('수정')
+	        	$('.formChange').attr('action', '/mercenary/detailUpdate?mercBoardCode=' + result.mercBoardCode)
+	        	$('.change').attr('type', 'submit')
 	        },
 	        error: function(){
 	        	//ajax 실행 실패 시 실행되는 구간
@@ -62,7 +62,7 @@ $(document).ready(function() {
 		<h3 class="modal-title">상세보기</h3>
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
-	<form action="" method="post" id="formAt">
+	<form action="#" method="post" id="formAt" class="formChange">
 		<div class="modal-body">
 			<table class="table">
 				<tbody>
@@ -108,8 +108,8 @@ $(document).ready(function() {
 		<div class="modal-footer">
 			 <c:choose>
 				<c:when test="${sessionScope.loginInfo.memberName eq mercVO.mercBoardWriter }">
-					<input type="button" class="btn btn-primary" value="수정하기" id="change">
-					<input type="hidden" value="${mercVO.mercBoardCode}" class="gg">
+					<input type="button" class="btn btn-primary change" value="수정하기" id="change">
+					<input type="hidden" value="${mercVO.mercBoardCode}">
 				</c:when>
 				<c:otherwise>
 					<c:if test="${mercVO.mercBoardPossible eq '1' }">

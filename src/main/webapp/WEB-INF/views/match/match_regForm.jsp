@@ -54,7 +54,7 @@
 		</div>
 	</div>
 	<div class="d-grid gap-2">
-		<input class="btn btn-primary" type="submit" value="클릭하지 마세요~ 쿼리 안짬!!">
+		<input class="btn btn-primary" type="submit" value="매치 등록">
 	</div>
 </form>
 </body>

@@ -8,11 +8,12 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(document).ready(function() {
+	//수정 ajax
 	$(document).on('click', '#change', function() {
 		var matchCode = $(this).next().val()
 		
 		$.ajax({
-	        url: '/matc/matchDetailAjax', //요청경로
+	        url: '/match/matchDetailAjax', //요청경로
 	        type: 'post',
 	        data:{'matchCode':matchCode}, //필요한 데이터
 	        success: function(result) {
@@ -43,9 +44,9 @@ $(document).ready(function() {
 	        	str2 += '<td><textarea rows="10px" name="matchIntro" class="form-control" >' + result.matchIntro + '</textarea></td>';
 	        	$('.introTr').append(str2);
 	        	
-	        	$('#change').val('수정')
-	        	$('#formAt').attr('action', '/match/matchDetailUpdate?matchCode=' + result.matchCode)
-	        	$('#change').attr('type', 'submit')
+	        	$('.change').val('수정')
+	        	$('.formAt').attr('action', '/match/matchDetailUpdate?matchCode=' + result.matchCode)
+	        	$('.change').attr('type', 'submit')
 	        },
 	        error: function(){
 	        	//ajax 실행 실패 시 실행되는 구간
@@ -53,6 +54,35 @@ $(document).ready(function() {
 	        }
 	  });
 	});
+	
+	//결과 등록 ajax
+	$(document).on('click', '#matchResult', function() {
+		var matchCode = $(this).prev().val()
+		
+		$.ajax({
+	        url: '/match/matchDetailAjax', //요청경로
+	        type: 'post',
+	        data:{'matchCode':matchCode}, //필요한 데이터
+	        success: function(result) {
+	        	//ajax 실행 성공 시 실행되는 구간
+	        	var str = '';
+	        	str += '<span class="input-group-text">결과 입력(홈 : 어웨이)</span>';
+	        	str += '<input type="number" name="matchResultHometeamScore" aria-label="First name" class="form-control" min="0" value="0">';
+	        	str += '<input type="number" name="matchResultAwayteamScore" aria-label="Last name" class="form-control" min="0" value="0">';
+	        	$('.inputScore').append(str);
+	        	
+	        	$('.formAt').attr('action', '/match/insertResult?matchCode=' + result.matchCode)
+	        	$('.matchResult').val('결과 등록')
+	        	$('.matchResult').attr('type', 'submit')
+	        	
+	        },
+	        error: function(){
+	        	//ajax 실행 실패 시 실행되는 구간
+	        	alert('실패');
+	        }
+	  });
+	});
+	
 });
 </script>
 </head>
@@ -62,7 +92,7 @@ $(document).ready(function() {
 		<h3 class="modal-title">상세보기</h3>
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
-	<form action="" method="post" id="formAt">
+	<form action="#" method="post" id="formAt" class="formAt">
 		<div class="modal-body">
 			<table class="table">
 				<tbody>
@@ -98,16 +128,25 @@ $(document).ready(function() {
 					<tr class="introTr">
 						<td class="al_left intro" colspan="4"><div class="match_meno">${matchVO.matchIntro }</div></td>
 					</tr>
+					<tr>
+					</tr>
 				</tbody>
 			</table>
+			<div class="input-group inputScore">
+				<c:if test="${matchResult != null }">
+					 	<span class="input-group-text">매치 결과(홈 : 어웨이)</span>
+	        			<input type="number" name="matchResultHometeamScore" aria-label="First name" class="form-control" min="0" value="${matchResult.matchResultHometeamScore }" readonly>
+	        			<input type="number" name="matchResultAwayteamScore" aria-label="Last name" class="form-control" min="0" value="${matchResult.matchResultAwayteamScore }" readonly>
+				</c:if>
+			</div>
 		</div>
 		<div class="modal-footer">
 			 <c:choose>
 				<c:when test="${sessionScope.loginInfo.teamName eq matchVO.matchWriter }">
-					<input type="button" class="btn btn-primary" value="수정하기" id="change">
-					<input type="hidden" value="${matchVO.matchCode}" class="gg">
-					<c:if test="${matchVO.matchPossible eq '2' }">
-						<input type="button" class="btn btn-info" value="매치 결과 등록" id="matchResult">
+					<input type="button" class="btn btn-primary change" value="수정하기" id="change">
+					<input type="hidden" value="${matchVO.matchCode}">
+					<c:if test="${matchVO.matchPossible eq '2' && empty matchResult}">
+						<input type="button" class="btn btn-info matchResult" value="매치 결과 등록" id="matchResult">
 					</c:if>
 				</c:when>
 				<c:otherwise>
@@ -135,7 +174,7 @@ $(document).ready(function() {
 					<td>
 						<c:choose>
 							<c:when test="${sessionScope.loginInfo.teamName eq matchVO.matchWriter && matchVO.matchPossible eq '1'}">
-								<button type="button" class="btn btn-info" onclick="location.href='/mercenary/updateResponse?mercBoardCode=${mercVO.mercBoardCode}&mercListCode=${merc.mercListCode}'">수락</button>
+								<button type="button" class="btn btn-info" onclick="location.href='/match/updateResponse?matchCode=${matchVO.matchCode }&matchManageCode=${team.matchManageCode}&teamCodeAway=${team.teamCodeAway}'">수락</button>
 							</c:when>
 							<c:otherwise>
 								${team.matchManageResponse }

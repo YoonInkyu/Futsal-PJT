@@ -5,27 +5,34 @@
 <!-- 윤인규 10/25 용병 구인구직 게시글 지원자 vo 작성 -->
 <mapper namespace="matchMapper">
 	<resultMap type="com.kh.project.match.vo.MatchVO" id="match">
-		<id column="MATCH_CODE" 				property="matchCode"/>
-		<result column="TEAM_CODE" 				property="teamCode"/>
-		<result column="TEAM_CODE_AWAY" 		property="teamCodeAway"/>
-		<result column="MATCH_WRITER" 			property="matchWriter"/>
-		<result column="MATCH_INTRO" 			property="matchIntro"/>
-		<result column="MATCH_REGDATE" 			property="matchRegdate"/>
-		<result column="MATCH_DATE" 			property="matchDate"/>
-		<result column="MATCH_START_TIME" 		property="matchStartTime"/>
-		<result column="MATCH_END_TIME" 		property="matchEndTime"/>
-		<result column="MATCH_POSSIBLE" 		property="matchPossible"/>
-		<result column="MATCH_LOCATION" 		property="matchLocation"/>
-		<result column="MATCH_APPLYNUM" 		property="matchApplyNum"/>
-		<result column="TEAM_NAME"	 			property="teamName"/>
+		<id column="MATCH_CODE" 						property="matchCode"/>
+		<result column="TEAM_CODE" 						property="teamCode"/>
+		<result column="TEAM_CODE_AWAY" 				property="teamCodeAway"/>
+		<result column="MATCH_WRITER" 					property="matchWriter"/>
+		<result column="MATCH_INTRO" 					property="matchIntro"/>
+		<result column="MATCH_REGDATE" 					property="matchRegdate"/>
+		<result column="MATCH_DATE" 					property="matchDate"/>
+		<result column="MATCH_START_TIME" 				property="matchStartTime"/>
+		<result column="MATCH_END_TIME" 				property="matchEndTime"/>
+		<result column="MATCH_POSSIBLE" 				property="matchPossible"/>
+		<result column="MATCH_LOCATION" 				property="matchLocation"/>
+		<result column="MATCH_APPLYNUM" 				property="matchApplyNum"/>
+		<result column="TEAM_NAME"	 					property="teamName"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.match.vo.MatchManageVO" id="matchManage">
-		<id column="MATCH_MANAGE_CODE" 			property="matchManageCode"/>
-		<result column="MATCH_CODE" 			property="matchCode"/>
-		<result column="TEAM_CODE_AWAY" 		property="teamCodeAway"/>
-		<result column="TEAM_NAME" 				property="teamName"/>
-		<result column="MATCH_MANAGE_RESPONSE" 	property="matchManageResponse"/>
+		<id column="MATCH_MANAGE_CODE" 					property="matchManageCode"/>
+		<result column="MATCH_CODE" 					property="matchCode"/>
+		<result column="TEAM_CODE_AWAY" 				property="teamCodeAway"/>
+		<result column="TEAM_NAME" 						property="teamName"/>
+		<result column="MATCH_MANAGE_RESPONSE" 			property="matchManageResponse"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.project.match.vo.MatchResultVO" id="matchResult">
+		<id column="MATCH_RESULT_CODE" 					property="matchResultCode"/>
+		<result column="MATCH_CODE" 					property="matchCode"/>
+		<result column="MATCH_RESULT_HOMETEAM_SCORE" 	property="matchResultHometeamScore"/>
+		<result column="MATCH_RESULT_AWAYTEAM_SCORE" 	property="matchResultAwayteamScore"/>
 	</resultMap>
 	
 	<!-- 매치 등록 -->
@@ -39,6 +46,7 @@
 			, MATCH_END_TIME
 			, MATCH_POSSIBLE
 			, MATCH_LOCATION
+			, TEAM_CODE
 		) VALUES (
 			(SELECT 'MATCH_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MATCH_CODE, 12, 4))), 0)+1, 4, '0') FROM MATCH)
 			, #{matchWriter}
@@ -48,6 +56,7 @@
 			, #{matchEndTime}
 			, #{matchPossible}
 			, #{matchLocation}
+			, #{teamCode}
 		)
 	</insert>
 	
@@ -108,5 +117,62 @@
         AND MATCH_CODE = #{matchCode}
 	</select>
 	
+	<!-- 매치 수정하기 -->
+	<update id="updateDetail">
+		UPDATE MATCH
+		SET MATCH_LOCATION = #{matchLocation}
+		, MATCH_DATE = #{matchDate}
+		, MATCH_START_TIME = #{matchStartTime}
+		, MATCH_END_TIME = #{matchEndTime}
+		, MATCH_INTRO = #{matchIntro}
+		WHERE MATCH_CODE = #{matchCode}
+	</update>
+	
+	<!-- 매치 수락 -->
+	<update id="updateResponse"> <!-- 매치 수락 누른 팀만 수락으로 변경 -->
+		UPDATE MATCH_MANAGE
+		SET
+		MATCH_MANAGE_RESPONSE = '수락'
+		WHERE MATCH_MANAGE_CODE = #{matchManageCode}
+	</update>
+	<update id="updateResponseRefuse"> <!-- 수락 누른 팀 제외 모든 팀 자동 거절 업데이트 쿼리 -->
+		UPDATE MATCH_MANAGE
+		SET
+		MATCH_MANAGE_RESPONSE = '거절'
+		WHERE MATCH_CODE = #{matchCode}
+		AND MATCH_MANAGE_RESPONSE IN (SELECT MATCH_MANAGE_RESPONSE
+									  FROM MATCH_MANAGE
+									  WHERE MATCH_CODE = #{matchCode}
+									  AND MATCH_MANAGE_RESPONSE = '응답중')	 
+	</update>
+	<update id="updatePossible"> <!-- 매치 테이블 수락 누른 팀 매칭 시키고 지원 불가능 업데이트 쿼리 -->
+		UPDATE MATCH
+		SET
+		MATCH_POSSIBLE = '2'
+		, TEAM_CODE_AWAY = #{teamCodeAway}
+		WHERE MATCH_CODE = #{matchCode}
+	</update>
+	
+	<!-- 매치 결과 입력(수정해야 함.) -->
+	<insert id="insertResult">
+		INSERT INTO MATCH_RESULT (
+			MATCH_RESULT_CODE
+			, MATCH_CODE
+			, MATCH_RESULT_HOMETEAM_SCORE
+			, MATCH_RESULT_AWAYTEAM_SCORE
+		) VALUES (
+			(SELECT 'MATCH_RESULT_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MATCH_RESULT_CODE, 19, 4))), 0)+1, 4, '0') FROM MATCH_RESULT)
+			, #{matchCode}
+			, #{matchResultHometeamScore}
+			, #{matchResultAwayteamScore}
+		)
+	</insert>
+	
+	<!-- 매치 결과 조회 -->
+	<select id="selectResult" resultMap="matchResult">
+		SELECT *
+		FROM MATCH_RESULT
+		WHERE MATCH_CODE = #{matchCode}
+	</select>
 	
 </mapper>

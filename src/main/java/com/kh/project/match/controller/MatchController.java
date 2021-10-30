@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.project.match.service.MatchService;
 import com.kh.project.match.vo.MatchManageVO;
+import com.kh.project.match.vo.MatchResultVO;
 import com.kh.project.match.vo.MatchVO;
 import com.kh.project.member.vo.MemberVO;
 
@@ -50,6 +51,9 @@ public class MatchController {
 		//로그인 한 사람 팀 이름을 작성팀으로 넣기 위해 matchVO에 set
 		String teamName = ((MemberVO)session.getAttribute("loginInfo")).getTeamName();
 		matchVO.setMatchWriter(teamName);
+		//로그인 한 사람 팀 코드를 작성팀으로 넣기 위해 matchVO에 set
+		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		matchVO.setTeamCode(teamCode);
 		
 		matchService.insertMatchBoard(matchVO);
 		return "redirect:/match/matchList";
@@ -61,6 +65,8 @@ public class MatchController {
 		model.addAttribute("matchVO", matchService.selectMatchDetail(matchCode));
 		//매치신청 팀 리스트
 		model.addAttribute("teamList", matchService.matchApplyList(matchCode));
+		//매치결과
+		model.addAttribute("matchResult", matchService.selectResult(matchCode));
 		return "logPage/match/match_detail";
 	}
 	//매치 수정하기 ajax 처리
@@ -70,7 +76,11 @@ public class MatchController {
 		return matchService.selectMatchDetail(matchCode);
 	}
 	//매치 상세보기 수정
-	
+	@PostMapping("/matchDetailUpdate")
+	public String matchDetailUpdate(MatchVO matchVO) {
+		matchService.updateDetail(matchVO);
+		return "redirect:/match/matchList";
+	}
 	
 	//매치 신청하기
 	@GetMapping("/updateApplyMatch")
@@ -81,5 +91,18 @@ public class MatchController {
 		return "redirect:/match/matchList";
 	}
 	
+	//매치 수락
+	@GetMapping("/updateResponse")
+	public String updateResponse(MatchManageVO matchManageVO) {
+		matchService.updateResponse(matchManageVO);
+		return "redirect:/match/matchList";
+	}
+	
+	//매치 결과 등록
+	@PostMapping("/insertResult")
+	public String insertResult(MatchResultVO matchResultVO) {
+		matchService.insertResult(matchResultVO);
+		return "redirect:/match/matchList";
+	}
 
 }

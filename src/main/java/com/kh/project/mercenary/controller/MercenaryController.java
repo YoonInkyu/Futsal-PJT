@@ -86,7 +86,7 @@ public class MercenaryController {
 	}
 	//용병 구인구직 수락
 	@GetMapping("/updateResponse")
-	public String updateResponse(Model model, MercenaryListVO mercenaryListVO) {
+	public String updateResponse(MercenaryListVO mercenaryListVO) {
 		mercenaryService.updateResponse(mercenaryListVO);
 		return "redirect:/mercenary/recruit";
 	}
