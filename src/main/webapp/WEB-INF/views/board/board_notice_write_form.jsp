@@ -15,7 +15,7 @@
 			<h5 class="mb-3" style="border-bottom: 2px solid blue;">공 지 사 항</h5>
 		</div>
 
-		<h3 class="m-5">공지 사항 작성</h3>
+		<h3 class="m-5">공지사항 작성</h3>
 
 		<form action="/board/noticeWriteForm" method="post" enctype="multipart/form-data">
 

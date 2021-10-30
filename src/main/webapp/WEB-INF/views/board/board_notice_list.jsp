@@ -13,7 +13,7 @@
 
 
 		<div class="row m-5 text-center justify-content-center">
-			<h2>공지 사항</h2>
+			<h2>공 지 사 항</h2>
 			<div class="col-3" style="border-bottom: 3px solid gray;"></div>
 
 		</div>

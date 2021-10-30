@@ -16,6 +16,7 @@ import com.kh.project.board.service.BoardFreeService;
 import com.kh.project.board.service.BoardNoticeService;
 import com.kh.project.board.service.ReplyFreeService;
 import com.kh.project.board.service.ReplyNoticeService;
+import com.kh.project.board.vo.BoardFreeVO;
 import com.kh.project.board.vo.BoardNoticeVO;
 
 @Controller
@@ -37,6 +38,7 @@ public class BoardController {
 	// ==============================// 공지사항 //==============================//
 	// ==============================// 공지사항 //==============================//
 	// ==============================// 공지사항 //==============================//
+
 	// 공지사항 리스트로 이동
 	@GetMapping("/goNoticeList")
 	public String goNoticeList(Model model) {
@@ -121,11 +123,85 @@ public class BoardController {
 	// ==============================// 자유게시판 //==============================//
 	// ==============================// 자유게시판 //==============================//
 	// ==============================// 자유게시판 //==============================//
-	// 자유게시판으로 이동
+
+	// 자유게시판 리스트로 이동
 	@GetMapping("/goFreeList")
-	public String goFreeList() {
+	public String goFreeList(Model model) {
+
+		model.addAttribute("freeList", boardFreeService.selectBoardFreeList());
 
 		return "board/board_free_list";
+	}
+
+	// 자유게시판 상세 페이지로 이동
+	@GetMapping("/goFreeDetail")
+	public String goFreeDetail(Model model, int boardNumFree) {
+
+		model.addAttribute("freeInfo", boardFreeService.selectBoardFreeDetail(boardNumFree));
+
+		// 댓글 조회
+		model.addAttribute("replyFreeList", replyFreeService.selectReplyFreeList(boardNumFree));
+
+		// 조회수 증가
+		boardFreeService.updateReadCntFree(boardNumFree);
+
+		return "board/board_free_detail";
+	}
+
+	// 자유게시판 글 쓰기 폼으로 이동
+	@GetMapping("/goFreeWriteForm")
+	public String goFreeWriteForm(Model model) {
+
+		model.addAttribute("nowDate", getNowDateToString());
+
+		return "board/board_free_write_form";
+
+	}
+
+	// 자유게시판 글 쓰기
+	@PostMapping("/freeWriteForm")
+	public String freeWriteForm(BoardFreeVO boardFreeVO, MultipartHttpServletRequest multi) {
+
+		Iterator<String> inputNames = multi.getFileNames();
+
+		// 첨부될 폴더(집 경로, 다른데서 할시 경로 변경 할것!!!)
+		String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+
+		boardFreeService.insertBoardFree(boardFreeVO);
+
+		return "redirect:/board/goFreeList";
+
+	}
+
+	// 자유게시판 글 수정 폼으로 이동
+	@GetMapping("/goUpdateBoardFree")
+	public String goUpdateBoardFree(Model model, int boardNumFree) {
+
+		model.addAttribute("nowDate", getNowDateToString());
+
+		model.addAttribute("freeInfo", boardFreeService.selectBoardFreeDetail(boardNumFree));
+
+		return "board/board_free_update_form";
+
+	}
+
+	// 자유게시판 글 수정
+	@PostMapping("/updateBoardFree")
+	public String updateBoardFree(BoardFreeVO boardFreeVO) {
+
+		boardFreeService.updateBoardFree(boardFreeVO);
+
+		return "redirect:/board/goFreeList";
+
+	}
+
+	// 자유게시판 글 삭제
+	@GetMapping("/deleteBoardFree")
+	public String deleteBoardFree(BoardFreeVO boardFreeVO) {
+
+		boardFreeService.deleteBoardFree(boardFreeVO);
+
+		return "redirect:/board/goFreeList";
 
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.project.board.service.ReplyFreeService;
 import com.kh.project.board.service.ReplyNoticeService;
+import com.kh.project.board.vo.ReplyFreeVO;
 import com.kh.project.board.vo.ReplyNoticeVO;
 import com.kh.project.member.vo.MemberVO;
 
@@ -18,7 +19,7 @@ import com.kh.project.member.vo.MemberVO;
 public class ReplyController {
 
 	@Resource(name = "replyFreeService")
-	private ReplyFreeService replyService;
+	private ReplyFreeService replyFreeService;
 
 	@Resource(name = "replyNoticeService")
 	private ReplyNoticeService replyNoticeService;
@@ -26,6 +27,7 @@ public class ReplyController {
 	// ==============================// 공지사항 //==============================//
 	// ==============================// 공지사항 //==============================//
 	// ==============================// 공지사항 //==============================//
+
 	// 공지사항 댓글 등록
 	@PostMapping("/noticeInsertReply")
 	public String noticeInsertReply(ReplyNoticeVO replyNoticeVO, HttpSession session) {
@@ -51,10 +53,27 @@ public class ReplyController {
 	// ==============================// 자유게시판 //==============================//
 	// ==============================// 자유게시판 //==============================//
 	// ==============================// 자유게시판 //==============================//
+
 	// 자유게시판 댓글 등록
-	@GetMapping("/freeInsertReply")
-	public String freeInsertReply() {
-		return "/board_free_list";
+	@PostMapping("/freeInsertReply")
+	public String freeInsertReply(ReplyFreeVO replyFreeVO, HttpSession session) {
+
+		String writerFree = ((MemberVO) session.getAttribute("loginInfo")).getMemberId();
+
+		replyFreeVO.setWriterFree(writerFree);
+
+		replyFreeService.insertReplyFree(replyFreeVO);
+
+		return "redirect:/board/goFreeDetail?boardNumFree=" + replyFreeVO.getBoardNumFree();
+	}
+
+	// 자유게시판 댓글 삭제
+	@GetMapping("/deleteReplyFree")
+	public String deleteReplyFree(ReplyFreeVO replyFreeVO, int replyNumFree) {
+
+		replyFreeService.deleteReplyFree(replyNumFree);
+
+		return "redirect:/board/goFreeDetail?boardNumFree=" + replyFreeVO.getBoardNumFree();
 	}
 
 }

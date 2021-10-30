@@ -134,9 +134,98 @@
 
 
 
+	<!-- 자유게시판 목록 조회 -->
+	<select id="selectBoardFreeList" resultMap="boardFree">
+		SELECT BOARD_NUM_FREE
+		, TITLE_FREE
+		, CONTENT_FREE
+		, TO_CHAR(CREATE_DATE_FREE, 'YYYY.MM.DD') AS CREATE_DATE_FREE
+		, WRITER_FREE
+		, READ_CNT_FREE
+		, BOARD_PW_FREE
+		FROM BOARD_FREE
+		<!-- <if test="searchValue != null and !searchValue.equals('')"> 느낌표는 반대를 뜻한다, 홀따옴표 두개를 붙여 쓰면 공란으로 인씩 -->
+		<!-- WHERE UPPER(${searchKeyword}) LIKE '%'||UPPER(#{searchValue})||'%' 검색할 타이틀도 대문자(UPPER)로 변경 검색되는 글자도 대문자로 변경 후 검색 하면 대문자끼리 검색 -->
+		<!-- $와 #의 차이 ${자바} = 자바 #{자바} = '자바' -->
+		<!-- 컬럼명을 사용할때는 $를 사용 해야된다 -->
+		<!-- </if> -->
+		ORDER BY BOARD_NUM_FREE DESC
+	</select>
 
 
 
+	<!-- 자유게시판 상세 목록 조회 -->
+	<select id="selectBoardFreeDetail" resultMap="boardFree">
+		SELECT BOARD_NUM_FREE
+		, TITLE_FREE
+		, CONTENT_FREE
+		, TO_CHAR(CREATE_DATE_FREE, 'YYYY.MM.DD') AS CREATE_DATE_FREE
+		, WRITER_FREE
+		, FILE_NAME_FREE
+		FROM BOARD_FREE
+		WHERE BOARD_NUM_FREE = #{boardNumFree}
+	</select>
+
+
+
+	<!-- 자유게시판 글 쓰기 -->
+	<insert id="insertBoardFree">
+		INSERT INTO BOARD_FREE (
+		BOARD_NUM_FREE
+		, TITLE_FREE
+		, WRITER_FREE
+		, CONTENT_FREE
+		<if test="fileNameFree != null and !fileNameFree.equals('')">
+			, FILE_NAME_FREE
+		</if>
+		<if test="boardPwFree != null and !boardPwFree.equals('')">
+			, BOARD_PW_FREE
+		</if>
+		) VALUES (
+		(SELECT NVL(MAX(BOARD_NUM_FREE), 0) + 1 FROM BOARD_FREE)
+		, #{titleFree}
+		, #{writerFree}
+		, #{contentFree}
+		<if test="fileNameFree != null and !fileNameFree.equals('')">
+			, #{fileNameFree}
+		</if>
+		<if test="boardPwFree != null and !boardPwFree.equals('')">
+			, #{boardPwFree}
+		</if>
+		)
+	</insert>
+
+
+
+	<!-- 조회수 증가 -->
+	<update id="updateReadCntFree">
+		UPDATE BOARD_FREE
+		SET
+		READ_CNT_FREE = READ_CNT_FREE + 1
+		WHERE BOARD_NUM_FREE = #{boardNumFree}
+	</update>
+
+
+
+	<!-- 자유게시판 글 수정 -->
+	<update id="updateBoardFree">
+		UPDATE BOARD_FREE
+		SET
+		TITLE_FREE = #{titleFree}
+		, CONTENT_FREE = #{contentFree}
+		<if test="fileNameFree != null and !fileNameFree.equals('')">
+			, FILE_NAME_FREE = #{fileNameFree}
+		</if>
+		WHERE BOARD_NUM_FREE = #{boardNumFree}
+	</update>
+
+
+
+	<!-- 자유게시판 글 삭제 -->
+	<delete id="deleteBoardFree">
+		DELETE BOARD_FREE
+		WHERE BOARD_NUM_FREE = #{boardNumFree}
+	</delete>
 
 
 
