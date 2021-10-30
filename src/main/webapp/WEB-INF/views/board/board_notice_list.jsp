@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,9 +21,16 @@
 
 		<div class="row">
 
-			<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-				<button class="btn btn-outline-primary col-2" type="button">글쓰기</button>
-			</div>
+			<!-- 관리자 기능이(IS_ADMIN)이 'Y'인 아이디만 "글쓰기"가 보이게 함 -->
+			<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
+
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+					<a class="btn btn-outline-primary col-2" type="button" href="/board/goNoticeWriteForm">글쓰기</a>
+				</div>
+
+			</c:if>
+
+
 
 			<div class="col text-center">
 
@@ -42,30 +50,16 @@
 
 					<tbody>
 
-						<tr>
-							<td>3</td>
-							<td>공지 3</td>
-							<td>admin</td>
-							<td>2013.11.23</td>
-							<td>3,000</td>
-						</tr>
+						<c:forEach items="${noticeList }" var="noticeInfo">
+							<tr onclick="location.href='/board/goNoticeDetail?boardNumNotice=' + ${noticeInfo.boardNumNotice };">
+								<td>${noticeInfo.boardNumNotice }</td>
+								<td>${noticeInfo.titleNotice }</td>
+								<td>${noticeInfo.writerNotice }</td>
+								<td>${noticeInfo.createDateNotice }</td>
+								<td>${noticeInfo.readCntNotice }</td>
+							</tr>
 
-						<tr>
-							<td>2</td>
-							<td>공지 2</td>
-							<td>admin</td>
-							<td>2012.11.23</td>
-							<td>2,000</td>
-						</tr>
-
-						<tr>
-							<td>1</td>
-							<td>공지 1</td>
-							<td>admin</td>
-							<td>2011.11.23</td>
-							<td>1,000</td>
-						</tr>
-
+						</c:forEach>
 
 					</tbody>
 
@@ -74,6 +68,8 @@
 			</div>
 
 		</div>
+
+		<a href="location"></a>
 
 
 
@@ -134,6 +130,8 @@
 
 
 	</div>
+
+
 
 
 

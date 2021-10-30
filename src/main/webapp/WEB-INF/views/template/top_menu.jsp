@@ -60,8 +60,8 @@
 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-							<li><a class="dropdown-item" href="/board/noticeList">공지 사항</a></li>
-							<li><a class="dropdown-item" href="/board/freeList">자유 게시판</a></li>
+							<li><a class="dropdown-item" href="/board/goNoticeList">공지 사항</a></li>
+							<li><a class="dropdown-item" href="/board/goFreeList">자유 게시판</a></li>
 						</ul></li>
 
 				</ul>

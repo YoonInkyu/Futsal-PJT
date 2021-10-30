@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +6,20 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
+	<br>자유 게시판 글쓰기
 
 </body>
 </html>

@@ -3,7 +3,164 @@
 <!-- 모든 SQL문을 mapper태그 안에 작성 -->
 <mapper namespace="boardMapper">
 
+	<!-- ============================== 공지사항 ============================== -->
+	<!-- ============================== 공지사항 ============================== -->
+	<!-- ============================== 공지사항 ============================== -->
+
+	<resultMap type="com.kh.project.board.vo.BoardNoticeVO" id="boardNotice">
+		<id column="BOARD_NUM_NOTICE" property="boardNumNotice" />
+		<result column="TITLE_NOTICE" property="titleNotice" />
+		<result column="CONTENT_NOTICE" property="contentNotice" />
+		<result column="CREATE_DATE_NOTICE" property="createDateNotice" />
+		<result column="WRITER_NOTICE" property="writerNotice" />
+		<result column="READ_CNT_NOTICE" property="readCntNotice" />
+		<result column="FILE_NAME_NOTICE" property="fileNameNotice" />
+		<result column="BOARD_PW_NOTICE" property="boardPwNotice" />
+	</resultMap>
+
+
+
+	<!-- 공지사항 목록 조회 -->
+	<select id="selectBoardNoticeList" resultMap="boardNotice">
+		SELECT BOARD_NUM_NOTICE
+		, TITLE_NOTICE
+		, CONTENT_NOTICE
+		, TO_CHAR(CREATE_DATE_NOTICE, 'YYYY.MM.DD') AS CREATE_DATE_NOTICE
+		, WRITER_NOTICE
+		, READ_CNT_NOTICE
+		, BOARD_PW_NOTICE
+		FROM BOARD_NOTICE
+		<!-- <if test="searchValue != null and !searchValue.equals('')"> 느낌표는 반대를 뜻한다, 홀따옴표 두개를 붙여 쓰면 공란으로 인씩 -->
+		<!-- WHERE UPPER(${searchKeyword}) LIKE '%'||UPPER(#{searchValue})||'%' 검색할 타이틀도 대문자(UPPER)로 변경 검색되는 글자도 대문자로 변경 후 검색 하면 대문자끼리 검색 -->
+		<!-- $와 #의 차이 ${자바} = 자바 #{자바} = '자바' -->
+		<!-- 컬럼명을 사용할때는 $를 사용 해야된다 -->
+		<!-- </if> -->
+		ORDER BY BOARD_NUM_NOTICE DESC
+	</select>
+
+
+
+	<!-- 공지사항 상세 목록 조회 -->
+	<select id="selectBoardNoticeDetail" resultMap="boardNotice">
+		SELECT BOARD_NUM_NOTICE
+		, TITLE_NOTICE
+		, CONTENT_NOTICE
+		, TO_CHAR(CREATE_DATE_NOTICE, 'YYYY.MM.DD') AS CREATE_DATE_NOTICE
+		, WRITER_NOTICE
+		, FILE_NAME_NOTICE
+		FROM BOARD_NOTICE
+		WHERE BOARD_NUM_NOTICE = #{boardNumNotice}
+	</select>
+
+
+
+	<!-- 공지사항 글 쓰기 -->
+	<insert id="insertBoardNotice">
+		INSERT INTO BOARD_NOTICE (
+		BOARD_NUM_NOTICE
+		, TITLE_NOTICE
+		, WRITER_NOTICE
+		, CONTENT_NOTICE
+		<if test="fileNameNotice != null and !fileNameNotice.equals('')">
+			, FILE_NAME_NOTICE
+		</if>
+		<if test="boardPwNotice != null and !boardPwNotice.equals('')">
+			, BOARD_PW_NOTICE
+		</if>
+		) VALUES (
+		(SELECT NVL(MAX(BOARD_NUM_NOTICE), 0) + 1 FROM BOARD_NOTICE)
+		, #{titleNotice}
+		, #{writerNotice}
+		, #{contentNotice}
+		<if test="fileNameNotice != null and !fileNameNotice.equals('')">
+			, #{fileNameNotice}
+		</if>
+		<if test="boardPwNotice != null and !boardPwNotice.equals('')">
+			, #{boardPwNotice}
+		</if>
+		)
+	</insert>
+
+
+
+	<!-- 조회수 증가 -->
+	<update id="updateReadCntNotice">
+		UPDATE BOARD_NOTICE
+		SET
+		READ_CNT_NOTICE = READ_CNT_NOTICE + 1
+		WHERE BOARD_NUM_NOTICE = #{boardNumNotice}
+	</update>
+
+
+
+	<!-- 공지사항 글 수정 -->
+	<update id="updateBoardNotice">
+		UPDATE BOARD_NOTICE
+		SET
+		TITLE_NOTICE = #{titleNotice}
+		, CONTENT_NOTICE = #{contentNotice}
+		<if test="fileNameNotice != null and !fileNameNotice.equals('')">
+			, FILE_NAME_NOTICE = #{fileNameNotice}
+		</if>
+		WHERE BOARD_NUM_NOTICE = #{boardNumNotice}
+	</update>
+
+
+
+	<!-- 공지사항 글 삭제 -->
+	<delete id="deleteBoardNotice">
+		DELETE BOARD_NOTICE
+		WHERE BOARD_NUM_NOTICE = #{boardNumNotice}
+	</delete>
+
+
+
+
+
+	<!-- ============================== 자유게시판 ============================== -->
+	<!-- ============================== 자유게시판 ============================== -->
+	<!-- ============================== 자유게시판 ============================== -->
+
+	<resultMap type="com.kh.project.board.vo.BoardFreeVO" id="boardFree">
+		<id column="BOARD_NUM_FREE" property="boardNumFree" />
+		<result column="TITLE_FREE" property="titleFree" />
+		<result column="CONTENT_FREE" property="contentFree" />
+		<result column="CREATE_DATE_FREE" property="createDateFree" />
+		<result column="WRITER_FREE" property="writerFree" />
+		<result column="READ_CNT_FREE" property="readCntFree" />
+		<result column="FILE_NAME_FREE" property="fileNameFree" />
+		<result column="BOARD_PW_FREE" property="boardPwFree" />
+	</resultMap>
+
+
+
+
+
+
+
+
+
+
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
