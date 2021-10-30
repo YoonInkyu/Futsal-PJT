@@ -165,7 +165,6 @@
 		WHERE M.MEMBER_CODE  = MB.MEMBER_CODE(+)
         AND M.MEMBER_CODE = #{memberCode}
 	</select>
-	
 	<!-- 멤버 블랙리스트 삭제 -->
 	<delete id="deleteMemberBlack">
 		DELETE MEMBER_BLACKLIST 

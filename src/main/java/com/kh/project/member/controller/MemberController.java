@@ -26,7 +26,6 @@ import com.kh.project.member.service.MemberService;
 import com.kh.project.member.vo.MemberBlacklistVO;
 import com.kh.project.member.vo.MemberImgVO;
 import com.kh.project.member.vo.MemberVO;
-import com.kh.project.team.vo.TeamLogoImgVO;
 
 @Controller
 @RequestMapping("/member")
@@ -179,6 +178,7 @@ public class MemberController {
 		model.addAttribute("black",memberService.memberBlackList(memberCode));
 		return  "member/member_blacklist";
 	}
+
 	//멤버블랙 삭제하기
 	@GetMapping("/deleteMemberBlack")
 	public String deleteMemberBlack(HttpSession session, Model model, String blackmemberCode) {

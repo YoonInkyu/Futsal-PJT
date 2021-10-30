@@ -32,7 +32,7 @@
 							</tr>
 						</thead>
 						<tbody>
-						<c:forEach items="${black }" var="blackInfo">
+						<c:forEach items="${black }" var="blackInfo" varStatus="status">
 							<c:if test="${blackInfo.blackName != null }">
 							<tr>
 							<c:if test="${not empty blackInfo.blackImg }">
@@ -45,8 +45,8 @@
 								<td>${blackInfo.blackDate }</td>
 								<td>
 									<!-- Button trigger modal -->
-									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Detail</button> <!-- Modal -->
-									<div class="modal fade  " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop${status.index }">Detail</button> <!-- Modal -->
+									<div class="modal fade  " id="staticBackdrop${status.index }" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
@@ -65,8 +65,8 @@
 														<label for="floatingTextarea2" >${blackInfo.blackComment }</label>
 													</div>
 												</div>
-												<div class="modal-footer d-flex justify-content-between" onclick="location.href='/member/deleteMemberBlack?blackmemberCode=${blackInfo.blackmemberCode}';">
-													<button type="button" class="btn btn-outline-danger">블럭 삭제</button>
+												<div class="modal-footer d-flex justify-content-between">
+													<button type="button" class="btn btn-outline-danger" onclick="location.href='/member/deleteMemberBlack?blackmemberCode=${blackInfo.blackmemberCode}';">블럭 삭제</button>
 													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 												</div>
 											</div>
@@ -75,12 +75,17 @@
 								</td>
 							</tr>
 							</c:if>
+							<c:if test="${blackInfo.blackName == null }">
+								<tr>
+									<td colspan="4" style="text-align: center;">등록된 블랙리스트가 없습니다.</td>
+								</tr>
+							</c:if>
 						</c:forEach>
 						</tbody>
 					</table>
 				</div>
 			</div>
-			<div class="row mt-5">
+<!-- 			<div class="row mt-5">
 				<div class="col">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center m-0 p-0">
@@ -94,7 +99,7 @@
 						</ul>
 					</nav>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </body>
