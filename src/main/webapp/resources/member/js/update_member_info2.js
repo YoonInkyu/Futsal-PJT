@@ -1,15 +1,17 @@
 //화면 로딩 후 바로 실행
 $(document).ready(function(){
-   $(document).on('keyup', '#tell', function() { 
+	$(document).on('keyup', '.tells', function() { 
 		//휴대번호 정규식
-		var tellJ = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
+		var tell1J = /^01[0||1||6||7||8||9]{1}$/;
+		var tell2J = /^[0-9]{3,4}$/;
+		var tell3J = /^[0-9]{4}$/;
 	   
-		if(tellJ.test($('#tell').val())){
+		if(tell1J.test($('#tell1').val()) && tell2J.test($('#tell2').val()) && tell3J.test($('#tell3').val())){
 		   $('#tellJDiv').text('');
-		   $('#joinButt').removeClass('disabled');
+		   $('#updateButt').removeClass('disabled');
 	   }else{
 		   $('#tellJDiv').text('휴대전화 번호를 확인하세요.');
-		   $('#joinButt').addClass('disabled');
+		   $('#updateButt').addClass('disabled');
 	   }
    });
    $(document).on('keyup', '#memberName', function() {
@@ -17,10 +19,10 @@ $(document).ready(function(){
 	   var nameJ = /^[가-힣]{2,6}$/;
 	   if(nameJ.test($('#memberName').val())){
 		   $('#nameJDiv').text('');
-		   $('#joinButt').removeClass('disabled');
+		   $('#updateButt').removeClass('disabled');
 	   }else{
 		   $('#nameJDiv').text('한글 2~6자리 입력');
-		   $('#joinButt').addClass('disabled');
+		   $('#updateButt').addClass('disabled');
 	   }
    });
    $(document).on('keyup', '#memberPw', function() { 
@@ -28,7 +30,7 @@ $(document).ready(function(){
 	   var pwJ = /^[A-Za-z0-9]{4,12}$/;
 	   if(pwJ.test($('#memberPw').val())){
 		   $('#pwJDiv').text('');
-		   $('#joinButt').removeClass('disabled');
+		   $('#changePwButt').removeClass('disabled');
 	   }else{
 		   $('#pwJDiv').text('숫자 및 영문 4~12자리 입력');
 		   $('#changePwButt').addClass('disabled');
@@ -45,7 +47,7 @@ $(document).ready(function(){
 			$('#pwCheckDiv').text('비밀번호를 확인하시오.');
 			$('#changePwButt').addClass('disabled');
 		}
-   });
+  });
    //모달창 닫으면
    var changePwModal = document.getElementById('changePwModal');
    //var loginModal = $('#loginModal');위에거가 이거랑 같은거임
@@ -55,6 +57,8 @@ $(document).ready(function(){
       $('#memberPw').text('');
       $('#memberPwCheck').text('');
       $('.modal input[type="password"]').val('');
+      $('#pwCheckDiv').text('');
+      $('#pwJDiv').text('');
    })
 });
 //함수 선언 영역
@@ -107,7 +111,6 @@ $(document).ready(function(){
                alert('실패');
             }
       });
-		
 	 });
 	
 })(jQuery);

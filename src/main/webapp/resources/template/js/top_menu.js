@@ -7,22 +7,22 @@ $(document).ready(function(){
 (function($){
 	//ID 중복 체크
 	checkLogin = function(){
-		var memberId = $('#memberId').val();
-		var memberPw = $('#memberPw').val();
+		var loginId = $('#loginId').val();
+		var loginPw = $('#loginPw').val();
 
 		$.ajax({
             url: '/member/checkLogin', //요청경로
             type: 'post',
-            data:{'memberId':memberId, 'memberPw':memberPw}, //필요한 데이터
+            data:{'loginId':loginId, 'loginPw':loginPw}, //필요한 데이터
             success: function(result) {
             	if(result){
             		$('#loginForm').submit();
             	}
             	else{
             		alert('아이디와 비밀번호가 일치하지 않습니다.');
-            		$('#memberId').val('');
-            		$('#memberPw').val('');
-            		$('#memberId').focus();
+            		$('#loginId').val('');
+            		$('#loginPw').val('');
+            		$('#loginId').focus();
             	}
             },
             error: function(){

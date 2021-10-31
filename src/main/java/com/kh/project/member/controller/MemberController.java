@@ -104,10 +104,10 @@ public class MemberController {
 	}
 	@ResponseBody
 	@PostMapping("/checkLogin")
-	public boolean checkLogin(String memberId, String memberPw) {
+	public boolean checkLogin(String loginId, String loginPw) {
 		MemberVO memberVO = new MemberVO();
-		memberVO.setMemberId(memberId);
-		memberVO.setMemberPw(memberPw);
+		memberVO.setMemberId(loginId);
+		memberVO.setMemberPw(loginPw);
 		boolean result = memberService.checkLogin(memberVO);
 		return result;
 	}
@@ -145,7 +145,7 @@ public class MemberController {
 		
 		memberVO.setUpdateTells(updateTells);
 		model.addAttribute("member",memberVO);
-		return  "member/update_member_info";
+		return  "member/update_member_info2";
 	}
 	//회원정보 수정하기
 	@PostMapping("/updateMemberInfo")

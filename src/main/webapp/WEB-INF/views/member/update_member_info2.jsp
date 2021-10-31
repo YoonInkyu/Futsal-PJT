@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/update_member_info.js?ver=1"></script>
+<script type="text/javascript" src="/resources/member/js/update_member_info2.js?ver=1"></script>
 </head>
 <body>
 	<form action="/member/updateMemberInfo" method="post" enctype="multipart/form-data">
@@ -110,7 +110,7 @@
 						</div>
 						<div class="d-grid gap-2">
 						<input type="hidden" value="${member.memberCode }" name="memberCode">
-							<input class="btn btn-primary" type="submit" value="수정 하기" id="joinButt">
+							<input class="btn btn-primary" type="submit" value="수정 하기" id="updateButt">
 						</div>
 					<div style="height: 10rem;"></div>
 				</div>

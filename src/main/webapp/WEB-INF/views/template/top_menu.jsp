@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/top_menu.js?ver=1"></script>
+<script type="text/javascript" src="/resources/template/js/top_menu.js?ver=5"></script>
 <style>
 /* .sticky { */
 /* 	position: fixed; */
@@ -99,7 +99,6 @@
 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownUser1">
 							<li><a class="dropdown-item" href="/member/myPage">마이페이지</a></li>
 							<li><a class="dropdown-item" href="/member/goMemberBlacklist">블랙리스트 관리</a></li>
-							<li><a class="dropdown-item" href="#">입력 3</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="/member/logout">LOGOUT</a></li>
 						</ul>
@@ -126,11 +125,11 @@
       <div class="modal-body">
       <form action="/member/login" method="post" id="loginForm">
         <div class="form-floating mb-3">
-  			<input type="text" class="form-control" id="memberId" placeholder="name@example.com" name="memberId" required>
+  			<input type="text" class="form-control" id="loginId" placeholder="name@example.com" name="memberId" required>
   			<label for="floatingInput">아 이 디</label>
 		</div>
 		<div class="form-floating">
-  			<input type="password" class="form-control" id="memberPw" placeholder="Password" name="memberPw" required>
+  			<input type="password" class="form-control" id="loginPw" placeholder="Password" name="memberPw" required>
   			<label for="floatingPassword">비 밀 번 호</label>
 		</div>
 		<div class="col-12 d-grid mt-3">
