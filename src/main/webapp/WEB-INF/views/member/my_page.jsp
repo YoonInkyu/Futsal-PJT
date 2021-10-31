@@ -7,6 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<script type="text/javascript">
+	    function recruitInfo(mercBoardCode){
+			$(".modal-content").load("/mercenary/recruitDetail?mercBoardCode=" + mercBoardCode);
+		}
+	    $(document).ready(function() {
+	    	var recruitDetailModal = document.getElementById('recruitDetailModal');
+	    	//모달 닫히면 페이지 리로드
+	    	//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
+	    	recruitDetailModal.addEventListener('hidden.bs.modal', function (event) {
+	    		location.reload();
+	    	})
+	    });
+	</script>
 </head>
 <body>
 	<div class="m-5">
@@ -45,7 +58,7 @@
 		</div>
 	</section>
 	<div class="m-5">
-		<h1 style="border-bottom: 3px solid gray;">나의 게시글로 하기(수정필요함)</h1>
+		<h1 style="border-bottom: 3px solid gray;">나의 최신 게시글</h1>
 	</div>
 <!-- 	승수씨 데이터 작업 부탁드립니다. 팀소속이 있을때 나올 화면 -->
 
@@ -55,84 +68,58 @@
 
 
 	<section class="about-me-section p-3 p-lg-5 theme-bg-light">
-
+		<div class="m-5">
+		<h3>용병</h3>
+		</div>
 		<div class="container">
-
 			<div class="profile-teaser row">
-
-				<div class="col-md-5 col-lg-5 align-self-center" style="width: 300px;">
-					<img class="profile-image img-fluid mb-3 mb-lg-0 me-md-0" src="/resources/img/common/1.png" alt="">
-				</div>
-
-				<div class="col-2"></div>
-
-				<div class="col-5">
-
-					<h1 class="name font-weight-bold mb-3">팀 명 : 울산 FC</h1>
-
-					<div class="mx-3 mb-5">
-						<h4>팀 내 포지션 : 공 격 수</h4>
-					</div>
-
-					<div class="mx-5 mb-4">
-						<div class="mb-3">지 역 : 울산</div>
-						<div class="mb-3">랭 킹 : 1 위</div>
-						<div class="mb-3">인 원 : 20 명</div>
-					</div>
-
-
-					<div class="form-floating">
-						<textarea name="teamIntro" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px" readonly></textarea>
-						<label for="floatingTextarea2">팀 소개</label>
-					</div>
-
-				</div>
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th scope="col">구분</th>
+							<th scope="col">지역</th>
+							<th scope="col">매치일자</th>
+							<th scope="col">신청 인원</th>
+							<th scope="col">작성자</th>
+							<th scope="col">작성일자</th>
+							<th scope="col">신청</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${MymercBoardList }" var="mercBoard" begin="0" end="4">
+						<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">
+							<td>${mercBoard.mercBoardSort }</td>
+							<td>${mercBoard.mercBoardLocation }</td>
+							<td>${mercBoard.mercBoardDate } ${mercBoard.mercBoardStartTime } ~ ${mercBoard.mercBoardEndTime }</td>
+							<td>${mercBoard.mercBoardApplyNumber }명</td>
+							<td>${mercBoard.mercBoardWriter }</td>
+							<td>${mercBoard.mercBoardRegdate }</td>
+							<c:choose>
+								<c:when test="${mercBoard.mercBoardPossible eq '1' }">
+									<td><button type="button" class="btn btn-info">신청</button></td>
+								</c:when>
+								<c:otherwise>
+									<td><button type="button" class="btn btn-danger">마감</button></td>
+								</c:otherwise>
+							</c:choose>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 
 			</div>
 
 		</div>
 
 	</section>
-
-
-
-	<%-- </c:when> --%>
-
-	<%-- <c:otherwise> --%>
-
-
-
-
-
-
-<!-- 팀 소속이 없을때 이미지 및 팀 찾기 -->
-
-
-	<section class="about-me-section p-3 p-lg-5 theme-bg-light">
-
-		<div class="container">
-
-			<div class="profile-teaser row ">
-
-				<div class="align-self-center mb-5 shadow-lg p-3 mb-5 bg-body rounded">
-					<img class="profile-image img-fluid mb-3 mb-lg-0 me-md-0 rounded-lg" src="/resources/img/common/main3.jpg" alt="">
-				</div>
-
+	
+	
+		<!-- tr 클릭시 상세보기 모달창이고, mercenary_recruit_detail.jsp을 불러와서 div class=content안에 내용 넣음 --> 
+	<div class="modal fade" tabindex="-1" id="recruitDetailModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content mercDetail">
 			</div>
-
-			<div class="row">
-
-				<div class="col-6 mx-auto d-grid">
-					<a class="btn btn-outline-success" href="/team/selectTeamList">팀 찾기</a>
-				</div>
-
-			</div>
-
-
 		</div>
-
-	</section>
-	<%-- </c:otherwise> --%>
-	<%-- </c:choose> --%>
+	</div>
 </body>
 </html>

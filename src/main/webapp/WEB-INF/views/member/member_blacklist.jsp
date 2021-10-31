@@ -57,9 +57,11 @@
 													<p>이름 : ${blackInfo.blackName }</p>
 													<p>포지션 : ${blackInfo.blackPosition }</p>
 													<p>블랙등록일 : ${blackInfo.blackDate }</p>
+													<c:if test="${not empty blackInfo.blackTeam }">
 													<p>팀 명 : ${blackInfo.blackTeam }</p>
 													<p>팀 활동지역 : ${blackInfo.blackTeamLocation }</p>
 													<p>팀 랭킹 : </p>
+													</c:if>
 													<div class="form-floating">
 														<textarea name="teamIntro" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px" readonly></textarea>
 														<label for="floatingTextarea2" >${blackInfo.blackComment }</label>

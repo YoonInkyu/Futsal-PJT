@@ -44,6 +44,8 @@
 			, MERC_BOARD_START_TIME
 			, MERC_BOARD_END_TIME
 			, MERC_BOARD_LOCATION
+			, MEMBER_CODE
+			, TEAM_CODE
 		) VALUES (
 			(SELECT 'MERC_BD_CODE_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MERC_BOARD_CODE, 14, 4))), 0)+1, 4, '0') FROM MERCENARY_BOARD)
 			, #{mercBoardSort}
@@ -54,6 +56,8 @@
 			, #{mercBoardStartTime}
 			, #{mercBoardEndTime}
 			, #{mercBoardLocation}
+			, #{memberCode}
+			, #{teamCode}
 		)
 	</insert>
 	
@@ -98,7 +102,7 @@
 			, MERC_BOARD_APPLYNUMBER
 		FROM MERCENARY_BOARD 
 		WHERE MEMBER_CODE = #{memberCode}
-		ORDER BY MERC_BOARD_CODE DESC
+		ORDER BY MERC_BOARD_DATE DESC
 	</select>
 	<!-- 용병 구인구직 상세보기 -->
 	<select id="selectMercDetail" resultMap="mercenary">

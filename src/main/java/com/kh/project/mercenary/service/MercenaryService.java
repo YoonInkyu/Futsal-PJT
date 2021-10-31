@@ -32,6 +32,6 @@ public interface MercenaryService {
 	public int updateResponse(MercenaryListVO mercenaryListVO);
 	
 	//나의 용병 게시글 보기
-	public MercenaryVO MyMercBoard(String memberCode);
+	public List<MercenaryVO> MyMercBoard(String memberCode);
 	
 }

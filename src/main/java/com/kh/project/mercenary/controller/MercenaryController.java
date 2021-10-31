@@ -67,6 +67,8 @@ public class MercenaryController {
 	@PostMapping("/recruitReg")
 	public String recruitRegBoard(HttpSession session, MercenaryVO mercenaryVO, Model model) {
 		//로그인한 사람 이름과 팀코드 가져와서 VO에 set
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+		mercenaryVO.setMemberCode(memberCode);
 		String memberName = ((MemberVO)session.getAttribute("loginInfo")).getMemberName();
 		mercenaryVO.setMercBoardWriter(memberName);
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();

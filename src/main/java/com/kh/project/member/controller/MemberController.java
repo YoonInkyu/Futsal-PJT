@@ -26,12 +26,15 @@ import com.kh.project.member.service.MemberService;
 import com.kh.project.member.vo.MemberBlacklistVO;
 import com.kh.project.member.vo.MemberImgVO;
 import com.kh.project.member.vo.MemberVO;
+import com.kh.project.mercenary.service.MercenaryService;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 	@Resource(name = "memberService")
 	private MemberService memberService;
+	@Resource(name = "mercenaryService")
+	private MercenaryService mercenaryService;
 	
 	//회원가입 페이지로 이동
 	@GetMapping("/goJoin")
@@ -126,6 +129,8 @@ public class MemberController {
 	public String mypage(HttpSession session, Model model) {
 		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
 		model.addAttribute("member",memberService.myPage(memberCode));
+		model.addAttribute("MymercBoardList",mercenaryService.MyMercBoard(memberCode));
+		
 		return  "member/my_page";
 	}
 	//회원정보 수정페이지 가기

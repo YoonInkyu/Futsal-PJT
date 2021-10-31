@@ -68,8 +68,8 @@ public class MercenaryServiceImpl implements MercenaryService{
 	}
 	//나의 용병 게시글 보기
 	@Override
-	public MercenaryVO MyMercBoard(String memberCode) {
-		return sqlSession.selectOne("mercenaryMapper.MyMercBoard", memberCode);
+	public List<MercenaryVO> MyMercBoard(String memberCode) {
+		return sqlSession.selectList("mercenaryMapper.MyMercBoard", memberCode);
 	}
 
 	
