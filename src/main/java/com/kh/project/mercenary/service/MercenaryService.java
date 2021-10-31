@@ -14,7 +14,10 @@ public interface MercenaryService {
 	public int insertMercBoard(MercenaryVO mercenaryVO);
 	
 	//용병 구인 게시글 리스트 조회
-	public List<MercenaryVO> selectMercBoardList();
+	public List<MercenaryVO> selectMercBoardList(MercenaryVO mercenaryVO);
+	
+	//게시글 수 조회
+	public int selectMercCnt(MercenaryVO mercenaryVO);
 	
 	//용병 구인 상세보기
 	public MercenaryVO selectMercDetail(String mercBoardCode);

@@ -71,7 +71,7 @@ $(document).ready(function() {
 	        	str += '<input type="number" name="matchResultAwayteamScore" aria-label="Last name" class="form-control" min="0" value="0">';
 	        	$('.inputScore').append(str);
 	        	
-	        	$('.formAt').attr('action', '/match/insertResult?matchCode=' + result.matchCode)
+	        	$('.formAt').attr('action', '/match/insertResult?matchCode=' + result.matchCode + '&teamCode=' + result.teamCode + '&teamCodeAway=' + result.teamCodeAway)
 	        	$('.matchResult').val('결과 등록')
 	        	$('.matchResult').attr('type', 'submit')
 	        	

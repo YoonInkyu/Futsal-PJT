@@ -1,6 +1,8 @@
 package com.kh.project.match.vo;
 
-public class MatchVO {
+import com.kh.project.common.vo.PageVO;
+
+public class MatchVO extends PageVO {
 	private String matchCode;
 	private String teamCode;
 	private String teamCodeAway;
@@ -14,8 +16,35 @@ public class MatchVO {
 	private String matchLocation;
 	private String matchApplyNum;
 	private String teamName;
+	private String rankWin;
+	private String rankDraw;
+	private String rankLose;
+	private String rankTotalScore;
 	
-	
+	public String getRankWin() {
+		return rankWin;
+	}
+	public void setRankWin(String rankWin) {
+		this.rankWin = rankWin;
+	}
+	public String getRankDraw() {
+		return rankDraw;
+	}
+	public void setRankDraw(String rankDraw) {
+		this.rankDraw = rankDraw;
+	}
+	public String getRankLose() {
+		return rankLose;
+	}
+	public void setRankLose(String rankLose) {
+		this.rankLose = rankLose;
+	}
+	public String getRankTotalScore() {
+		return rankTotalScore;
+	}
+	public void setRankTotalScore(String rankTotalScore) {
+		this.rankTotalScore = rankTotalScore;
+	}
 	public String getTeamName() {
 		return teamName;
 	}

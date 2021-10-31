@@ -18,6 +18,10 @@
 		<result column="MATCH_LOCATION" 				property="matchLocation"/>
 		<result column="MATCH_APPLYNUM" 				property="matchApplyNum"/>
 		<result column="TEAM_NAME"	 					property="teamName"/>
+		<result column="RANK_WIN"	 					property="rankWin"/>
+		<result column="RANK_DRAW"	 					property="rankDraw"/>
+		<result column="RANK_LOSE"	 					property="rankLose"/>
+		<result column="RANK_TOTAL_SCORE"	 			property="rankTotalScore"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.match.vo.MatchManageVO" id="matchManage">
@@ -63,16 +67,67 @@
 	<!-- 매치 리스트 조회 -->
 	<select id="selectMatchList" resultMap="match">
 		SELECT MATCH_CODE
-			, MATCH_LOCATION
-			, MATCH_DATE
-			, MATCH_START_TIME
-			, MATCH_END_TIME
-			, MATCH_APPLYNUM
-			, MATCH_WRITER
-			, TO_CHAR(MATCH_REGDATE, 'YYYY-MM-DD') AS MATCH_REGDATE
-			, MATCH_POSSIBLE
+		    , MATCH_LOCATION
+		    , MATCH_DATE
+		    , MATCH_START_TIME
+		    , MATCH_END_TIME
+		    , MATCH_APPLYNUM
+		    , MATCH_WRITER
+		    , MATCH_REGDATE
+		    , MATCH_POSSIBLE
+		    , ROW_NUM
+		FROM (
+		    SELECT MATCH_CODE
+		        , MATCH_LOCATION
+		        , MATCH_DATE
+		        , MATCH_START_TIME
+		        , MATCH_END_TIME
+		        , MATCH_APPLYNUM
+		        , MATCH_WRITER
+		        , MATCH_REGDATE
+		        , MATCH_POSSIBLE
+		        , ROWNUM AS ROW_NUM
+		    FROM (
+		            SELECT MATCH_CODE
+		                , MATCH_LOCATION
+		                , MATCH_DATE
+		                , MATCH_START_TIME
+		                , MATCH_END_TIME
+		                , MATCH_APPLYNUM
+		                , MATCH_WRITER
+		                , TO_CHAR(MATCH_REGDATE, 'YYYY-MM-DD') AS MATCH_REGDATE
+		                , MATCH_POSSIBLE
+		            FROM MATCH
+		            WHERE 1 = 1
+		            <if test="searchLocation != null and !searchLocation.equals('')">
+		           	 	AND MATCH_LOCATION = '${searchLocation}'
+		            </if>
+		            <if test="searchKeyword != null and !searchKeyword.equals('')">
+		            	AND MATCH_POSSIBLE = '${searchKeyword}'
+		            </if>
+		            <if test="searchValue != null and !searchValue.equals('')">
+		           		AND MATCH_WRITER LIKE '%'||#{searchValue}||'%'
+		            </if>
+		            ORDER BY MATCH_CODE DESC
+		        )
+		)
+		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
+	</select>
+	
+	<!-- 게시글 수 -->
+	<select id="selectMatchCnt" resultType="int">
+		SELECT COUNT(MATCH_CODE)
 		FROM MATCH
-		ORDER BY MATCH_CODE DESC
+		WHERE 1 = 1
+		<if test="searchLocation != null and !searchLocation.equals('')">
+		 	AND MATCH_LOCATION = '${searchLocation}'
+		</if>
+		<if test="searchKeyword != null and !searchKeyword.equals('')">
+			AND MATCH_POSSIBLE = '${searchKeyword}'
+		</if>
+		<if test="searchValue != null and !searchValue.equals('')">
+			AND MATCH_WRITER LIKE '%'||#{searchValue}||'%'
+		</if>
 	</select>
 	
 	<!-- 매치 상세보기 -->
@@ -153,7 +208,7 @@
 		WHERE MATCH_CODE = #{matchCode}
 	</update>
 	
-	<!-- 매치 결과 입력(수정해야 함.) -->
+	<!-- 매치 결과 입력 -->
 	<insert id="insertResult">
 		INSERT INTO MATCH_RESULT (
 			MATCH_RESULT_CODE
@@ -167,6 +222,42 @@
 			, #{matchResultAwayteamScore}
 		)
 	</insert>
+	<!-- 팀 생성할때 랭크 테이블에 팀코드 넣기 -->
+	<!-- 매치 결과에 따라 홈팀 랭크 입력.... DB 프로시저나 함수로 하는게 맞는건가?? -->
+	<update id="updateHomeRank">
+		UPDATE RANK
+		SET
+		RANK_WIN = RANK_WIN + (SELECT COUNT(MATCH_CODE)
+		                        FROM MATCH_RESULT
+		                        WHERE MATCH_RESULT_HOMETEAM_SCORE<![CDATA[>]]>MATCH_RESULT_AWAYTEAM_SCORE
+		                        AND MATCH_CODE = #{matchCode})
+		, RANK_DRAW = RANK_DRAW + (SELECT COUNT(MATCH_CODE)
+		                            FROM MATCH_RESULT
+		                            WHERE MATCH_RESULT_HOMETEAM_SCORE = MATCH_RESULT_AWAYTEAM_SCORE
+		                            AND MATCH_CODE = #{matchCode})
+		, RANK_LOSE = RANK_LOSE + (SELECT COUNT(MATCH_CODE)
+		                            FROM MATCH_RESULT
+		                            WHERE MATCH_RESULT_HOMETEAM_SCORE<![CDATA[<]]>MATCH_RESULT_AWAYTEAM_SCORE
+		                            AND MATCH_CODE = #{matchCode})
+		WHERE TEAM_CODE = #{teamCode}
+	</update>
+	<update id="updateAwayRank">
+		UPDATE RANK
+		SET
+		RANK_WIN = RANK_WIN + (SELECT COUNT(MATCH_CODE)
+		                        FROM MATCH_RESULT
+		                        WHERE MATCH_RESULT_AWAYTEAM_SCORE<![CDATA[>]]>MATCH_RESULT_HOMETEAM_SCORE
+		                        AND MATCH_CODE = #{matchCode})
+		, RANK_DRAW = RANK_DRAW + (SELECT COUNT(MATCH_CODE)
+		                            FROM MATCH_RESULT
+		                            WHERE MATCH_RESULT_AWAYTEAM_SCORE = MATCH_RESULT_HOMETEAM_SCORE
+		                            AND MATCH_CODE = #{matchCode})
+		, RANK_LOSE = RANK_LOSE + (SELECT COUNT(MATCH_CODE)
+		                            FROM MATCH_RESULT
+		                            WHERE MATCH_RESULT_AWAYTEAM_SCORE<![CDATA[<]]>MATCH_RESULT_HOMETEAM_SCORE
+		                            AND MATCH_CODE = #{matchCode})
+		WHERE TEAM_CODE = #{teamCodeAway}
+	</update>
 	
 	<!-- 매치 결과 조회 -->
 	<select id="selectResult" resultMap="matchResult">

@@ -76,18 +76,72 @@
 	<!-- 용병 구인구직 게시글 리스트 조회 -->
 	<select id="selectMercBoardList" resultMap="mercenary">
 		SELECT MERC_BOARD_CODE
-			, MERC_BOARD_SORT
-			, MERC_BOARD_LOCATION
-			, MERC_BOARD_WRITER
-			, MERC_BOARD_POSSIBLE
-			, MERC_BOARD_DATE
-			, MERC_BOARD_START_TIME
-			, MERC_BOARD_END_TIME
-			, TO_CHAR(MERC_BOARD_REGDATE, 'YYYY-MM-DD') AS MERC_BOARD_REGDATE
-			, MERC_BOARD_APPLYNUMBER
-		FROM MERCENARY_BOARD
-		ORDER BY MERC_BOARD_CODE DESC
+            , MERC_BOARD_SORT
+            , MERC_BOARD_LOCATION
+            , MERC_BOARD_WRITER
+            , MERC_BOARD_POSSIBLE
+            , MERC_BOARD_DATE
+            , MERC_BOARD_START_TIME
+            , MERC_BOARD_END_TIME
+            , MERC_BOARD_REGDATE
+            , MERC_BOARD_APPLYNUMBER
+		    , ROW_NUM
+		FROM (
+		    SELECT MERC_BOARD_CODE
+                , MERC_BOARD_SORT
+                , MERC_BOARD_LOCATION
+                , MERC_BOARD_WRITER
+                , MERC_BOARD_POSSIBLE
+                , MERC_BOARD_DATE
+                , MERC_BOARD_START_TIME
+                , MERC_BOARD_END_TIME
+                , MERC_BOARD_REGDATE
+                , MERC_BOARD_APPLYNUMBER
+		        , ROWNUM AS ROW_NUM
+		    FROM (
+		            SELECT MERC_BOARD_CODE
+                        , MERC_BOARD_SORT
+                        , MERC_BOARD_LOCATION
+                        , MERC_BOARD_WRITER
+                        , MERC_BOARD_POSSIBLE
+                        , MERC_BOARD_DATE
+                        , MERC_BOARD_START_TIME
+                        , MERC_BOARD_END_TIME
+                        , TO_CHAR(MERC_BOARD_REGDATE, 'YYYY-MM-DD') AS MERC_BOARD_REGDATE
+                        , MERC_BOARD_APPLYNUMBER
+                    FROM MERCENARY_BOARD
+		            WHERE 1 = 1
+		            <if test="searchLocation != null and !searchLocation.equals('')">
+		           	 	AND MERC_BOARD_LOCATION = '${searchLocation}'
+		            </if>
+		            <if test="searchKeyword != null and !searchKeyword.equals('')">
+		            	AND MERC_BOARD_POSSIBLE = '${searchKeyword}'
+		            </if>
+		            <if test="searchValue != null and !searchValue.equals('')">
+		           		AND MERC_BOARD_WRITER LIKE '%'||#{searchValue}||'%'
+		            </if>
+		            ORDER BY MERC_BOARD_CODE DESC
+		        )
+		)
+		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
 	</select>
+	
+	<!-- 게시글 수 -->
+	<select id="selectMercCnt" resultType="int">
+		SELECT COUNT(MERC_BOARD_CODE)
+		FROM MERCENARY_BOARD
+		WHERE 1 = 1
+		<if test="searchLocation != null and !searchLocation.equals('')">
+		 	AND MERC_BOARD_LOCATION = '${searchLocation}'
+		</if>
+		<if test="searchKeyword != null and !searchKeyword.equals('')">
+			AND MERC_BOARD_POSSIBLE = '${searchKeyword}'
+		</if>
+		<if test="searchValue != null and !searchValue.equals('')">
+			AND MERC_BOARD_WRITER LIKE '%'||#{searchValue}||'%'
+		</if>
+	</select>
+	
 	<!-- 나의 용병 구인구직 게시글보기-->
 	<select id="MyMercBoard" resultMap="mercenary">
 		SELECT MERC_BOARD_CODE
@@ -104,6 +158,7 @@
 		WHERE MEMBER_CODE = #{memberCode}
 		ORDER BY MERC_BOARD_DATE DESC
 	</select>
+	
 	<!-- 용병 구인구직 상세보기 -->
 	<select id="selectMercDetail" resultMap="mercenary">
 		SELECT *

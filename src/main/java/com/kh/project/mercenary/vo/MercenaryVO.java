@@ -1,9 +1,11 @@
 package com.kh.project.mercenary.vo;
 
+import com.kh.project.common.vo.PageVO;
+
 // 윤인규, 1020 작성
 // 윤인규, 1023 변수 추가(각각 Date, Time 데이터 DB와 프로젝트에 추가)
 // 수정 윤인규, 1026 구인구직 테이블 합침
-public class MercenaryVO {
+public class MercenaryVO extends PageVO {
 	// 용병 구인구직 변수
 	private String mercBoardCode;
 	private String mercBoardSort;

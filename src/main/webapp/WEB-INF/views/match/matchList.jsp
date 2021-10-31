@@ -63,43 +63,69 @@ $(document).ready(function() {
 		<!-- 검색관련 내용 -->
 		<div class="row mt-5">
 			<div class="col-6 mx-auto m-0 p-0">
-				<div class="row mx-auto">
-					<div class="col-2">
-						<select class="form-select form-select" aria-label=".form-select-lg example" name="searchKeyword">
-							<option selected>지점</option>
-							<option value="서울">서울</option>
-							<option value="대구">대구</option>
-							<option value="대전">대전</option>
-						</select>
+				<form action="/match/matchList" method="post">
+					<div class="row mx-auto">
+						<div class="col-3">
+							<select class="form-select form-select" aria-label=".form-select-lg example" name="searchLocation">
+								<c:if test="${matchVO.searchLocation == null }">
+									<option value="">지역</option>
+									<option value="서울">서울</option>
+									<option value="대구">대구</option>
+									<option value="대전">대전</option>
+								</c:if>
+								<c:if test="${matchVO.searchLocation != null }">
+									<option value="">지역</option>
+									<option value="서울" <c:if test="${matchVO.searchLocation == '서울'}">selected</c:if>>서울</option>
+									<option value="대구" <c:if test="${matchVO.searchLocation == '대구'}">selected</c:if>>대구</option>
+									<option value="대전" <c:if test="${matchVO.searchLocation == '대전'}">selected</c:if>>대전</option>
+								</c:if>
+							</select>
+						</div>
+						<div class="col-3">
+							<select class="form-select form-select" aria-label=".form-select-lg example" name="searchKeyword">
+								<c:if test="${matchVO.searchKeyword == null}">
+									<option value="">신청여부</option>
+									<option value="1">신청</option>
+									<option value="2">마감</option>
+								</c:if>
+								<c:if test="${matchVO.searchKeyword != null}">
+									<option value="">신청여부</option>
+									<option value="1" <c:if test="${matchVO.searchKeyword == '1'}">selected</c:if>>신청</option>
+									<option value="2" <c:if test="${matchVO.searchKeyword == '2'}">selected</c:if>>마감</option>
+								</c:if>
+							</select>
+						</div>
+						<div class="col">
+							<input class="form-control" type="search" placeholder="작성팀 검색" aria-label="Search" name="searchValue" value="${matchVO.searchValue }">
+						</div>
+						<div class="col-1">
+							<button class="btn btn-primary " type="submit">Search</button>
+						</div>
 					</div>
-					<div class="col">
-						<input class="form-control" type="search" placeholder="Search" aria-label="Search" name="searchValue">
-					</div>
-					<div class="col-1">
-						<button class="btn btn-primary " type="submit">Search</button>
-					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 		<!-- 페이징 처리 -->
 		<div class="row mt-5">
 			<div class="col">
 				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center m-0 p-0">
-						<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">6</a></li>
-						<li class="page-item"><a class="page-link" href="#">7</a></li>
-						<li class="page-item"><a class="page-link" href="#">8</a></li>
-						<li class="page-item"><a class="page-link" href="#">9</a></li>
-						<li class="page-item"><a class="page-link" href="#">10</a></li>
-						<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
+					<ul class="pagination justify-content-center">
+						<c:if test="${matchVO.prev eq true}">
+							<li class="page-item">
+								<a class="page-link" href="/match/matchList?nowPage=${matchVO.beginPage - 1 }">Prev</a>
+							</li>
+						</c:if>
+						<c:forEach begin="${matchVO.beginPage }" end="${matchVO.endPage }" var="pageNumber">
+							<li class="page-item <c:if test="${matchVO.nowPage == pageNumber }">active</c:if>">
+								<!-- 여기 href 수정 -->
+								<a class="page-link" href="/match/matchList?nowPage=${pageNumber }&searchLocation=${matchVO.searchLocation}&searchKeyword=${matchVO.searchKeyword}&searchValue=${matchVO.searchValue}">${pageNumber }</a>
+							</li>
+						</c:forEach>
+						<c:if test="${matchVO.next eq true}">
+							<li class="page-item">
+								<a class="page-link" href="/match/matchList?nowPage=${matchVO.endPage + 1 }">Next</a>
+							</li>
+						</c:if>
 					</ul>
 				</nav>
 			</div>

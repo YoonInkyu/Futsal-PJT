@@ -27,8 +27,14 @@ public class MercenaryServiceImpl implements MercenaryService{
 	
 	//용병 구인구직 게시글 리스트 조회
 	@Override
-	public List<MercenaryVO> selectMercBoardList() {
-		return sqlSession.selectList("mercenaryMapper.selectMercBoardList");
+	public List<MercenaryVO> selectMercBoardList(MercenaryVO mercenaryVO) {
+		return sqlSession.selectList("mercenaryMapper.selectMercBoardList", mercenaryVO);
+	}
+	
+	//용병 구인구직 게시글 수 조회
+	@Override
+	public int selectMercCnt(MercenaryVO mercenaryVO) {
+		return sqlSession.selectOne("mercenaryMapper.selectMercCnt", mercenaryVO);
 	}
 	
 	//용병 구인구직 상세보기
@@ -71,6 +77,8 @@ public class MercenaryServiceImpl implements MercenaryService{
 	public List<MercenaryVO> MyMercBoard(String memberCode) {
 		return sqlSession.selectList("mercenaryMapper.MyMercBoard", memberCode);
 	}
+
+	
 
 	
 }

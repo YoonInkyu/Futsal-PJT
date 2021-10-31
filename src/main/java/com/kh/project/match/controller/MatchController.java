@@ -26,8 +26,24 @@ public class MatchController {
 	
 	//매치 리스트 조회(첫화면)
 	@GetMapping("/matchList")
-	public String matchList(Model model) {
-		model.addAttribute("matchList", matchService.selectMatchList());
+	public String matchList(Model model, MatchVO matchVO) {
+		//전체 데이터 수
+		int dataCnt = matchService.selectMatchCnt(matchVO);
+		matchVO.setTotalCnt(dataCnt);
+		//페이징 처리
+		matchVO.setPageInfo();
+		model.addAttribute("matchList", matchService.selectMatchList(matchVO));
+		return "match/matchList";
+	}
+	//검색 조건 사용했을 때 리스트 조회
+	@PostMapping("/matchList")
+	public String matchList2(Model model, MatchVO matchVO) {
+		//전체 데이터 수
+		int dataCnt = matchService.selectMatchCnt(matchVO);
+		matchVO.setTotalCnt(dataCnt);
+		//페이징 처리
+		matchVO.setPageInfo();
+		model.addAttribute("matchList", matchService.selectMatchList(matchVO));
 		return "match/matchList";
 	}
 	//매치 게시글 등록 폼으로 이동
@@ -100,8 +116,15 @@ public class MatchController {
 	
 	//매치 결과 등록
 	@PostMapping("/insertResult")
-	public String insertResult(MatchResultVO matchResultVO) {
-		matchService.insertResult(matchResultVO);
+	public String insertResult(MatchResultVO matchResultVO, MatchVO matchVO) {
+		// 오류는 안나는데, 랭크 update가 안됨... 자바에서 실행된 쿼리 DB에서 그대로 실행되고 업데이트도 됨. WHY?
+		int b = matchService.insertResult(matchResultVO, matchVO);
+		System.out.println("결과랑 랭크입력 했지??");
+		System.out.println(b);
+		//insertResult 쿼리로 한번에 처리
+		//int a = matchService.updateRank(matchVO);
+		//System.out.println("랭크입력 했지??");
+		//System.out.println(a);
 		return "redirect:/match/matchList";
 	}
 

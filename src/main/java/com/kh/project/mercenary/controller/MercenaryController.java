@@ -30,8 +30,25 @@ public class MercenaryController {
 	//용병 구인구직 페이지로 이동
 	@GetMapping("/recruit")
 	public String goMercenaryRecruit(Model model, MercenaryVO mercenaryVO) {
+		//전체 데이터 수
+		int dataCnt = mercenaryService.selectMercCnt(mercenaryVO);
+		mercenaryVO.setTotalCnt(dataCnt);
+		//페이징 처리
+		mercenaryVO.setPageInfo();
 		//구인구직 리스트 셀렉트
-		model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList());
+		model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
+		return "mercenary/mercenary_recruit";
+	}
+	//검색 조건식 사용시 용병 구인구직 리스트 조회
+	@PostMapping("/recruit")
+	public String goMercenaryRecruit2(Model model, MercenaryVO mercenaryVO) {
+		//전체 데이터 수
+		int dataCnt = mercenaryService.selectMercCnt(mercenaryVO);
+		mercenaryVO.setTotalCnt(dataCnt);
+		//페이징 처리
+		mercenaryVO.setPageInfo();
+		//구인구직 리스트 셀렉트
+		model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
 		return "mercenary/mercenary_recruit";
 	}
 	//용병 구인구직 상세보기 (모달)

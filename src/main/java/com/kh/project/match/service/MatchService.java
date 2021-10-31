@@ -12,7 +12,10 @@ public interface MatchService {
 	public int insertMatchBoard(MatchVO matchVO);
 	
 	//매치 게시글 조회
-	public List<MatchVO> selectMatchList();
+	public List<MatchVO> selectMatchList(MatchVO matchVO);
+	
+	//게시글 수 조회
+	public int selectMatchCnt(MatchVO matchVO);
 	
 	//매치 상세보기
 	public MatchVO selectMatchDetail(String matchCode);
@@ -29,9 +32,13 @@ public interface MatchService {
 	//매치 수락
 	public int updateResponse(MatchManageVO matchManageVO);
 	
-	//매치 결과 입력
-	public int insertResult(MatchResultVO matchResultVO);
+	//매치 결과 입력 랭크 입력
+	public int insertResult(MatchResultVO matchResultVO, MatchVO matchVO);
 	
 	//매치 결과 조회
 	public MatchResultVO selectResult(String matchCode);
+	
+	//매치 결과 홈팀 랭크입력
+	//insertResult에서 같이 처리하면 됨.
+	//public int updateRank(MatchVO matchVO);
 }

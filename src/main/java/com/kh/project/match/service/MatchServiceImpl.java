@@ -23,13 +23,19 @@ public class MatchServiceImpl implements MatchService {
 	public int insertMatchBoard(MatchVO matchVO) {
 		return sqlSession.insert("matchMapper.insertMatchBoard", matchVO);
 	}
-
-	//매치 게시글 조회
+	
+	//매치 리스트 조회
 	@Override
-	public List<MatchVO> selectMatchList() {
-		return sqlSession.selectList("matchMapper.selectMatchList");
+	public List<MatchVO> selectMatchList(MatchVO matchVO) {
+		return sqlSession.selectList("matchMapper.selectMatchList", matchVO);
 	}
 	
+	//매치 게시글 수 조회
+	@Override
+	public int selectMatchCnt(MatchVO matchVO) {
+		return sqlSession.selectOne("matchMapper.selectMatchCnt", matchVO);
+	}
+
 	//매치 상세보기
 	@Override
 	public MatchVO selectMatchDetail(String matchCode) {
@@ -66,10 +72,15 @@ public class MatchServiceImpl implements MatchService {
 		return sqlSession.update("matchMapper.updatePossible", matchManageVO);
 	}
 
-	//매치 결과 입력
+	//매치 결과 & 랭크  입력
 	@Override
-	public int insertResult(MatchResultVO matchResultVO) {
-		return sqlSession.insert("matchMapper.insertResult", matchResultVO);
+	public int insertResult(MatchResultVO matchResultVO, MatchVO matchVO) {
+		// 매치 점수 입력
+		sqlSession.insert("matchMapper.insertResult", matchResultVO);
+		// 홈팀 랭크 승무패 입력
+		sqlSession.update("matchMapper.updateHomeRank", matchVO);
+		// 어웨이 랭크 승무패 입력
+		return sqlSession.update("matchMapper.updateAwayRank", matchVO);
 	}
 
 	//매치 결과 조회
@@ -77,6 +88,13 @@ public class MatchServiceImpl implements MatchService {
 	public MatchResultVO selectResult(String matchCode) {
 		return sqlSession.selectOne("matchMapper.selectResult", matchCode);
 	}
+
+	//홈팀 랭킹 입력
+	//@Override
+	//public int updateRank(MatchVO matchVO) {
+	//	sqlSession.update("matchMapper.updateHomeRank", matchVO);
+	//	return sqlSession.update("matchMapper.updateAwayRank", matchVO);
+	//}
 
 	
 	
