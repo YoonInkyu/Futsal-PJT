@@ -40,7 +40,7 @@
 
 						<tr>
 							<th scope="col" width="10%">번호</th>
-							<th scope="col" width="">제목</th>
+							<th scope="col" width="*%">제목</th>
 							<th scope="col" width="15%">작성자</th>
 							<th scope="col" width="20%">작성일자</th>
 							<th scope="col" width="15%">조회</th>
@@ -51,6 +51,7 @@
 					<tbody>
 
 						<c:forEach items="${noticeList }" var="noticeInfo">
+
 							<tr onclick="location.href='/board/goNoticeDetail?boardNumNotice=' + ${noticeInfo.boardNumNotice };">
 								<td>${noticeInfo.boardNumNotice }</td>
 								<td>${noticeInfo.titleNotice }</td>

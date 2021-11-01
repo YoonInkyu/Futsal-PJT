@@ -64,7 +64,7 @@
 
 
 		<!-- 글 내용 -->
-		<div class="row mb-3" style="border-bottom: 1px solid gray; height: 30rem;">${noticeInfo.contentNotice }</div>
+		<div class="row mb-3" style="border-bottom: 1px solid gray; height: 30rem; word-break: break-all;">${noticeInfo.contentNotice }</div>
 
 
 
@@ -107,7 +107,8 @@
 
 							<div class="input-group">
 
-								<span class="input-group-text" id="basic-addon1">댓글 입력</span> <input type="text" class="form-control" name="contentNotice" placeholder="입력..." aria-label="Username" aria-describedby="basic-addon1" required>
+								<span class="input-group-text" id="basic-addon1">댓글 입력</span> 
+								<input type="text" class="form-control" name="contentNotice" placeholder="입력..." aria-label="Username" aria-describedby="basic-addon1" required>
 
 								<button type="submit" class="btn btn-success">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
@@ -125,7 +126,8 @@
 					<c:otherwise>
 
 						<div class="input-group ">
-							<span class="input-group-text" id="basic-addon1">댓글 입력</span> <input type="text" class="form-control" placeholder="로그인을 하셔야 댓글 입력이 가능 합니다." aria-label="Username" aria-describedby="basic-addon1" readonly>
+							<span class="input-group-text" id="basic-addon1">댓글 입력</span> 
+							<input type="text" class="form-control" placeholder="로그인을 하셔야 댓글 입력이 가능 합니다." aria-label="Username" aria-describedby="basic-addon1" readonly>
 
 							<button type="submit" class="btn btn-success">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
@@ -155,7 +157,8 @@
 
 			<!-- 로그인 이미지(이미지 불러 오고 링크 걸어서 정보로 갈수 있게 할 예정) -->
 			<div class="col-3 text-end">
-				<i class="bi bi-camera-fill"></i> <img src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="30%;" height="30%;">
+				<i class="bi bi-camera-fill"></i> 
+				<img src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="30%;" height="30%;">
 			</div>
 
 
