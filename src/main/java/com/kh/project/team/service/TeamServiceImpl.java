@@ -45,8 +45,8 @@ public class TeamServiceImpl implements TeamService{
 	
 	// 팀리스트 조회
 	@Override
-	public List<TeamVO> selectTeamList() {
-		return sqlSession.selectList("teamMapper.selectTeamList");
+	public List<TeamVO> selectTeamList(TeamVO teamVO) {
+		return sqlSession.selectList("teamMapper.selectTeamList", teamVO);
 	}
 	// 나의팀 조회
 	@Override
@@ -59,10 +59,9 @@ public class TeamServiceImpl implements TeamService{
 		sqlSession.update("teamMapper.updateInfo", teamVO);
 		return sqlSession.update("teamMapper.updateImgInfo", teamVO);
 	}
-
+	// 팀삭제
 	@Override
 	public int deleteTeam(String teamCode) {
-		
 		sqlSession.update("teamMapper.deleteTeamImg", teamCode);
 		sqlSession.delete("teamMapper.deleteTeam", teamCode);
 		return sqlSession.update("teamMapper.deleteMemberTeamCode", teamCode);

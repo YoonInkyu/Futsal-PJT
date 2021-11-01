@@ -3,22 +3,40 @@
 <!-- 모든 SQL문을 mapper태그 안에 작성 -->
 <mapper namespace="teamMapper">
 	<resultMap type="com.kh.project.team.vo.TeamVO" id="team">
-		<id column="TEAM_CODE" 						property="teamCode"/>
-		<result column="TEAM_NAME" 					property="teamName"/>
-		<result column="MEMBER_CODE" 				property="memberCode"/>
-		<result column="TEAM_ADMIN" 				property="teamAdmin"/>
-		<result column="TEAM_LOCATION" 				property="teamLocation"/>
-		<result column="TEAM_INTRO" 				property="teamIntro"/>
+		<id column="TEAM_CODE" 							property="teamCode"/>
+		<result column="TEAM_NAME" 						property="teamName"/>
+		<result column="MEMBER_CODE" 					property="memberCode"/>
+		<result column="TEAM_ADMIN" 					property="teamAdmin"/>
+		<result column="TEAM_LOCATION" 					property="teamLocation"/>
+		<result column="TEAM_INTRO" 					property="teamIntro"/>
 		<result column="TEAM_LOGO_IMG_ATTACHED_NAME" 	property="teamLogoImgAttachedName"/>
-		<result column="TEAM_LOGO_IMG_ORIGN_NAME" 	property="teamLogoImgOrignName"/>
-		<result column="TEAM_LOGO_IMG_CODE" 	property="teamLogoImgCode"/>
+		<result column="TEAM_LOGO_IMG_ORIGN_NAME" 		property="teamLogoImgOrignName"/>
+		<result column="TEAM_LOGO_IMG_CODE" 			property="teamLogoImgCode"/>
+		<result column="RANK_TOTAL_SCORE" 				property="rankTotalScore"/>
+		<result column="MEMBERCOUNT" 					property="memberCount"/>
 	</resultMap>
+	
 	<resultMap type="com.kh.project.team.vo.TeamLogoImgVO" id="teamLogoImg">
 		<id column="TEAM_LOGO_IMG_CODE" 				property="teamLogoImgCode"/>
 		<result column="TEAM_LOGO_IMG_ORIGN_NAME" 		property="teamLogoImgOrignName"/>
 		<result column="TEAM_LOGO_IMG_ATTACHED_NAME" 	property="teamLogoImgAttachedName"/>
 		<result column="TEAM_CODE"						property="teamCode"/>
 	</resultMap>
+	
+	<resultMap type="com.kh.project.team.vo.TeamVO" id="teamView">
+		<id column="TEAM_CODE" 						property="teamCode"/>
+		<result column="TEAM_NAME" 					property="teamName" />				
+		<result column="TEAM_INTRO" 				property="teamIntro"/>
+		<result column="TEAM_LOGO_IMG_ORIGN_NAME"	property="teamLogoImgOrignName"/>
+		<result column="RANK_TOTAL_SCORE"			property="rankTotalScore"/>
+		<result column="MEMBER_NAME"				property="memberName"/>
+		<result column="MEMBER_GENDER"				property="memberGender"/>
+		<result column="MEMBER_TELL"				property="memberTell"/>	
+		<result column="TEAM_ADMIN"					property="teamAdmin"/>
+		<result column="MEMBER_IMG_ATTACHED_NAME"	property="memberImgAttachedName"/>
+		<result column="POSITION"					property="position"/>
+	</resultMap>
+
 	
 	<insert id="insertTeam">
 		INSERT INTO TEAM(
@@ -117,8 +135,42 @@
 		, TEAM_ADMIN = '1'
 		WHERE TEAM_CODE = #{teamCode}
 	</update>
-	<!-- <select id="">
+	
+	<!--팀 리스트 조회 -->
+	<select id="selectTeamList" resultMap="teamView">
+	SELECT T.TEAM_CODE
+	    , T.TEAM_NAME
+	    , T.TEAM_INTRO
+	    , TI.TEAM_LOGO_IMG_ORIGN_NAME
+	    , R.RANK_TOTAL_SCORE
+	     , M.MEMBER_NAME
+		 , M.MEMBER_GENDER
+		 , M.MEMBER_TELL
+		 , M.TEAM_ADMIN
+		 , MI.MEMBER_IMG_ATTACHED_NAME 
+		 , M.POSITION
+	    , (SELECT COUNT(INNER_M.MEMBER_CODE) FROM MEMBER INNER_M , TEAM INNER_T
+	        WHERE INNER_T.TEAM_CODE = INNER_M.TEAM_CODE
+	    AND INNER_T.TEAM_CODE = T.TEAM_CODE) AS MEMBERCOUNT     
+		FROM RANK R, TEAM_LOGO_IMG TI, TEAM T ,MEMBER M, MEMBER_IMG MI
+		WHERE T.TEAM_CODE = TI.TEAM_CODE 
+		AND T.TEAM_CODE = R.TEAM_CODE
+        AND T.TEAM_CODE = M. TEAM_CODE
+        AND M.MEMBER_CODE = MI.MEMBER_CODE
+		ORDER BY RANK_TOTAL_SCORE DESC
+	</select>
+	
+	<!-- <select id="selectTeamListMember" resultMap="">
 		SELECT 
+		    M.MEMBER_NAME
+		    , M.MEMBER_GENDER
+		    , M.MEMBER_TELL
+		    , M.TEAM_ADMIN
+		    , MI.MEMBER_IMG_ATTACHED_NAME 
+		    , M.POSITION
+		    , M.TEAM_CODE
+		FROM   MEMBER M, MEMBER_IMG MI, TEAM T
+		WHERE M.TEAM_CODE = 
 	</select> -->
 	
 </mapper>

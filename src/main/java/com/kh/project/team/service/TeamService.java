@@ -24,7 +24,7 @@ public interface TeamService {
 	void insertTeamLogoImg(TeamLogoImgVO teamLogoImgVO);
 	
 	// 팀리스트
-	List<TeamVO> selectTeamList();
+	List<TeamVO> selectTeamList(TeamVO teamVO);
 	
 	// 나의팀 관리
 	TeamVO teamManage(String teamCode);

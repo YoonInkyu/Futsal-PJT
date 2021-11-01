@@ -107,9 +107,7 @@ public class TeamController {
 		@GetMapping("/deleteTeam")
 		public String teamDelete(HttpSession session) {
 			String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
-			
 			teamService.deleteTeam(teamCode);
-			
 			return "team/submenu_team_list";
 		}
 	
@@ -170,9 +168,11 @@ public class TeamController {
 	
 	// 팀 리스트 조회 
 	@GetMapping("/selectTeamList")
-	public String selectTeamList() {
-		/* model.addAttribute("teamList", teamService.selectTeamList()); */
-	return "team/submenu_team_list";
+	public String selectTeamList(Model model, TeamVO teamVO) {
+		model.addAttribute("teamList", teamService.selectTeamList(teamVO)); 
+		
+		return "team/submenu_team_list";
+	
 	}
 	
 	

@@ -13,9 +13,56 @@ public class TeamVO {
 	private String teamLogoImgAttachedName;
 	private String teamLogoImgOrignName;
 	private String teamLogoImgCode;
+	private String rankTotalScore;
+	private int memberCount;
+	private String memberName;
+	private String memberGender;
+	private String memberTell;
+	private String memberImgAttachedName;
+	private String position;
 	
-	
-	
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getMemberGender() {
+		return memberGender;
+	}
+	public void setMemberGender(String memberGender) {
+		this.memberGender = memberGender;
+	}
+	public String getMemberTell() {
+		return memberTell;
+	}
+	public void setMemberTell(String memberTell) {
+		this.memberTell = memberTell;
+	}
+	public String getMemberImgAttachedName() {
+		return memberImgAttachedName;
+	}
+	public void setMemberImgAttachedName(String memberImgAttachedName) {
+		this.memberImgAttachedName = memberImgAttachedName;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	public int getMemberCount() {
+		return memberCount;
+	}
+	public void setMemberCount(int memberCount) {
+		this.memberCount = memberCount;
+	}
+	public String getRankTotalScore() {
+		return rankTotalScore;
+	}
+	public void setRankTotalScore(String rankTotalScore) {
+		this.rankTotalScore = rankTotalScore;
+	}
 	public String getTeamLogoImgOrignName() {
 		return teamLogoImgOrignName;
 	}
