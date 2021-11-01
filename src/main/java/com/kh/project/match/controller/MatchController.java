@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.project.common.util.CurrentDateTime;
 import com.kh.project.match.service.MatchService;
 import com.kh.project.match.vo.MatchManageVO;
 import com.kh.project.match.vo.MatchResultVO;
@@ -57,7 +58,7 @@ public class MatchController {
 			model.addAttribute("url", "matchList");
 			return "match/alert";
 		}
-		
+		model.addAttribute("today", CurrentDateTime.today());
 		//팀이 있는 경우 매치 등록 폼으로 이동
 		return "match/match_regForm";
 	}

@@ -133,7 +133,7 @@ $(document).ready(function() {
 				</tbody>
 			</table>
 			<div class="input-group inputScore">
-				<c:if test="${matchResult != null }">
+				<c:if test="${not empty matchResult }">
 					 	<span class="input-group-text">매치 결과(홈 : 어웨이)</span>
 	        			<input type="number" name="matchResultHometeamScore" aria-label="First name" class="form-control" min="0" value="${matchResult.matchResultHometeamScore }" readonly>
 	        			<input type="number" name="matchResultAwayteamScore" aria-label="Last name" class="form-control" min="0" value="${matchResult.matchResultAwayteamScore }" readonly>

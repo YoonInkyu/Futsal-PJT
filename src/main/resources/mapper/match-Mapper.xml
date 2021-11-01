@@ -267,13 +267,13 @@
 	<update id="updateHomeTotal">
 		UPDATE RANK
 		SET
-		RANK_TOTAL_SCORE = (RANK_WIN*3) + (RANK_WIN*1)
+		RANK_TOTAL_SCORE = (RANK_WIN*3) + (RANK_DRAW*1)
 		WHERE TEAM_CODE = #{teamCode}
 	</update>
 	<update id="updateAwayTotal">
 		UPDATE RANK
 		SET
-		RANK_TOTAL_SCORE = (RANK_WIN*3) + (RANK_WIN*1)
+		RANK_TOTAL_SCORE = (RANK_WIN*3) + (RANK_DRAW*1)
 		WHERE TEAM_CODE = #{teamCodeAway}
 	</update>
 	

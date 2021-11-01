@@ -10,6 +10,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(document).on('change', '.matchEndTime', function() {
+		var matchStartTime = $('.matchStartTime').val();
+		var matchEndTime = $('.matchEndTime').val();
+		
+		if(matchEndTime < matchStartTime) {
+			alert('매치 끝나는 시간이 매치 시작보다 빠릅니다.')
+			$('.matchEndTime').val('');
+		}
+		else {
+		}
+		
+	});
+});
+</script>
 </head>
 <body>
 <form action="/match/matchReg" method="post">
@@ -29,15 +45,15 @@
 		</div>
 		<div class="col-12 mb-5">
 			<label for="selectDate" class="form-label">매치 날짜?</label>
-			<input type="date" name="matchDate" class="form-control" id="selectDate">
+			<input type="date" name="matchDate" class="form-control" id="selectDate" value="${today }" min="${today }">
 		</div>
 		<div class="col-12 mb-5">
 			<label for="selectTime" class="form-label">매치 시작 시간?</label>
-			<input type="time" name="matchStartTime" class="form-control" id="selectTime" min="09:00:00" max="24:00:00">
+			<input type="time" name="matchStartTime" class="form-control matchStartTime" id="selectTime" min="09:00:00" max="24:00:00">
 		</div>
 		<div class="col-12 mb-5">
 			<label for="selectTime" class="form-label">매치 끝나는 시간?</label>
-			<input type="time" name="matchEndTime" class="form-control" id="selectTime" min="09:00:00" max="24:00:00">
+			<input type="time" name="matchEndTime" class="form-control matchEndTime" id="selectTime" min="09:00:00" max="24:00:00">
 		</div>
 		<div class="col-12 mb-5">
 			<div class="row">

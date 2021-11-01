@@ -12,7 +12,7 @@ public class CurrentDateTime {
 		// 오늘 날짜 구하기
 		LocalDate now = LocalDate.now();
 		// 포맷 정의
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		// 포맷 적용
 		String nowDate = now.format(formatter);
 		// 오늘 날짜 리턴

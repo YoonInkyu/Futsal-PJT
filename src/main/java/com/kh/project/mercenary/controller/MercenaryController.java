@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.project.common.util.CurrentDateTime;
 import com.kh.project.member.service.MemberService;
 import com.kh.project.member.vo.MemberVO;
 import com.kh.project.mercenary.service.MercenaryService;
@@ -91,6 +92,7 @@ public class MercenaryController {
 			model.addAttribute("url", "recruit");
 			return "mercenary/alert";
 		}
+		model.addAttribute("today", CurrentDateTime.today());
 		return "mercenary/mercenary_recruit_regform";
 	}
 	//용병 구인구직 등록
