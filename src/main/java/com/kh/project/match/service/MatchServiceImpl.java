@@ -74,19 +74,30 @@ public class MatchServiceImpl implements MatchService {
 
 	//매치 결과 & 랭크  입력
 	@Override
-	public int insertResult(MatchResultVO matchResultVO, MatchVO matchVO) {
+	public int insertResult(MatchResultVO matchResultVO) {
 		// 매치 점수 입력
 		sqlSession.insert("matchMapper.insertResult", matchResultVO);
 		// 홈팀 랭크 승무패 입력
-		sqlSession.update("matchMapper.updateHomeRank", matchVO);
+		sqlSession.update("matchMapper.updateHomeRank", matchResultVO);
 		// 어웨이 랭크 승무패 입력
-		return sqlSession.update("matchMapper.updateAwayRank", matchVO);
+		sqlSession.update("matchMapper.updateAwayRank", matchResultVO);
+		//홈 승점 입력
+		sqlSession.update("matchMapper.updateHomeTotal", matchResultVO);
+		//어웨이 승점 입력
+		return sqlSession.update("matchMapper.updateAwayTotal", matchResultVO);
 	}
 
 	//매치 결과 조회
 	@Override
 	public MatchResultVO selectResult(String matchCode) {
 		return sqlSession.selectOne("matchMapper.selectResult", matchCode);
+	}
+
+	//매치 삭제
+	@Override
+	public int deleteMatch(String matchCode) {
+		sqlSession.delete("matchMapper.deleteApplyMatch", matchCode);
+		return sqlSession.delete("matchMapper.deleteMatch", matchCode);
 	}
 
 	//홈팀 랭킹 입력

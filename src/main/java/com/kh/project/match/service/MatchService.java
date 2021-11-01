@@ -33,7 +33,7 @@ public interface MatchService {
 	public int updateResponse(MatchManageVO matchManageVO);
 	
 	//매치 결과 입력 랭크 입력
-	public int insertResult(MatchResultVO matchResultVO, MatchVO matchVO);
+	public int insertResult(MatchResultVO matchResultVO);
 	
 	//매치 결과 조회
 	public MatchResultVO selectResult(String matchCode);
@@ -41,4 +41,7 @@ public interface MatchService {
 	//매치 결과 홈팀 랭크입력
 	//insertResult에서 같이 처리하면 됨.
 	//public int updateRank(MatchVO matchVO);
+	
+	//매치 삭제
+	public int deleteMatch(String matchCode);
 }

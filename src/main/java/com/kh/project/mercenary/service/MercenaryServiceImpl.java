@@ -78,6 +78,13 @@ public class MercenaryServiceImpl implements MercenaryService{
 		return sqlSession.selectList("mercenaryMapper.MyMercBoard", memberCode);
 	}
 
+	//용병 구인구직 삭제
+	@Override
+	public int deleteMerc(String mercBoardCode) {
+		sqlSession.delete("mercenaryMapper.deleteApplyMerc", mercBoardCode);
+		return sqlSession.delete("mercenaryMapper.deleteMerc", mercBoardCode);
+	}
+
 	
 
 	

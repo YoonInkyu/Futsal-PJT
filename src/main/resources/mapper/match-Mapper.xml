@@ -37,6 +37,12 @@
 		<result column="MATCH_CODE" 					property="matchCode"/>
 		<result column="MATCH_RESULT_HOMETEAM_SCORE" 	property="matchResultHometeamScore"/>
 		<result column="MATCH_RESULT_AWAYTEAM_SCORE" 	property="matchResultAwayteamScore"/>
+		<result column="TEAM_CODE" 						property="teamCode"/>
+		<result column="TEAM_CODE_AWAY" 				property="teamCodeAway"/>
+		<result column="RANK_WIN"	 					property="rankWin"/>
+		<result column="RANK_DRAW"	 					property="rankDraw"/>
+		<result column="RANK_LOSE"	 					property="rankLose"/>
+		<result column="RANK_TOTAL_SCORE"	 			property="rankTotalScore"/>
 	</resultMap>
 	
 	<!-- 매치 등록 -->
@@ -258,6 +264,18 @@
 		                            AND MATCH_CODE = #{matchCode})
 		WHERE TEAM_CODE = #{teamCodeAway}
 	</update>
+	<update id="updateHomeTotal">
+		UPDATE RANK
+		SET
+		RANK_TOTAL_SCORE = (RANK_WIN*3) + (RANK_DRAW*1)
+		WHERE TEAM_CODE = #{teamCode}
+	</update>
+	<update id="updateAwayTotal">
+		UPDATE RANK
+		SET
+		RANK_TOTAL_SCORE = (RANK_WIN*3) + (RANK_DRAW*1)
+		WHERE TEAM_CODE = #{teamCodeAway}
+	</update>
 	
 	<!-- 매치 결과 조회 -->
 	<select id="selectResult" resultMap="matchResult">
@@ -265,5 +283,16 @@
 		FROM MATCH_RESULT
 		WHERE MATCH_CODE = #{matchCode}
 	</select>
+	
+	<!-- 매치 삭제 -->
+	<delete id="deleteMatch">
+		DELETE FROM MATCH
+		WHERE MATCH_CODE = #{matchCode}
+	</delete>
+	<!-- 매치 지원팀 삭제 -->
+	<delete id="deleteApplyMatch">
+		DELETE FROM MATCH_MANAGE
+		WHERE MATCH_CODE = #{matchCode}
+	</delete>
 	
 </mapper>

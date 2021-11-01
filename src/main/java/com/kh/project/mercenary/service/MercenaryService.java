@@ -37,4 +37,7 @@ public interface MercenaryService {
 	//나의 용병 게시글 보기
 	public List<MercenaryVO> MyMercBoard(String memberCode);
 	
+	//용병 구인 게시글 삭제
+	public int deleteMerc(String mercBoardCode);
+	
 }

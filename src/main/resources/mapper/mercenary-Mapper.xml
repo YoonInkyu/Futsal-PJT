@@ -111,6 +111,14 @@
                         , MERC_BOARD_APPLYNUMBER
                     FROM MERCENARY_BOARD
 		            WHERE 1 = 1
+		            AND MEMBER_CODE 
+							NOT IN (
+    							SELECT BLACKMEMBER_CODE 
+    							FROM MEMBER_BLACKLIST 
+    					WHERE MEMBER_CODE = #{memberCode})
+		            <if test="searchSort != null and !searchSort.equals('')">
+		           	 	AND MERC_BOARD_SORT = '${searchSort}'
+		            </if>
 		            <if test="searchLocation != null and !searchLocation.equals('')">
 		           	 	AND MERC_BOARD_LOCATION = '${searchLocation}'
 		            </if>
@@ -131,15 +139,18 @@
 		SELECT COUNT(MERC_BOARD_CODE)
 		FROM MERCENARY_BOARD
 		WHERE 1 = 1
-		<if test="searchLocation != null and !searchLocation.equals('')">
-		 	AND MERC_BOARD_LOCATION = '${searchLocation}'
-		</if>
-		<if test="searchKeyword != null and !searchKeyword.equals('')">
-			AND MERC_BOARD_POSSIBLE = '${searchKeyword}'
-		</if>
-		<if test="searchValue != null and !searchValue.equals('')">
-			AND MERC_BOARD_WRITER LIKE '%'||#{searchValue}||'%'
-		</if>
+        <if test="searchSort != null and !searchSort.equals('')">
+       	 	AND MERC_BOARD_SORT = '${searchSort}'
+        </if>
+        <if test="searchLocation != null and !searchLocation.equals('')">
+       	 	AND MERC_BOARD_LOCATION = '${searchLocation}'
+        </if>
+        <if test="searchKeyword != null and !searchKeyword.equals('')">
+        	AND MERC_BOARD_POSSIBLE = '${searchKeyword}'
+        </if>
+        <if test="searchValue != null and !searchValue.equals('')">
+       		AND MERC_BOARD_WRITER LIKE '%'||#{searchValue}||'%'
+        </if>
 	</select>
 	
 	<!-- 나의 용병 구인구직 게시글보기-->
@@ -199,7 +210,12 @@
 		    , MERC_LIST_RESPONSE
 		FROM MEMBER M, MERC_APPLYLIST A
 		WHERE M.MEMBER_CODE = A.MEMBER_CODE
-		AND MERC_BOARD_CODE = #{mercBoardCode}
+		AND MERC_BOARD_CODE = #{mercBoardCode} 
+		AND A.MEMBER_CODE 
+ 			NOT IN (
+    			SELECT BLACKMEMBER_CODE 
+    			FROM MEMBER_BLACKLIST 
+    			WHERE MEMBER_CODE = #{memberCode})
 	</select>
 	
 	<!-- 용병 지원 수락 쿼리 -->
@@ -225,6 +241,17 @@
 		MERC_BOARD_POSSIBLE = '2'
 		WHERE MERC_BOARD_CODE = #{mercBoardCode}
 	</update>
+	
+	<!-- 용병 구인구직 삭제 -->
+	<delete id="deleteMerc">
+		DELETE FROM MERCENARY_BOARD
+		WHERE MERC_BOARD_CODE = #{mercBoardCode}
+	</delete>
+	<!-- 용병 구인구직 신청한 사람 삭제 -->
+	<delete id="deleteApplyMerc">
+		DELETE FROM MERC_APPLYLIST
+		WHERE MERC_BOARD_CODE = #{mercBoardCode}
+	</delete>
 	
 </mapper>
 

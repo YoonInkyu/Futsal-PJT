@@ -20,6 +20,15 @@
 
 
 
+	<resultMap type="com.kh.project.board.vo.NoticeImgVO" id="noticeImg">
+		<id column="NOTICE_IMG_CODE" property="noticeImgCode" />
+		<result column="NOTICE_IMG_ORIGN_NAME" property="noticeImgOrignName" />
+		<result column="NOTICE_IMG_ATTACHED_NAME" property="noticeImgAttachedName" />
+		<result column="BOARD_NUM_NOTICE" property="boardNumNotice" />
+	</resultMap>
+
+
+
 	<!-- 공지사항 목록 조회 -->
 	<select id="selectBoardNoticeList" resultMap="boardNotice">
 		SELECT BOARD_NUM_NOTICE
@@ -115,6 +124,46 @@
 
 
 
+<!-- 맵퍼 참고 이미지 참고 -->
+<!-- 	<insert id="insertImgs"> -->
+<!-- 		INSERT INTO BOOK_IMG ( -->
+<!-- 		IMG_CODE -->
+<!-- 		, ORIGIN_IMG_NAME -->
+<!-- 		, ATTACHED_IMG_NAME -->
+<!-- 		, ITEM_CODE -->
+<!-- 		, IS_MAIN -->
+<!-- 		) -->
+<!-- 		<foreach collection="imgList" item="imgInfo" separator="UNION ALL"> -->
+			<!-- collection="imgList" : 반복될 대상(리스트) / item="imgInfo" : 반복해서 뽑아낼 값 한개 / separator="UNION ALL" : 구분자 반복 할때 마다 넣는다. -->
+<!-- 			SELECT #{imgInfo.imgCode} -->
+<!-- 			, #{imgInfo.originImgName} -->
+<!-- 			, #{imgInfo.attachedImgName} -->
+<!-- 			, #{imgInfo.itemCode} -->
+<!-- 			, #{imgInfo.isMain} -->
+<!-- 			FROM DUAL -->
+<!-- 		</foreach> -->
+<!-- 	</insert> -->
+
+
+	<!-- 속도가 빠른 다중 인설트문 -->
+	<!-- INSERT INTO table(column1, column2, ...) -->
+	<!-- SELECT value1, value2, ... FROM DUAL -->
+	<!-- UNION ALL : 셀렉트를 연결 하는 문구 (연결 되는 조회 결과를 동시에 호출하여 보여 준다.) -->
+	<!-- SELECT value1, value2, ... FROM DUAL -->
+	<!-- UNION ALL -->
+	<!-- ... -->
+	<!-- SELECT value1, value2, ... FROM DUAL; -->
+
+
+<!-- 	<select id="selectNextNumber" resultType="int"> -->
+<!-- 		SELECT NVL(MAX(TO_NUMBER(SUBSTR(IMG_CODE, 5, 3))) + 1, 1) -->
+<!-- 		FROM BOOK_IMG -->
+<!-- 	</select> -->
+
+
+
+
+
 
 
 	<!-- ============================== 자유게시판 ============================== -->
@@ -130,6 +179,15 @@
 		<result column="READ_CNT_FREE" property="readCntFree" />
 		<result column="FILE_NAME_FREE" property="fileNameFree" />
 		<result column="BOARD_PW_FREE" property="boardPwFree" />
+	</resultMap>
+
+
+
+	<resultMap type="com.kh.project.board.vo.freeImgVO" id="freeImg">
+		<id column="FREE_IMG_CODE" property="freeImgCode" />
+		<result column="FREE_IMG_ORIGN_NAME" property="freeImgOrignName" />
+		<result column="FREE_IMG_ATTACHED_NAME" property="freeImgAttachedName" />
+		<result column="BOARD_NUM_FREE" property="boardNumFree" />
 	</resultMap>
 
 

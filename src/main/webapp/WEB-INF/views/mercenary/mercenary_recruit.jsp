@@ -66,7 +66,21 @@ $(document).ready(function() {
 			<div class="col-6 mx-auto m-0 p-0">
 				<form action="/mercenary/recruit" method="post">
 					<div class="row mx-auto">
-						<div class="col-3">
+						<div class="col-2">
+							<select class="form-select form-select" aria-label=".form-select-lg example" name="searchSort">
+								<c:if test="${mercenaryVO.searchSort == null }">
+									<option value="">구분</option>
+									<option value="구인">구인</option>
+									<option value="구직">구직</option>
+								</c:if>
+								<c:if test="${mercenaryVO.searchSort != null }">
+									<option value="">구분</option>
+									<option value="구인" <c:if test="${mercenaryVO.searchSort == '구인'}">selected</c:if>>구인</option>
+									<option value="구직" <c:if test="${mercenaryVO.searchSort == '구직'}">selected</c:if>>구직</option>
+								</c:if>
+							</select>
+						</div>
+						<div class="col-2">
 							<select class="form-select form-select" aria-label=".form-select-lg example" name="searchLocation">
 								<c:if test="${mercenaryVO.searchLocation == null }">
 									<option value="">지역</option>

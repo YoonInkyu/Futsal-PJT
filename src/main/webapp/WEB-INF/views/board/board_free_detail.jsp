@@ -43,7 +43,17 @@
 
 							<tr>
 								<td>${freeInfo.boardNumFree }</td>
-								<td>${freeInfo.writerFree }</td>
+
+								<td>
+									<div class="btn-group dropend">
+										<button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${freeInfo.writerFree }</button>
+										<ul class="dropdown-menu">
+											<li><a class="dropdown-item" href="#">블랙 리스트</a></li>
+											<li><a class="dropdown-item" href="#">소속 팀 보기</a></li>
+										</ul>
+									</div>
+								</td>
+
 								<td>${freeInfo.createDateFree }</td>
 								<td>${freeInfo.readCntFree }</td>
 							</tr>
@@ -64,7 +74,7 @@
 
 
 		<!-- 글 내용 -->
-		<div class="row mb-3" style="border-bottom: 1px solid gray; height: 30rem;">${freeInfo.contentFree }</div>
+		<div class="row mb-3" style="border-bottom: 1px solid gray; height: 30rem; word-break: break-all;">${freeInfo.contentFree }</div>
 
 
 

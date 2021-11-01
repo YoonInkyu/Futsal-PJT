@@ -205,6 +205,32 @@ public class BoardController {
 
 	}
 
+//	모르겠음 물어 볼것
+
+//	// 자유게시판 비밀 글, 비번 입력 페이지 이동
+//	@GetMapping("/selectPwFree")
+//	public String selectPwFree(BoardFreeVO boardFreeVO) {
+//
+//		return "/board/goFreeList";
+//
+//	}
+//	
+////	
+////	// 비밀 글 비밀번호 입력 페이지 이동
+////	else if (command.equals("/secretInputNum.bo")) {
+////
+////		// 선택한 게시글의 비밀번호를 가져온다.
+////		String boardPw = request.getParameter("boardPw");
+////		String boardNum = request.getParameter("boardNum");
+////
+////		request.setAttribute("boardPw", boardPw);
+////		request.setAttribute("boardNum", boardNum);
+////
+////		path = "view/secret_result.jsp";
+////
+////	}
+//	
+
 	// ==============================// 오늘 날짜 메소드 //==============================//
 	// ==============================// 오늘 날짜 메소드 //==============================//
 	// ==============================// 오늘 날짜 메소드 //==============================//

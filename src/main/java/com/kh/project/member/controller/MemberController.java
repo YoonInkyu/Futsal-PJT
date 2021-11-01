@@ -87,7 +87,7 @@ public class MemberController {
 		//기존 가입 : true, 미가입 : false
 		return memberService.checkId(memberId);
 	}
-	//비밀번호 체크
+	//기존 및 새 비밀번호 중복 체크
 	@ResponseBody
 	@PostMapping("/checkPw")
 	public boolean checkPw(String memberPw, String memberCode) {
@@ -97,11 +97,13 @@ public class MemberController {
 		//일치 : true, 불일치 : false
 		return  memberService.checkPw(memberVO);
 	}
+	//비밀번호 변경
 	@ResponseBody
 	@PostMapping("/changePw")
 	public boolean changePw(MemberVO memberVO) {
 		return memberService.changePw(memberVO);
 	}
+	//아이디 비밀번호 체크
 	@ResponseBody
 	@PostMapping("/checkLogin")
 	public boolean checkLogin(String loginId, String loginPw) {
