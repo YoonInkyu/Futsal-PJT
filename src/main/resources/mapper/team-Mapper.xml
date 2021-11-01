@@ -52,7 +52,6 @@
 		) VALUES (
 			#{teamCode}
 		)
-		
 	</insert>
 	
 	<select id="selectNextTeamCode" resultType="String">

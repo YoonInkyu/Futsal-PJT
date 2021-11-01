@@ -26,8 +26,8 @@ public class TeamServiceImpl implements TeamService{
 	@Override
 	public int insertTeam(TeamVO teamVO) {
 		sqlSession.update("teamMapper.upDateMemberTeamCode", teamVO);
-		sqlSession.insert("teamMapper.insertRankTeam", teamVO);
-		return sqlSession.insert("teamMapper.insertTeam", teamVO);
+		sqlSession.insert("teamMapper.insertTeam", teamVO);
+		return sqlSession.insert("teamMapper.insertRankTeam", teamVO); 
 	}
 
 	// 팀코드 생성
