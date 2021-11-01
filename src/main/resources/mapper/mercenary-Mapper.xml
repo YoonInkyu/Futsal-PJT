@@ -111,6 +111,11 @@
                         , MERC_BOARD_APPLYNUMBER
                     FROM MERCENARY_BOARD
 		            WHERE 1 = 1
+		            AND MEMBER_CODE 
+							NOT IN (
+    							SELECT BLACKMEMBER_CODE 
+    							FROM MEMBER_BLACKLIST 
+    					WHERE MEMBER_CODE = #{memberCode})
 		            <if test="searchSort != null and !searchSort.equals('')">
 		           	 	AND MERC_BOARD_SORT = '${searchSort}'
 		            </if>
@@ -205,7 +210,12 @@
 		    , MERC_LIST_RESPONSE
 		FROM MEMBER M, MERC_APPLYLIST A
 		WHERE M.MEMBER_CODE = A.MEMBER_CODE
-		AND MERC_BOARD_CODE = #{mercBoardCode}
+		AND MERC_BOARD_CODE = #{mercBoardCode} 
+		AND A.MEMBER_CODE 
+ 			NOT IN (
+    			SELECT BLACKMEMBER_CODE 
+    			FROM MEMBER_BLACKLIST 
+    			WHERE MEMBER_CODE = #{memberCode})
 	</select>
 	
 	<!-- 용병 지원 수락 쿼리 -->

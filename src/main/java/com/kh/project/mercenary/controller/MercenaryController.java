@@ -1,6 +1,5 @@
 package com.kh.project.mercenary.controller;
 
-import java.nio.channels.SeekableByteChannel;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -31,34 +30,40 @@ public class MercenaryController {
 	
 	//용병 구인구직 페이지로 이동
 	@GetMapping("/recruit")
-	public String goMercenaryRecruit(Model model, MercenaryVO mercenaryVO) {
+	public String goMercenaryRecruit(Model model, MercenaryVO mercenaryVO, HttpSession session) {
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
 		//전체 데이터 수
 		int dataCnt = mercenaryService.selectMercCnt(mercenaryVO);
 		mercenaryVO.setTotalCnt(dataCnt);
 		//페이징 처리
 		mercenaryVO.setPageInfo();
 		//구인구직 리스트 셀렉트
+		mercenaryVO.setMemberCode(memberCode);
 		model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
 		return "mercenary/mercenary_recruit";
 	}
 	//검색 조건식 사용시 용병 구인구직 리스트 조회
 	@PostMapping("/recruit")
-	public String goMercenaryRecruit2(Model model, MercenaryVO mercenaryVO) {
+	public String goMercenaryRecruit2(Model model, MercenaryVO mercenaryVO, HttpSession session) {
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
 		//전체 데이터 수
 		int dataCnt = mercenaryService.selectMercCnt(mercenaryVO);
 		mercenaryVO.setTotalCnt(dataCnt);
 		//페이징 처리
 		mercenaryVO.setPageInfo();
+		mercenaryVO.setMemberCode(memberCode);
 		//구인구직 리스트 셀렉트
 		model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
 		return "mercenary/mercenary_recruit";
 	}
 	//용병 구인구직 상세보기 (모달)
 	@GetMapping("/recruitDetail")
-	public String recruitDetail(Model model, String mercBoardCode, MercenaryListVO mercenaryListVO) {
+	public String recruitDetail(Model model, String mercBoardCode, MercenaryListVO mercenaryListVO, HttpSession session) {
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
 		//구인 상세보기 조회
 		model.addAttribute("mercVO", mercenaryService.selectMercDetail(mercBoardCode));
 		//신청자 리스트 조회
+		mercenaryListVO.setMemberCode(memberCode);
 		model.addAttribute("mercList", mercenaryService.selectMercRecruitList(mercenaryListVO));
 		//상세보기 모달창 사이드,푸터 없애기 위해 리턴값에 logPage/ 추가 
 		return "logPage/mercenary/mercenary_recruit_detail";
