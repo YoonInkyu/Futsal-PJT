@@ -50,15 +50,22 @@ public class MatchController {
 	//매치 게시글 등록 폼으로 이동
 	@GetMapping("/goMatchRegForm")
 	public String goMatchRegForm(HttpSession session, Model model) {
+		//로그인 여부 확인
+		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
+		if(memberCode == null) {
+			model.addAttribute("msg", "로그인해야 등록 가능 합니다.");
+			model.addAttribute("url", "matchList");
+			return "match/alert";
+		}
+		//팀이 여부 확인
 		String teamName = ((MemberVO)session.getAttribute("loginInfo")).getTeamName();
-
-		//팀이 없는경우 알럿창과 함께 매치 리스트 조회 페이지로 이동
 		if(teamName == null) {
 			model.addAttribute("msg", "소속팀이 있어야 매치 등록이 가능합니다.");
 			model.addAttribute("url", "matchList");
 			return "match/alert";
 		}
 		model.addAttribute("today", CurrentDateTime.today());
+		model.addAttribute("time", CurrentDateTime.nowTime());
 		//팀이 있는 경우 매치 등록 폼으로 이동
 		return "match/match_regForm";
 	}
@@ -101,7 +108,21 @@ public class MatchController {
 	
 	//매치 신청하기
 	@GetMapping("/updateApplyMatch")
-	public String updateApplyMatch(MatchManageVO matchManageVO, HttpSession session) {
+	public String updateApplyMatch(MatchManageVO matchManageVO, HttpSession session, Model model) {
+		//로그인 여부 확인
+		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
+		if(memberCode == null) {
+			model.addAttribute("msg", "로그인해야 등록 가능 합니다.");
+			model.addAttribute("url", "matchList");
+			return "match/alert";
+		}
+		//팀 여부 확인
+		String teamName = ((MemberVO)session.getAttribute("loginInfo")).getTeamName();
+		if(teamName == null) {
+			model.addAttribute("msg", "소속팀이 있어야 매치 신청이 가능합니다.");
+			model.addAttribute("url", "matchList");
+			return "match/alert";
+		}
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 		matchManageVO.setTeamCodeAway(teamCode);
 		matchService.insertApplyMatch(matchManageVO);
@@ -118,7 +139,6 @@ public class MatchController {
 	//매치 결과 등록
 	@PostMapping("/insertResult")
 	public String insertResult(MatchResultVO matchResultVO) {
-		// 오류는 안나는데, 랭크 update가 안됨... 자바에서 실행된 쿼리 DB에서 그대로 실행하면 업데이트도 됨. WHY?
 		matchService.insertResult(matchResultVO);
 		//insertResult 쿼리로 한번에 처리
 		//int a = matchService.updateRank(matchVO);

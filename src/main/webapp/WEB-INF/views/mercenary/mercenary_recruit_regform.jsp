@@ -48,19 +48,19 @@ $(document).ready(function() {
 		</div>
 		<div class="col-12 mb-5">
 			<label for="inputIntro" class="form-label">팀 소개</label>
-			<textarea rows="10px" name="mercBoardIntro" class="form-control" id="inputIntro"></textarea>
+			<textarea rows="10px" name="mercBoardIntro" class="form-control" id="inputIntro" required></textarea>
 		</div>
 		<div class="col-12 mb-5">
 			<label for="selectDate" class="form-label">매치 날짜?</label>
-			<input type="date" name="mercBoardDate" class="form-control" id="selectDate" value="${today }" min="${today }">
+			<input type="date" name="mercBoardDate" class="form-control" id="selectDate" value="${today }" min="${today }" required>
 		</div>
 		<div class="col-12 mb-5">
 			<label for="selectTime" class="form-label">매치 시작 시간?</label>
-			<input type="time" name="mercBoardStartTime" class="form-control mercBoardStartTime" id="selectTime" min="09:00:00" max="24:00:00">
+			<input type="time" name="mercBoardStartTime" class="form-control mercBoardStartTime" id="selectTime" value="${time }" min="09:00" required>
 		</div>
 		<div class="col-12 mb-5">
 			<label for="selectTime" class="form-label">매치 끝나는 시간?</label>
-			<input type="time" name="mercBoardEndTime" class="form-control mercBoardEndTime" id="selectTime" min="09:00:00" max="24:00:00">
+			<input type="time" name="mercBoardEndTime" class="form-control mercBoardEndTime" id="selectTime" value="${time }"required>
 		</div>
 		<div class="col-12 mb-5">
 			<div class="row">

@@ -32,40 +32,74 @@ public class MercenaryController {
 	//용병 구인구직 페이지로 이동
 	@GetMapping("/recruit")
 	public String goMercenaryRecruit(Model model, MercenaryVO mercenaryVO, HttpSession session) {
-		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
-		//전체 데이터 수
-		int dataCnt = mercenaryService.selectMercCnt(mercenaryVO);
-		mercenaryVO.setTotalCnt(dataCnt);
-		//페이징 처리
-		mercenaryVO.setPageInfo();
-		//구인구직 리스트 셀렉트
-		mercenaryVO.setMemberCode(memberCode);
-		model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
+		Object result = session.getAttribute("loginInfo");
+		if(result == null) {
+			//전체 데이터 수
+			int dataCnt = mercenaryService.selectMercCnt(mercenaryVO);
+			mercenaryVO.setTotalCnt(dataCnt);
+			//페이징 처리
+			mercenaryVO.setPageInfo();
+			//구인구직 리스트 셀렉트
+			model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
+		}
+		else {
+			String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+			//전체 데이터 수
+			int dataCnt = mercenaryService.selectMercCnt(mercenaryVO);
+			mercenaryVO.setTotalCnt(dataCnt);
+			//페이징 처리
+			mercenaryVO.setPageInfo();
+			//구인구직 리스트 셀렉트
+			mercenaryVO.setMemberCode(memberCode);
+			model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
+		}
 		return "mercenary/mercenary_recruit";
 	}
 	//검색 조건식 사용시 용병 구인구직 리스트 조회
 	@PostMapping("/recruit")
 	public String goMercenaryRecruit2(Model model, MercenaryVO mercenaryVO, HttpSession session) {
-		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
-		//전체 데이터 수
-		int dataCnt = mercenaryService.selectMercCnt(mercenaryVO);
-		mercenaryVO.setTotalCnt(dataCnt);
-		//페이징 처리
-		mercenaryVO.setPageInfo();
-		mercenaryVO.setMemberCode(memberCode);
-		//구인구직 리스트 셀렉트
-		model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
+		Object result = session.getAttribute("loginInfo");
+		if(result == null) {
+			//전체 데이터 수
+			int dataCnt = mercenaryService.selectMercCnt(mercenaryVO);
+			mercenaryVO.setTotalCnt(dataCnt);
+			//페이징 처리
+			mercenaryVO.setPageInfo();
+			//구인구직 리스트 셀렉트
+			model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
+		}
+		else {
+			String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+			//전체 데이터 수
+			int dataCnt = mercenaryService.selectMercCnt(mercenaryVO);
+			mercenaryVO.setTotalCnt(dataCnt);
+			//페이징 처리
+			mercenaryVO.setPageInfo();
+			//구인구직 리스트 셀렉트
+			mercenaryVO.setMemberCode(memberCode);
+			model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
+		}
 		return "mercenary/mercenary_recruit";
 	}
 	//용병 구인구직 상세보기 (모달)
 	@GetMapping("/recruitDetail")
 	public String recruitDetail(Model model, String mercBoardCode, MercenaryListVO mercenaryListVO, HttpSession session) {
-		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
-		//구인 상세보기 조회
-		model.addAttribute("mercVO", mercenaryService.selectMercDetail(mercBoardCode));
-		//신청자 리스트 조회
-		mercenaryListVO.setMemberCode(memberCode);
-		model.addAttribute("mercList", mercenaryService.selectMercRecruitList(mercenaryListVO));
+		Object result = session.getAttribute("loginInfo");
+		//로그인 여부 확인
+		if(result == null) {
+			//구인 상세보기 조회
+			model.addAttribute("mercVO", mercenaryService.selectMercDetail(mercBoardCode));
+			//신청자 리스트 조회
+			model.addAttribute("mercList", mercenaryService.selectMercRecruitList(mercenaryListVO));
+		}
+		else {
+			String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+			//구인 상세보기 조회
+			model.addAttribute("mercVO", mercenaryService.selectMercDetail(mercBoardCode));
+			//신청자 리스트 조회
+			mercenaryListVO.setMemberCode(memberCode);
+			model.addAttribute("mercList", mercenaryService.selectMercRecruitList(mercenaryListVO));
+		}
 		//상세보기 모달창 사이드,푸터 없애기 위해 리턴값에 logPage/ 추가 
 		return "logPage/mercenary/mercenary_recruit_detail";
 	}
@@ -93,12 +127,13 @@ public class MercenaryController {
 			return "mercenary/alert";
 		}
 		model.addAttribute("today", CurrentDateTime.today());
+		model.addAttribute("time", CurrentDateTime.nowTime());
 		return "mercenary/mercenary_recruit_regform";
 	}
 	//용병 구인구직 등록
 	@PostMapping("/recruitReg")
 	public String recruitRegBoard(HttpSession session, MercenaryVO mercenaryVO, Model model) {
-		//로그인한 사람 이름과 팀코드 가져와서 VO에 set
+		//로그인 정보 가져와서 VO에 set
 		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
 		mercenaryVO.setMemberCode(memberCode);
 		String memberName = ((MemberVO)session.getAttribute("loginInfo")).getMemberName();
@@ -114,7 +149,13 @@ public class MercenaryController {
 	}
 	//용병 구인구직 신청하기
 	@GetMapping("/updateRecruitCnt")
-	public String updateRecruitCnt(Model model, MercenaryVO mercenaryVO) {
+	public String updateRecruitCnt(Model model, MercenaryVO mercenaryVO, HttpSession session) {
+		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
+		if(memberCode == null) {
+			model.addAttribute("msg", "로그인해야 신청 가능 합니다.");
+			model.addAttribute("url", "recruit");
+			return "mercenary/alert";
+		}
 		mercenaryService.insertMercList(mercenaryVO);
 		return "redirect:/mercenary/recruit";
 	}

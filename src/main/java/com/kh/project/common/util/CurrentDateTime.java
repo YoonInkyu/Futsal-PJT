@@ -3,6 +3,7 @@ package com.kh.project.common.util;
 //1025 윤인규 코로나 api 조회시 필요한 오늘 날짜와 오늘 날짜에서 5일 전 날짜 구하는 메소드 구현함.
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
@@ -32,4 +33,18 @@ public class CurrentDateTime {
 		//5일전 날짜 리턴
 		return firstDay;
 	}
+	//현재 시간 구하는 메소드
+	public static String nowTime() {
+		// 현재 시간
+		LocalTime now = LocalTime.now();
+		// 포맷 정의하기
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		// 포맷 적용하기
+		String nowTime = now.format(formatter);
+		// 현재 시간 리턴
+		return nowTime;
+		
+
+	}
+	
 }
