@@ -183,7 +183,7 @@
 
 
 
-	<resultMap type="com.kh.project.board.vo.freeImgVO" id="freeImg">
+	<resultMap type="com.kh.project.board.vo.FreeImgVO" id="freeImg">
 		<id column="FREE_IMG_CODE" property="freeImgCode" />
 		<result column="FREE_IMG_ORIGN_NAME" property="freeImgOrignName" />
 		<result column="FREE_IMG_ATTACHED_NAME" property="freeImgAttachedName" />

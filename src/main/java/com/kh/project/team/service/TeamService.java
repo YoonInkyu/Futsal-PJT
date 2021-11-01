@@ -25,6 +25,9 @@ public interface TeamService {
 	
 	// 팀리스트
 	List<TeamVO> selectTeamList(TeamVO teamVO);
+
+	// 팀 상세정보(회원목록 포함)
+	List<TeamVO> selectTeamDetail(String teamCode);
 	
 	// 나의팀 관리
 	TeamVO teamManage(String teamCode);
@@ -34,6 +37,7 @@ public interface TeamService {
 	
 	// 팀 삭제
 	int deleteTeam(String teamCode);
+	
 	
 	
 	

@@ -68,6 +68,12 @@ public class TeamServiceImpl implements TeamService{
 		
 	}
 
+	// 팀 상세정보(회원목록 포함)
+	@Override
+	public List<TeamVO> selectTeamDetail(String teamCode) {
+		return sqlSession.selectList("teamMapper.selectTeamDetail", teamCode);
+	}
+
 	
 	
 }

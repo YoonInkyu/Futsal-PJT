@@ -170,10 +170,12 @@ public class TeamController {
 	@GetMapping("/selectTeamList")
 	public String selectTeamList(Model model, TeamVO teamVO) {
 		model.addAttribute("teamList", teamService.selectTeamList(teamVO)); 
-		
 		return "team/submenu_team_list";
-	
 	}
-	
+	@GetMapping("/teamDetail")
+	public String teamDetail(String teamCode, Model model) {
+		model.addAttribute("teamDetail", teamService.selectTeamDetail(teamCode));
+		return "logPage/team/team_detail";
+	}
 	
 }

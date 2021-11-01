@@ -10,6 +10,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+$(document).ready(function() {
+	var recruitDetailModal = document.getElementById('staticBackdrop');
+	//모달 닫히면 페이지 리로드
+	//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
+	recruitDetailModal.addEventListener('hidden.bs.modal', function (event) {
+		location.reload();
+	})
+});
+</script>
 </head>
 <body>
 
@@ -78,33 +88,16 @@
 										<td>${teamList.memberCount }</td>
 										<td>
 											<!-- Button trigger modal -->
-											<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">상세보기</button> <!-- Modal -->
+											<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="teamDetail('${teamList.teamCode}')">상세보기</button> <!-- Modal -->
+											<script type="text/javascript">
+											    function teamDetail(teamCode){
+													$(".modal-content").load("/team/teamDetail?teamCode=" + teamCode);
+												}
+											</script>
 											<div class="modal fade  " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-												<div class="modal-dialog">
+												<div class="modal-dialog modal-lg">
 													<div class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title" id="staticBackdropLabel"></h5>
-															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-														</div>
 														
-															<div class="modal-body">
-																<p>
-																	<img src="/resources/img/team/${teamList.teamLogoImgOrignName }" width="30%">
-																</p>
-																<p>회원수 : ${teamList.memberCount }</p>
-																<p>이미지 : ${teamList.memberImgAttachedName }</p>
-																<p>이름 : ${teamList.memberName }</p>
-																<p>성별 : ${teamList.memberGender }</p>
-																<p>연락처 : ${teamList.memberTell }</p>
-																<p>등급 : ${teamList.teamAdmin }</p>
-																<p>포지션 : ${teamList.position }</p>
-													
-															</div>
-														
-														<div class="modal-footer justify-content-between">
-															<button type="button" class="btn btn-outline-success">가입 신청</button>
-															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-														</div>
 													</div>
 												</div>
 											</div>
