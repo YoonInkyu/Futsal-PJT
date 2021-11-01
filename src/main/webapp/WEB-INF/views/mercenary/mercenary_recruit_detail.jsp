@@ -22,11 +22,11 @@ $(document).ready(function() {
 	        	str += '<td>';
 	        	str += '<select class="form-select" name="mercBoardLocation">'
 	        	str += '<option selected value="' + result.mercBoardLocation + '">' + result.mercBoardLocation + '</option>';
-	        	//선택된 애는 option에 안나오게 어떻게 하는고임..??
-	        	str += '<option value="서울">서울</option>';
-	        	str += '<option value="경기">경기</option>';
-	        	str += '<option value="대전">대전</option>';
-	        	str += '<option value="대구">대구</option>';
+	        	//선택된 애는 option에 안나오게 어떻게 하는고임..??(안댕.... ''로 감싸야 되는데 안감싸짐..)
+	        	str += '<option value="서울" <c:if test="' + result.mercBoardLocation + ' == ''서울'}">selected</c:if>>서울</option>';
+	        	str += '<option value="경기" <c:if test="' + result.mercBoardLocation + ' == ''경기'}">selected</c:if>>경기</option>';
+	        	str += '<option value="대전" <c:if test="' + result.mercBoardLocation + ' == ''대전'}">selected</c:if>>대전</option>';
+	        	str += '<option value="대구" <c:if test="' + result.mercBoardLocation + ' == ''대구'}">selected</c:if>>대구</option>';
 	        	str += '</select>';
 	        	str += '</td>';
 	        	$('.locationTr').append(str);
@@ -110,6 +110,7 @@ $(document).ready(function() {
 				<c:when test="${sessionScope.loginInfo.memberName eq mercVO.mercBoardWriter }">
 					<input type="button" class="btn btn-primary change" value="수정하기" id="change">
 					<input type="hidden" value="${mercVO.mercBoardCode}">
+					<input type="button" class="btn btn-danger delete" value="삭제하기" onclick="location.href='/mercenary/deleteMerc?mercBoardCode=${mercVO.mercBoardCode}'">
 				</c:when>
 				<c:otherwise>
 					<c:if test="${mercVO.mercBoardPossible eq '1' }">

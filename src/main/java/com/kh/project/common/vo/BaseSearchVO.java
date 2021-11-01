@@ -4,8 +4,14 @@ public class BaseSearchVO {
 	private String searchLocation;
 	private String searchKeyword;
 	private String searchValue;
+	private String searchSort;
 	
-	
+	public String getSearchSort() {
+		return searchSort;
+	}
+	public void setSearchSort(String searchSort) {
+		this.searchSort = searchSort;
+	}
 	public String getSearchLocation() {
 		return searchLocation;
 	}

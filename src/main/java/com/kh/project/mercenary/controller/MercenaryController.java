@@ -1,5 +1,7 @@
 package com.kh.project.mercenary.controller;
 
+import java.nio.channels.SeekableByteChannel;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -77,7 +79,13 @@ public class MercenaryController {
 	}
 	//용병 구인구직 등록 페이지로 이동
 	@GetMapping("/recruitRegForm")
-	public String goRecruitRegForm() {
+	public String goRecruitRegForm(Model model, HttpSession session) {
+		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
+		if(memberCode == null) {
+			model.addAttribute("msg", "로그인해야 등록 가능 합니다.");
+			model.addAttribute("url", "recruit");
+			return "mercenary/alert";
+		}
 		return "mercenary/mercenary_recruit_regform";
 	}
 	//용병 구인구직 등록
@@ -107,6 +115,12 @@ public class MercenaryController {
 	@GetMapping("/updateResponse")
 	public String updateResponse(MercenaryListVO mercenaryListVO) {
 		mercenaryService.updateResponse(mercenaryListVO);
+		return "redirect:/mercenary/recruit";
+	}
+	//용병 구인구직 삭제
+	@GetMapping("/deleteMerc")
+	public String deleteMerc(String mercBoardCode) {
+		mercenaryService.deleteMerc(mercBoardCode);
 		return "redirect:/mercenary/recruit";
 	}
 }

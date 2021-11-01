@@ -116,15 +116,18 @@ public class MatchController {
 	
 	//매치 결과 등록
 	@PostMapping("/insertResult")
-	public String insertResult(MatchResultVO matchResultVO, MatchVO matchVO) {
-		// 오류는 안나는데, 랭크 update가 안됨... 자바에서 실행된 쿼리 DB에서 그대로 실행되고 업데이트도 됨. WHY?
-		int b = matchService.insertResult(matchResultVO, matchVO);
-		System.out.println("결과랑 랭크입력 했지??");
-		System.out.println(b);
+	public String insertResult(MatchResultVO matchResultVO) {
+		// 오류는 안나는데, 랭크 update가 안됨... 자바에서 실행된 쿼리 DB에서 그대로 실행하면 업데이트도 됨. WHY?
+		matchService.insertResult(matchResultVO);
 		//insertResult 쿼리로 한번에 처리
 		//int a = matchService.updateRank(matchVO);
-		//System.out.println("랭크입력 했지??");
-		//System.out.println(a);
+		return "redirect:/match/matchList";
+	}
+
+	//매치 삭제
+	@GetMapping("/deleteMatch")
+	public String deleteMatch(String matchCode) {
+		matchService.deleteMatch(matchCode);
 		return "redirect:/match/matchList";
 	}
 
