@@ -30,17 +30,23 @@ import com.kh.project.team.vo.TeamVO;
 public class TeamController {
 	@Resource(name = "teamService")
 	private TeamService teamService;
+	@Resource(name = "memberService")
+	private MemberService memberService;
 	
 	// 팀생성 페이지로 이동
 	@GetMapping("/goRegTeam")
 	public String goRegTeam() {
 		return "team/submenu_team_create";
 	} 
+	// 팀삭제 페이지로 이동
+	@GetMapping("/goTeamDelete")
+	public String goTeamDelete() {
+		return "team/team_delete";
+	} 
 	
 	// My 팀 페이지 이동
 	@GetMapping("/submenuTeamManage") 
 	public String teamManage_admin() { 
-		
 		return "myTeamLayout/team/submenu_team_manage";
 	}
 	
@@ -48,6 +54,8 @@ public class TeamController {
 	@GetMapping("/teamInfo")
 	public String teamInfo(HttpSession session, Model model) {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		System.out.println("팀코드 들고오니? ");
+		System.out.println(teamCode);
 		
 		model.addAttribute("myTeam", teamService.teamManage(teamCode));
 		return "myTeamLayout/team/team_info";
@@ -92,10 +100,18 @@ public class TeamController {
 		// 업데이트 실행
 		teamService.updateInfo(teamVO);
 		
-		
 		return "redirect:/team/teamInfo";
 	}
 	
+	// 팀 삭제
+		@GetMapping("/deleteTeam")
+		public String teamDelete(HttpSession session) {
+			String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+			
+			teamService.deleteTeam(teamCode);
+			
+			return "team/submenu_team_list";
+		}
 	
 		
 	
@@ -146,6 +162,9 @@ public class TeamController {
 		// 팀로고 등록
 		teamService.insertTeamLogoImg(teamLogoImg);
 		
+		session.setAttribute("loginInfo", memberService.selectMemberInfo(memberInfo.getMemberCode()));
+		
+		
 		return "mainPage/main_page";
 	}
 	
@@ -155,5 +174,6 @@ public class TeamController {
 		/* model.addAttribute("teamList", teamService.selectTeamList()); */
 	return "team/submenu_team_list";
 	}
+	
 	
 }

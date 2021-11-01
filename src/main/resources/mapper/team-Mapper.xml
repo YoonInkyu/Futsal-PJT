@@ -36,6 +36,15 @@
 		)
 	</insert>
 	
+		<!-- 팀생성시 멤버테이블에 팀코드 입력 -->
+	<update id="upDateMemberTeamCode" >
+		UPDATE MEMBER SET 
+			TEAM_CODE = #{teamCode}
+			, TEAM_ADMIN = '3'
+			WHERE
+			MEMBER_CODE = #{memberCode}
+	</update>
+	
 	<select id="selectNextTeamCode" resultType="String">
 		SELECT 'TEAM_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(TEAM_CODE, 6, 3))), 0)+1, 3, '0') FROM TEAM
 	</select>
@@ -81,7 +90,24 @@
 		WHERE TEAM_LOGO_IMG_CODE = #{teamLogoImgCode}
 	</update>
  
+	<!-- 팀 삭제 -->
+	<delete id="deleteTeam">
+	DELETE FROM TEAM 
+	WHERE TEAM_CODE = #{teamCode}
+	</delete>
 	
+	<delete id="deleteTeamImg">
+	DELETE FROM TEAM_LOGO_IMG
+	WHERE TEAM_CODE = #{teamCode}
+	</delete>
+	
+	<!-- 팀삭제시 멤버에있는 팀코드 수정 -->
+	<update id="deleteMemberTeamCode">
+		UPDATE MEMBER SET
+		TEAM_CODE = NULL
+		, TEAM_ADMIN = '1'
+		WHERE TEAM_CODE = #{teamCode}
+	</update>
 	<!-- <select id="">
 		SELECT 
 	</select> -->

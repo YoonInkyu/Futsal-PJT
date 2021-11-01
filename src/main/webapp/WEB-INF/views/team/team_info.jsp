@@ -80,7 +80,7 @@ $(document).ready(function() {
 
 <input type="button" value="수정" id="change">
 <input type="hidden" value="${myTeam.teamCode }" class="gg">
-<input type="button" value="삭제">
+<input type="button" value="삭제" onclick="location.href='goTeamDelete'">
 </form>
 </div>
 <script type="text/javascript">

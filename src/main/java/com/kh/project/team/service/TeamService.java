@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.kh.project.member.vo.MemberVO;
 import com.kh.project.team.vo.TeamLogoImgVO;
 import com.kh.project.team.vo.TeamVO;
 
@@ -30,6 +31,9 @@ public interface TeamService {
 	
 	// 팀정보 수정 
 	int updateInfo(TeamVO teamVO);
+	
+	// 팀 삭제
+	int deleteTeam(String teamCode);
 	
 	
 	

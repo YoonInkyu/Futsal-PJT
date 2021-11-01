@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.kh.project.member.vo.MemberVO;
 import com.kh.project.team.vo.TeamLogoImgVO;
 import com.kh.project.team.vo.TeamVO;
 
@@ -24,12 +25,14 @@ public class TeamServiceImpl implements TeamService{
 	// 팀생성
 	@Override
 	public int insertTeam(TeamVO teamVO) {
+		sqlSession.update("teamMapper.upDateMemberTeamCode", teamVO);
 		return sqlSession.insert("teamMapper.insertTeam", teamVO);
 	}
 
 	// 팀코드 생성
 	@Override
 	public String selectNextTeamCode() {
+		
 		return sqlSession.selectOne("teamMapper.selectNextTeamCode");
 	}
 	
@@ -54,6 +57,15 @@ public class TeamServiceImpl implements TeamService{
 	public int updateInfo(TeamVO teamVO) {
 		sqlSession.update("teamMapper.updateInfo", teamVO);
 		return sqlSession.update("teamMapper.updateImgInfo", teamVO);
+	}
+
+	@Override
+	public int deleteTeam(String teamCode) {
+		
+		sqlSession.update("teamMapper.deleteTeamImg", teamCode);
+		sqlSession.delete("teamMapper.deleteTeam", teamCode);
+		return sqlSession.update("teamMapper.deleteMemberTeamCode", teamCode);
+		
 	}
 
 	
