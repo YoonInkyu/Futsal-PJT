@@ -45,6 +45,16 @@
 			MEMBER_CODE = #{memberCode}
 	</update>
 	
+	<!-- 팀생성시 랭크 테이블에 팀코드 입력 -->
+	<insert id="insertRankTeam">
+		INSERT INTO RANK (
+			TEAM_CODE
+		) VALUES (
+			#{teamCode}
+		)
+		
+	</insert>
+	
 	<select id="selectNextTeamCode" resultType="String">
 		SELECT 'TEAM_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(TEAM_CODE, 6, 3))), 0)+1, 3, '0') FROM TEAM
 	</select>
