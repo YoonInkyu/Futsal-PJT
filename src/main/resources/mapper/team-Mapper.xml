@@ -32,9 +32,19 @@
 		<result column="MEMBER_NAME"				property="memberName"/>
 		<result column="MEMBER_GENDER"				property="memberGender"/>
 		<result column="MEMBER_TELL"				property="memberTell"/>	
+		<result column="MEMBER_CODE"				property="memberCode"/>	
 		<result column="TEAM_ADMIN"					property="teamAdmin"/>
 		<result column="MEMBER_IMG_ATTACHED_NAME"	property="memberImgAttachedName"/>
 		<result column="POSITION"					property="position"/>
+		<result column="APPLY_CODE"					property="applyCode"/>
+		<result column="APPLY_SORT"					property="applySort"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.project.team.vo.TeamApplyVO" id="apply">
+		<id column="APPLY_CODE" 						property="applyCode"/>
+		<result column="TEAM_CODE" 						property="teamCode" />				
+		<result column="MEMBER_CODE" 					property="memberCode"/>
+		<result column="APPLY_SORT" 					property="applySort"/>
 	</resultMap>
 
 	
@@ -122,7 +132,7 @@
 	DELETE FROM TEAM 
 	WHERE TEAM_CODE = #{teamCode}
 	</delete>
-	
+	<!-- 팀 삭제 시 팀 이미지 삭제 -->
 	<delete id="deleteTeamImg">
 	DELETE FROM TEAM_LOGO_IMG
 	WHERE TEAM_CODE = #{teamCode}
@@ -150,7 +160,7 @@
 		AND T.TEAM_CODE = R.TEAM_CODE
 		ORDER BY RANK_TOTAL_SCORE DESC
 	</select>
-	
+	<!-- 팀 목록에서 팀원정보 조회 -->
 	<select id="selectTeamDetail" resultMap="teamView">
 		SELECT M.MEMBER_NAME
 		 , MEMBER_GENDER
@@ -163,18 +173,58 @@
 			FROM MEMBER M
 			WHERE M.TEAM_CODE = #{teamCode}
 	</select>
-	<!-- <select id="selectTeamListMember" resultMap="">
+	
+	<!-- 팀관리 팀원 조회 -->
+	<select id="selectTeamMemberManage" resultMap="teamView">
+		SELECT MEMBER_NAME
+        , MEMBER_CODE
+        , POSITION
+        , (SELECT MEMBER_IMG_ATTACHED_NAME 
+            FROM MEMBER_IMG IM
+            WHERE IM.MEMBER_CODE = M.MEMBER_CODE) AS MEMBER_IMG_ATTACHED_NAME
+    	FROM MEMBER M
+    	WHERE M.TEAM_CODE = #{teamCode}
+	
+	</select>
+	<!-- 팀원 상세조회  -->
+	<select id="selectTeamMemberDetail" resultMap="teamView">
+		SELECT MEMBER_NAME
+        , POSITION
+        , (SELECT MEMBER_IMG_ATTACHED_NAME 
+            FROM MEMBER_IMG IM
+            WHERE IM.MEMBER_CODE = M.MEMBER_CODE) AS MEMBER_IMG_ATTACHED_NAME
+        , TEAM_ADMIN
+        , MEMBER_GENDER
+        , MEMBER_TELL
+        FROM MEMBER M
+        WHERE M.MEMBER_CODE = #{memberCode}
+	</select>
+	
+	<insert id="insertTeamApply">
+	INSERT INTO TEAM_APPLY(
+    APPLY_CODE
+    , TEAM_CODE
+    , MEMBER_CODE
+    	) VALUES (
+    	(SELECT 'APPLY_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(APPLY_CODE, 7, 3))), 0)+1, 3, '0') FROM TEAM_APPLY)
+    	, #{teamCode}
+    	, #{memberCode}
+    	)
+	</insert>
+	
+	<select id="selectApplyMember" resultMap="teamView">
 		SELECT 
-		    M.MEMBER_NAME
-		    , M.MEMBER_GENDER
-		    , M.MEMBER_TELL
-		    , M.TEAM_ADMIN
-		    , MI.MEMBER_IMG_ATTACHED_NAME 
-		    , M.POSITION
+		  MEMBER_NAME
+		    , POSITION
+		    , M.MEMBER_CODE
+		    , MEMBER_GENDER
+		    , MEMBER_TELL
 		    , M.TEAM_CODE
-		FROM   MEMBER M, MEMBER_IMG MI, TEAM T
-		WHERE M.TEAM_CODE = 
-	</select> -->
+		FROM MEMBER M, TEAM_APPLY TM
+		WHERE M.TEAM_CODE = TM.TEAM_CODE
+		AND M.TEAM_CODE = #{teamCode}
+		AND APPLY_SORT = '1'
+	</select>
 	
 </mapper>
 

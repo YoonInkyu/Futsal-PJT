@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.kh.project.member.service.MemberService;
 import com.kh.project.member.vo.MemberVO;
 import com.kh.project.team.service.TeamService;
+import com.kh.project.team.vo.TeamApplyVO;
 import com.kh.project.team.vo.TeamLogoImgVO;
 import com.kh.project.team.vo.TeamVO;
 
@@ -54,8 +55,6 @@ public class TeamController {
 	@GetMapping("/teamInfo")
 	public String teamInfo(HttpSession session, Model model) {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
-		System.out.println("팀코드 들고오니? ");
-		System.out.println(teamCode);
 		
 		model.addAttribute("myTeam", teamService.teamManage(teamCode));
 		return "myTeamLayout/team/team_info";
@@ -172,10 +171,54 @@ public class TeamController {
 		model.addAttribute("teamList", teamService.selectTeamList(teamVO)); 
 		return "team/submenu_team_list";
 	}
+	// 팀 리스트 조회 -> 상세보기
 	@GetMapping("/teamDetail")
-	public String teamDetail(String teamCode, Model model) {
+	public String teamDetail(String teamCode, Model model, HttpSession session) {
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
 		model.addAttribute("teamDetail", teamService.selectTeamDetail(teamCode));
+		model.addAttribute("teamCode", teamCode);
+		model.addAttribute("memberCode", memberCode);
 		return "logPage/team/team_detail";
 	}
 	
+	// 팀관리 팀원조회
+	@GetMapping("/selectTeamMemberManage")
+	public String selectTeamMemberManage(HttpSession session, Model model) {
+		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		model.addAttribute("memberList",teamService.selectTeamMemberManage(teamCode));
+		model.addAttribute("applyMember",teamService.selectApplyMember(teamCode));
+		return "myTeamLayout/team/submenu_team_manage";
+	}
+	
+	// 팀관리 -> 팀원조회 -> 팀원상세 조회
+	@GetMapping("/teamMemberDetail")
+	public String teamMemberDetail(String memberCode, Model model) {
+		model.addAttribute("memberDetail",teamService.selectTeamMemberDetail(memberCode));
+		return "logPage/team/team_member_detail";
+	}
+	
+	// 팀가입 신청
+	@GetMapping("/insertTeamApply")
+	public String insertTeamApply(TeamApplyVO teamApplyVO, Model model) {
+		
+		teamService.insertTeamApply(teamApplyVO);
+		model.addAttribute("msg", "가입신청이 완료되었습니다.");
+		model.addAttribute("url", "selectTeamList");
+		return "team/alert";
+	}
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+

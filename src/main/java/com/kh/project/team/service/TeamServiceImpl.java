@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.kh.project.member.vo.MemberVO;
+import com.kh.project.team.vo.TeamApplyVO;
 import com.kh.project.team.vo.TeamLogoImgVO;
 import com.kh.project.team.vo.TeamVO;
 
@@ -73,6 +74,39 @@ public class TeamServiceImpl implements TeamService{
 	public List<TeamVO> selectTeamDetail(String teamCode) {
 		return sqlSession.selectList("teamMapper.selectTeamDetail", teamCode);
 	}
+	
+	// 팀 관리의 팀원목록 조회
+	@Override
+	public List<MemberVO> selectTeamMemberManage(String teamCode) {
+		
+		// 팀 멤버 조회
+		return sqlSession.selectList("teamMapper.selectTeamMemberManage", teamCode);
+	}
+
+	// 팀관리의 팀원목록 상세조회
+	@Override
+	public TeamVO selectTeamMemberDetail(String memberCode) {
+		return sqlSession.selectOne("teamMapper.selectTeamMemberDetail", memberCode);
+	}
+	
+	// 팀 가입신청
+	@Override
+	public void insertTeamApply(TeamApplyVO teamApplyVO) {
+		sqlSession.insert("teamMapper.insertTeamApply", teamApplyVO);
+		
+	}
+
+	// 가입신청 멤버 리스트
+	@Override
+	public List<MemberVO> selectApplyMember(String teamCode) {
+		return sqlSession.selectList("teamMapper.selectApplyMember", teamCode);
+
+	}
+	
+
+
+	
+	
 
 	
 	

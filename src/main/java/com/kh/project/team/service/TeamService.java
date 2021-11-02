@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import com.kh.project.member.vo.MemberVO;
+import com.kh.project.team.vo.TeamApplyVO;
 import com.kh.project.team.vo.TeamLogoImgVO;
 import com.kh.project.team.vo.TeamVO;
 
@@ -38,8 +39,16 @@ public interface TeamService {
 	// 팀 삭제
 	int deleteTeam(String teamCode);
 	
+	// 팀관리 팀원 조회
+	List<MemberVO> selectTeamMemberManage(String teamCode);
 	
+	// 팀관리의 팀원목록 상세조회
+	TeamVO selectTeamMemberDetail(String memberCode);
 	
+	// 팀 가입신청
+	void insertTeamApply(TeamApplyVO teamApplyVO);
 	
+	// 가입신청 멤버리스트
+	List<MemberVO> selectApplyMember(String teamCode);
 	
 }

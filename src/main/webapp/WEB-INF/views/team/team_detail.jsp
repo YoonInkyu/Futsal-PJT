@@ -35,7 +35,7 @@
 			</table>
 		</div>
 	<div class="modal-footer justify-content-between">
-		<button type="button" class="btn btn-outline-success">가입 신청</button>
+		<button type="button" class="btn btn-outline-success" onclick="location.href='insertTeamApply?teamCode=${teamCode}&memberCode=${memberCode }'">가입 신청</button>
 		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 	</div>
 </body>
