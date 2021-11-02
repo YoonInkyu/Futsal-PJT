@@ -20,6 +20,7 @@
 		<result column="TEAM_CODE" 					property="teamCode"/>
 		<result column="MEMBER_CODE" 				property="memberCode"/>
 		<result column="MEMBER_TELL" 				property="memberTell"/>
+		<result column="MEMBER_ID" 					property="memberId"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.mercenary.vo.MercenaryListVO" id="mercenaryList">
@@ -29,6 +30,7 @@
 		<result column="MEMBER_CODE" 				property="memberCode"/>
 		<result column="TEAM_CODE" 					property="teamCode"/>
 		<result column="MEMBER_NAME" 				property="memberName"/>
+		<result column="MEMBER_ID" 					property="memberId"/>
 		<result column="POSITION" 					property="position"/>
 		<result column="MERC_LIST_RESPONSE" 		property="mercListResponse"/>
 	</resultMap>
@@ -78,41 +80,53 @@
 	<select id="selectMercBoardList" resultMap="mercenary">
 		SELECT MERC_BOARD_CODE
             , MERC_BOARD_SORT
-            , MERC_BOARD_LOCATION
             , MERC_BOARD_WRITER
-            , MERC_BOARD_POSSIBLE
+            , MERC_BOARD_INTRO
+            , MERC_BOARD_REGDATE
+            , MERC_BOARD_APPLYNUMBER
             , MERC_BOARD_DATE
             , MERC_BOARD_START_TIME
             , MERC_BOARD_END_TIME
-            , MERC_BOARD_REGDATE
-            , MERC_BOARD_APPLYNUMBER
+            , MERC_BOARD_POSSIBLE
+            , MERC_BOARD_LOCATION
+            , TEAM_CODE
+            , MEMBER_CODE
+            , MEMBER_ID
 		    , ROW_NUM
 		FROM (
 		    SELECT MERC_BOARD_CODE
                 , MERC_BOARD_SORT
-                , MERC_BOARD_LOCATION
                 , MERC_BOARD_WRITER
-                , MERC_BOARD_POSSIBLE
+                , MERC_BOARD_INTRO
+                , MERC_BOARD_REGDATE
+                , MERC_BOARD_APPLYNUMBER
                 , MERC_BOARD_DATE
                 , MERC_BOARD_START_TIME
                 , MERC_BOARD_END_TIME
-                , MERC_BOARD_REGDATE
-                , MERC_BOARD_APPLYNUMBER
+                , MERC_BOARD_POSSIBLE
+                , MERC_BOARD_LOCATION
+                , TEAM_CODE
+                , MEMBER_CODE
+                , MEMBER_ID
 		        , ROWNUM AS ROW_NUM
 		    FROM (
 		            SELECT MERC_BOARD_CODE
                         , MERC_BOARD_SORT
-                        , MERC_BOARD_LOCATION
                         , MERC_BOARD_WRITER
-                        , MERC_BOARD_POSSIBLE
+                        , MERC_BOARD_INTRO
+                        , TO_CHAR(MERC_BOARD_REGDATE, 'YYYY-MM-DD') AS MERC_BOARD_REGDATE
+                        , MERC_BOARD_APPLYNUMBER
                         , MERC_BOARD_DATE
                         , MERC_BOARD_START_TIME
                         , MERC_BOARD_END_TIME
-                        , TO_CHAR(MERC_BOARD_REGDATE, 'YYYY-MM-DD') AS MERC_BOARD_REGDATE
-                        , MERC_BOARD_APPLYNUMBER
-                    FROM MERCENARY_BOARD
-		            WHERE 1 = 1
-		            AND MEMBER_CODE 
+                        , MERC_BOARD_POSSIBLE
+                        , MERC_BOARD_LOCATION
+                        , MB.TEAM_CODE AS TEAM_CODE
+                        , MB.MEMBER_CODE AS MEMBER_CODE
+                        , MEMBER_ID
+                    FROM MERCENARY_BOARD MB, MEMBER M
+                    WHERE MB.MEMBER_CODE = M.MEMBER_CODE
+		            AND MB.MEMBER_CODE 
 							NOT IN (
     							SELECT BLACKMEMBER_CODE 
     							FROM MEMBER_BLACKLIST 
@@ -127,7 +141,7 @@
 		            	AND MERC_BOARD_POSSIBLE = '${searchKeyword}'
 		            </if>
 		            <if test="searchValue != null and !searchValue.equals('')">
-		           		AND MERC_BOARD_WRITER LIKE '%'||#{searchValue}||'%'
+		           		AND MEMBER_ID LIKE '%'||#{searchValue}||'%'
 		            </if>
 		            ORDER BY MERC_BOARD_CODE DESC
 		        )
@@ -138,7 +152,7 @@
 	<!-- 게시글 수 -->
 	<select id="selectMercCnt" resultType="int">
 		SELECT COUNT(MERC_BOARD_CODE)
-		FROM MERCENARY_BOARD
+		FROM MERCENARY_BOARD MB, MEMBER M
 		WHERE 1 = 1
         <if test="searchSort != null and !searchSort.equals('')">
        	 	AND MERC_BOARD_SORT = '${searchSort}'
@@ -150,7 +164,7 @@
         	AND MERC_BOARD_POSSIBLE = '${searchKeyword}'
         </if>
         <if test="searchValue != null and !searchValue.equals('')">
-       		AND MERC_BOARD_WRITER LIKE '%'||#{searchValue}||'%'
+       		AND MEMBER_ID LIKE '%'||#{searchValue}||'%'
         </if>
 	</select>
 	
@@ -187,6 +201,7 @@
 		    , MB.TEAM_CODE
 		    , MB.MEMBER_CODE
 		    , MEMBER_TELL
+		    , MEMBER_ID
 		FROM MERCENARY_BOARD MB, MEMBER M
 		WHERE MB.MEMBER_CODE = M.MEMBER_CODE
 		AND MERC_BOARD_CODE = #{mercBoardCode}
@@ -221,6 +236,7 @@
 		SELECT MERC_LIST_CODE
 			, M.MEMBER_CODE
 		    , MEMBER_NAME
+		    , MEMBER_ID
 		    , POSITION
 		    , MERC_LIST_RESPONSE
 		FROM MEMBER M, MERC_APPLYLIST A

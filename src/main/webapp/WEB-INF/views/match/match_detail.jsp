@@ -22,12 +22,30 @@ $(document).ready(function() {
 	        	var str='';
 	        	str += '<td>';
 	        	str += '<select class="form-select" name="matchLocation">'
-	        	str += '<option selected value="' + result.matchLocation + '">' + result.matchLocation + '</option>';
-	        	//선택된 애는 option에 안나오게 어떻게 하는고임..??
-	        	str += '<option value="서울">서울</option>';
-	        	str += '<option value="경기">경기</option>';
-	        	str += '<option value="대전">대전</option>';
-	        	str += '<option value="대구">대구</option>';
+	        		if(result.matchLocation == '서울'){
+		        		str += '<option value="서울" selected>서울</option>';
+		        		str += '<option value="경기">경기</option>';
+		        		str += '<option value="대전">대전</option>';
+		        		str += '<option value="대구">대구</option>';
+		        	}
+		        	else if(result.matchLocation == '경기'){
+		        		str += '<option value="서울">서울</option>';
+		        		str += '<option value="경기" selected>경기</option>';
+		        		str += '<option value="대전">대전</option>';
+		        		str += '<option value="대구">대구</option>';
+		        	}
+		        	else if(result.matchLocation == '대전'){
+		        		str += '<option value="서울">서울</option>';
+		        		str += '<option value="경기">경기</option>';
+		        		str += '<option value="대전" selected>대전</option>';
+		        		str += '<option value="대구">대구</option>';
+		        	}
+		        	else if(result.matchLocation == '대구'){
+		        		str += '<option value="서울">서울</option>';
+		        		str += '<option value="경기">경기</option>';
+		        		str += '<option value="대전">대전</option>';
+		        		str += '<option value="대구" selected>대구</option>';
+		        	}
 	        	str += '</select>';
 	        	str += '</td>';
 	        	$('.locationTr').append(str);
@@ -85,6 +103,11 @@ $(document).ready(function() {
 	
 });
 </script>
+<style type="text/css">
+input[type=number] {
+	text-align: center;
+}
+</style>
 </head>
 <body>
 <!-- 용병 구인 상세보기 모달 내용 -->
@@ -132,13 +155,25 @@ $(document).ready(function() {
 					</tr>
 				</tbody>
 			</table>
-			<div class="input-group inputScore">
-				<c:if test="${not empty matchResult }">
-					 	<span class="input-group-text">매치 결과(홈 : 어웨이)</span>
-	        			<input type="number" name="matchResultHometeamScore" aria-label="First name" class="form-control" min="0" value="${matchResult.matchResultHometeamScore }" readonly>
-	        			<input type="number" name="matchResultAwayteamScore" aria-label="Last name" class="form-control" min="0" value="${matchResult.matchResultAwayteamScore }" readonly>
-				</c:if>
-			</div>
+			<c:if test="${not empty matchResult }">
+				<div class="input-group inputScore">
+				<table class="table">
+					<colgroup>
+						<col width="*">
+						<col width="40%">
+						<col width="34%">
+					</colgroup>
+					<tr>
+						<th></th>
+						<th>HOME SCORE</th>
+						<th>AWAY SCORE</th>
+					</tr>
+				</table>
+				 	<span class="input-group-text">매치 결과</span>
+        			<input type="number" name="matchResultHometeamScore" aria-label="First name" class="form-control" min="0" value="${matchResult.matchResultHometeamScore }" readonly>
+        			<input type="number" name="matchResultAwayteamScore" aria-label="Last name" class="form-control" min="0" value="${matchResult.matchResultAwayteamScore }" readonly>
+				</div>
+			</c:if>
 		</div>
 		<div class="modal-footer">
 			 <c:choose>

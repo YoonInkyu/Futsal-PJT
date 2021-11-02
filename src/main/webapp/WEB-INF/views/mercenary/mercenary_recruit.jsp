@@ -45,7 +45,7 @@ $(document).ready(function() {
 							<td>${mercBoard.mercBoardLocation }</td>
 							<td>${mercBoard.mercBoardDate } ${mercBoard.mercBoardStartTime } ~ ${mercBoard.mercBoardEndTime }</td>
 							<td>${mercBoard.mercBoardApplyNumber }명</td>
-							<td>${mercBoard.mercBoardWriter }</td>
+							<td>${mercBoard.memberId }</td>
 							<td>${mercBoard.mercBoardRegdate }</td>
 							<c:choose>
 								<c:when test="${mercBoard.mercBoardPossible eq '1' }">

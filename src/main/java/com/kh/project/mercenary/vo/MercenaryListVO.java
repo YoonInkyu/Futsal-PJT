@@ -9,10 +9,16 @@ public class MercenaryListVO {
 	private String memberCode;
 	private String teamCode;
 	private String memberName;
+	private String memberId;
 	private String position;
 	private String mercListResponse;
 	
-	
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	public String getMercListResponse() {
 		return mercListResponse;
 	}

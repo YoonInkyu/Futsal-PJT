@@ -21,12 +21,30 @@ $(document).ready(function() {
 	        	var str='';
 	        	str += '<td>';
 	        	str += '<select class="form-select" name="mercBoardLocation">'
-	        	str += '<option selected value="' + result.mercBoardLocation + '">' + result.mercBoardLocation + '</option>';
-	        	//선택된 애는 option에 안나오게 어떻게 하는고임..??(안댕.... ''로 감싸야 되는데 안감싸짐..)
-	        	str += '<option value="서울" <c:if test="' + result.mercBoardLocation + ' == ''서울'}">selected</c:if>>서울</option>';
-	        	str += '<option value="경기" <c:if test="' + result.mercBoardLocation + ' == ''경기'}">selected</c:if>>경기</option>';
-	        	str += '<option value="대전" <c:if test="' + result.mercBoardLocation + ' == ''대전'}">selected</c:if>>대전</option>';
-	        	str += '<option value="대구" <c:if test="' + result.mercBoardLocation + ' == ''대구'}">selected</c:if>>대구</option>';
+	        	if(result.mercBoardLocation == '서울'){
+	        		str += '<option value="서울" selected>서울</option>';
+	        		str += '<option value="경기">경기</option>';
+	        		str += '<option value="대전">대전</option>';
+	        		str += '<option value="대구">대구</option>';
+	        	}
+	        	else if(result.mercBoardLocation == '경기'){
+	        		str += '<option value="서울">서울</option>';
+	        		str += '<option value="경기" selected>경기</option>';
+	        		str += '<option value="대전">대전</option>';
+	        		str += '<option value="대구">대구</option>';
+	        	}
+	        	else if(result.mercBoardLocation == '대전'){
+	        		str += '<option value="서울">서울</option>';
+	        		str += '<option value="경기">경기</option>';
+	        		str += '<option value="대전" selected>대전</option>';
+	        		str += '<option value="대구">대구</option>';
+	        	}
+	        	else if(result.mercBoardLocation == '대구'){
+	        		str += '<option value="서울">서울</option>';
+	        		str += '<option value="경기">경기</option>';
+	        		str += '<option value="대전">대전</option>';
+	        		str += '<option value="대구" selected>대구</option>';
+	        	}
 	        	str += '</select>';
 	        	str += '</td>';
 	        	$('.locationTr').append(str);
@@ -72,7 +90,7 @@ $(document).ready(function() {
 					</tr>
 					<tr class="writerTr">
 						<th scope="row">작성자</th>
-						<td class="al_left writer">${mercVO.mercBoardWriter }</td>
+						<td class="al_left writer">${mercVO.memberId }</td>
 					</tr>
 					<tr class="locationTr">
 						<th scope="row">지역</th>
@@ -124,7 +142,7 @@ $(document).ready(function() {
 	<table class="table">
 		<thead>
 			<tr>
-				<th scope="col">멤버 이름</th>
+				<th scope="col">지원자</th>
 				<th scope="col">포지션</th>
 				<th scope="col">수락/거절</th>
 			</tr>
@@ -132,7 +150,7 @@ $(document).ready(function() {
 		<tbody>
 			<c:forEach items="${mercList }" var="merc">
 				<tr>
-					<td>${merc.memberName }</td>
+					<td>${merc.memberId }</td>
 					<td>${merc.position }</td>
 					<td>
 						<c:choose>

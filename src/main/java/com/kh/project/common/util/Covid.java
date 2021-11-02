@@ -57,7 +57,7 @@ public class Covid {
 			// TODO: handle exception
 		}
 	}
-	private static String getTagValue(String tag, Element eElement) {
+	public static String getTagValue(String tag, Element eElement) {
 		NodeList itemList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
 		
 		Node nValue = (Node) itemList.item(0);
