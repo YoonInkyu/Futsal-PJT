@@ -19,8 +19,9 @@ public interface MemberService {
 	void insertMemberImg(MemberImgVO memberImgVO);
 	//다음 회원코드 조회
 	String nextMemberCode();
-	//로그인
+	//아이디 비밀번호 확인
 	boolean checkLogin(MemberVO memberVO);
+	//로그인
 	String login(MemberVO memberVO);
 	//세션정보
 	MemberVO selectMemberInfo(String memberCode);
@@ -32,6 +33,12 @@ public interface MemberService {
 	void updateMemberInfo(MemberVO memberVO);
 	//회원이미지 수정하기
 	void updateMemberImg(MemberImgVO memberImgVO);
+	//회원아이디에서 회원코드 빼오기
+	String memberCode(String memberId);
+	//블랙중복확인
+	boolean checkMemberBlack(MemberBlacklistVO memberBlacklistVO);
+	//회원 블랙하기
+	boolean addMemberBlack(MemberBlacklistVO memberBlacklistVO);
 	//회원블랙리스트 보기
 	List<MemberBlacklistVO> memberBlackList (String memberCode);
 	//회원블랙 삭제하기

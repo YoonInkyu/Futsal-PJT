@@ -113,7 +113,11 @@ public class MemberController {
 		boolean result = memberService.checkLogin(memberVO);
 		return result;
 	}
-
+	//로그인 페이지로 이동
+	@GetMapping("/goLogin")
+	public String goLogin() {
+		return  "logPage/member/login";
+	}
 	//로그인 하기
 	@PostMapping("/login")
 	public String login(MemberVO memberVO, HttpSession session) {
@@ -185,6 +189,29 @@ public class MemberController {
 		session.setAttribute("loginInfo", memberService.selectMemberInfo(memberVO.getMemberCode()));
 		return  "redirect:/member/myPage";
 	}
+	//멤버블랙 중복확인
+	@ResponseBody
+	@PostMapping("/checkMemberBlack")
+	public boolean changePw(String blackMemberId, HttpSession session) {
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+		MemberBlacklistVO memberBlacklistVO = new MemberBlacklistVO();
+		memberBlacklistVO.setMemberCode(memberCode);
+		memberBlacklistVO.setBlackmemberCode(memberService.memberCode(blackMemberId));
+		return memberService.checkMemberBlack(memberBlacklistVO);
+	}
+	//멤버블랙 추가하기
+	@ResponseBody
+	@PostMapping("/addMemberBlack")
+	public boolean addMemberBlack(String memberblackMemberId,String blackComment, HttpSession session) {
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+		String blackmemberCode = memberService.memberCode(memberblackMemberId);
+		MemberBlacklistVO memberBlacklistVO = new MemberBlacklistVO();
+		memberBlacklistVO.setMemberCode(memberCode);
+		memberBlacklistVO.setBlackmemberCode(blackmemberCode);
+		memberBlacklistVO.setBlackComment(blackComment);
+		return memberService.addMemberBlack(memberBlacklistVO);
+	}
+	
 	//멤버 블랙리스트 관리페이지
 	@GetMapping("/goMemberBlacklist")
 	public String goMemberBlacklist(HttpSession session, Model model) {

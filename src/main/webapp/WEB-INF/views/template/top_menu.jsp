@@ -9,14 +9,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="/resources/template/js/top_menu.js?ver=5"></script>
-<style>
-/* .sticky { */
-/* 	position: fixed; */
-/* 	top: 0; */
-/* 	width: 100%; */
-/* } */
-</style>
-
 </head>
 <body>
 
@@ -74,7 +66,8 @@
 
 				<div style="text-align: right;">
 					<a class="navbar-brand" href="/member/goJoin"><img src="/resources/img/common/login.png" width="8%" height="">JOIN</a> 
-					<span class="navbar-brand" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;"><img src="/resources/img/common/login.png" width="8%" height="">LOGIN</span>
+					<!-- <a class="navbar-brand" href="/member/goLogin"><img src="/resources/img/common/login.png" width="8%" height="">LOGIN</a> -->
+					<span class="navbar-brand" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;"><img src="/resources/img/common/login.png" width="8%" height="">LOGIN</span> 
 				</div>
 
 			</c:if>

@@ -115,6 +115,5 @@ $(document).ready(function(){
                alert('실패');
             }
       });
-		
 	}
 })(jQuery);

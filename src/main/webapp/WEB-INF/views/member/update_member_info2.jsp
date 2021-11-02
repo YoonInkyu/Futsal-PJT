@@ -43,6 +43,9 @@
 								}
 							</script>
 						</div>
+						<%-- <div class="d-grid mb-5">
+							<input class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#baseImgModal" value="기본사진으로 변경" onclick="baseImg(memberCode=${member.memberCode});">
+						</div> --%>
 						<div class="col-12 mb-5">
 							<label for="inputId" class="form-label">아이디</label> 
 							<input type="text" class="form-control" id="memberId" name="memberId" readonly value="${member.memberId }">

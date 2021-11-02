@@ -148,6 +148,27 @@
 		FROM MEMBER_VIEW
 		WHERE MEMBER_CODE = #{memberCode}
 	</select>
+	<!-- 자유게시판 회원아디에서 회원코드 빼오기 -->
+	<select id="memberCode" resultType="String">
+	SELECT MEMBER_CODE FROM MEMBER WHERE MEMBER_ID = #{memberId}
+	</select>
+	<!-- 멤버 블랙 아이디 중복체크 -->
+	<select id="checkMemberBlack" resultType="String">
+		SELECT BLACKMEMBER_CODE FROM MEMBER_BLACKLIST WHERE MEMBER_CODE = #{memberCode} AND BLACKMEMBER_CODE = #{blackmemberCode}
+	</select>
+	
+	<!-- 멤버 블랙하기 -->
+	<insert id="addMemberBlack">
+		INSERT INTO MEMBER_BLACKLIST(
+			BLACKMEMBER_CODE
+    		, MEMBER_CODE
+    		, BLACK_COMMENT
+		) VALUES (
+    		#{blackMemberCode}
+    		, #{memberCode}
+    		, #{blackComment}
+		)
+	</insert>
 	
 	<!-- 멤버 블랙리스트 보기 -->
 	<select id="memberBlackList" resultMap="memberBlacklist">

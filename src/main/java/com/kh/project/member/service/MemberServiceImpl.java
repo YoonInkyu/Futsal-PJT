@@ -89,6 +89,18 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO selectMemberInfo(String memberCode) {
 		return sqlSession.selectOne("memberMapper.selectMemberInfo", memberCode);
 	}
+	@Override
+	public String memberCode(String memberId) {
+		return sqlSession.selectOne("memberMapper.memberCode", memberId);
+	}
+	@Override
+	public boolean checkMemberBlack(MemberBlacklistVO memberBlacklistVO) {
+		return sqlSession.selectOne("memberMapper.checkMemberBlack", memberBlacklistVO) == null ? true : false;
+	}
+	@Override
+	public boolean addMemberBlack(MemberBlacklistVO memberBlacklistVO) {
+		return sqlSession.insert("memberMapper.addMemberBlack", memberBlacklistVO) == 0 ? false : true;
+	}
 
 
 	
