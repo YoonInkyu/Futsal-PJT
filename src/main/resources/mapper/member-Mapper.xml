@@ -164,7 +164,7 @@
     		, MEMBER_CODE
     		, BLACK_COMMENT
 		) VALUES (
-    		#{blackMemberCode}
+    		#{blackmemberCode}
     		, #{memberCode}
     		, #{blackComment}
 		)

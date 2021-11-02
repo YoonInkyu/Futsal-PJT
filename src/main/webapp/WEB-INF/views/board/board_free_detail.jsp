@@ -59,7 +59,6 @@
 									</div>
 								</td>
 								</c:if>
-
 								<td>${freeInfo.createDateFree }</td>
 								<td>${freeInfo.readCntFree }</td>
 							</tr>
@@ -193,9 +192,21 @@
 					</thead>
 
 					<tbody>
-
 						<tr>
-							<td>${replyFree.writerFree }</td>
+							<c:if test="${replyFree.writerFree eq loginInfo.memberId}">
+								<td>${replyFree.writerFree }</td>
+							</c:if>
+							<c:if test="${replyFree.writerFree ne loginInfo.memberId}">
+								<td>
+									<div class="btn-group dropend">
+										<button type="button" class="btn btn-outline-primary dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${replyFree.writerFree }">${replyFree.writerFree }</button>
+										<ul class="dropdown-menu">
+											<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addMemberBlackModal" style="cursor: pointer;">블랙리스트 추가</li>
+											<li class="dropdown-item">소속 팀 보기</li>
+										</ul>
+									</div>
+								</td>
+							</c:if>
 							<td>${replyFree.createDateFree }</td>
 						</tr>
 

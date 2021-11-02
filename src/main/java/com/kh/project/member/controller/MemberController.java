@@ -202,9 +202,9 @@ public class MemberController {
 	//멤버블랙 추가하기
 	@ResponseBody
 	@PostMapping("/addMemberBlack")
-	public boolean addMemberBlack(String memberblackMemberId,String blackComment, HttpSession session) {
+	public boolean addMemberBlack(String blackMemberId,String blackComment, HttpSession session) {
 		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
-		String blackmemberCode = memberService.memberCode(memberblackMemberId);
+		String blackmemberCode = memberService.memberCode(blackMemberId);
 		MemberBlacklistVO memberBlacklistVO = new MemberBlacklistVO();
 		memberBlacklistVO.setMemberCode(memberCode);
 		memberBlacklistVO.setBlackmemberCode(blackmemberCode);
