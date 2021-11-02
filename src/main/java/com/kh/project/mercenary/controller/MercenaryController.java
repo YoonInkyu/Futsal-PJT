@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.project.common.util.CurrentDateTime;
+import com.kh.project.common.util.MessageService;
 import com.kh.project.member.service.MemberService;
 import com.kh.project.member.vo.MemberVO;
 import com.kh.project.mercenary.service.MercenaryService;
@@ -149,7 +150,7 @@ public class MercenaryController {
 	}
 	//용병 구인구직 신청하기
 	@GetMapping("/updateRecruitCnt")
-	public String updateRecruitCnt(Model model, MercenaryVO mercenaryVO, HttpSession session) {
+	public String updateRecruitCnt(Model model, MercenaryVO mercenaryVO, HttpSession session, String memberTell) {
 		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
 		if(memberCode == null) {
 			model.addAttribute("msg", "로그인해야 신청 가능 합니다.");
@@ -157,6 +158,11 @@ public class MercenaryController {
 			return "mercenary/alert";
 		}
 		mercenaryService.insertMercList(mercenaryVO);
+		
+		//신청시 문자 전송
+		String content = "[FootBall] 용병 신청이 도착했습니다. 홈페이지에서 확인해 주세요";
+		MessageService.sendMessage(memberTell, content);
+		
 		return "redirect:/mercenary/recruit";
 	}
 	//용병 구인구직 수락

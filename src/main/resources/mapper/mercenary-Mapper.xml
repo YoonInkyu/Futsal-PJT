@@ -19,6 +19,7 @@
 		<result column="MERC_BOARD_LOCATION" 		property="mercBoardLocation"/>
 		<result column="TEAM_CODE" 					property="teamCode"/>
 		<result column="MEMBER_CODE" 				property="memberCode"/>
+		<result column="MEMBER_TELL" 				property="memberTell"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.mercenary.vo.MercenaryListVO" id="mercenaryList">
@@ -172,9 +173,23 @@
 	
 	<!-- 용병 구인구직 상세보기 -->
 	<select id="selectMercDetail" resultMap="mercenary">
-		SELECT *
-		FROM MERCENARY_BOARD
-		WHERE MERC_BOARD_CODE = #{mercBoardCode}
+		SELECT MERC_BOARD_CODE
+		    , MERC_BOARD_SORT
+		    , MERC_BOARD_WRITER
+		    , MERC_BOARD_INTRO
+		    , MERC_BOARD_REGDATE
+		    , MERC_BOARD_APPLYNUMBER
+		    , MERC_BOARD_DATE
+		    , MERC_BOARD_START_TIME
+		    , MERC_BOARD_END_TIME
+		    , MERC_BOARD_POSSIBLE
+		    , MERC_BOARD_LOCATION
+		    , MB.TEAM_CODE
+		    , MB.MEMBER_CODE
+		    , MEMBER_TELL
+		FROM MERCENARY_BOARD MB, MEMBER M
+		WHERE MB.MEMBER_CODE = M.MEMBER_CODE
+		AND MERC_BOARD_CODE = #{mercBoardCode}
 	</select>
 	
 	<!-- 용병 구인구직 지원하기 -->

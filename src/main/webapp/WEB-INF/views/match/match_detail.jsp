@@ -154,7 +154,7 @@ $(document).ready(function() {
 				</c:when>
 				<c:otherwise>
 					<c:if test="${matchVO.matchPossible eq '1' }">
-						<input type="button" class="btn btn-primary" value="신청하기" onclick="location.href='/match/updateApplyMatch?matchCode=${matchVO.matchCode}&teamCodeAway=${sessionScope.loginInfo.teamCode }'">
+						<input type="button" class="btn btn-primary" value="신청하기" onclick="location.href='/match/updateApplyMatch?matchCode=${matchVO.matchCode}&memberTell=${matchVO.memberTell }&teamCodeAway=${sessionScope.loginInfo.teamCode }'">
 					</c:if>
 				</c:otherwise>
 			</c:choose>

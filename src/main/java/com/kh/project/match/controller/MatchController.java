@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.project.common.util.CurrentDateTime;
+import com.kh.project.common.util.MessageService;
 import com.kh.project.match.service.MatchService;
 import com.kh.project.match.vo.MatchManageVO;
 import com.kh.project.match.vo.MatchResultVO;
@@ -108,7 +109,7 @@ public class MatchController {
 	
 	//매치 신청하기
 	@GetMapping("/updateApplyMatch")
-	public String updateApplyMatch(MatchManageVO matchManageVO, HttpSession session, Model model) {
+	public String updateApplyMatch(MatchManageVO matchManageVO, HttpSession session, Model model, String memberTell) {
 		//로그인 여부 확인
 		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
 		if(memberCode == null) {
@@ -126,6 +127,11 @@ public class MatchController {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 		matchManageVO.setTeamCodeAway(teamCode);
 		matchService.insertApplyMatch(matchManageVO);
+		
+		//신청시 문자 전송
+		String content = "[FootBall] 매치 신청이 도착했습니다. 홈페이지에서 확인해 주세요";
+		MessageService.sendMessage(memberTell, content);
+		
 		return "redirect:/match/matchList";
 	}
 	

@@ -22,6 +22,9 @@
 		<result column="RANK_DRAW"	 					property="rankDraw"/>
 		<result column="RANK_LOSE"	 					property="rankLose"/>
 		<result column="RANK_TOTAL_SCORE"	 			property="rankTotalScore"/>
+		<result column="MEMBER_NAME"	 				property="memberName"/>
+		<result column="MEMBER_CODE"	 				property="memberCode"/>
+		<result column="MEMBER_TELL"	 				property="memberTell"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.match.vo.MatchManageVO" id="matchManage">
@@ -138,9 +141,25 @@
 	
 	<!-- 매치 상세보기 -->
 	<select id="selectMatchDetail" resultMap="match">
-		SELECT *
-		FROM MATCH
-		WHERE MATCH_CODE = #{matchCode}
+		SELECT MC.MATCH_CODE
+		    , MC.TEAM_CODE
+		    , MC.TEAM_CODE_AWAY
+		    , MC.MATCH_APPLYNUM
+		    , MC.MATCH_WRITER
+		    , MC.MATCH_INTRO
+		    , MC.MATCH_REGDATE
+		    , MC.MATCH_DATE
+		    , MC.MATCH_START_TIME
+		    , MC.MATCH_END_TIME
+		    , MC.MATCH_POSSIBLE
+		    , MC.MATCH_LOCATION
+		    , MEMBER_NAME
+		    , M.MEMBER_CODE
+		    , MEMBER_TELL
+		FROM MATCH MC, TEAM T, MEMBER M
+		WHERE MC.TEAM_CODE = T.TEAM_CODE
+		AND MC.TEAM_CODE = M.TEAM_CODE
+		AND MATCH_CODE = #{matchCode}
 	</select>
 	
 	<!-- 매치 신청하기 -->

@@ -20,8 +20,14 @@ public class MercenaryVO extends PageVO {
 	private String mercBoardLocation;
 	private String memberCode;
 	private String teamCode;
+	private String memberTell;
 	
-	
+	public String getMemberTell() {
+		return memberTell;
+	}
+	public void setMemberTell(String memberTell) {
+		this.memberTell = memberTell;
+	}
 	public String getMercBoardSort() {
 		return mercBoardSort;
 	}
