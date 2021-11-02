@@ -48,7 +48,16 @@
 								<td>${noticeInfo.readCntNotice }</td>
 							</tr>
 							<tr>
-								<td colspan="4">첨부파일 : ${noticeInfo.fileNameNotice }</td>
+								<td colspan="4">
+<%-- 								<c:forEach items="" var=""> --%>
+<!-- 디테일 올때 셀렉트 쿼리 짜야됨 -->
+								<a href="C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\" >첨부파일 : ${noticeInfo.fileNameNotice }</a>
+<%-- 								<a href="C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\" >첨부파일 : ${noticeInfo.fileNameNotice }</a> --%>
+								
+								
+<%-- 								</c:forEach> --%>
+								
+								</td>
 							</tr>
 
 						</tbody>
@@ -65,7 +74,6 @@
 
 		<!-- 글 내용 -->
 		<div class="row mb-3" style="border-bottom: 1px solid gray; height: 30rem; word-break: break-all;">${noticeInfo.contentNotice }</div>
-
 
 
 		<!-- 버튼 -->
@@ -108,7 +116,7 @@
 							<div class="input-group">
 
 								<span class="input-group-text" id="basic-addon1">댓글 입력</span> 
-								<input type="text" class="form-control" name="contentNotice" placeholder="입력..." aria-label="Username" aria-describedby="basic-addon1" required>
+								<input type="text" class="form-control" name="contentNotice" placeholder="입력..." aria-label="Username" aria-describedby="basic-addon1" onkeyup="contentNoticeReply_checkByte(this);" required>
 
 								<button type="submit" class="btn btn-success">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
@@ -121,13 +129,14 @@
 
 						</form>
 
+						<div class="mt-3">글자수 제한 (<span id="nowByte2">0</span>/500bytes)</div>
+
 					</c:when>
 
 					<c:otherwise>
 
 						<div class="input-group ">
-							<span class="input-group-text" id="basic-addon1">댓글 입력</span> 
-							<input type="text" class="form-control" placeholder="로그인을 하셔야 댓글 입력이 가능 합니다." aria-label="Username" aria-describedby="basic-addon1" readonly>
+							<span class="input-group-text" id="basic-addon1">댓글 입력</span> <input type="text" class="form-control" placeholder="로그인을 하셔야 댓글 입력이 가능 합니다." aria-label="Username" aria-describedby="basic-addon1" readonly>
 
 							<button type="submit" class="btn btn-success">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
@@ -157,8 +166,7 @@
 
 			<!-- 로그인 이미지(이미지 불러 오고 링크 걸어서 정보로 갈수 있게 할 예정) -->
 			<div class="col-3 text-end">
-				<i class="bi bi-camera-fill"></i> 
-				<img src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="30%;" height="30%;">
+				<i class="bi bi-camera-fill"></i> <img src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="30%;" height="30%;">
 			</div>
 
 
@@ -214,28 +222,53 @@
 
 
 
-
-
-
-
-
-
-
-
 	<!-- ============================== 스크립트 부분 ============================== -->
 
 	<script type="text/javascript">
 
-function deleteBoardNotice(boardNumNotice) {
-	
-	var result = confirm('삭제하시겠습니까?');
-	
-	if (result) {
-		
-		location.href= '/board/deleteBoardNotice?boardNumNotice=' + boardNumNotice;
+	// 	공지사항 삭제 알람
+	function deleteBoardNotice(boardNumNotice) {
+
+		var result = confirm('삭제하시겠습니까?');
+
+		if (result) {
+
+			location.href = '/board/deleteBoardNotice?boardNumNotice=' + boardNumNotice;
+		}
 	}
-}
-</script>
+	
+	
+	// 공지사항 댓글 글자수 제한
+	function contentNoticeReply_checkByte(obj) {
+		const maxByte = 500; //최대 바이트
+		const text_val = obj.value; //입력한 문자
+		const text_len = text_val.length; //입력한 문자수
+
+		let totalByte = 0;
+		for (let i = 0; i < text_len; i++) {
+			const each_char = text_val.charAt(i);
+			const uni_char = escape(each_char) //유니코드 형식으로 변환
+			if (uni_char.length > 4) {
+				// 한글 : 2Byte
+				totalByte += 2;
+			} else {
+				// 영문,숫자,특수문자 : 1Byte
+				totalByte += 1;
+			}
+		}
+
+		if (totalByte > maxByte) {
+			alert('최대 500Byte까지만 입력가능합니다.');
+			document.getElementById("nowByte2").innerText = totalByte;
+			document.getElementById("nowByte2").style.color = "red";
+		} else {
+			document.getElementById("nowByte2").innerText = totalByte;
+			document.getElementById("nowByte2").style.color = "green";
+		}
+	}
+
+	</script>
+
 
 
 </body>

@@ -3,6 +3,7 @@ package com.kh.project.board.service;
 import java.util.List;
 
 import com.kh.project.board.vo.BoardNoticeVO;
+import com.kh.project.board.vo.NoticeImgVO;
 
 public interface BoardNoticeService {
 
@@ -24,6 +25,13 @@ public interface BoardNoticeService {
 	// 공지사항 글 삭제
 	int deleteBoardNotice(BoardNoticeVO boardNoticeVO);
 	
+	//공지사항 이미지 코드 조회
+	int selectNextNumber();
 	
+	//공지사항 이미지
+	void insertImgs(BoardNoticeVO boardNoticeVO);
+	
+	//공지사항 다음 넘버 조회
+	int selectNextNoticeNum();
 
 }

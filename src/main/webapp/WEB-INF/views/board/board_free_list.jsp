@@ -76,8 +76,8 @@ tr {
 
 								<c:otherwise>
 
-									<%-- <tr onclick="location.href='/board/selectPwFree?boardPwFree=' + ${freeInfo.boardPwFree }'&boardNumFree=' + ${freeInfo.boardNumFree };"> --%>
-									<tr data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="selectPwFree(${freeInfo.boardPwFree }&${freeInfo.boardNumFree });">
+									
+									<tr data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="selectModal(${freeInfo.boardPwFree},${freeInfo.boardNumFree })">
 										<td>${freeInfo.boardNumFree }</td>
 
 										<td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-lock2" viewBox="0 0 16 16">
@@ -195,7 +195,7 @@ tr {
 						<input type="password" class="form-control rounded-4" id="inputPwFree" placeholder="Password"> <label for="inputPwFree">입력...</label>
 					</div>
 
-					<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" data-bs-dismiss="modal" onclick="checkPwFree(${freeInfo.boardPwFree });">확 인</button>
+					<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" data-bs-dismiss="modal" id="checkPw" onclick="checkPwFree();">확 인</button>
 
 
 				</div>
@@ -215,11 +215,11 @@ tr {
 
 	<script type="text/javascript">
 
-		function checkPwFree(boardNumFree) {
+// 		function checkPwFree(boardNumFree) {
 	
-			var inputPwFree = document.getElementById('inputPwFree').value;
+// 			var inputPwFree = document.getElementById('inputPwFree').value;
 			
-			var boardPwFree = document.getElementById('boardPwFree').value;
+// 			var boardPwFree = document.getElementById('boardPwFree').value;
 			
 			
 // 			//웹페이지 콘솔에서 입력 및 받아 오는 값 확인
@@ -228,20 +228,69 @@ tr {
 			
 			
 			
-			if (inputPwFree != boardPwFree) {
+// 			if (inputPwFree != boardPwFree) {
 				
-				alert('비밀번호를 확인하세요.')
+// 				alert('비밀번호를 확인하세요.')
 				
-				inputPwFree.value = '';
+// 				inputPwFree.value = '';
 				
-				inputPwFree.focus();
+// 				inputPwFree.focus();
 				
-				return;
-			}
+// 				return;
+// 			}
 			
-			location.href = '/board/goFreeDetail?boardNumFree=' + boardNumFree;
+// 			location.href = '/board/goFreeDetail?boardNumFree=' + boardNumFree;
 
-		}
+// 		}
+		
+		
+		
+		
+		(function($) {
+			
+			selectModal = function(boardPwFree,boardNumFree){
+				
+				//내가 input에 입력한 비번
+				
+				
+// 				$(document).on('click', '#inputPwFree', function() {
+// 					var str = '<input type="hidden" value="' + boardPwFree + '">';
+// 					$(this).html(str);
+					
+				}
+				
+				
+				function checkPwFree(boardNumFree) {
+					
+					var inputPwFree = document.getElementById('inputPwFree').value;
+					
+					var boardPwFree = document.getElementById('boardPwFree').value;
+					
+					
+//		 			//웹페이지 콘솔에서 입력 및 받아 오는 값 확인
+//		 			console.log('입력한 비밀번호 = ' + inputPwFree);
+//		 			console.log('진짜 비밀번호 = ' + boardPwFree);
+					
+					
+					
+					if (inputPwFree != boardPwFree) {
+						
+						alert('비밀번호를 확인하세요.')
+						
+						inputPwFree.value = '';
+						
+						inputPwFree.focus();
+						
+						return;
+					}
+					
+					location.href = '/board/goFreeDetail?boardNumFree=' + boardNumFree;
+
+				}
+			};
+
+		})(jQuery);
+		
 	</script>
 
 

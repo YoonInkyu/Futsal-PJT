@@ -117,8 +117,7 @@
 
 							<div class="input-group">
 
-								<span class="input-group-text" id="basic-addon1">댓글 입력</span> 
-								<input type="text" class="form-control" name="contentFree" placeholder="입력..." aria-label="Username" aria-describedby="basic-addon1" required>
+								<span class="input-group-text" id="basic-addon1">댓글 입력</span> <input type="text" class="form-control" name="contentFree" placeholder="입력..." aria-label="Username" aria-describedby="basic-addon1" onkeyup="contentFreeReply_checkByte(this);" required>
 
 								<button type="submit" class="btn btn-success">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
@@ -131,13 +130,14 @@
 
 						</form>
 
+						<div class="mt-3">글자수 제한 (<span id="nowByte2">0</span>/500bytes)</div>
+
 					</c:when>
 
 					<c:otherwise>
 
 						<div class="input-group ">
-							<span class="input-group-text" id="basic-addon1">댓글 입력</span> 
-							<input type="text" class="form-control" placeholder="로그인을 하셔야 댓글 입력이 가능 합니다." aria-label="Username" aria-describedby="basic-addon1" readonly>
+							<span class="input-group-text" id="basic-addon1">댓글 입력</span> <input type="text" class="form-control" placeholder="로그인을 하셔야 댓글 입력이 가능 합니다." aria-label="Username" aria-describedby="basic-addon1" readonly>
 
 							<button type="submit" class="btn btn-success">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
@@ -223,28 +223,53 @@
 
 
 
-
-
-
-
-
-
-
-
 	<!-- ============================== 스크립트 부분 ============================== -->
 
 	<script type="text/javascript">
 
-function deleteBoardFree(boardNumFree) {
-	
-	var result = confirm('삭제하시겠습니까?');
-	
-	if (result) {
-		
-		location.href= '/board/deleteBoardFree?boardNumFree=' + boardNumFree;
+	// 	공지사항 삭제 알람
+	function deleteBoardFree(boardNumFree) {
+
+		var result = confirm('삭제하시겠습니까?');
+
+		if (result) {
+
+			location.href = '/board/deleteBoardFree?boardNumFree=' + boardNumFree;
+		}
 	}
-}
-</script>
+	
+	
+	// 공지사항 댓글 글자수 제한
+	function contentFreeReply_checkByte(obj) {
+		const maxByte = 500; //최대 바이트
+		const text_val = obj.value; //입력한 문자
+		const text_len = text_val.length; //입력한 문자수
+
+		let totalByte = 0;
+		for (let i = 0; i < text_len; i++) {
+			const each_char = text_val.charAt(i);
+			const uni_char = escape(each_char) //유니코드 형식으로 변환
+			if (uni_char.length > 4) {
+				// 한글 : 2Byte
+				totalByte += 2;
+			} else {
+				// 영문,숫자,특수문자 : 1Byte
+				totalByte += 1;
+			}
+		}
+
+		if (totalByte > maxByte) {
+			alert('최대 500Byte까지만 입력가능합니다.');
+			document.getElementById("nowByte2").innerText = totalByte;
+			document.getElementById("nowByte2").style.color = "red";
+		} else {
+			document.getElementById("nowByte2").innerText = totalByte;
+			document.getElementById("nowByte2").style.color = "green";
+		}
+	}
+
+	</script>
+
 
 
 </body>

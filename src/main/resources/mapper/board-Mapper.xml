@@ -123,26 +123,23 @@
 	</delete>
 
 
-
-<!-- 맵퍼 참고 이미지 참고 -->
-<!-- 	<insert id="insertImgs"> -->
-<!-- 		INSERT INTO BOOK_IMG ( -->
-<!-- 		IMG_CODE -->
-<!-- 		, ORIGIN_IMG_NAME -->
-<!-- 		, ATTACHED_IMG_NAME -->
-<!-- 		, ITEM_CODE -->
-<!-- 		, IS_MAIN -->
-<!-- 		) -->
-<!-- 		<foreach collection="imgList" item="imgInfo" separator="UNION ALL"> -->
-			<!-- collection="imgList" : 반복될 대상(리스트) / item="imgInfo" : 반복해서 뽑아낼 값 한개 / separator="UNION ALL" : 구분자 반복 할때 마다 넣는다. -->
-<!-- 			SELECT #{imgInfo.imgCode} -->
-<!-- 			, #{imgInfo.originImgName} -->
-<!-- 			, #{imgInfo.attachedImgName} -->
-<!-- 			, #{imgInfo.itemCode} -->
-<!-- 			, #{imgInfo.isMain} -->
-<!-- 			FROM DUAL -->
-<!-- 		</foreach> -->
-<!-- 	</insert> -->
+	<!-- 공지사항 이미지 업로드 -->
+	<insert id="insertImgs">
+	INSERT INTO NOTICE_IMG (
+		NOTICE_IMG_CODE
+		, NOTICE_IMG_ORIGN_NAME
+		, NOTICE_IMG_ATTACHED_NAME
+		, BOARD_NUM_NOTICE
+	)
+	<foreach collection="noticeImgList" item="imgInfo" separator="UNION ALL">
+		<!-- collection="imgList" : 반복될 대상(리스트) / item="imgInfo" : 반복해서 뽑아낼 값 한개 / separator="UNION ALL" : 구분자 반복 할때 마다 넣는다. -->
+		SELECT #{imgInfo.noticeImgCode}
+		, #{imgInfo.noticeImgOrignName}
+		, #{imgInfo.noticeImgAttachedName}
+		, #{imgInfo.boardNumNotice}
+		FROM DUAL
+	</foreach>
+	</insert>
 
 
 	<!-- 속도가 빠른 다중 인설트문 -->
@@ -154,11 +151,17 @@
 	<!-- ... -->
 	<!-- SELECT value1, value2, ... FROM DUAL; -->
 
-
-<!-- 	<select id="selectNextNumber" resultType="int"> -->
-<!-- 		SELECT NVL(MAX(TO_NUMBER(SUBSTR(IMG_CODE, 5, 3))) + 1, 1) -->
-<!-- 		FROM BOOK_IMG -->
-<!-- 	</select> -->
+	<!-- 	공지사항 다음 들어갈 이미지 코드 조회 -->
+	<select id="selectNextNumber" resultType="int">
+		SELECT NVL(MAX(TO_NUMBER(SUBSTR(NOTICE_IMG_CODE, 12, 3))) + 1, 1)
+		FROM NOTICE_IMG
+	</select>
+	
+	<!-- 공지사항 다음 들어갈 공지사항 넘버 조회 -->
+	<select id="selectNextNoticeNum" resultType="int">
+		SELECT NVL(MAX(BOARD_NUM_NOTICE) + 1, 1)
+		FROM BOARD_NOTICE
+	</select>
 
 
 

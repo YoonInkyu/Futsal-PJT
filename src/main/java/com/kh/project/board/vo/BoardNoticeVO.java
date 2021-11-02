@@ -1,6 +1,10 @@
 package com.kh.project.board.vo;
 
-public class BoardNoticeVO {
+import java.util.List;
+
+import com.kh.project.common.vo.PageVO;
+
+public class BoardNoticeVO extends PageVO {
 
 	private int boardNumNotice;
 	private String titleNotice;
@@ -10,6 +14,15 @@ public class BoardNoticeVO {
 	private int readCntNotice;
 	private String fileNameNotice;
 	private String boardPwNotice;
+	private List<NoticeImgVO> noticeImgList;
+	
+		public List<NoticeImgVO> getNoticeImgList() {
+		return noticeImgList;
+	}
+
+	public void setNoticeImgList(List<NoticeImgVO> noticeImgList) {
+		this.noticeImgList = noticeImgList;
+	}
 
 	public int getBoardNumNotice() {
 		return boardNumNotice;

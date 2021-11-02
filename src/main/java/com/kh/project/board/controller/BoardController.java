@@ -1,7 +1,11 @@
 package com.kh.project.board.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -10,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.project.board.service.BoardFreeService;
@@ -18,6 +23,8 @@ import com.kh.project.board.service.ReplyFreeService;
 import com.kh.project.board.service.ReplyNoticeService;
 import com.kh.project.board.vo.BoardFreeVO;
 import com.kh.project.board.vo.BoardNoticeVO;
+import com.kh.project.board.vo.NoticeImgVO;
+import com.kh.project.common.util.CurrentDateTime;
 
 @Controller
 @RequestMapping("/board")
@@ -52,7 +59,10 @@ public class BoardController {
 	@GetMapping("/goNoticeDetail")
 	public String goNoticeDetail(Model model, int boardNumNotice) {
 
-		model.addAttribute("noticeInfo", boardNoticeService.selectBoardNoticeDetail(boardNumNotice));
+		// 상세 조회 시, 내용 부분 엔터 값 적용
+		BoardNoticeVO result = boardNoticeService.selectBoardNoticeDetail(boardNumNotice);
+		result.setContentNotice(result.getContentNotice().replace("\r\n", "<br>"));
+		model.addAttribute("noticeInfo", result);
 
 		// 댓글 조회
 		model.addAttribute("replyNoticeList", replyNoticeService.selectReplyNoticeList(boardNumNotice));
@@ -76,13 +86,77 @@ public class BoardController {
 	// 공지사항 글 쓰기
 	@PostMapping("/noticeWriteForm")
 	public String noticeWriteForm(BoardNoticeVO boardNoticeVO, MultipartHttpServletRequest multi) {
-
+		System.out.println("noticeWriteForm 오니");
 		Iterator<String> inputNames = multi.getFileNames();
 
 		// 첨부될 폴더(집 경로, 다른데서 할시 경로 변경 할것!!!)
-		String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+		//String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+		// 첨부될 폴더(학원 경로, 다른데서 할시 경로 변경 할것!!!)
+		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+		
+		List<NoticeImgVO> noticeImgList = new ArrayList<>();
+		
+		//다음에 들어갈 이미지 코드 조회 
+		int nextImgCode = boardNoticeService.selectNextNumber();
+		
+		//다음에 들어갈 넘버 조회
+		int nextNoticeNum = boardNoticeService.selectNextNoticeNum();
+		
+		while (inputNames.hasNext()) {
+			String inputName = inputNames.next();
 
+			// 실제첨부 기능
+			try {
+				if (inputName.equals("file")) {
+//					multi.getFiles(inputName); //파일 여러개 들고 와서 파일즈
+					List<MultipartFile> fileList = multi.getFiles(inputName); // 파일즈 확인
+					// 여러개 파일을 받으니까 리스트에 담고 포문으로 업로드 한다.
+
+					// 파일 목록(fileList)을 가져 와서 파일(file) 한개식을 업로드
+					for (MultipartFile file : fileList) {
+
+						String attachedFileName = CurrentDateTime.today() + "_" + file.getOriginalFilename();
+
+						String uploadFile = uploadPath + attachedFileName;
+//						String uploadFile = uploadPath + FileUploadUtil.getNowDateTime() + "_" + file.getOriginalFilename();
+						// 업로드시 날자 + 오리지널 파일명을 만드는 변수 업로드파일을 만든다 예)
+						// 202110111212331122_a.jsp
+
+						file.transferTo(new File(uploadFile)); // 한개씩 파일 이동(업로드)
+
+						NoticeImgVO img = new NoticeImgVO();
+						img.setNoticeImgCode("NOTICE_IMG_" + String.format("%03d", nextImgCode++));
+						img.setNoticeImgOrignName(file.getOriginalFilename());
+						img.setNoticeImgAttachedName(attachedFileName);
+						img.setBoardNumNotice(nextNoticeNum);
+
+						noticeImgList.add(img);
+					}
+				}
+
+
+			}
+
+			catch (IllegalStateException e) {
+
+				e.printStackTrace();
+			}
+
+			catch (IOException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+		
+		//게시글 등록 쿼리
 		boardNoticeService.insertBoardNotice(boardNoticeVO);
+		
+		
+		
+		//첨부파일 등록 쿼리
+		boardNoticeVO.setNoticeImgList(noticeImgList);
+		boardNoticeService.insertImgs(boardNoticeVO);
 
 		return "redirect:/board/goNoticeList";
 
@@ -136,6 +210,11 @@ public class BoardController {
 	// 자유게시판 상세 페이지로 이동
 	@GetMapping("/goFreeDetail")
 	public String goFreeDetail(Model model, int boardNumFree) {
+
+		// 상세 조회 시, 내용 부분 엔터 값 적용
+		BoardFreeVO result = boardFreeService.selectBoardFreeDetail(boardNumFree);
+		result.setContentFree(result.getContentFree().replace("\r\n", "<br>"));
+		model.addAttribute("freeInfo", result);
 
 		model.addAttribute("freeInfo", boardFreeService.selectBoardFreeDetail(boardNumFree));
 

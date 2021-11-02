@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.project.board.vo.BoardNoticeVO;
+import com.kh.project.board.vo.NoticeImgVO;
 
 @Service("boardNoticeService")
 public class BoardNoticeServiceImpl implements BoardNoticeService {
@@ -43,6 +44,21 @@ public class BoardNoticeServiceImpl implements BoardNoticeService {
 	@Override
 	public int deleteBoardNotice(BoardNoticeVO boardNoticeVO) {
 		return sqlSession.delete("boardMapper.deleteBoardNotice", boardNoticeVO);
+	}
+
+	@Override
+	public int selectNextNumber() {
+		return sqlSession.selectOne("boardMapper.selectNextNumber");
+	}
+
+	@Override
+	public void insertImgs(BoardNoticeVO boardNoticeVO) {
+		sqlSession.insert("boardMapper.insertImgs", boardNoticeVO);
+	}
+
+	@Override
+	public int selectNextNoticeNum() {
+		return sqlSession.selectOne("boardMapper.selectNextNoticeNum");
 	}
 
 }

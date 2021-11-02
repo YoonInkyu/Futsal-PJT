@@ -24,4 +24,6 @@ public interface BoardFreeService {
 	// 자유게시판 글 삭제
 	int deleteBoardFree(BoardFreeVO boardFreeVO);
 
+	//
+
 }
