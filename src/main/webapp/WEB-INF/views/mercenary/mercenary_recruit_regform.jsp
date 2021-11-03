@@ -24,6 +24,17 @@ $(document).ready(function() {
 		}
 		
 	});
+	
+	$(document).on('click', '#mercReg', function() {
+		var inputIntro = $('#inputIntro').val()
+		
+		if(inputIntro == '') {
+			alert('팀 소개를 먼저 입력 해주세요.')
+		}
+		else {
+			alert('용병 등록이 완료되었습니다.')
+		}
+	});
 });
 </script>
 </head>
@@ -77,7 +88,7 @@ $(document).ready(function() {
 		</div>
 	</div>
 	<div class="d-grid gap-2">
-		<input class="btn btn-primary" type="submit" value="모집 등록">
+		<input class="btn btn-primary" type="submit" id="mercReg" value="모집 등록">
 	</div>
 </form>
 </body>
