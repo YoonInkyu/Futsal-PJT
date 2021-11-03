@@ -88,7 +88,7 @@ tr {
 										<td>${freeInfo.writerFree }</td>
 										<td>${freeInfo.createDateFree }</td>
 										<td>${freeInfo.readCntFree }</td>
-										
+
 									</tr>
 
 								</c:otherwise>
@@ -108,7 +108,7 @@ tr {
 		<a href="location"></a>
 
 
-
+<!-- 검색 기능 -->
 		<div class="row mt-5">
 
 			<div class="col-6 mx-auto m-0 p-0">
@@ -140,6 +140,39 @@ tr {
 
 
 
+
+
+		<!-- 페이징 처리  인규씨꺼 -->
+<!-- 		<div class="row mt-5"> -->
+<!-- 			<div class="col"> -->
+<!-- 				<nav aria-label="Page navigation example"> -->
+<!-- 					<ul class="pagination justify-content-center"> -->
+<%-- 						<c:if test="${mercenaryVO.prev eq true}"> --%>
+<!-- 							<li class="page-item"> -->
+<%-- 								<a class="page-link" href="/mercenary/recruit?nowPage=${mercenaryVO.beginPage - 1 }">Prev</a> --%>
+<!-- 							</li> -->
+<%-- 						</c:if> --%>
+<%-- 						<c:forEach begin="${mercenaryVO.beginPage }" end="${mercenaryVO.endPage }" var="pageNumber"> --%>
+<%-- 							<li class="page-item <c:if test="${mercenaryVO.nowPage == pageNumber }">active</c:if>"> --%>
+<!-- 								여기 href 수정 -->
+<%-- 								<a class="page-link" href="/mercenary/recruit?nowPage=${pageNumber }&searchLocation=${mercenaryVO.searchLocation}&searchKeyword=${mercenaryVO.searchKeyword}&searchValue=${mercenaryVO.searchValue}">${pageNumber }</a> --%>
+<!-- 							</li> -->
+<%-- 						</c:forEach> --%>
+<%-- 						<c:if test="${mercenaryVO.next eq true}"> --%>
+<!-- 							<li class="page-item"> -->
+<%-- 								<a class="page-link" href="/mercenary/recruit?nowPage=${mercenaryVO.endPage + 1 }">Next</a> --%>
+<!-- 							</li> -->
+<%-- 						</c:if> --%>
+<!-- 					</ul> -->
+<!-- 				</nav> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+
+
+
+
+<!-- 페이징 처리 -->
 		<div class="row mt-5">
 
 			<div class="col">
@@ -190,13 +223,13 @@ tr {
 
 				<div class="modal-body p-5 pt-0">
 
+					<input type="hidden" id="datePw"> <input type="hidden" id="dataNum">
 
 					<div class="form-floating mb-3">
 						<input type="password" class="form-control rounded-4" id="inputPwFree" placeholder="Password"> <label for="inputPwFree">입력...</label>
 					</div>
 
 					<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" id="checkPw" onclick="checkPwFree();">확 인</button>
-					<input type="hidden" id="originPw"> <input type="hidden" id="num">
 
 				</div>
 
@@ -209,8 +242,6 @@ tr {
 
 
 
-
-
 	<!-- ============================== 스크립트 부분 ============================== -->
 
 	<script type="text/javascript">
@@ -218,18 +249,16 @@ tr {
 		(function($) {
 			
 			setInfo = function(pw, num){
-				$('#originPw').val(pw);	
-				$('#num').val(num);
+				$('#datePw').val(pw);	
+				$('#dataNum').val(num);
 			}
 			
 			checkPwFree = function(){
 				
-					inputPwFree
 					var inputPw = $('#inputPwFree').val();	
-					var realPw = $('#originPw').val();	
+					var datePw = $('#datePw').val();	
 					
-					
-					if (inputPw != realPw) {
+					if (inputPw != datePw) {
 						
 						alert('비밀번호를 확인하세요.')
 						
@@ -240,16 +269,13 @@ tr {
 						return;
 					}
 					
-					location.href = '/board/goFreeDetail?boardNumFree=' + $('#num').val();
+					location.href = '/board/goFreeDetail?boardNumFree=' + $('#dataNum').val();
 
 				}
-				
 
 		})(jQuery);
 		
 	</script>
-
-
 
 
 

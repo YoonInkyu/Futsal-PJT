@@ -4,6 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- 글작성 에디터 사용시 필요 -->
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script> -->
+
+
 </head>
 <body>
 
@@ -93,6 +98,20 @@
 
 
 
+<!-- 글작성 에디터 사용 가능함 -->
+<!-- 문제 기존에 바이트수 카운트 함수 적용 안됨 -->
+<!-- 모양이 안맞음 -->
+<!-- 사용되는 기능들 다시 불러 올수 있는지 확인 안됨(사진등록, 글자 타입, 표 등) -->
+<!-- 현재 기준으로 에러가 많이 날거 같음 -->
+
+<!-- 	<h1>Classic editor</h1> -->
+<!-- 	<div id="editor"> -->
+<!-- 		<p>This is some sample content.</p> -->
+<!-- 	</div> -->
+
+
+
+
 	<!-- ============================== 스크립트 부분 ============================== -->
 
 	<script type="text/javascript">
@@ -124,6 +143,18 @@
 			}
 		}
 	</script>
+
+
+<!-- 글작성 에디터 -->
+	<script>
+//         ClassicEditor
+//             .create( document.querySelector( '#editor' ) )
+//             .catch( error => {
+//                 console.error( error );
+//             } );
+    </script>
+
+
 
 
 

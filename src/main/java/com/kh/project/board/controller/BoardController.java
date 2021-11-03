@@ -244,7 +244,7 @@ public class BoardController {
 		Iterator<String> inputNames = multi.getFileNames();
 
 		// 첨부될 폴더(집 경로, 다른데서 할시 경로 변경 할것!!!)
-		// String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+//		 String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
 
 		// 첨부될 폴더(학원 경로, 다른데서 할시 경로 변경 할것!!!)
 		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
