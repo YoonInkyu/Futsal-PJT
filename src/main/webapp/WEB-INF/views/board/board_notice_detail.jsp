@@ -48,15 +48,12 @@
 								<td>${noticeInfo.readCntNotice }</td>
 							</tr>
 							<tr>
-								<td colspan="4">
-<%-- 								<c:forEach items="" var=""> --%>
-<!-- 디테일 올때 셀렉트 쿼리 짜야됨 -->
-								<a href="C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\" >첨부파일 : ${noticeInfo.fileNameNotice }</a>
-<%-- 								<a href="C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\" >첨부파일 : ${noticeInfo.fileNameNotice }</a> --%>
-								
-								
-<%-- 								</c:forEach> --%>
-								
+								<td colspan="4">첨부파일 : <c:forEach items="${imgListNotice }" var="imgNotice">
+
+										<a class="mx-1 btn btn-outline-success  btn-sm" href="<c:url value="..\\resources\\img\\board\\${imgNotice.noticeImgAttachedName }" ></c:url>" download="${imgNotice.noticeImgOrignName }">${imgNotice.noticeImgOrignName }</a>
+
+									</c:forEach>
+
 								</td>
 							</tr>
 
@@ -115,8 +112,7 @@
 
 							<div class="input-group">
 
-								<span class="input-group-text" id="basic-addon1">댓글 입력</span> 
-								<input type="text" class="form-control" name="contentNotice" placeholder="입력..." aria-label="Username" aria-describedby="basic-addon1" onkeyup="contentNoticeReply_checkByte(this);" required>
+								<span class="input-group-text" id="basic-addon1">댓글 입력</span> <input type="text" class="form-control" name="contentNotice" placeholder="입력..." aria-label="Username" aria-describedby="basic-addon1" onkeyup="contentNoticeReply_checkByte(this);" required>
 
 								<button type="submit" class="btn btn-success">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
@@ -129,7 +125,9 @@
 
 						</form>
 
-						<div class="mt-3">글자수 제한 (<span id="nowByte2">0</span>/500bytes)</div>
+						<div class="mt-3">
+							글자수 제한 (<span id="nowByte2">0</span>/500bytes)
+						</div>
 
 					</c:when>
 

@@ -40,20 +40,20 @@
 						<label for="createDateNotice" class="form-label">작 성 일</label> <input type="date" class="form-control" name="createDateNotice" value="${nowDate }" readonly>
 					</div>
 
-					<div class="col mx-auto">
-						<label for="boardPwNotice" class="form-label">비 밀 번 호</label> <input type="password" class="form-control" name="boardPwNotice">
-					</div>
+					<!-- 공지사항은 비밀 번호 없는 것으로 설정 -->
+					<!-- 					<div class="col mx-auto"> -->
+					<!-- 						<label for="boardPwNotice" class="form-label">비 밀 번 호</label> <input type="password" class="form-control" name="boardPwNotice"> -->
+					<!-- 					</div> -->
 
 				</div>
 
 
 
-<!-- 				파일 업로드 미 구현 -->
-
+				<!-- 파일 업로드 -->
 				<div class="row">
 
 					<div class="col-12 mb-5">
-						<label for="fileNameNotice" class="form-label">파 일 등 록</label> <input type="file" class="form-control" name="file" multiple>
+						<label for="fileNotice" class="form-label">파 일 등 록</label> <input type="file" class="form-control" name="fileNotice" multiple>
 					</div>
 
 				</div>
@@ -68,7 +68,9 @@
 						<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="contentNotice" style="height: 300px" onkeyup="contentNotice_checkByte(this);" required></textarea>
 						<label for="floatingTextarea2">내 용</label>
 					</div>
-					<div class="mt-3">글자수 제한 (<span id="nowByte1">0</span>/1000bytes)</div>
+					<div class="mt-3">
+						글자수 제한 (<span id="nowByte1">0</span>/1000bytes)
+					</div>
 				</div>
 
 

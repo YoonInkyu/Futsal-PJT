@@ -18,20 +18,24 @@ public interface BoardNoticeService {
 
 	// 조회수 증가
 	void updateReadCntNotice(int boardNumNotice);
-	
+
 	// 공지사항 글 수정
 	int updateBoardNotice(BoardNoticeVO boardNoticeVO);
-	
+
 	// 공지사항 글 삭제
 	int deleteBoardNotice(BoardNoticeVO boardNoticeVO);
-	
-	//공지사항 이미지 코드 조회
-	int selectNextNumber();
-	
-	//공지사항 이미지
-	void insertImgs(BoardNoticeVO boardNoticeVO);
-	
-	//공지사항 다음 넘버 조회
+
+	// 공지사항 이미지
+	void insertImgsNotice(BoardNoticeVO boardNoticeVO);
+
+	// 공지사항 이미지 코드 조회
+	int selectNextNumberNotice();
+
+	// 공지사항 다음 넘버 조회
 	int selectNextNoticeNum();
+	
+	// 공지사항 이미지 조회
+	List<NoticeImgVO> selectImgListNotice(int boardNumNotice);
+	
 
 }

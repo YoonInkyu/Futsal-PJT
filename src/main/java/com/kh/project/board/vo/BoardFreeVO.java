@@ -1,5 +1,7 @@
 package com.kh.project.board.vo;
 
+import java.util.List;
+
 public class BoardFreeVO {
 
 	private int boardNumFree;
@@ -10,6 +12,16 @@ public class BoardFreeVO {
 	private int readCntFree;
 	private String fileNameFree;
 	private String boardPwFree;
+
+	private List<FreeImgVO> freeImgList;
+
+	public List<FreeImgVO> getFreeImgList() {
+		return freeImgList;
+	}
+
+	public void setFreeImgList(List<FreeImgVO> freeImgList) {
+		this.freeImgList = freeImgList;
+	}
 
 	public int getBoardNumFree() {
 		return boardNumFree;

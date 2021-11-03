@@ -63,7 +63,13 @@
 								<td>${freeInfo.readCntFree }</td>
 							</tr>
 							<tr>
-								<td colspan="4">첨부파일 : ${freeInfo.fileNameFree }</td>
+							
+							<td colspan="4">첨부파일 : <c:forEach items="${imgListFree }" var="imgFree">
+
+										<a class="mx-1 btn btn-outline-success  btn-sm" href="<c:url value="..\\resources\\img\\board\\${imgFree.freeImgAttachedName }" ></c:url>" download="${imgFree.freeImgOrignName }">${imgFree.freeImgOrignName }</a>
+
+									</c:forEach>
+
 							</tr>
 
 						</tbody>

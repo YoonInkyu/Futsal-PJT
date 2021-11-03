@@ -47,17 +47,14 @@
 				</div>
 
 
-
-				<!-- 파일 업로드 미 구현 -->
-
+				<!-- 파일 업로드 -->
 				<div class="row">
-	
-					<div class="col-12 mb-5">
-						<label for="fileNameFree" class="form-label">파 일 등 록</label> <input type="file" class="form-control" name="fileNameFree">
-					</div>
-	
-				</div>
 
+					<div class="col-12 mb-5">
+						<label for="fileFree" class="form-label">파 일 등 록</label> <input type="file" class="form-control" name="fileFree" multiple>
+					</div>
+
+				</div>
 
 
 
@@ -68,7 +65,9 @@
 						<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="contentFree" style="height: 300px" onkeyup="contentFree_checkByte(this);" required></textarea>
 						<label for="floatingTextarea2">내 용</label>
 					</div>
-					<div class="mt-3">글자수 제한 (<span id="nowByte1">0</span>/1000bytes)</div>
+					<div class="mt-3">
+						글자수 제한 (<span id="nowByte1">0</span>/1000bytes)
+					</div>
 
 				</div>
 
@@ -89,7 +88,7 @@
 		</form>
 
 	</div>
-	
+
 
 
 	<!-- ============================== 스크립트 부분 ============================== -->
@@ -125,6 +124,6 @@
 	</script>
 
 
-	
+
 </body>
 </html>

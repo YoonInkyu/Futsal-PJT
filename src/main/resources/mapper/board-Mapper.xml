@@ -39,11 +39,6 @@
 		, READ_CNT_NOTICE
 		, BOARD_PW_NOTICE
 		FROM BOARD_NOTICE
-		<!-- <if test="searchValue != null and !searchValue.equals('')"> 느낌표는 반대를 뜻한다, 홀따옴표 두개를 붙여 쓰면 공란으로 인씩 -->
-		<!-- WHERE UPPER(${searchKeyword}) LIKE '%'||UPPER(#{searchValue})||'%' 검색할 타이틀도 대문자(UPPER)로 변경 검색되는 글자도 대문자로 변경 후 검색 하면 대문자끼리 검색 -->
-		<!-- $와 #의 차이 ${자바} = 자바 #{자바} = '자바' -->
-		<!-- 컬럼명을 사용할때는 $를 사용 해야된다 -->
-		<!-- </if> -->
 		ORDER BY BOARD_NUM_NOTICE DESC
 	</select>
 
@@ -123,44 +118,50 @@
 	</delete>
 
 
+
 	<!-- 공지사항 이미지 업로드 -->
-	<insert id="insertImgs">
-	INSERT INTO NOTICE_IMG (
+	<insert id="insertImgsNotice">
+		INSERT INTO NOTICE_IMG (
 		NOTICE_IMG_CODE
 		, NOTICE_IMG_ORIGN_NAME
 		, NOTICE_IMG_ATTACHED_NAME
 		, BOARD_NUM_NOTICE
-	)
-	<foreach collection="noticeImgList" item="imgInfo" separator="UNION ALL">
-		<!-- collection="imgList" : 반복될 대상(리스트) / item="imgInfo" : 반복해서 뽑아낼 값 한개 / separator="UNION ALL" : 구분자 반복 할때 마다 넣는다. -->
-		SELECT #{imgInfo.noticeImgCode}
-		, #{imgInfo.noticeImgOrignName}
-		, #{imgInfo.noticeImgAttachedName}
-		, #{imgInfo.boardNumNotice}
-		FROM DUAL
-	</foreach>
+		)
+		<foreach collection="noticeImgList" item="imgInfo" separator="UNION ALL">
+			SELECT #{imgInfo.noticeImgCode}
+			, #{imgInfo.noticeImgOrignName}
+			, #{imgInfo.noticeImgAttachedName}
+			, #{imgInfo.boardNumNotice}
+			FROM DUAL
+		</foreach>
 	</insert>
 
 
-	<!-- 속도가 빠른 다중 인설트문 -->
-	<!-- INSERT INTO table(column1, column2, ...) -->
-	<!-- SELECT value1, value2, ... FROM DUAL -->
-	<!-- UNION ALL : 셀렉트를 연결 하는 문구 (연결 되는 조회 결과를 동시에 호출하여 보여 준다.) -->
-	<!-- SELECT value1, value2, ... FROM DUAL -->
-	<!-- UNION ALL -->
-	<!-- ... -->
-	<!-- SELECT value1, value2, ... FROM DUAL; -->
 
-	<!-- 	공지사항 다음 들어갈 이미지 코드 조회 -->
-	<select id="selectNextNumber" resultType="int">
+	<!-- 다음 이미지 찾기 -->
+	<select id="selectNextNumberNotice" resultType="int">
 		SELECT NVL(MAX(TO_NUMBER(SUBSTR(NOTICE_IMG_CODE, 12, 3))) + 1, 1)
 		FROM NOTICE_IMG
 	</select>
-	
+
+
+
 	<!-- 공지사항 다음 들어갈 공지사항 넘버 조회 -->
 	<select id="selectNextNoticeNum" resultType="int">
 		SELECT NVL(MAX(BOARD_NUM_NOTICE) + 1, 1)
 		FROM BOARD_NOTICE
+	</select>
+
+
+	<!-- 공지사항 이미지 조회 -->
+	<select id="selectImgListNotice" resultMap="noticeImg">
+		SELECT NOTICE_IMG_CODE
+		, NOTICE_IMG_ORIGN_NAME
+		, NOTICE_IMG_ATTACHED_NAME
+		, BOARD_NUM_NOTICE
+		FROM NOTICE_IMG
+		WHERE BOARD_NUM_NOTICE = #{boardNumNotice}
+		ORDER BY NOTICE_IMG_CODE
 	</select>
 
 
@@ -205,11 +206,6 @@
 		, READ_CNT_FREE
 		, BOARD_PW_FREE
 		FROM BOARD_FREE
-		<!-- <if test="searchValue != null and !searchValue.equals('')"> 느낌표는 반대를 뜻한다, 홀따옴표 두개를 붙여 쓰면 공란으로 인씩 -->
-		<!-- WHERE UPPER(${searchKeyword}) LIKE '%'||UPPER(#{searchValue})||'%' 검색할 타이틀도 대문자(UPPER)로 변경 검색되는 글자도 대문자로 변경 후 검색 하면 대문자끼리 검색 -->
-		<!-- $와 #의 차이 ${자바} = 자바 #{자바} = '자바' -->
-		<!-- 컬럼명을 사용할때는 $를 사용 해야된다 -->
-		<!-- </if> -->
 		ORDER BY BOARD_NUM_FREE DESC
 	</select>
 
@@ -287,6 +283,55 @@
 		DELETE BOARD_FREE
 		WHERE BOARD_NUM_FREE = #{boardNumFree}
 	</delete>
+
+
+
+	<!-- 자유게시판 이미지 업로드 -->
+	<insert id="insertImgsFree">
+		INSERT INTO FREE_IMG (
+		FREE_IMG_CODE
+		, FREE_IMG_ORIGN_NAME
+		, FREE_IMG_ATTACHED_NAME
+		, BOARD_NUM_FREE
+		)
+		<foreach collection="freeImgList" item="imgInfo" separator="UNION ALL">
+			SELECT #{imgInfo.freeImgCode}
+			, #{imgInfo.freeImgOrignName}
+			, #{imgInfo.freeImgAttachedName}
+			, #{imgInfo.boardNumFree}
+			FROM DUAL
+		</foreach>
+	</insert>
+
+
+
+	<!-- 다음 이미지 찾기 -->
+	<select id="selectNextNumberFree" resultType="int">
+		SELECT NVL(MAX(TO_NUMBER(SUBSTR(FREE_IMG_CODE, 12, 3))) + 1, 1)
+		FROM FREE_IMG
+	</select>
+
+
+
+	<!-- 자유게시판 다음 들어갈 자유게시판 넘버 조회 -->
+	<select id="selectNextFreeNum" resultType="int">
+		SELECT NVL(MAX(BOARD_NUM_FREE) + 1, 1)
+		FROM BOARD_FREE
+	</select>
+
+
+
+	<!-- 공지사항 이미지 조회 -->
+	<select id="selectImgListFree" resultMap="freeImg">
+		SELECT FREE_IMG_CODE
+		, FREE_IMG_ORIGN_NAME
+		, FREE_IMG_ATTACHED_NAME
+		, BOARD_NUM_FREE
+		FROM FREE_IMG
+		WHERE BOARD_NUM_FREE = #{boardNumFree}
+		ORDER BY FREE_IMG_CODE
+	</select>
+
 
 
 

@@ -23,6 +23,7 @@ import com.kh.project.board.service.ReplyFreeService;
 import com.kh.project.board.service.ReplyNoticeService;
 import com.kh.project.board.vo.BoardFreeVO;
 import com.kh.project.board.vo.BoardNoticeVO;
+import com.kh.project.board.vo.FreeImgVO;
 import com.kh.project.board.vo.NoticeImgVO;
 import com.kh.project.common.util.CurrentDateTime;
 
@@ -67,6 +68,9 @@ public class BoardController {
 		// 댓글 조회
 		model.addAttribute("replyNoticeList", replyNoticeService.selectReplyNoticeList(boardNumNotice));
 
+		// 이미지 조회
+		model.addAttribute("imgListNotice", boardNoticeService.selectImgListNotice(boardNumNotice));
+
 		// 조회수 증가
 		boardNoticeService.updateReadCntNotice(boardNumNotice);
 
@@ -86,43 +90,39 @@ public class BoardController {
 	// 공지사항 글 쓰기
 	@PostMapping("/noticeWriteForm")
 	public String noticeWriteForm(BoardNoticeVO boardNoticeVO, MultipartHttpServletRequest multi) {
-		System.out.println("noticeWriteForm 오니");
+
 		Iterator<String> inputNames = multi.getFileNames();
 
 		// 첨부될 폴더(집 경로, 다른데서 할시 경로 변경 할것!!!)
-		//String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+		// String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+
 		// 첨부될 폴더(학원 경로, 다른데서 할시 경로 변경 할것!!!)
 		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
-		
+
 		List<NoticeImgVO> noticeImgList = new ArrayList<>();
-		
-		//다음에 들어갈 이미지 코드 조회 
-		int nextImgCode = boardNoticeService.selectNextNumber();
-		
-		//다음에 들어갈 넘버 조회
+
+		// 다음에 들어갈 이미지 코드 조회
+		int nextImgCode = boardNoticeService.selectNextNumberNotice();
+
+		// 다음에 들어갈 넘버 조회
 		int nextNoticeNum = boardNoticeService.selectNextNoticeNum();
-		
+
 		while (inputNames.hasNext()) {
 			String inputName = inputNames.next();
 
 			// 실제첨부 기능
 			try {
-				if (inputName.equals("file")) {
-//					multi.getFiles(inputName); //파일 여러개 들고 와서 파일즈
-					List<MultipartFile> fileList = multi.getFiles(inputName); // 파일즈 확인
-					// 여러개 파일을 받으니까 리스트에 담고 포문으로 업로드 한다.
+				if (inputName.equals("fileNotice")) {
 
-					// 파일 목록(fileList)을 가져 와서 파일(file) 한개식을 업로드
+					List<MultipartFile> fileList = multi.getFiles(inputName);
+
 					for (MultipartFile file : fileList) {
 
-						String attachedFileName = CurrentDateTime.today() + "_" + file.getOriginalFilename();
+						String attachedFileName = CurrentDateTime.getNowDateTime() + "_" + file.getOriginalFilename();
 
 						String uploadFile = uploadPath + attachedFileName;
-//						String uploadFile = uploadPath + FileUploadUtil.getNowDateTime() + "_" + file.getOriginalFilename();
-						// 업로드시 날자 + 오리지널 파일명을 만드는 변수 업로드파일을 만든다 예)
-						// 202110111212331122_a.jsp
 
-						file.transferTo(new File(uploadFile)); // 한개씩 파일 이동(업로드)
+						file.transferTo(new File(uploadFile));
 
 						NoticeImgVO img = new NoticeImgVO();
 						img.setNoticeImgCode("NOTICE_IMG_" + String.format("%03d", nextImgCode++));
@@ -133,7 +133,6 @@ public class BoardController {
 						noticeImgList.add(img);
 					}
 				}
-
 
 			}
 
@@ -148,15 +147,13 @@ public class BoardController {
 			}
 
 		}
-		
-		//게시글 등록 쿼리
+
+		// 게시글 등록 쿼리
 		boardNoticeService.insertBoardNotice(boardNoticeVO);
-		
-		
-		
-		//첨부파일 등록 쿼리
+
+		// 첨부파일 등록 쿼리
 		boardNoticeVO.setNoticeImgList(noticeImgList);
-		boardNoticeService.insertImgs(boardNoticeVO);
+		boardNoticeService.insertImgsNotice(boardNoticeVO);
 
 		return "redirect:/board/goNoticeList";
 
@@ -221,6 +218,9 @@ public class BoardController {
 		// 댓글 조회
 		model.addAttribute("replyFreeList", replyFreeService.selectReplyFreeList(boardNumFree));
 
+		// 이미지 조회
+		model.addAttribute("imgListFree", boardFreeService.selectImgListFree(boardNumFree));
+
 		// 조회수 증가
 		boardFreeService.updateReadCntFree(boardNumFree);
 
@@ -244,9 +244,66 @@ public class BoardController {
 		Iterator<String> inputNames = multi.getFileNames();
 
 		// 첨부될 폴더(집 경로, 다른데서 할시 경로 변경 할것!!!)
-		String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+		// String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
 
+		// 첨부될 폴더(학원 경로, 다른데서 할시 경로 변경 할것!!!)
+		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+
+		List<FreeImgVO> FreeImgList = new ArrayList<>();
+
+		// 다음에 들어갈 이미지 코드 조회
+		int nextImgCode = boardFreeService.selectNextNumberFree();
+
+		// 다음에 들어갈 넘버 조회
+		int nextFreeNum = boardFreeService.selectNextFreeNum();
+
+		while (inputNames.hasNext()) {
+			String inputName = inputNames.next();
+
+			// 실제첨부 기능
+			try {
+				if (inputName.equals("fileFree")) {
+
+					List<MultipartFile> fileList = multi.getFiles(inputName);
+
+					for (MultipartFile file : fileList) {
+
+						String attachedFileName = CurrentDateTime.getNowDateTime() + "_" + file.getOriginalFilename();
+
+						String uploadFile = uploadPath + attachedFileName;
+
+						file.transferTo(new File(uploadFile));
+
+						FreeImgVO img = new FreeImgVO();
+						img.setFreeImgCode("Free_IMG_" + String.format("%03d", nextImgCode++));
+						img.setFreeImgOrignName(file.getOriginalFilename());
+						img.setFreeImgAttachedName(attachedFileName);
+						img.setBoardNumFree(nextFreeNum);
+
+						FreeImgList.add(img);
+					}
+				}
+
+			}
+
+			catch (IllegalStateException e) {
+
+				e.printStackTrace();
+			}
+
+			catch (IOException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+		// 게시글 등록 쿼리
 		boardFreeService.insertBoardFree(boardFreeVO);
+
+		// 첨부파일 등록 쿼리
+		boardFreeVO.setFreeImgList(FreeImgList);
+		boardFreeService.insertImgsFree(boardFreeVO);
 
 		return "redirect:/board/goFreeList";
 
@@ -283,32 +340,6 @@ public class BoardController {
 		return "redirect:/board/goFreeList";
 
 	}
-
-//	모르겠음 물어 볼것
-
-//	// 자유게시판 비밀 글, 비번 입력 페이지 이동
-//	@GetMapping("/selectPwFree")
-//	public String selectPwFree(BoardFreeVO boardFreeVO) {
-//
-//		return "/board/goFreeList";
-//
-//	}
-//	
-////	
-////	// 비밀 글 비밀번호 입력 페이지 이동
-////	else if (command.equals("/secretInputNum.bo")) {
-////
-////		// 선택한 게시글의 비밀번호를 가져온다.
-////		String boardPw = request.getParameter("boardPw");
-////		String boardNum = request.getParameter("boardNum");
-////
-////		request.setAttribute("boardPw", boardPw);
-////		request.setAttribute("boardNum", boardNum);
-////
-////		path = "view/secret_result.jsp";
-////
-////	}
-//	
 
 	// ==============================// 오늘 날짜 메소드 //==============================//
 	// ==============================// 오늘 날짜 메소드 //==============================//

@@ -76,8 +76,8 @@ tr {
 
 								<c:otherwise>
 
-									
-									<tr data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="selectModal(${freeInfo.boardPwFree},${freeInfo.boardNumFree })">
+
+									<tr data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="setInfo('${freeInfo.boardPwFree}', ${freeInfo.boardNumFree });">
 										<td>${freeInfo.boardNumFree }</td>
 
 										<td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-lock2" viewBox="0 0 16 16">
@@ -88,7 +88,7 @@ tr {
 										<td>${freeInfo.writerFree }</td>
 										<td>${freeInfo.createDateFree }</td>
 										<td>${freeInfo.readCntFree }</td>
-
+										
 									</tr>
 
 								</c:otherwise>
@@ -195,8 +195,8 @@ tr {
 						<input type="password" class="form-control rounded-4" id="inputPwFree" placeholder="Password"> <label for="inputPwFree">입력...</label>
 					</div>
 
-					<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" data-bs-dismiss="modal" id="checkPw" onclick="checkPwFree();">확 인</button>
-
+					<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" id="checkPw" onclick="checkPwFree();">확 인</button>
+					<input type="hidden" id="originPw"> <input type="hidden" id="num">
 
 				</div>
 
@@ -214,80 +214,36 @@ tr {
 	<!-- ============================== 스크립트 부분 ============================== -->
 
 	<script type="text/javascript">
-
-// 		function checkPwFree(boardNumFree) {
-	
-// 			var inputPwFree = document.getElementById('inputPwFree').value;
-			
-// 			var boardPwFree = document.getElementById('boardPwFree').value;
-			
-			
-// 			//웹페이지 콘솔에서 입력 및 받아 오는 값 확인
-// 			console.log('입력한 비밀번호 = ' + inputPwFree);
-// 			console.log('진짜 비밀번호 = ' + boardPwFree);
-			
-			
-			
-// 			if (inputPwFree != boardPwFree) {
-				
-// 				alert('비밀번호를 확인하세요.')
-				
-// 				inputPwFree.value = '';
-				
-// 				inputPwFree.focus();
-				
-// 				return;
-// 			}
-			
-// 			location.href = '/board/goFreeDetail?boardNumFree=' + boardNumFree;
-
-// 		}
-		
-		
-		
 		
 		(function($) {
 			
-			selectModal = function(boardPwFree,boardNumFree){
+			setInfo = function(pw, num){
+				$('#originPw').val(pw);	
+				$('#num').val(num);
+			}
+			
+			checkPwFree = function(){
 				
-				//내가 input에 입력한 비번
-				
-				
-// 				$(document).on('click', '#inputPwFree', function() {
-// 					var str = '<input type="hidden" value="' + boardPwFree + '">';
-// 					$(this).html(str);
-					
-				}
-				
-				
-				function checkPwFree(boardNumFree) {
-					
-					var inputPwFree = document.getElementById('inputPwFree').value;
-					
-					var boardPwFree = document.getElementById('boardPwFree').value;
+					inputPwFree
+					var inputPw = $('#inputPwFree').val();	
+					var realPw = $('#originPw').val();	
 					
 					
-//		 			//웹페이지 콘솔에서 입력 및 받아 오는 값 확인
-//		 			console.log('입력한 비밀번호 = ' + inputPwFree);
-//		 			console.log('진짜 비밀번호 = ' + boardPwFree);
-					
-					
-					
-					if (inputPwFree != boardPwFree) {
+					if (inputPw != realPw) {
 						
 						alert('비밀번호를 확인하세요.')
 						
-						inputPwFree.value = '';
+						$('#inputPwFree').val('');	
 						
-						inputPwFree.focus();
+						$('#inputPwFree').focus();	
 						
 						return;
 					}
 					
-					location.href = '/board/goFreeDetail?boardNumFree=' + boardNumFree;
+					location.href = '/board/goFreeDetail?boardNumFree=' + $('#num').val();
 
 				}
-			};
+				
 
 		})(jQuery);
 		

@@ -47,18 +47,24 @@ public class BoardNoticeServiceImpl implements BoardNoticeService {
 	}
 
 	@Override
-	public int selectNextNumber() {
-		return sqlSession.selectOne("boardMapper.selectNextNumber");
+	public void insertImgsNotice(BoardNoticeVO boardNoticeVO) {
+		sqlSession.insert("boardMapper.insertImgsNotice", boardNoticeVO);
 	}
 
 	@Override
-	public void insertImgs(BoardNoticeVO boardNoticeVO) {
-		sqlSession.insert("boardMapper.insertImgs", boardNoticeVO);
+	public int selectNextNumberNotice() {
+		return sqlSession.selectOne("boardMapper.selectNextNumberNotice");
 	}
 
 	@Override
 	public int selectNextNoticeNum() {
 		return sqlSession.selectOne("boardMapper.selectNextNoticeNum");
+	}
+
+	@Override
+	public List<NoticeImgVO> selectImgListNotice(int boardNumNotice) {
+		 return sqlSession.selectList("boardMapper.selectImgListNotice", boardNumNotice);
+		
 	}
 
 }

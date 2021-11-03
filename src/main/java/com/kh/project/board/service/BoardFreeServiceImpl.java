@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.project.board.vo.BoardFreeVO;
+import com.kh.project.board.vo.BoardNoticeVO;
+import com.kh.project.board.vo.FreeImgVO;
 
 @Service("boardFreeService")
 public class BoardFreeServiceImpl implements BoardFreeService {
@@ -44,4 +46,26 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	public int deleteBoardFree(BoardFreeVO boardFreeVO) {
 		return sqlSession.delete("boardMapper.deleteBoardFree", boardFreeVO);
 	}
+
+	@Override
+	public void insertImgsFree(BoardFreeVO boardFreeVO) {
+		sqlSession.insert("boardMapper.insertImgsFree", boardFreeVO);
+	}
+
+	@Override
+	public int selectNextNumberFree() {
+		return sqlSession.selectOne("boardMapper.selectNextNumberFree");
+	}
+
+	@Override
+	public int selectNextFreeNum() {
+		return sqlSession.selectOne("boardMapper.selectNextFreeNum");
+	}
+
+	@Override
+	public List<FreeImgVO> selectImgListFree(int boardNumFree) {
+		return sqlSession.selectList("boardMapper.selectImgListFree", boardNumFree);
+
+	}
+
 }
