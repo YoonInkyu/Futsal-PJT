@@ -162,6 +162,7 @@ public class TeamController {
 		session.setAttribute("loginInfo", memberService.selectMemberInfo(memberInfo.getMemberCode()));
 		
 		
+		
 		return "mainPage/main_page";
 	}
 	
@@ -204,6 +205,43 @@ public class TeamController {
 		teamService.insertTeamApply(teamApplyVO);
 		model.addAttribute("msg", "가입신청이 완료되었습니다.");
 		model.addAttribute("url", "selectTeamList");
+		return "team/alert";
+	}
+	// 팀가입 승인
+	@GetMapping("/teamApplyApproval")
+	public String teamApplyApproval(TeamVO teamVO, HttpSession session, Model model) {
+		
+		
+		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		teamVO.setTeamCode(teamCode);
+		
+		teamService.teamApplyApproval(teamVO);
+		model.addAttribute("msg", "가입이 승인되었습니다..");
+		model.addAttribute("url", "selectTeamMemberManage");
+
+		
+		return "team/alert";
+	}
+	// 팀가입 거절
+	@GetMapping("/teamApplyReject")
+	public String teamApplyReject(TeamVO teamVO, HttpSession session, Model model) {
+		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		teamVO.setTeamCode(teamCode);
+		
+		teamService.teamApplyReject(teamVO);
+		model.addAttribute("msg", "가입신청이 거절되었습니다.");
+		model.addAttribute("url", "selectTeamMemberManage");
+		return "team/alert";
+	}
+	
+	// 팀멤버 강퇴
+	@GetMapping("/teamMemberDelete")
+	public String teamMemberDelete(TeamVO teamVO, HttpSession session, Model model) {
+		
+		
+		teamService.teamMemberDelete(teamVO);
+		model.addAttribute("msg", "강퇴 완료 되었습니다.");
+		model.addAttribute("url", "selectTeamMemberManage");
 		return "team/alert";
 	}
 	

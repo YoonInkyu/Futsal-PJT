@@ -102,7 +102,24 @@ public class TeamServiceImpl implements TeamService{
 		return sqlSession.selectList("teamMapper.selectApplyMember", teamCode);
 
 	}
+	// 팀가입 승인
+	@Override
+	public int teamApplyApproval(TeamVO teamVO) {
+		sqlSession.update("teamMapper.teamApplyApproval", teamVO);
+		return sqlSession.delete("teamMapper.teamApplyReject", teamVO);
+	}
 	
+	// 팀가입 거부
+	@Override
+	public int teamApplyReject(TeamVO teamVO) {
+		return sqlSession.delete("teamMapper.teamApplyReject", teamVO);
+	}
+	
+	// 팀원 강퇴
+	@Override
+	public int teamMemberDelete(TeamVO teamVO) {
+		return sqlSession.update("teamMapper.teamMemberDelete", teamVO);
+	}
 
 
 	

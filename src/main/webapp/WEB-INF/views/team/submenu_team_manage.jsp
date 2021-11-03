@@ -112,52 +112,23 @@
 															<th scope="col" width="20%">상세 정보</th>
 														</tr>
 													</thead>
-													
 													<tbody>
 														<c:forEach items="${applyMember }" var="applyMember">
-															<tr>
-																<td><button type="button" class="btn btn-primary">승인</button>
-																	<button type="button" class="btn btn-danger">취소</button></td>
-																<td><img src="/resources/img/common/3.jpg"
-																	width="30%"></td>
-																<td>${applyMember.memberName }</td>
-																<td>${applyMember.memberCode }</td>
-																<td>${applyMember.position }</td>
-																<td>${applyMember.memberGender }</td>
-																<td>${applyMember.memberTell }</td>
-																<td>
-																	<!-- Button trigger modal -->
-																	<button type="button" class="btn btn-primary"
-																		data-bs-toggle="modal"
-																		data-bs-target="#staticBackdrop2">Detail</button> <!-- Modal -->
-																	<div class="modal fade  " id="staticBackdrop2"
-																		data-bs-backdrop="static" data-bs-keyboard="false"
-																		tabindex="-1" aria-labelledby="staticBackdropLabel"
-																		aria-hidden="true">
-																		<div class="modal-dialog">
-																			<div class="modal-content">
-																				<div class="modal-header">
-																					<h5 class="modal-title" id="staticBackdropLabel">원빈
-																						상세 정보</h5>
-																					<button type="button" class="btn-close"
-																						data-bs-dismiss="modal" aria-label="Close"></button>
-																				</div>
-																				<div class="modal-body">
-																					<p>
-																						<img src="/resources/img/common/3.jpg" width="30%">
-																					</p>
-																					<p>자기 소개 : 안녕하세요 원빈 입니다. 전 티.오.피 만 먹습니다. 여러분들도
-																						그렇게 하길 바래요 얼마면 되</p>
-																				</div>
-																				<div class="modal-footer">
-																					<button type="button" class="btn btn-secondary"
-																						data-bs-dismiss="modal">Close</button>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</td>
-															</tr>
+																<tr>
+																	<td>
+																		<img src="/resources/img/member/${applyMember.memberImgAttachedName }" width="30%">
+																	</td>
+																	<td>${applyMember.memberName }</td>
+																	<td>${applyMember.memberCode }</td>
+																	<td>${applyMember.position }</td>
+																	<td>${applyMember.memberGender }</td>
+																	<td>${applyMember.memberTell }</td>
+																	<td>
+																	<td>
+																		<button type="button" class="btn btn-primary" onclick="location.href='teamApplyApproval?memberCode=${applyMember.memberCode}'">승인</button>
+																		<button type="button" class="btn btn-danger" onclick="location.href='teamApplyReject?memberCode=${applyMember.memberCode}'">거절</button>
+																	</td>
+																</tr>
 														</c:forEach>
 													</tbody>
 												</table>

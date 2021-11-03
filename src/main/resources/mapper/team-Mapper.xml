@@ -196,6 +196,7 @@
         , TEAM_ADMIN
         , MEMBER_GENDER
         , MEMBER_TELL
+        , MEMBER_CODE
         FROM MEMBER M
         WHERE M.MEMBER_CODE = #{memberCode}
 	</select>
@@ -214,17 +215,42 @@
 	
 	<select id="selectApplyMember" resultMap="teamView">
 		SELECT 
-		  MEMBER_NAME
-		    , POSITION
-		    , M.MEMBER_CODE
-		    , MEMBER_GENDER
-		    , MEMBER_TELL
-		    , M.TEAM_CODE
-		FROM MEMBER M, TEAM_APPLY TM
-		WHERE M.TEAM_CODE = TM.TEAM_CODE
-		AND M.TEAM_CODE = #{teamCode}
-		AND APPLY_SORT = '1'
+		M.MEMBER_CODE
+	    , POSITION
+	    , MEMBER_NAME
+	    , MEMBER_GENDER
+	    , (SELECT MEMBER_IMG_ATTACHED_NAME
+	                    FROM MEMBER_IMG
+	                    WHERE MEMBER_CODE = T.MEMBER_CODE) AS MEMBER_IMG_ATTACHED_NAME 
+		FROM MEMBER M , TEAM_APPLY T 
+        WHERE T.TEAM_CODE = #{teamCode}
+        AND M.MEMBER_CODE = T.MEMBER_CODE
+        AND APPLY_SORT = '1'
 	</select>
+	<!-- 팀가입 승인  -->
+	<update id="teamApplyApproval">
+	UPDATE MEMBER
+	SET TEAM_CODE = #{teamCode}
+		, TEAM_ADMIN = '2'
+	WHERE MEMBER_CODE = #{memberCode}
+	
+	</update>
+	
+	<!-- 팀가입 승인 및 삭제  -->
+	<delete id="teamApplyReject">
+	DELETE FROM TEAM_APPLY
+		WHERE MEMBER_CODE = #{memberCode}
+		AND TEAM_CODE = #{teamCode}
+	</delete>
+	
+	<!-- 팀 강퇴  -->
+	<update id="teamMemberDelete">
+	UPDATE MEMBER
+	SET TEAM_CODE = NULL
+		, TEAM_ADMIN = '1'
+	WHERE MEMBER_CODE = #{memberCode}
+	
+	</update>
 	
 </mapper>
 

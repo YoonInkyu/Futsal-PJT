@@ -5,6 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+$(document).ready(function() {
+	var recruitDetailModal = document.getElementById('staticBackdrop');
+	//모달 닫히면 페이지 리로드
+	//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
+	recruitDetailModal.addEventListener('hidden.bs.modal', function (event) {
+		location.reload();
+	})
+});
+</script>
 </head>
 <body>
 	<div class="modal-header">
@@ -35,7 +45,7 @@
 
 	</div>
 	<div class="modal-footer d-flex justify-content-between">
-		<button type="button" class="btn btn-outline-danger">팀원 추방</button>
+		<button type="button" class="btn btn-outline-danger" onclick="location.href='teamMemberDelete?memberCode=${memberDetail.memberCode}'">팀원 추방</button>
 		<button type="button" class="btn btn-secondary"
 			data-bs-dismiss="modal">Close</button>
 	</div>

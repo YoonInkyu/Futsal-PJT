@@ -51,4 +51,29 @@ public interface TeamService {
 	// 가입신청 멤버리스트
 	List<MemberVO> selectApplyMember(String teamCode);
 	
+	
+	// 가입신청 승인
+	int teamApplyApproval(TeamVO teamVO);
+	
+	// 가입신청 거부
+	int teamApplyReject(TeamVO teamVO);
+	
+	// 가입신청 거부
+	int teamMemberDelete(TeamVO teamVO);
+	
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+

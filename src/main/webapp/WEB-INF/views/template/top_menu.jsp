@@ -44,7 +44,7 @@
 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">팀 관리</a>
 
 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-							<li><a class="dropdown-item" href="/team/submenuTeamManage">MY TEAM</a></li>
+							<li><a class="dropdown-item" href="/team/selectTeamMemberManage">MY TEAM</a></li>
 							<li><a class="dropdown-item" href="/team/goRegTeam">팀 생성</a></li>
 							<li><a class="dropdown-item" href="/team/selectTeamList">팀 목록</a></li>
 						</ul></li>
