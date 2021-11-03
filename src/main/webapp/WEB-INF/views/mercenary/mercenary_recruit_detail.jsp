@@ -90,7 +90,7 @@ $(document).ready(function() {
 					</tr>
 					<tr class="writerTr">
 						<th scope="row">작성자</th>
-						<td class="al_left writer">${mercVO.memberId }1</td>
+						<td class="al_left writer">${mercVO.memberId }</td>
 					</tr>
 					<tr class="locationTr">
 						<th scope="row">지역</th>
