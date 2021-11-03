@@ -100,6 +100,11 @@ public class MatchServiceImpl implements MatchService {
 		return sqlSession.delete("matchMapper.deleteMatch", matchCode);
 	}
 
+	@Override
+	public List<MatchVO> MyMatchList(String teamCode) {
+		return sqlSession.selectList("matchMapper.MyMatchList", teamCode);
+	}
+
 	//홈팀 랭킹 입력
 	//@Override
 	//public int updateRank(MatchVO matchVO) {

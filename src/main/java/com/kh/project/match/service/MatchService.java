@@ -14,6 +14,9 @@ public interface MatchService {
 	//매치 게시글 조회
 	public List<MatchVO> selectMatchList(MatchVO matchVO);
 	
+	//매치 게시글 조회
+	public List<MatchVO> MyMatchList(String teamCode);
+	
 	//게시글 수 조회
 	public int selectMatchCnt(MatchVO matchVO);
 	

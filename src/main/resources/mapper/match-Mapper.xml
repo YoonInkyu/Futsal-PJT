@@ -123,6 +123,47 @@
 		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
 	</select>
 	
+	<!-- 나의 매치 리스트 조회 -->
+	<select id="MyMatchList" resultMap="match">
+		SELECT MATCH_CODE
+		    , MATCH_LOCATION
+		    , MATCH_DATE
+		    , MATCH_START_TIME
+		    , MATCH_END_TIME
+		    , MATCH_APPLYNUM
+		    , MATCH_WRITER
+		    , MATCH_REGDATE
+		    , MATCH_POSSIBLE
+		    , ROW_NUM
+		FROM (
+		    SELECT MATCH_CODE
+		        , MATCH_LOCATION
+		        , MATCH_DATE
+		        , MATCH_START_TIME
+		        , MATCH_END_TIME
+		        , MATCH_APPLYNUM
+		        , MATCH_WRITER
+		        , MATCH_REGDATE
+		        , MATCH_POSSIBLE
+		        , ROWNUM AS ROW_NUM
+		    FROM (
+		            SELECT MATCH_CODE
+		                , MATCH_LOCATION
+		                , MATCH_DATE
+		                , MATCH_START_TIME
+		                , MATCH_END_TIME
+		                , MATCH_APPLYNUM
+		                , MATCH_WRITER
+		                , TO_CHAR(MATCH_REGDATE, 'YYYY-MM-DD') AS MATCH_REGDATE
+		                , MATCH_POSSIBLE
+		            FROM MATCH
+		            WHERE 1 = 1
+		            AND TEAM_CODE = #{teamCode}
+		            ORDER BY MATCH_CODE DESC
+		        )
+		)
+	</select>
+	
 	<!-- 게시글 수 -->
 	<select id="selectMatchCnt" resultType="int">
 		SELECT COUNT(MATCH_CODE)
