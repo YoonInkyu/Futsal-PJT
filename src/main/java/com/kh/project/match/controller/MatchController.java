@@ -102,9 +102,11 @@ public class MatchController {
 	}
 	//매치 상세보기 수정
 	@PostMapping("/matchDetailUpdate")
-	public String matchDetailUpdate(MatchVO matchVO) {
+	public String matchDetailUpdate(MatchVO matchVO, Model model) {
 		matchService.updateDetail(matchVO);
-		return "redirect:/match/matchList";
+		model.addAttribute("msg", "수정 되었습니다.");
+		model.addAttribute("url", "matchList");
+		return "match/alert";
 	}
 	
 	//매치 신청하기
@@ -124,38 +126,58 @@ public class MatchController {
 			model.addAttribute("url", "matchList");
 			return "match/alert";
 		}
-		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
-		matchManageVO.setTeamCodeAway(teamCode);
-		matchService.insertApplyMatch(matchManageVO);
+		//신청 가능 여부 확인
+		boolean result = matchService.checkMatchApply(matchManageVO);
 		
-		//신청시 문자 전송
-		String content = "[FootBall] 매치 신청이 도착했습니다. 홈페이지에서 확인해 주세요";
-		MessageService.sendMessage(memberTell, content);
-		
+		//신청 가능하면 insert
+		if(result == true) {
+			String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+			matchManageVO.setTeamCodeAway(teamCode);
+			matchService.insertApplyMatch(matchManageVO);
+			
+			//신청시 문자 전송
+			String content = "[FootBall] 매치 신청이 도착했습니다. 홈페이지에서 확인해 주세요";
+			MessageService.sendMessage(memberTell, content);
+			
+			model.addAttribute("msg", "매치 신청이 완료되었습니다.");
+			model.addAttribute("url", "matchList");
+			return "match/alert";
+		}
+		else if(result == false) {
+			model.addAttribute("msg", "이미 신청한 매치 게시글 입니다.");
+			model.addAttribute("url", "matchList");
+			return "match/alert";
+		}
 		return "redirect:/match/matchList";
 	}
 	
 	//매치 수락
 	@GetMapping("/updateResponse")
-	public String updateResponse(MatchManageVO matchManageVO) {
+	public String updateResponse(MatchManageVO matchManageVO, Model model) {
 		matchService.updateResponse(matchManageVO);
-		return "redirect:/match/matchList";
+		model.addAttribute("msg", "매치 수락 하였습니다.");
+		model.addAttribute("url", "matchList");
+		return "match/alert";
 	}
 	
 	//매치 결과 등록
 	@PostMapping("/insertResult")
-	public String insertResult(MatchResultVO matchResultVO) {
+	public String insertResult(MatchResultVO matchResultVO, Model model) {
 		matchService.insertResult(matchResultVO);
 		//insertResult 쿼리로 한번에 처리
 		//int a = matchService.updateRank(matchVO);
-		return "redirect:/match/matchList";
+		model.addAttribute("msg", "매치 결과가 등록되었습니다.");
+		model.addAttribute("url", "matchList");
+		return "match/alert";
 	}
 
 	//매치 삭제
 	@GetMapping("/deleteMatch")
-	public String deleteMatch(String matchCode) {
+	public String deleteMatch(String matchCode, Model model) {
 		matchService.deleteMatch(matchCode);
-		return "redirect:/match/matchList";
+		model.addAttribute("msg", "삭제 되었습니다.");
+		model.addAttribute("url", "matchList");
+		return "match/alert";
 	}
 
 }

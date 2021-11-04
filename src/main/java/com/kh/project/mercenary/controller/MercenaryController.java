@@ -113,10 +113,12 @@ public class MercenaryController {
 	}
 	//상세보기 수정
 	@PostMapping("/detailUpdate")
-	public String detailUpdate(MercenaryVO mercenaryVO) {
+	public String detailUpdate(MercenaryVO mercenaryVO, Model model) {
 		//ajax에서 submit 한 데이터 업데이트
 		mercenaryService.updateMercBoard(mercenaryVO);
-		return "redirect:/mercenary/recruit";
+		model.addAttribute("msg", "수정 되었습니다.");
+		model.addAttribute("url", "recruit");
+		return "mercenary/alert";
 	}
 	//용병 구인구직 등록 페이지로 이동
 	@GetMapping("/recruitRegForm")
@@ -150,31 +152,53 @@ public class MercenaryController {
 	}
 	//용병 구인구직 신청하기
 	@GetMapping("/updateRecruitCnt")
-	public String updateRecruitCnt(Model model, MercenaryVO mercenaryVO, HttpSession session, String memberTell) {
+	public String updateRecruitCnt(Model model, MercenaryVO mercenaryVO, HttpSession session, String memberTell, MercenaryListVO mercenaryListVO) {
 		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
 		if(memberCode == null) {
 			model.addAttribute("msg", "로그인해야 신청 가능 합니다.");
 			model.addAttribute("url", "recruit");
 			return "mercenary/alert";
 		}
-		mercenaryService.insertMercList(mercenaryVO);
 		
-		//신청시 문자 전송
-		String content = "[FootBall] 용병 신청이 도착했습니다. 홈페이지에서 확인해 주세요";
-		MessageService.sendMessage(memberTell, content);
+		//신청가능 여부 확인
+		boolean result = mercenaryService.checkMercApply(mercenaryListVO);
 		
+		System.out.println("신청가능해??");
+		System.out.println(result);
+		
+		//신청가능 하면 insert
+		if(result == true) {
+			mercenaryService.insertMercList(mercenaryVO);
+			//신청 성공시 작성자에게 문자 전송
+			String content = "[FootBall] 용병 신청이 도착했습니다. 홈페이지에서 확인해 주세요";
+			MessageService.sendMessage(memberTell, content);
+			
+			model.addAttribute("msg", "용병 신청이 완료되었습니다.");
+			model.addAttribute("url", "recruit");
+			return "mercenary/alert";
+		}
+		//신청이 이미 된 용병글이면 alert
+		else if(result == false) {
+			model.addAttribute("msg", "이미 신청한 용병 구인구직 게시글 입니다.");
+			model.addAttribute("url", "recruit");
+			return "mercenary/alert";
+		}
 		return "redirect:/mercenary/recruit";
 	}
 	//용병 구인구직 수락
 	@GetMapping("/updateResponse")
-	public String updateResponse(MercenaryListVO mercenaryListVO) {
+	public String updateResponse(MercenaryListVO mercenaryListVO, Model model) {
 		mercenaryService.updateResponse(mercenaryListVO);
-		return "redirect:/mercenary/recruit";
+		model.addAttribute("msg", "용병을 수락했습니다.");
+		model.addAttribute("url", "recruit");
+		return "mercenary/alert";
 	}
 	//용병 구인구직 삭제
 	@GetMapping("/deleteMerc")
-	public String deleteMerc(String mercBoardCode) {
+	public String deleteMerc(String mercBoardCode, Model model) {
 		mercenaryService.deleteMerc(mercBoardCode);
-		return "redirect:/mercenary/recruit";
+		model.addAttribute("msg", "삭제 되었습니다.");
+		model.addAttribute("url", "recruit");
+		return "mercenary/alert";
 	}
 }

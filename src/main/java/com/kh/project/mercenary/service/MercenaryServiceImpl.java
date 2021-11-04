@@ -85,6 +85,13 @@ public class MercenaryServiceImpl implements MercenaryService{
 		return sqlSession.delete("mercenaryMapper.deleteMerc", mercBoardCode);
 	}
 
+	//용병 신청 가능 여부 확인
+	@Override
+	public boolean checkMercApply(MercenaryListVO mercenaryListVO) {
+		String result = sqlSession.selectOne("mercenaryMapper.checkMercApply", mercenaryListVO);
+		return result == null ? true : false;
+	}
+
 	
 
 	

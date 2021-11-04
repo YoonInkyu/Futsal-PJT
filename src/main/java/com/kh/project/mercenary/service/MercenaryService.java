@@ -40,4 +40,7 @@ public interface MercenaryService {
 	//용병 구인 게시글 삭제
 	public int deleteMerc(String mercBoardCode);
 	
+	//용병 신청 가능 여부 확인
+	public boolean checkMercApply(MercenaryListVO mercenaryListVO);
+	
 }

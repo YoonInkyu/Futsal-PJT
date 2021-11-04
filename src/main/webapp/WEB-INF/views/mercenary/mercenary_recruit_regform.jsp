@@ -22,7 +22,6 @@ $(document).ready(function() {
 		}
 		else {
 		}
-		
 	});
 	
 	$(document).on('click', '#mercReg', function() {

@@ -251,6 +251,16 @@
 		AND MERC_BOARD_CODE = #{mercBoardCode}
 	</select>
 	
+	<!-- 용병 구인구직 신청 가능 확인하기 -->
+	<select id="checkMercApply" resultType="String">
+		SELECT MERC_LIST_CODE
+			, MERC_BOARD_CODE
+			, MEMBER_CODE
+		FROM MERC_APPLYLIST
+		WHERE MERC_BOARD_CODE = #{mercBoardCode}
+		AND MEMBER_CODE = #{memberCode}
+	</select>
+	
 	<!-- 용병 구인구직 지원하기 -->
 	<insert id="insertMercList">
 		INSERT INTO MERC_APPLYLIST (

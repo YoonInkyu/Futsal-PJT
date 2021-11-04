@@ -47,4 +47,7 @@ public interface MatchService {
 	
 	//매치 삭제
 	public int deleteMatch(String matchCode);
+	
+	//매치 신청 가능 여부 확인
+	public boolean checkMatchApply(MatchManageVO matchManageVO);
 }

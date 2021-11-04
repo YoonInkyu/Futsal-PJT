@@ -22,7 +22,17 @@ $(document).ready(function() {
 		}
 		else {
 		}
+	});
+	
+	$(document).on('click', '#matchReg', function() {
+		var inputIntro = $('#inputIntro').val()
 		
+		if(inputIntro == '') {
+			alert('매치 소개를 먼저 입력 해주세요.')
+		}
+		else {
+			alert('매치 등록이 완료되었습니다.')
+		}
 	});
 });
 </script>
@@ -70,7 +80,7 @@ $(document).ready(function() {
 		</div>
 	</div>
 	<div class="d-grid gap-2">
-		<input class="btn btn-primary" type="submit" value="매치 등록">
+		<input class="btn btn-primary" type="submit" id="matchReg" value="매치 등록">
 	</div>
 </form>
 </body>

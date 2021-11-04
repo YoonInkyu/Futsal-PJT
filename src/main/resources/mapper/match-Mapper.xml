@@ -203,6 +203,16 @@
 		AND MATCH_CODE = #{matchCode}
 	</select>
 	
+	<!-- 매치 신청 가능 여부 확인 -->
+	<select id="checkMatchApply" resultType="String">
+		SELECT MATCH_MANAGE_CODE
+			, MATCH_CODE
+			TEAM_CODE_AWAY
+		FROM MATCH_MANAGE
+		WHERE TEAM_CODE_AWAY = #{teamCodeAway}
+		AND MATCH_CODE = #{matchCode}
+	</select>
+	
 	<!-- 매치 신청하기 -->
 	<insert id="insertApplyMatch">
 		INSERT INTO MATCH_MANAGE (

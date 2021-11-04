@@ -155,25 +155,25 @@ input[type=number] {
 					</tr>
 				</tbody>
 			</table>
-			<c:if test="${not empty matchResult }">
 				<div class="input-group inputScore">
-				<table class="table">
-					<colgroup>
-						<col width="*">
-						<col width="40%">
-						<col width="34%">
-					</colgroup>
-					<tr>
-						<th></th>
-						<th>HOME SCORE</th>
-						<th>AWAY SCORE</th>
-					</tr>
-				</table>
-				 	<span class="input-group-text">매치 결과</span>
-        			<input type="number" name="matchResultHometeamScore" aria-label="First name" class="form-control" min="0" value="${matchResult.matchResultHometeamScore }" readonly>
-        			<input type="number" name="matchResultAwayteamScore" aria-label="Last name" class="form-control" min="0" value="${matchResult.matchResultAwayteamScore }" readonly>
+				<c:if test="${not empty matchResult }">
+					<table class="table">
+						<colgroup>
+							<col width="*">
+							<col width="40%">
+							<col width="34%">
+						</colgroup>
+						<tr>
+							<th></th>
+							<th>HOME SCORE</th>
+							<th>AWAY SCORE</th>
+						</tr>
+					</table>
+					 	<span class="input-group-text">매치 결과</span>
+	        			<input type="number" name="matchResultHometeamScore" aria-label="First name" class="form-control" min="0" value="${matchResult.matchResultHometeamScore }" readonly>
+	        			<input type="number" name="matchResultAwayteamScore" aria-label="Last name" class="form-control" min="0" value="${matchResult.matchResultAwayteamScore }" readonly>
+				</c:if>
 				</div>
-			</c:if>
 		</div>
 		<div class="modal-footer">
 			 <c:choose>
