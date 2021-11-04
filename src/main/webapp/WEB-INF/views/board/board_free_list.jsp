@@ -18,11 +18,13 @@ tr {
 	<div class="container">
 
 
+
 		<div class="row m-5 text-center justify-content-center">
 			<h2>자 유 게 시 판</h2>
 			<div class="col-3" style="border-bottom: 3px solid gray;"></div>
 
 		</div>
+
 
 
 		<div class="row">
@@ -74,8 +76,8 @@ tr {
 								</c:when>
 
 
-								<c:otherwise>
 
+								<c:otherwise>
 
 									<tr data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="setInfo('${freeInfo.boardPwFree}', ${freeInfo.boardNumFree });">
 										<td>${freeInfo.boardNumFree }</td>
@@ -105,108 +107,79 @@ tr {
 
 		</div>
 
+		<!-- 이거 머지? 승수씨한테 물어 볼것-->
 		<a href="location"></a>
 
 
-<!-- 검색 기능 -->
-		<div class="row mt-5">
 
-			<div class="col-6 mx-auto m-0 p-0">
+		<!-- 검색 기능 -->
+		<form action="/board/goFreeList" method="post">
 
-				<div class="row mx-auto">
+			<div class="row mt-5">
 
-					<div class="col-3">
-						<select class="form-select form-select" aria-label=".form-select-lg example">
-							<option value="제목" selected>제목</option>
-							<option value="내용">내용</option>
-							<option value="작성자">작성자</option>
-						</select>
-					</div>
+				<div class="col-6 mx-auto m-0 p-0">
 
-					<div class="col">
-						<input class="form-control" type="search" placeholder="Search" aria-label="Search">
-					</div>
+					<div class="row mx-auto">
 
-					<div class="col-1">
-						<button class="btn btn-primary " type="submit">Search</button>
+						<div class="col-3">
+							<select name="searchKeyword" class="form-select form-select" aria-label=".form-select-lg example">
+								<option value="TITLE_Free" selected>제목</option>
+								<option value="CONTENT_Free">내용</option>
+								<option value="WRITER_Free">작성자</option>
+							</select>
+						</div>
+
+						<div class="col">
+							<input name="searchValue" class="form-control" type="search" placeholder="Search" aria-label="Search" value="${boardFreeVO.searchValue}">
+						</div>
+
+						<div class="col-1">
+							<button class="btn btn-primary " type="submit">Search</button>
+						</div>
+
 					</div>
 
 				</div>
 
 			</div>
 
-		</div>
+		</form>
 
 
 
+		<!-- 페이징 기능 -->
+			<div class="row mt-5">
 
+				<div class="col">
 
+					<nav aria-label="Page navigation example">
 
-		<!-- 페이징 처리  인규씨꺼 -->
-<!-- 		<div class="row mt-5"> -->
-<!-- 			<div class="col"> -->
-<!-- 				<nav aria-label="Page navigation example"> -->
-<!-- 					<ul class="pagination justify-content-center"> -->
-<%-- 						<c:if test="${mercenaryVO.prev eq true}"> --%>
-<!-- 							<li class="page-item"> -->
-<%-- 								<a class="page-link" href="/mercenary/recruit?nowPage=${mercenaryVO.beginPage - 1 }">Prev</a> --%>
-<!-- 							</li> -->
-<%-- 						</c:if> --%>
-<%-- 						<c:forEach begin="${mercenaryVO.beginPage }" end="${mercenaryVO.endPage }" var="pageNumber"> --%>
-<%-- 							<li class="page-item <c:if test="${mercenaryVO.nowPage == pageNumber }">active</c:if>"> --%>
-<!-- 								여기 href 수정 -->
-<%-- 								<a class="page-link" href="/mercenary/recruit?nowPage=${pageNumber }&searchLocation=${mercenaryVO.searchLocation}&searchKeyword=${mercenaryVO.searchKeyword}&searchValue=${mercenaryVO.searchValue}">${pageNumber }</a> --%>
-<!-- 							</li> -->
-<%-- 						</c:forEach> --%>
-<%-- 						<c:if test="${mercenaryVO.next eq true}"> --%>
-<!-- 							<li class="page-item"> -->
-<%-- 								<a class="page-link" href="/mercenary/recruit?nowPage=${mercenaryVO.endPage + 1 }">Next</a> --%>
-<!-- 							</li> -->
-<%-- 						</c:if> --%>
-<!-- 					</ul> -->
-<!-- 				</nav> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
+						<ul class="pagination justify-content-center m-0 p-0">
 
+							<li class="page-item <c:if test="${!boardFreeVO.prev }">disabled</c:if>"><a class="page-link" aria-label="Previous" href="/board/goFreeList?nowPage=${boardFreeVO.beginPage - 1 }"> <span aria-hidden="true">&laquo;</span>
+							</a></li>
 
+							<c:forEach begin="${boardFreeVO.beginPage }" end="${boardFreeVO.endPage }" var="pageNumber">
+								<li class="page-item <c:if test="${boardFreeVO.nowPage eq pageNumber }">active</c:if>"><a class="page-link" href="/board/goFreeList?nowPage=${pageNumber }&searchKeyword=${boardFreeVO.searchKeyword}&searchValue=${boardFreeVO.searchValue}">${pageNumber }</a></li>
+							</c:forEach>
 
+							<li class="page-item <c:if test="${!boardFreeVO.next }">disabled</c:if>"><a class="page-link" href="/board/goFreeList?nowPage=${boardFreeVO.endPage + 1 }"> <span aria-hidden="true">&raquo;</span></a></li>
 
-<!-- 페이징 처리 -->
-		<div class="row mt-5">
+						</ul>
 
-			<div class="col">
+					</nav>
 
-				<nav aria-label="Page navigation example">
-
-					<ul class="pagination justify-content-center m-0 p-0">
-
-						<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
-
-					</ul>
-
-				</nav>
+				</div>
 
 			</div>
 
-		</div>
 
 
 	</div>
 
 
 
-
-
-
 	<!--  Modal -->
-
 	<div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
 		<div class="modal-dialog" role="document">
@@ -241,9 +214,7 @@ tr {
 
 
 
-
 	<!-- ============================== 스크립트 부분 ============================== -->
-
 	<script type="text/javascript">
 		
 		(function($) {

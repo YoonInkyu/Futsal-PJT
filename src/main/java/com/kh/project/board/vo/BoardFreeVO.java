@@ -2,7 +2,9 @@ package com.kh.project.board.vo;
 
 import java.util.List;
 
-public class BoardFreeVO {
+import com.kh.project.common.vo.PageVO;
+
+public class BoardFreeVO extends PageVO {
 
 	private int boardNumFree;
 	private String titleFree;

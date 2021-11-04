@@ -14,7 +14,7 @@ public class BoardNoticeVO extends PageVO {
 	private int readCntNotice;
 	private String fileNameNotice;
 	private String boardPwNotice;
-	
+
 	private List<NoticeImgVO> noticeImgList;
 
 	public List<NoticeImgVO> getNoticeImgList() {

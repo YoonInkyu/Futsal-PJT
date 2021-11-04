@@ -10,7 +10,7 @@ import com.kh.project.board.vo.NoticeImgVO;
 public interface BoardFreeService {
 
 	// 자유게시판 목록 조회
-	List<BoardFreeVO> selectBoardFreeList();
+	List<BoardFreeVO> selectBoardFreeList(BoardFreeVO boardFreeVO);
 
 	// 자유게시판 목록 상세 조회
 	BoardFreeVO selectBoardFreeDetail(int boardNumFree);
@@ -35,10 +35,11 @@ public interface BoardFreeService {
 
 	// 자유게시판 다음 넘버 조회
 	int selectNextFreeNum();
-	
+
 	// 자유게시판 이미지 조회
 	List<FreeImgVO> selectImgListFree(int boardNumFree);
-	
-	
+
+	// 게시글 전체 개수 조회
+	int selectBoardCntFree(BoardFreeVO boardFreeVO);
 
 }

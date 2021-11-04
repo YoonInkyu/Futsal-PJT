@@ -16,9 +16,9 @@ public class BoardNoticeServiceImpl implements BoardNoticeService {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<BoardNoticeVO> selectBoardNoticeList() {
+	public List<BoardNoticeVO> selectBoardNoticeList(BoardNoticeVO boardNoticeVO) {
 
-		return sqlSession.selectList("boardMapper.selectBoardNoticeList");
+		return sqlSession.selectList("boardMapper.selectBoardNoticeList", boardNoticeVO);
 	}
 
 	@Override
@@ -63,8 +63,13 @@ public class BoardNoticeServiceImpl implements BoardNoticeService {
 
 	@Override
 	public List<NoticeImgVO> selectImgListNotice(int boardNumNotice) {
-		 return sqlSession.selectList("boardMapper.selectImgListNotice", boardNumNotice);
-		
+		return sqlSession.selectList("boardMapper.selectImgListNotice", boardNumNotice);
+
+	}
+
+	@Override
+	public int selectBoardCntNotice(BoardNoticeVO boardNoticeVO) {
+		return sqlSession.selectOne("boardMapper.selectBoardCntNotice", boardNoticeVO);
 	}
 
 }

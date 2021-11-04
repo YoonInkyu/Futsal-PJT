@@ -49,27 +49,26 @@
 									<td>${freeInfo.writerFree }</td>
 								</c:if>
 								<c:if test="${freeInfo.writerFree ne loginInfo.memberId}">
-								<td>
-									<div class="btn-group dropend">
-										<button type="button" class="btn btn-outline-primary dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${freeInfo.writerFree }">${freeInfo.writerFree }</button>
-										<ul class="dropdown-menu">
-											<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addMemberBlackModal" style="cursor: pointer;">블랙리스트 추가</li>
-											<li class="dropdown-item">소속 팀 보기</li>
-										</ul>
-									</div>
-								</td>
+									<td>
+										<div class="btn-group dropend">
+											<button type="button" class="btn btn-outline-primary dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${freeInfo.writerFree }">${freeInfo.writerFree }</button>
+											<ul class="dropdown-menu">
+												<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addMemberBlackModal" style="cursor: pointer;">블랙리스트 추가</li>
+												<li class="dropdown-item">소속 팀 보기</li>
+											</ul>
+										</div>
+									</td>
 								</c:if>
 								<td>${freeInfo.createDateFree }</td>
 								<td>${freeInfo.readCntFree }</td>
 							</tr>
 							<tr>
-							
-							<td colspan="4">첨부파일 : <c:forEach items="${imgListFree }" var="imgFree">
+
+								<td colspan="4">첨부파일 : <c:forEach items="${imgListFree }" var="imgFree">
 
 										<a class="mx-1 btn btn-outline-success  btn-sm" href="<c:url value="..\\resources\\img\\board\\${imgFree.freeImgAttachedName }" ></c:url>" download="${imgFree.freeImgOrignName }">${imgFree.freeImgOrignName }</a>
 
 									</c:forEach>
-
 							</tr>
 
 						</tbody>
@@ -141,7 +140,9 @@
 
 						</form>
 
-						<div class="mt-3">글자수 제한 (<span id="nowByte2">0</span>/500bytes)</div>
+						<div class="mt-3">
+							글자수 제한 (<span id="nowByte2">0</span>/500bytes)
+						</div>
 
 					</c:when>
 
@@ -244,31 +245,33 @@
 
 	</c:forEach>
 
-<div class="modal fade" id="addMemberBlackModal" tabindex="-1">
-	<div class="modal-dialog">
-	<div class="modal-content addMemberBlackDiv">
-    <div class="modal-header">
-    	<h5 class="modal-title" id="exampleModalLabel">블랙리스트 추가</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-    	<div class="form-floating mb-3">
-  			<input type="text" class="form-control" id="blackComment" placeholder="name@example.com" required>
-  			<label for="floatingInput" style="color: gray;">사 유 : 블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김처리됩니다.</label>
-		</div>
-		<div class="modal-footer">
-    		<!-- <p>블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김처리됩니다.</p> -->
-    		<button type="button" class="btn btn-primary" onclick="addMemberBlack()">추 가 하 기</button>
-        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
-		</div>
-	</div>
-      <!-- <div class="modal-footer">
+
+
+
+	<div class="modal fade" id="addMemberBlackModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content addMemberBlackDiv">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">블랙리스트 추가</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="blackComment" placeholder="name@example.com" required> <label for="floatingInput" style="color: gray;">사 유 : 블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김처리됩니다.</label>
+					</div>
+					<div class="modal-footer">
+						<!-- <p>블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김처리됩니다.</p> -->
+						<button type="button" class="btn btn-primary" onclick="addMemberBlack()">추 가 하 기</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
+					</div>
+				</div>
+				<!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div> -->
-    </div>
+			</div>
+		</div>
 	</div>
-</div>
 
 	<!-- ============================== 스크립트 부분 ============================== -->
 

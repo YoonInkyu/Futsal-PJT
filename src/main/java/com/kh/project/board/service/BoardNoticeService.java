@@ -8,7 +8,7 @@ import com.kh.project.board.vo.NoticeImgVO;
 public interface BoardNoticeService {
 
 	// 공지사항 목록 조회
-	List<BoardNoticeVO> selectBoardNoticeList();
+	List<BoardNoticeVO> selectBoardNoticeList(BoardNoticeVO boardNoticeVO);
 
 	// 공지사항 목록 상세 조회
 	BoardNoticeVO selectBoardNoticeDetail(int boardNumNotice);
@@ -33,9 +33,11 @@ public interface BoardNoticeService {
 
 	// 공지사항 다음 넘버 조회
 	int selectNextNoticeNum();
-	
+
 	// 공지사항 이미지 조회
 	List<NoticeImgVO> selectImgListNotice(int boardNumNotice);
-	
+
+	// 게시글 전체 개수 조회
+	int selectBoardCntNotice(BoardNoticeVO boardNoticeVO);
 
 }

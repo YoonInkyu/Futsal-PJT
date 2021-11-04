@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+tr {
+	cursor: pointer;
+}
+</style>
+
 </head>
 <body>
 
@@ -50,6 +56,7 @@
 
 					<tbody>
 
+						<!-- 공지사항은 관리자만 입력함으로 비밀번호 없음 -->
 						<c:forEach items="${noticeList }" var="noticeInfo">
 
 							<tr onclick="location.href='/board/goNoticeDetail?boardNumNotice=' + ${noticeInfo.boardNumNotice };">
@@ -70,71 +77,76 @@
 
 		</div>
 
+
+		<!-- 이거 머지? 승수씨한테 물어 볼것-->
 		<a href="location"></a>
 
 
 
-		<div class="row mt-5">
+		<!-- 검색 기능 -->
+		<form action="/board/goNoticeList" method="post">
 
-			<div class="col-6 mx-auto m-0 p-0">
+			<div class="row mt-5">
 
-				<div class="row mx-auto">
+				<div class="col-6 mx-auto m-0 p-0">
 
-					<div class="col-3">
-						<select class="form-select form-select" aria-label=".form-select-lg example">
-							<option value="제목" selected>제목</option>
-							<option value="내용">내용</option>
-							<option value="작성자">작성자</option>
-						</select>
-					</div>
+					<div class="row mx-auto">
 
-					<div class="col">
-						<input class="form-control" type="search" placeholder="Search" aria-label="Search">
-					</div>
+						<div class="col-3">
+							<select name="searchKeyword" class="form-select form-select" aria-label=".form-select-lg example">
+								<option value="TITLE_NOTICE" selected>제목</option>
+								<option value="CONTENT_NOTICE">내용</option>
+								<option value="WRITER_NOTICE">작성자</option>
+							</select>
+						</div>
 
-					<div class="col-1">
-						<button class="btn btn-primary " type="submit">Search</button>
+						<div class="col">
+							<input name="searchValue" class="form-control" type="search" placeholder="Search" aria-label="Search" value="${boardNoticeVO.searchValue}">
+						</div>
+
+						<div class="col-1">
+							<button class="btn btn-primary " type="submit">Search</button>
+						</div>
+
 					</div>
 
 				</div>
 
 			</div>
 
-		</div>
+		</form>
 
 
 
+		<!-- 페이징 기능 -->
+			<div class="row mt-5">
 
-		<div class="row mt-5">
+				<div class="col">
 
-			<div class="col">
+					<nav aria-label="Page navigation example">
 
-				<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center m-0 p-0">
 
-					<ul class="pagination justify-content-center m-0 p-0">
+							<li class="page-item <c:if test="${!boardNoticeVO.prev }">disabled</c:if>"><a class="page-link" aria-label="Previous" href="/board/goNoticeList?nowPage=${boardNoticeVO.beginPage - 1 }"> <span aria-hidden="true">&laquo;</span>
+							</a></li>
 
-						<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
+							<c:forEach begin="${boardNoticeVO.beginPage }" end="${boardNoticeVO.endPage }" var="pageNumber">
+								<li class="page-item <c:if test="${boardNoticeVO.nowPage eq pageNumber }">active</c:if>"><a class="page-link" href="/board/goNoticeList?nowPage=${pageNumber }&searchKeyword=${boardNoticeVO.searchKeyword}&searchValue=${boardNoticeVO.searchValue}">${pageNumber }</a></li>
+							</c:forEach>
 
-					</ul>
+							<li class="page-item <c:if test="${!boardNoticeVO.next }">disabled</c:if>"><a class="page-link" href="/board/goNoticeList?nowPage=${boardNoticeVO.endPage + 1 }"> <span aria-hidden="true">&raquo;</span></a></li>
 
-				</nav>
+						</ul>
+
+					</nav>
+
+				</div>
 
 			</div>
 
-		</div>
 
 
 	</div>
-
-
-
-
 
 
 

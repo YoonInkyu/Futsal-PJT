@@ -17,7 +17,7 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<BoardFreeVO> selectBoardFreeList() {
+	public List<BoardFreeVO> selectBoardFreeList(BoardFreeVO boardFreeVO) {
 
 		return sqlSession.selectList("boardMapper.selectBoardFreeList");
 	}
@@ -66,6 +66,11 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	public List<FreeImgVO> selectImgListFree(int boardNumFree) {
 		return sqlSession.selectList("boardMapper.selectImgListFree", boardNumFree);
 
+	}
+
+	@Override
+	public int selectBoardCntFree(BoardFreeVO boardFreeVO) {
+		return sqlSession.selectOne("boardMapper.selectBoardCntFree", boardFreeVO);
 	}
 
 }

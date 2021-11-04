@@ -48,10 +48,16 @@ public class BoardController {
 	// ==============================// 공지사항 //==============================//
 
 	// 공지사항 리스트로 이동
-	@GetMapping("/goNoticeList")
-	public String goNoticeList(Model model) {
+	@RequestMapping("/goNoticeList")
+	public String goNoticeList(Model model, BoardNoticeVO boardNoticeVO) {
 
-		model.addAttribute("noticeList", boardNoticeService.selectBoardNoticeList());
+		// 공지사항 등록된 글 수 카운트
+		boardNoticeVO.setTotalCnt(boardNoticeService.selectBoardCntNotice(boardNoticeVO));
+
+		// 페이징 처리(페이지 세팅을 해야 정상 작동됨)
+		boardNoticeVO.setPageInfo();
+
+		model.addAttribute("noticeList", boardNoticeService.selectBoardNoticeList(boardNoticeVO));
 
 		return "board/board_notice_list";
 	}
@@ -94,10 +100,10 @@ public class BoardController {
 		Iterator<String> inputNames = multi.getFileNames();
 
 		// 첨부될 폴더(집 경로, 다른데서 할시 경로 변경 할것!!!)
-		// String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+		String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
 
 		// 첨부될 폴더(학원 경로, 다른데서 할시 경로 변경 할것!!!)
-		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+//		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
 
 		List<NoticeImgVO> noticeImgList = new ArrayList<>();
 
@@ -108,10 +114,12 @@ public class BoardController {
 		int nextNoticeNum = boardNoticeService.selectNextNoticeNum();
 
 		while (inputNames.hasNext()) {
+
 			String inputName = inputNames.next();
 
 			// 실제첨부 기능
 			try {
+
 				if (inputName.equals("fileNotice")) {
 
 					List<MultipartFile> fileList = multi.getFiles(inputName);
@@ -196,10 +204,16 @@ public class BoardController {
 	// ==============================// 자유게시판 //==============================//
 
 	// 자유게시판 리스트로 이동
-	@GetMapping("/goFreeList")
-	public String goFreeList(Model model) {
+	@RequestMapping("/goFreeList")
+	public String goFreeList(Model model, BoardFreeVO boardFreeVO) {
 
-		model.addAttribute("freeList", boardFreeService.selectBoardFreeList());
+		// 자유게시판 등록된 글 수 카운트
+		boardFreeVO.setTotalCnt(boardFreeService.selectBoardCntFree(boardFreeVO));
+
+		// 페이징 처리(페이지 세팅을 해야 정상 작동됨)
+		boardFreeVO.setPageInfo();
+
+		model.addAttribute("freeList", boardFreeService.selectBoardFreeList(boardFreeVO));
 
 		return "board/board_free_list";
 	}
@@ -244,10 +258,10 @@ public class BoardController {
 		Iterator<String> inputNames = multi.getFileNames();
 
 		// 첨부될 폴더(집 경로, 다른데서 할시 경로 변경 할것!!!)
-//		 String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+		String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
 
 		// 첨부될 폴더(학원 경로, 다른데서 할시 경로 변경 할것!!!)
-		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+//		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
 
 		List<FreeImgVO> FreeImgList = new ArrayList<>();
 
@@ -258,10 +272,12 @@ public class BoardController {
 		int nextFreeNum = boardFreeService.selectNextFreeNum();
 
 		while (inputNames.hasNext()) {
+
 			String inputName = inputNames.next();
 
 			// 실제첨부 기능
 			try {
+
 				if (inputName.equals("fileFree")) {
 
 					List<MultipartFile> fileList = multi.getFiles(inputName);
