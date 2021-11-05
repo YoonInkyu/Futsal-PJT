@@ -252,6 +252,13 @@
 	
 	</update>
 	
+	<!-- 팀이름 중복체크 -->
+	<select id="checkTeamName" resultType="String">
+		SELECT TEAM_NAME
+		FROM TEAM 
+		WHERE TEAM_NAME = #{teamName}
+	</select>
+	
 </mapper>
 
 

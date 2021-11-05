@@ -8,10 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<style type="text/css">
-</style>
-
+<script type="text/javascript" src="/resources/team/js/submenu_team_create.js"></script>
 </head>
 <body>
 	<form action="/team/regTeam" method="post" enctype="multipart/form-data">
@@ -28,25 +25,18 @@
 
 				<div class="row my-4 ">
 
-
-
-
-
 					<!-- 사진 이미지, 고정 사이즈 적용 예정 -->
-
 					<div class="col-4">
 					<i class="bi bi-camera-fill"></i>
 						<img src="/resources/img/common/addImg.PNG" id="preview" class="img-thumbnail">
 					</div>
 
-
-
-
 					<div class="col-8">
 						<div class="row">
-							<label for="inputId" class="form-label">팀 명</label>
+							<label for="inputTeamName" class="form-label">팀 명</label>
 							<div class="col mb-3 d-grid gap-2 d-md-flex">
-								<input type="text" name="teamName" class="form-control" id="inputId" placeholder="1~16 글자수 생성 가능"> <input class="btn btn-primary" type="submit" value="중복 체크">
+								<input type="text" name="teamName" class="form-control" id="inputTeamName" placeholder="1~16 글자수 생성 가능" required>
+								<input class="btn btn-primary" id="checkTeamName" type="button" value="중복 체크">
 							</div>
 						</div>
 						<div class="row">
@@ -94,8 +84,8 @@
 				</div>
 				<div class="row mt-5 mb-3 text-center">
 
-					<div class="d-grid gap-2 d-md-block">
-						<button class="btn btn-primary col-2 mx-auto" type="submit">팀 등록</button>
+					<div class="d-grid gap-2 d-md-block" id="buttonDiv">
+						<button class="btn btn-primary col-2 mx-auto" id="createTeam" type="submit" disabled>팀 등록</button>
 						<button class="btn btn-primary col-2 mx-auto" type="button">취 소</button>
 					</div>
 

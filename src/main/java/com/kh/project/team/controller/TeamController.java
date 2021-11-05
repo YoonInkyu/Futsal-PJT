@@ -238,14 +238,20 @@ public class TeamController {
 	@GetMapping("/teamMemberDelete")
 	public String teamMemberDelete(TeamVO teamVO, HttpSession session, Model model) {
 		
-		
 		teamService.teamMemberDelete(teamVO);
 		model.addAttribute("msg", "강퇴 완료 되었습니다.");
 		model.addAttribute("url", "selectTeamMemberManage");
 		return "team/alert";
 	}
 	
-	
+	// 팀 이름 중복확인
+	@ResponseBody
+	@PostMapping("/checkTeamName")
+	public boolean checkTeamName(String teamName) {
+		
+		return teamService.checkTeamName(teamName);
+		
+	}
 	
 	
 	

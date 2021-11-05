@@ -61,7 +61,8 @@ public interface TeamService {
 	// 가입신청 거부
 	int teamMemberDelete(TeamVO teamVO);
 	
-	
+	// 팀이름 중복확인
+	boolean checkTeamName(String teamName);
 	
 	
 	

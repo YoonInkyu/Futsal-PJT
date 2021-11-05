@@ -120,6 +120,13 @@ public class TeamServiceImpl implements TeamService{
 	public int teamMemberDelete(TeamVO teamVO) {
 		return sqlSession.update("teamMapper.teamMemberDelete", teamVO);
 	}
+	
+	// 팀이름 중복확인
+	@Override
+	public boolean checkTeamName(String teamName) {
+		String result = sqlSession.selectOne("teamMapper.checkTeamName", teamName);
+		return result == null ? true : false;
+	}
 
 
 	
