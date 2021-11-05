@@ -33,38 +33,38 @@
 	<select id="selectBoardNoticeList" resultMap="boardNotice">
 		SELECT BOARD_NUM_NOTICE
 		, TITLE_NOTICE
-		, CONTENT_NOTICE 
+		, CONTENT_NOTICE
 		, WRITER_NOTICE
 		, CREATE_DATE_NOTICE
 		, READ_CNT_NOTICE
-		, BOARD_PW_NOTICE 
+		, BOARD_PW_NOTICE
 		, ROW_NUM
 		FROM
-			(
-			SELECT BOARD_NUM_NOTICE
-			, TITLE_NOTICE
-			, CONTENT_NOTICE 
-			, WRITER_NOTICE
-			, CREATE_DATE_NOTICE
-			, READ_CNT_NOTICE
-			, BOARD_PW_NOTICE 
-			, ROWNUM AS ROW_NUM
-			FROM
-				(
-				SELECT BOARD_NUM_NOTICE
-				, TITLE_NOTICE
-				, CONTENT_NOTICE 
-				, WRITER_NOTICE
-				, TO_CHAR(CREATE_DATE_NOTICE, 'YYYY-MM-DD') AS CREATE_DATE_NOTICE
-				, READ_CNT_NOTICE
-				, BOARD_PW_NOTICE 
-				FROM BOARD_NOTICE
-				<if test="searchValue != null and !searchValue.equals('')">
-					WHERE ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
-				</if>
-				ORDER BY BOARD_NUM_NOTICE DESC
-				)
-			)
+		(
+		SELECT BOARD_NUM_NOTICE
+		, TITLE_NOTICE
+		, CONTENT_NOTICE
+		, WRITER_NOTICE
+		, CREATE_DATE_NOTICE
+		, READ_CNT_NOTICE
+		, BOARD_PW_NOTICE
+		, ROWNUM AS ROW_NUM
+		FROM
+		(
+		SELECT BOARD_NUM_NOTICE
+		, TITLE_NOTICE
+		, CONTENT_NOTICE
+		, WRITER_NOTICE
+		, TO_CHAR(CREATE_DATE_NOTICE, 'YYYY-MM-DD') AS CREATE_DATE_NOTICE
+		, READ_CNT_NOTICE
+		, BOARD_PW_NOTICE
+		FROM BOARD_NOTICE
+		<if test="searchValue != null and !searchValue.equals('')">
+			WHERE ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
+		</if>
+		ORDER BY BOARD_NUM_NOTICE DESC
+		)
+		)
 		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
 	</select>
 
@@ -73,7 +73,7 @@
 	<!-- 공지사항 전체 데이터 개수 조회 -->
 	<select id="selectBoardCntNotice" resultType="int">
 		SELECT COUNT(BOARD_NUM_NOTICE)
-		FROM BOARD_NOTICE	
+		FROM BOARD_NOTICE
 		<if test="searchValue != null and !searchValue.equals('')">
 			WHERE ${searchKeyword} LIKE '%'||#{searchValue}||'%'
 		</if>
@@ -203,10 +203,6 @@
 
 
 
-
-
-
-
 	<!-- ============================== 자유게시판 ============================== -->
 	<!-- ============================== 자유게시판 ============================== -->
 	<!-- ============================== 자유게시판 ============================== -->
@@ -237,38 +233,38 @@
 	<select id="selectBoardFreeList" resultMap="boardFree">
 		SELECT BOARD_NUM_FREE
 		, TITLE_FREE
-		, CONTENT_FREE 
+		, CONTENT_FREE
 		, WRITER_FREE
 		, CREATE_DATE_FREE
 		, READ_CNT_FREE
-		, BOARD_PW_FREE 
+		, BOARD_PW_FREE
 		, ROW_NUM
 		FROM
-			(
-			SELECT BOARD_NUM_FREE
-			, TITLE_FREE
-			, CONTENT_FREE 
-			, WRITER_FREE
-			, CREATE_DATE_FREE
-			, READ_CNT_FREE
-			, BOARD_PW_FREE 
-			, ROWNUM AS ROW_NUM
-			FROM
-				(
-				SELECT BOARD_NUM_FREE
-				, TITLE_FREE
-				, CONTENT_FREE 
-				, WRITER_FREE
-				, TO_CHAR(CREATE_DATE_FREE, 'YYYY-MM-DD') AS CREATE_DATE_FREE
-				, READ_CNT_FREE
-				, BOARD_PW_FREE 
-				FROM BOARD_FREE
-				<if test="searchValue != null and !searchValue.equals('')">
-					WHERE ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
-				</if>
-				ORDER BY BOARD_NUM_FREE DESC
-				)
-			)
+		(
+		SELECT BOARD_NUM_FREE
+		, TITLE_FREE
+		, CONTENT_FREE
+		, WRITER_FREE
+		, CREATE_DATE_FREE
+		, READ_CNT_FREE
+		, BOARD_PW_FREE
+		, ROWNUM AS ROW_NUM
+		FROM
+		(
+		SELECT BOARD_NUM_FREE
+		, TITLE_FREE
+		, CONTENT_FREE
+		, WRITER_FREE
+		, TO_CHAR(CREATE_DATE_FREE, 'YYYY-MM-DD') AS CREATE_DATE_FREE
+		, READ_CNT_FREE
+		, BOARD_PW_FREE
+		FROM BOARD_FREE
+		<if test="searchValue != null and !searchValue.equals('')">
+			WHERE ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
+		</if>
+		ORDER BY BOARD_NUM_FREE DESC
+		)
+		)
 		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
 	</select>
 
@@ -277,7 +273,7 @@
 	<!-- 자유게시판 전체 데이터 개수 조회 -->
 	<select id="selectBoardCntFree" resultType="int">
 		SELECT COUNT(BOARD_NUM_FREE)
-		FROM BOARD_FREE	
+		FROM BOARD_FREE
 		<if test="searchValue != null and !searchValue.equals('')">
 			WHERE ${searchKeyword} LIKE '%'||#{searchValue}||'%'
 		</if>

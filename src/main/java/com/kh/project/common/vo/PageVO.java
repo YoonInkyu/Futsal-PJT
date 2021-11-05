@@ -14,8 +14,8 @@ public class PageVO extends BaseSearchVO {
 	
 	public PageVO () {
 		nowPage = 1;
-		displayCnt = 2;
-		displayPageCnt = 2;
+		displayCnt = 5;
+		displayPageCnt = 5;
 	}
 
 	public int getNowPage() {

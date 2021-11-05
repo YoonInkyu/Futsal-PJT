@@ -60,8 +60,7 @@ public class BoardController {
 		model.addAttribute("noticeList", boardNoticeService.selectBoardNoticeList(boardNoticeVO));
 
 		return "board/board_notice_list";
-		
-	
+
 	}
 
 	// 공지사항 상세 페이지로 이동
@@ -128,19 +127,23 @@ public class BoardController {
 
 					for (MultipartFile file : fileList) {
 
-						String attachedFileName = CurrentDateTime.getNowDateTime() + "_" + file.getOriginalFilename();
+						if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
 
-						String uploadFile = uploadPath + attachedFileName;
+							String attachedFileName = CurrentDateTime.getNowDateTime() + "_" + file.getOriginalFilename();
 
-						file.transferTo(new File(uploadFile));
+							String uploadFile = uploadPath + attachedFileName;
 
-						NoticeImgVO img = new NoticeImgVO();
-						img.setNoticeImgCode("NOTICE_IMG_" + String.format("%03d", nextImgCode++));
-						img.setNoticeImgOrignName(file.getOriginalFilename());
-						img.setNoticeImgAttachedName(attachedFileName);
-						img.setBoardNumNotice(nextNoticeNum);
+							file.transferTo(new File(uploadFile));
 
-						noticeImgList.add(img);
+							NoticeImgVO img = new NoticeImgVO();
+							img.setNoticeImgCode("NOTICE_IMG_" + String.format("%03d", nextImgCode++));
+							img.setNoticeImgOrignName(file.getOriginalFilename());
+							img.setNoticeImgAttachedName(attachedFileName);
+							img.setBoardNumNotice(nextNoticeNum);
+
+							noticeImgList.add(img);
+						}
+
 					}
 				}
 
@@ -162,11 +165,12 @@ public class BoardController {
 		boardNoticeService.insertBoardNotice(boardNoticeVO);
 
 		// 첨부파일 등록 쿼리
-		boardNoticeVO.setNoticeImgList(noticeImgList);
-		boardNoticeService.insertImgsNotice(boardNoticeVO);
+		if (noticeImgList.size() != 0) {
+			boardNoticeVO.setNoticeImgList(noticeImgList);
+			boardNoticeService.insertImgsNotice(boardNoticeVO);
+		}
 
 		return "redirect:/board/goNoticeList";
-
 	}
 
 	// 공지사항 글 수정 폼으로 이동
@@ -265,7 +269,7 @@ public class BoardController {
 		// 첨부될 폴더(학원 경로, 다른데서 할시 경로 변경 할것!!!)
 		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
 
-		List<FreeImgVO> FreeImgList = new ArrayList<>();
+		List<FreeImgVO> freeImgList = new ArrayList<>();
 
 		// 다음에 들어갈 이미지 코드 조회
 		int nextImgCode = boardFreeService.selectNextNumberFree();
@@ -286,19 +290,22 @@ public class BoardController {
 
 					for (MultipartFile file : fileList) {
 
-						String attachedFileName = CurrentDateTime.getNowDateTime() + "_" + file.getOriginalFilename();
+						if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
 
-						String uploadFile = uploadPath + attachedFileName;
+							String attachedFileName = CurrentDateTime.getNowDateTime() + "_" + file.getOriginalFilename();
 
-						file.transferTo(new File(uploadFile));
+							String uploadFile = uploadPath + attachedFileName;
 
-						FreeImgVO img = new FreeImgVO();
-						img.setFreeImgCode("Free_IMG_" + String.format("%03d", nextImgCode++));
-						img.setFreeImgOrignName(file.getOriginalFilename());
-						img.setFreeImgAttachedName(attachedFileName);
-						img.setBoardNumFree(nextFreeNum);
+							file.transferTo(new File(uploadFile));
 
-						FreeImgList.add(img);
+							FreeImgVO img = new FreeImgVO();
+							img.setFreeImgCode("Free_IMG_" + String.format("%03d", nextImgCode++));
+							img.setFreeImgOrignName(file.getOriginalFilename());
+							img.setFreeImgAttachedName(attachedFileName);
+							img.setBoardNumFree(nextFreeNum);
+
+							freeImgList.add(img);
+						}
 					}
 				}
 
@@ -320,8 +327,11 @@ public class BoardController {
 		boardFreeService.insertBoardFree(boardFreeVO);
 
 		// 첨부파일 등록 쿼리
-		boardFreeVO.setFreeImgList(FreeImgList);
-		boardFreeService.insertImgsFree(boardFreeVO);
+		if (freeImgList.size() != 0) {
+
+			boardFreeVO.setFreeImgList(freeImgList);
+			boardFreeService.insertImgsFree(boardFreeVO);
+		}
 
 		return "redirect:/board/goFreeList";
 
