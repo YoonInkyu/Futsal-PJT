@@ -33,6 +33,9 @@
 		<result column="TEAM_CODE_AWAY" 				property="teamCodeAway"/>
 		<result column="TEAM_NAME" 						property="teamName"/>
 		<result column="MATCH_MANAGE_RESPONSE" 			property="matchManageResponse"/>
+		<result column="MEMBER_NAME"	 				property="memberName"/>
+		<result column="MEMBER_CODE"	 				property="memberCode"/>
+		<result column="MEMBER_TELL"	 				property="memberTell"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.match.vo.MatchResultVO" id="matchResult">
@@ -237,16 +240,31 @@
 	</update>
 	
 	<!-- 매치 신청 지원 팀 리스트 -->
+	<!-- 	11/5 쿼리 수정 (문자발송할때 신청자 아이디, 경기날짜 필요함) -->
 	<select id="matchApplyList" resultMap="matchManage">
 		SELECT MATCH_MANAGE_CODE
 			, MATCH_CODE
 			, TEAM_CODE_AWAY
 			, TEAM_NAME
 			, MATCH_MANAGE_RESPONSE
-		FROM MATCH_MANAGE M, TEAM T
+            , MEMBER_NAME
+		    , MB.MEMBER_CODE
+		    , MEMBER_TELL
+		FROM MATCH_MANAGE M, TEAM T, MEMBER MB
         WHERE M.TEAM_CODE_AWAY = T.TEAM_CODE
+        AND M.TEAM_CODE_AWAY = MB.TEAM_CODE
         AND MATCH_CODE = #{matchCode}
 	</select>
+	<!-- 	<select id="matchApplyList" resultMap="matchManage"> -->
+	<!-- 		SELECT MATCH_MANAGE_CODE -->
+	<!-- 			, MATCH_CODE -->
+	<!-- 			, TEAM_CODE_AWAY -->
+	<!-- 			, TEAM_NAME -->
+	<!-- 			, MATCH_MANAGE_RESPONSE -->
+	<!-- 		FROM MATCH_MANAGE M, TEAM T -->
+	<!--         WHERE M.TEAM_CODE_AWAY = T.TEAM_CODE -->
+	<!--         AND MATCH_CODE = #{matchCode} -->
+	<!-- 	</select> -->
 	
 	<!-- 매치 수정하기 -->
 	<update id="updateDetail">

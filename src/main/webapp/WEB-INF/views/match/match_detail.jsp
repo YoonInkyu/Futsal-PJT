@@ -215,7 +215,7 @@ input[type=number] {
 								<button type="button" class="btn btn-info" onclick="location.href='/match/updateResponse?matchCode=${matchVO.matchCode }&matchManageCode=${team.matchManageCode}&teamCodeAway=${team.teamCodeAway}'">수락</button>
 							</c:when>
 							<c:otherwise>
-								${team.matchManageResponse }
+								${team.matchManageResponse } ${team.memberTell }
 							</c:otherwise>
 						</c:choose>
 					</td>

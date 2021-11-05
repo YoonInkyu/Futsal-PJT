@@ -6,7 +6,28 @@ public class MatchManageVO {
 	private String teamCodeAway;
 	private String teamName;
 	private String matchManageResponse;
+	private String memberName;
+	private String memberCode;
+	private String memberTell;
 	
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getMemberCode() {
+		return memberCode;
+	}
+	public void setMemberCode(String memberCode) {
+		this.memberCode = memberCode;
+	}
+	public String getMemberTell() {
+		return memberTell;
+	}
+	public void setMemberTell(String memberTell) {
+		this.memberTell = memberTell;
+	}
 	public String getTeamName() {
 		return teamName;
 	}
