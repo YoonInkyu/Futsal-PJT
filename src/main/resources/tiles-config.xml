@@ -7,7 +7,7 @@
 	<!-- 메인 페이지(탑 메뉴와 바디 만 있는 템플릿) -->
 	<definition name="mainPageLayout" template="/WEB-INF/views/template/main_page_template.jsp">
 		<put-attribute name="title" value="FootBall" />
-		<put-attribute name="menu" value="/WEB-INF/views/template/top_menu.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/template/main_top_menu.jsp" />
 		<put-attribute name="body" value="" />
 	</definition>
 
@@ -35,7 +35,6 @@
 	<definition name="baseLayout" template="/WEB-INF/views/template/template.jsp">
 		<put-attribute name="title" value="FootBall" />
 		<put-attribute name="menu" value="/WEB-INF/views/template/top_menu.jsp" />
-		<put-attribute name="side" value="/WEB-INF/views/template/side_menu.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/views/template/buttom_menu.jsp" />
 		<put-attribute name="body" value="" />
 	</definition>

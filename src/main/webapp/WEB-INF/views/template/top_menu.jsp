@@ -65,9 +65,9 @@
 			<c:if test="${empty sessionScope.loginInfo }">
 
 				<div style="text-align: right;">
-					<a class="navbar-brand" href="/member/goJoin"><img src="/resources/img/common/login.png" width="8%" height="">JOIN</a> 
+					<a class="navbar-brand" href="/member/goJoin"><img src="/resources/img/common/login.png" width="8%" height="">JOIN</a>
 					<!-- <a class="navbar-brand" href="/member/goLogin"><img src="/resources/img/common/login.png" width="8%" height="">LOGIN</a> -->
-					<span class="navbar-brand" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;"><img src="/resources/img/common/login.png" width="8%" height="">LOGIN</span> 
+					<span class="navbar-brand" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;"><img src="/resources/img/common/login.png" width="8%" height="">LOGIN</span>
 				</div>
 
 			</c:if>
@@ -79,15 +79,14 @@
 				<div class="d-flex flex-wrap ">
 
 					<div class="dropdown" style="text-align: right;">
-						<a href="#" class="navbar-brand d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-						<c:choose> 
-						<c:when test="${sessionScope.loginInfo.memberImgAttachedName != null }">
-						<img src="/resources/img/member/${sessionScope.loginInfo.memberImgAttachedName }" alt="mdo" width="32" height="32" class="rounded-circle"> ${sessionScope.loginInfo.memberName } 님 환영합니다.
+						<a href="#" class="navbar-brand d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <c:choose>
+								<c:when test="${sessionScope.loginInfo.memberImgAttachedName != null }">
+									<img src="/resources/img/member/${sessionScope.loginInfo.memberImgAttachedName }" alt="mdo" width="32" height="32" class="rounded-circle"> ${sessionScope.loginInfo.memberName } 님 환영합니다.
 						</c:when>
-						<c:otherwise>
-						<img src="/resources/img/member/nullImg.png" alt="mdo" width="32" height="32" class="rounded-circle"> ${sessionScope.loginInfo.memberName } 님 환영합니다.
+								<c:otherwise>
+									<img src="/resources/img/member/nullImg.png" alt="mdo" width="32" height="32" class="rounded-circle"> ${sessionScope.loginInfo.memberName } 님 환영합니다.
 						</c:otherwise>
-						</c:choose>
+							</c:choose>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownUser1">
 							<li><a class="dropdown-item" href="/member/myPage">마이페이지</a></li>
@@ -107,43 +106,40 @@
 
 	</nav>
 
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">로 그 인</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form action="/member/login" method="post" id="loginForm">
-        <div class="form-floating mb-3">
-  			<input type="text" class="form-control" id="loginId" placeholder="name@example.com" name="memberId" required>
-  			<label for="floatingInput">아 이 디</label>
-		</div>
-		<div class="form-floating">
-  			<input type="password" class="form-control" id="loginPw" placeholder="Password" name="memberPw" required>
-  			<label for="floatingPassword">비 밀 번 호</label>
-		</div>
-		<div class="col-12 d-grid mt-3">
-        	<input type="button" class="btn btn-primary" value="로 그 인 하 기" onclick="checkLogin();">
-        </div>
-      </form>
-      </div>
-      <!-- <div class="modal-footer">
+	<!-- Login Modal -->
+	<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">로 그 인</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form action="/member/login" method="post" id="loginForm">
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="loginId" placeholder="name@example.com" name="memberId" required> <label for="floatingInput">아 이 디</label>
+						</div>
+						<div class="form-floating">
+							<input type="password" class="form-control" id="loginPw" placeholder="Password" name="memberPw" required> <label for="floatingPassword">비 밀 번 호</label>
+						</div>
+						<div class="col-12 d-grid mt-3">
+							<input type="button" class="btn btn-primary" value="로 그 인 하 기" onclick="checkLogin();">
+						</div>
+					</form>
+				</div>
+				<!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div> -->
-    </div>
-  </div>
-</div>
+			</div>
+		</div>
+	</div>
 
 
 
-
-
-
-
+<!-- 	<video id="video01" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title="video element"> -->
+<!-- 		<source src="/resources/img/common/sub_03.mp4" type="video/mp4"> -->
+<!-- 	</video> -->
 
 
 

@@ -32,9 +32,6 @@ body {
 	font-size: 18px;
 }
 
-.side1 {
-	background-color: red;
-}
 
 .body1 {
 /* 	background-color: gray; */
@@ -72,15 +69,9 @@ height: 10rem;
 
 		<div class="row my-3">
 
-			<div class="col-10 p-5 body1">
+			<div class="col body1">
 
 				<tiles:insertAttribute name="body" />
-
-			</div>
-
-			<div class="col-2 p-5 side1">
-
-				<tiles:insertAttribute name="side" />
 
 			</div>
 
