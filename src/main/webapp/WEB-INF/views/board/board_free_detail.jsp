@@ -258,10 +258,12 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<div class="form-floating mb-3">
-						<input type="text" class="form-control" id="blackComment" placeholder="name@example.com" required> <label for="floatingInput" style="color: gray;">사 유 : 블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김처리됩니다.</label>
+					<div class="form-floating">
+  						<textarea class="form-control" placeholder="Leave a comment here" id="blackComment" style="height: 100px"></textarea>
+  						<label for="floatingTextarea2" style="color: gray;">사 유 입력란<br><br>블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청<br> 현황이 숨김처리됩니다.</label>
 					</div>
 					<div class="modal-footer">
+						<!-- <p>블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김처리됩니다.</p> -->
 						<button type="button" class="btn btn-primary" onclick="addMemberBlack()">추 가 하 기</button>
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
 					</div>
