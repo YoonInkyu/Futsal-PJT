@@ -60,7 +60,7 @@
 				, BOARD_PW_NOTICE 
 				FROM BOARD_NOTICE
 				<if test="searchValue != null and !searchValue.equals('')">
-					WHERE ${searchKeyword} LIKE '%'||#{searchValue}||'%'
+					WHERE ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
 				</if>
 				ORDER BY BOARD_NUM_NOTICE DESC
 				)
@@ -264,7 +264,7 @@
 				, BOARD_PW_FREE 
 				FROM BOARD_FREE
 				<if test="searchValue != null and !searchValue.equals('')">
-					WHERE ${searchKeyword} LIKE '%'||#{searchValue}||'%'
+					WHERE ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
 				</if>
 				ORDER BY BOARD_NUM_FREE DESC
 				)

@@ -50,7 +50,9 @@
 							<tr>
 								<td colspan="4">첨부파일 : <c:forEach items="${imgListNotice }" var="imgNotice">
 
-										<a class="mx-1 btn btn-outline-success  btn-sm" href="<c:url value="..\\resources\\img\\board\\${imgNotice.noticeImgAttachedName }" ></c:url>" download="${imgNotice.noticeImgOrignName }">${imgNotice.noticeImgOrignName }</a>
+										<c:if test="${not empty imgNotice.noticeImgOrignName }">
+											<a class="mx-1 btn btn-outline-success  btn-sm" href="<c:url value="..\\resources\\img\\board\\${imgNotice.noticeImgAttachedName }" ></c:url>" download="${imgNotice.noticeImgOrignName }">${imgNotice.noticeImgOrignName }</a>
+										</c:if>
 
 									</c:forEach>
 

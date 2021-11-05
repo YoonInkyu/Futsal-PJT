@@ -148,6 +148,8 @@ tr {
 
 
 		<!-- 페이징 기능 -->
+		<c:if test="${boardFreeVO.totalCnt != 0 }">
+
 			<div class="row mt-5">
 
 				<div class="col">
@@ -172,6 +174,8 @@ tr {
 				</div>
 
 			</div>
+
+		</c:if>
 
 
 

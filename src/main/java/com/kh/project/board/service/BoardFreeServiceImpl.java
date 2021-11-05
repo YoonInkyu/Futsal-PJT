@@ -19,7 +19,7 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	@Override
 	public List<BoardFreeVO> selectBoardFreeList(BoardFreeVO boardFreeVO) {
 
-		return sqlSession.selectList("boardMapper.selectBoardFreeList");
+		return sqlSession.selectList("boardMapper.selectBoardFreeList", boardFreeVO);
 	}
 
 	@Override

@@ -25,6 +25,7 @@ tr {
 		</div>
 
 
+
 		<div class="row">
 
 			<!-- 관리자 기능이(IS_ADMIN)이 'Y'인 아이디만 "글쓰기"가 보이게 함 -->
@@ -78,10 +79,6 @@ tr {
 		</div>
 
 
-		<!-- 이거 머지? 승수씨한테 물어 볼것-->
-		<a href="location"></a>
-
-
 
 		<!-- 검색 기능 -->
 		<form action="/board/goNoticeList" method="post">
@@ -119,6 +116,8 @@ tr {
 
 
 		<!-- 페이징 기능 -->
+		<c:if test="${boardNoticeVO.totalCnt != 0 }">
+		
 			<div class="row mt-5">
 
 				<div class="col">
@@ -126,7 +125,6 @@ tr {
 					<nav aria-label="Page navigation example">
 
 						<ul class="pagination justify-content-center m-0 p-0">
-
 							<li class="page-item <c:if test="${!boardNoticeVO.prev }">disabled</c:if>"><a class="page-link" aria-label="Previous" href="/board/goNoticeList?nowPage=${boardNoticeVO.beginPage - 1 }"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
 
@@ -143,6 +141,8 @@ tr {
 				</div>
 
 			</div>
+			
+		</c:if>
 
 
 

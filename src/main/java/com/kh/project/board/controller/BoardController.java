@@ -60,6 +60,8 @@ public class BoardController {
 		model.addAttribute("noticeList", boardNoticeService.selectBoardNoticeList(boardNoticeVO));
 
 		return "board/board_notice_list";
+		
+	
 	}
 
 	// 공지사항 상세 페이지로 이동
@@ -100,10 +102,10 @@ public class BoardController {
 		Iterator<String> inputNames = multi.getFileNames();
 
 		// 첨부될 폴더(집 경로, 다른데서 할시 경로 변경 할것!!!)
-		String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+//		String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
 
 		// 첨부될 폴더(학원 경로, 다른데서 할시 경로 변경 할것!!!)
-//		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
 
 		List<NoticeImgVO> noticeImgList = new ArrayList<>();
 
@@ -258,10 +260,10 @@ public class BoardController {
 		Iterator<String> inputNames = multi.getFileNames();
 
 		// 첨부될 폴더(집 경로, 다른데서 할시 경로 변경 할것!!!)
-		String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+//		String uploadPath = "C:\\Users\\PSH\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
 
 		// 첨부될 폴더(학원 경로, 다른데서 할시 경로 변경 할것!!!)
-//		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
+		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\board\\";
 
 		List<FreeImgVO> FreeImgList = new ArrayList<>();
 
