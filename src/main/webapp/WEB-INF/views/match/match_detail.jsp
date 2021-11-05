@@ -101,6 +101,21 @@ $(document).ready(function() {
 	  });
 	});
 	
+	$(document).on('click', '#matchResponse', function() {
+		var matchCode = $(this).next().val()
+		var matchManageCode = $(this).next().next().val()
+		var matchDateAll = $(this).next().next().next().val()
+		var teamCodeAway = $(this).next().next().next().next().val()
+		var applyMemberTell = $(this).next().next().next().next().next().val()
+		var applyTeamName = $(this).next().next().next().next().next().next().val()
+		var writerMemberTell = $(this).next().next().next().next().next().next().next().val()
+		var writerTeamName = $(this).next().next().next().next().next().next().next().next().val()
+		var str = '?matchCode=' + matchCode + '&matchManageCode=' + matchManageCode + '&matchDateAll=' + matchDateAll + '&teamCodeAway=' + teamCodeAway + '&applyMemberTell=' + applyMemberTell + '&applyTeamName=' + applyTeamName + '&writerMemberTell=' + writerMemberTell + '&writerTeamName=' + writerTeamName
+		//alert(str)
+		
+		location.href='/match/updateResponse' + str;
+	});
+	
 });
 </script>
 <style type="text/css">
@@ -212,10 +227,19 @@ input[type=number] {
 					<td>
 						<c:choose>
 							<c:when test="${sessionScope.loginInfo.teamName eq matchVO.matchWriter && matchVO.matchPossible eq '1'}">
-								<button type="button" class="btn btn-info" onclick="location.href='/match/updateResponse?matchCode=${matchVO.matchCode }&matchManageCode=${team.matchManageCode}&teamCodeAway=${team.teamCodeAway}'">수락</button>
+								<button type="button" class="btn btn-info" id="matchResponse">수락</button>
+								<input type="hidden" value="${matchVO.matchCode }"> <!-- 매치코드 -->
+								<input type="hidden" value="${team.matchManageCode }"> <!-- 매치 매니지 코드 -->
+								<input type="hidden" value="${team.matchDate }"> <!-- 매치 시간 -->
+								<input type="hidden" value="${team.teamCodeAway }"> <!-- 신청자 팀코드 -->
+								<input type="hidden" value="${team.memberTell }"> <!-- 신청자 핸드폰번호 -->
+								<input type="hidden" value="${team.teamName }"> <!-- 신청자 아이디 -->
+								<input type="hidden" value="${matchVO.memberTell }"> <!-- 작성자 핸드폰 번호 -->
+								<input type="hidden" value="${matchVO.matchWriter }"> <!-- 작성자 아이디 -->
+<%-- 								<button type="button" class="btn btn-info" onclick="location.href='/match/updateResponse?matchCode=${matchVO.matchCode }&matchManageCode=${team.matchManageCode}&teamCodeAway=${team.teamCodeAway}'">수락</button> --%>
 							</c:when>
 							<c:otherwise>
-								${team.matchManageResponse } ${team.memberTell }
+								${team.matchManageResponse }
 							</c:otherwise>
 						</c:choose>
 					</td>

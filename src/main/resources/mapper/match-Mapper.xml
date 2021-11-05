@@ -36,6 +36,7 @@
 		<result column="MEMBER_NAME"	 				property="memberName"/>
 		<result column="MEMBER_CODE"	 				property="memberCode"/>
 		<result column="MEMBER_TELL"	 				property="memberTell"/>
+		<result column="MATCH_DATE" 					property="matchDate"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.match.vo.MatchResultVO" id="matchResult">
@@ -250,11 +251,26 @@
             , MEMBER_NAME
 		    , MB.MEMBER_CODE
 		    , MEMBER_TELL
+            , (SELECT MATCH_DATE||' '||MATCH_START_TIME||' ~ '||MATCH_END_TIME FROM MATCH WHERE MATCH_CODE = #{matchCode}) AS MATCH_DATE
 		FROM MATCH_MANAGE M, TEAM T, MEMBER MB
         WHERE M.TEAM_CODE_AWAY = T.TEAM_CODE
         AND M.TEAM_CODE_AWAY = MB.TEAM_CODE
         AND MATCH_CODE = #{matchCode}
 	</select>
+<!-- 	<select id="matchApplyList" resultMap="matchManage"> -->
+<!-- 		SELECT MATCH_MANAGE_CODE -->
+<!-- 			, MATCH_CODE -->
+<!-- 			, TEAM_CODE_AWAY -->
+<!-- 			, TEAM_NAME -->
+<!-- 			, MATCH_MANAGE_RESPONSE -->
+<!--             , MEMBER_NAME -->
+<!-- 		    , MB.MEMBER_CODE -->
+<!-- 		    , MEMBER_TELL -->
+<!-- 		FROM MATCH_MANAGE M, TEAM T, MEMBER MB -->
+<!--         WHERE M.TEAM_CODE_AWAY = T.TEAM_CODE -->
+<!--         AND M.TEAM_CODE_AWAY = MB.TEAM_CODE -->
+<!--         AND MATCH_CODE = #{matchCode} -->
+<!-- 	</select> -->
 	<!-- 	<select id="matchApplyList" resultMap="matchManage"> -->
 	<!-- 		SELECT MATCH_MANAGE_CODE -->
 	<!-- 			, MATCH_CODE -->

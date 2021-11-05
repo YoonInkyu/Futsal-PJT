@@ -135,7 +135,7 @@ public class MatchController {
 			matchManageVO.setTeamCodeAway(teamCode);
 			matchService.insertApplyMatch(matchManageVO);
 			
-			//신청시 문자 전송
+			//신청시 게시글 등록자(홈팀)에게 문자 전송
 			String content = "[FootBall] 매치 신청이 도착했습니다. 홈페이지에서 확인해 주세요";
 			MessageService.sendMessage(memberTell, content);
 			
@@ -143,6 +143,7 @@ public class MatchController {
 			model.addAttribute("url", "matchList");
 			return "match/alert";
 		}
+		//신청 불가능하면 alert
 		else if(result == false) {
 			model.addAttribute("msg", "이미 신청한 매치 게시글 입니다.");
 			model.addAttribute("url", "matchList");
@@ -153,8 +154,19 @@ public class MatchController {
 	
 	//매치 수락
 	@GetMapping("/updateResponse")
-	public String updateResponse(MatchManageVO matchManageVO, Model model) {
+	public String updateResponse(MatchManageVO matchManageVO, Model model, String applyMemberTell, String applyTeamName, String writerMemberTell, String writerTeamName, String matchDateAll) {
 		matchService.updateResponse(matchManageVO);
+		
+		//신청시 게시글 등록자(홈팀)에게 문자 전송
+		String content = "[FootBall] 매치가 수락되었습니다. 상대팀 : " + applyTeamName + " 매치 날짜 : " + matchDateAll;
+		MessageService.sendMessage(writerMemberTell, content);
+		System.out.println(writerMemberTell);
+		
+		//신청시 게시글 신청자(어웨이팀)에게 문자 전송
+		String content2 = "[FootBall] 매치가 수락되었습니다. 상대팀 : " + writerTeamName + " 매치 날짜 : " + matchDateAll;
+		MessageService.sendMessage2(applyMemberTell, content2);
+		System.out.println(applyMemberTell);
+		
 		model.addAttribute("msg", "매치 수락 하였습니다.");
 		model.addAttribute("url", "matchList");
 		return "match/alert";

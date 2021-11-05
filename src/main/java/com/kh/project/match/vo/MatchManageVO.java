@@ -9,7 +9,14 @@ public class MatchManageVO {
 	private String memberName;
 	private String memberCode;
 	private String memberTell;
+	private String matchDate;
 	
+	public String getMatchDate() {
+		return matchDate;
+	}
+	public void setMatchDate(String matchDate) {
+		this.matchDate = matchDate;
+	}
 	public String getMemberName() {
 		return memberName;
 	}
