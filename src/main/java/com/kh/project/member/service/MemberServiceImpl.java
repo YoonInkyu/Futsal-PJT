@@ -101,6 +101,11 @@ public class MemberServiceImpl implements MemberService{
 	public boolean addMemberBlack(MemberBlacklistVO memberBlacklistVO) {
 		return sqlSession.insert("memberMapper.addMemberBlack", memberBlacklistVO) == 0 ? false : true;
 	}
+	@Override
+	public void deleteMember(String memberCode) {
+		sqlSession.delete("memberMapper.deleteMember", memberCode);
+		
+	}
 
 
 	

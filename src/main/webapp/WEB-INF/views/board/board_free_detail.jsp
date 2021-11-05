@@ -260,7 +260,6 @@
 						<input type="text" class="form-control" id="blackComment" placeholder="name@example.com" required> <label for="floatingInput" style="color: gray;">사 유 : 블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김처리됩니다.</label>
 					</div>
 					<div class="modal-footer">
-						<!-- <p>블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김처리됩니다.</p> -->
 						<button type="button" class="btn btn-primary" onclick="addMemberBlack()">추 가 하 기</button>
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
 					</div>

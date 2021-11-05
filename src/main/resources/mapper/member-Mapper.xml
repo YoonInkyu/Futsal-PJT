@@ -192,6 +192,11 @@
 		WHERE MEMBER_CODE = #{memberCode}
 		AND BLACKMEMBER_CODE = #{blackmemberCode}
 	</delete>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMember">
+		DELETE MEMBER WHERE MEMBER_CODE = #{memberCode}
+	</delete>
 </mapper>
 
 

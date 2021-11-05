@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="/resources/mercenary/js/mercenary_recruit.js?ver=2"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var recruitDetailModal = document.getElementById('recruitDetailModal');
@@ -35,24 +36,38 @@ $(document).ready(function() {
 							<th scope="col">신청 인원</th>
 							<th scope="col">작성자</th>
 							<th scope="col">작성일자</th>
-							<th scope="col">신청</th>
+							<th scope="col">
+							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${mercBoardList }" var="mercBoard">
-						<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">
-							<td>${mercBoard.mercBoardSort }</td>
-							<td>${mercBoard.mercBoardLocation }</td>
-							<td>${mercBoard.mercBoardDate } ${mercBoard.mercBoardStartTime } ~ ${mercBoard.mercBoardEndTime }</td>
-							<td>${mercBoard.mercBoardApplyNumber }명</td>
-							<td>${mercBoard.memberId }</td>
-							<td>${mercBoard.mercBoardRegdate }</td>
+						<tr>
+							<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">${mercBoard.mercBoardSort }</td>
+							<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">${mercBoard.mercBoardLocation }</td>
+							<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">${mercBoard.mercBoardDate } ${mercBoard.mercBoardStartTime } ~ ${mercBoard.mercBoardEndTime }</td>
+							<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">${mercBoard.mercBoardApplyNumber }명</td>
+							<c:if test="${mercBoard.memberId  eq loginInfo.memberId}">
+								<td>${mercBoard.memberId}</td>
+							</c:if>
+							<c:if test="${mercBoard.memberId  ne loginInfo.memberId}">
+							<td>
+							<div class="btn-group dropend">
+								<button type="button" class="btn btn-outline-dark dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${mercBoard.memberId }">${mercBoard.memberId }</button>
+								<ul class="dropdown-menu">
+									<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addMemberBlackModal" style="cursor: pointer;">블랙리스트 추가</li>
+									<li class="dropdown-item">소속 팀 보기</li>
+								</ul>
+							</div>
+							</td>
+							</c:if>
+							<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">${mercBoard.mercBoardRegdate }</td>
 							<c:choose>
 								<c:when test="${mercBoard.mercBoardPossible eq '1' }">
-									<td><button type="button" class="btn btn-info">신청</button></td>
+									<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')"><button type="button" class="btn btn-info">신청</button></td>
 								</c:when>
 								<c:otherwise>
-									<td><button type="button" class="btn btn-danger">마감</button></td>
+									<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')"><button type="button" class="btn btn-danger">마감</button></td>
 								</c:otherwise>
 							</c:choose>
 						</tr>
@@ -158,6 +173,31 @@ $(document).ready(function() {
 	<div class="modal fade" tabindex="-1" id="recruitDetailModal">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content mercDetail">
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="addMemberBlackModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content addMemberBlackDiv">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">블랙리스트 추가</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-floating">
+  						<textarea class="form-control" placeholder="Leave a comment here" id="blackComment" style="height: 100px"></textarea>
+  						<label for="floatingTextarea2" style="color: gray;">사 유 입력란<br><br>블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청<br> 현황이 숨김처리됩니다.</label>
+					</div>
+					<div class="modal-footer">
+						<!-- <p>블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김처리됩니다.</p> -->
+						<button type="button" class="btn btn-primary" onclick="addMemberBlack()">추 가 하 기</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
+					</div>
+				</div>
+				<!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
 			</div>
 		</div>
 	</div>

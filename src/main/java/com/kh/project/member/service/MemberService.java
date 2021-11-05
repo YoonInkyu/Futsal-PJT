@@ -43,5 +43,6 @@ public interface MemberService {
 	List<MemberBlacklistVO> memberBlackList (String memberCode);
 	//회원블랙 삭제하기
 	void deleteMemberBlack(MemberBlacklistVO memberBlacklistVO);
-	
+	//회원탈퇴
+	void deleteMember(String memberCode);
 }

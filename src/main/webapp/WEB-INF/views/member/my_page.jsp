@@ -8,8 +8,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script type="text/javascript">
-	    function recruitInfo(mercBoardCode){
+	    function recruitInfo1(mercBoardCode){
 			$(".modal-content").load("/mercenary/recruitDetail?mercBoardCode=" + mercBoardCode);
+		}
+	    function recruitInfo2(matchCode){
+			$(".modal-content").load("/match/matchDetail?matchCode=" + matchCode);
 		}
 	    $(document).ready(function() {
 	    	var recruitDetailModal = document.getElementById('recruitDetailModal');
@@ -29,7 +32,7 @@
 </head>
 <body>
 	<div class="m-5">
-		<h1 style="border-bottom: 3px solid gray;">선수 소개</h1>
+		<h1 style="border-bottom: 3px solid gray;">선수 소개 <span style="display: inline-block; float: right;"><button type="button" class="btn btn-link link-dark" data-bs-toggle="modal" data-bs-target="#deleteMemberModal">회원탈퇴</button></span></h1>
 	</div>
 	<section class="about-me-section p-3 p-lg-5 theme-bg-light">
 		<div class="container">
@@ -86,7 +89,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${MymercBoardList }" var="mercBoard" begin="0" end="4">
-						<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">
+						<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo1('${mercBoard.mercBoardCode}')">
 							<td>${mercBoard.mercBoardSort }</td>
 							<td>${mercBoard.mercBoardLocation }</td>
 							<td>${mercBoard.mercBoardDate } ${mercBoard.mercBoardStartTime } ~ ${mercBoard.mercBoardEndTime }</td>
@@ -127,7 +130,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${matchList }" var="match" begin="0" end="4">
-						<tr data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo('${match.matchCode}')">
+						<tr data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo2('${match.matchCode}')">
 							<td>${match.matchLocation }</td>
 							<td>${match.matchDate } ${match.matchStartTime } ~ ${match.matchEndTime }</td>
 							<td>${match.matchApplyNum }명</td>
@@ -156,5 +159,29 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" tabindex="-1" id="matchDetailModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content matchDetail">
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+<div class="modal fade" id="deleteMemberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">회 원 탈 퇴</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        정말 탈퇴하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="location.href='/member/deleteMember'">Y E S</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

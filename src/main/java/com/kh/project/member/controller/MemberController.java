@@ -236,6 +236,16 @@ public class MemberController {
 		memberService.deleteMemberBlack(memberBlacklistVO);
 		return  "redirect:/member/goMemberBlacklist";
 	}
+	//회원탈퇴
+	@GetMapping("/deleteMember")
+	public String deleteMember(HttpSession session) {
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+		session.removeAttribute("loginInfo");
+		memberService.deleteMember(memberCode);
+		return  "redirect:/templateLayout/main_page";
+	}
+	
+	
 }
 
 
