@@ -32,7 +32,7 @@
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 							<li class="mt-1"><a href="/team/teamInfo" class="link-dark rounded">팀 정보</a></li>
 							<li class="my-3"><a href="/team/selectTeamMemberManage" class="link-dark rounded">팀 관리</a></li>
-							<li><a href="#" class="link-dark rounded">매치 관리</a></li>
+							<li><a href="/team/matchManage" class="link-dark rounded">매치 관리</a></li>
 						</ul>
 					</div>
 				</li>

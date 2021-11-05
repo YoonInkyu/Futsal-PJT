@@ -34,6 +34,7 @@ public class TeamController {
 	@Resource(name = "memberService")
 	private MemberService memberService;
 	
+	
 	// 팀생성 페이지로 이동
 	@GetMapping("/goRegTeam")
 	public String goRegTeam() {
@@ -251,6 +252,13 @@ public class TeamController {
 		
 		return teamService.checkTeamName(teamName);
 		
+	}
+	
+	// 매치관리 페이지 이동
+	@GetMapping("/matchManage")
+	public String matchManage() {
+		
+		return "team/";
 	}
 	
 	

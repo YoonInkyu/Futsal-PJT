@@ -38,6 +38,18 @@
 	
 	<context:component-scan base-package="com.kh.project.*.controller" />
 	
+	<!-- interceptor 객체를 생성 -->
+	<beans:bean id="loginInterceptor" class="com.kh.project.common.interceptor.LoginInterceptor"></beans:bean>
+	
+	<!-- interceptor 가 실행될 요청 경로를 지정 -->
+		<interceptors>
+			<interceptor>
+				<mapping path="/team/*"/>
+				
+				<beans:ref bean="loginInterceptor"/>
+				
+			</interceptor>
+		</interceptors>
 	
 	
 </beans:beans>
