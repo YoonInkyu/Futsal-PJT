@@ -66,7 +66,7 @@
 
 								<td colspan="4">첨부파일 : <c:forEach items="${imgListFree }" var="imgFree">
 
-										<c:if test="${not empty imgListFree.freeImgOrignName }">
+										<c:if test="${not empty imgFree.freeImgOrignName }">
 											<a class="mx-1 btn btn-outline-success  btn-sm" href="<c:url value="..\\resources\\img\\board\\${imgFree.freeImgAttachedName }" ></c:url>" download="${imgFree.freeImgOrignName }">${imgFree.freeImgOrignName }</a>
 										</c:if>
 
