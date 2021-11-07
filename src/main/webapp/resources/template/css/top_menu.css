@@ -1,0 +1,222 @@
+
+#wrapper #header {
+	position: fixed;
+	z-index: 90;
+	top: 0;
+	right: 0;
+	left: 0;
+}
+
+#wrapper #header .header {
+	position: relative;
+	margin: 0 auto;
+}
+
+#wrapper #header nav {
+	position: absolute;
+	top: 65px;
+	right: 0;
+	left: 0;
+	height: 85px;
+	background: rgba(0, 0, 0, 0.46);
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+
+#wrapper #header nav .nav_wrap {
+	position: absolute;
+	left: 50%;
+	margin-left: -800px;
+	width: 1300px;
+	font-size: 0;
+	line-height: 0;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+
+#wrapper #header nav .nav_wrap ul {
+	position: relative;
+	text-align: left;
+}
+
+#wrapper #header nav .nav_wrap ul li {
+	display: inline-block;
+	position: relative;
+	padding: 0 30px;
+	vertical-align: top;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+
+#wrapper #header nav .nav_wrap ul li:first-child {
+	padding-left: 0;
+}
+
+#wrapper #header nav .nav_wrap ul li:first-child a {
+	width: 146px;
+	/*  	background: url('/images/common/nav_aia.png') no-repeat center center;  */
+	/*  	background-size: 100% auto;  */
+}
+
+#wrapper #header nav .nav_wrap ul li:first-child a:after {
+	display: none;
+}
+
+/* #wrapper #header nav .nav_wrap ul li a.join { */
+/* 	display: none */
+/* } */
+#wrapper #header nav .nav_wrap ul li a {
+	display: block;
+	height: 85px;
+	color: #fff;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 85px;
+	text-decoration: none;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+
+#wrapper #header nav .nav_wrap ul li a:after {
+	display: block;
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0%;
+	height: 6px;
+	background: #4c89cd;
+	-webkit-transform: translate3d(-50%, 0, 0);
+	-moz-transform: translate3d(-50%, 0, 0);
+	-o-transform: translate3d(-50%, 0, 0);
+	-ms-transform: translate3d(-50%, 0, 0);
+	transform: translate3d(-50%, 0, 0);
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.15s ease-out;
+}
+
+#wrapper #header nav .nav_wrap ul li a:hover:after {
+	width: 80%;
+}
+
+#wrapper #header nav .util {
+	position: absolute;
+	top: 20px;
+	right: 50%;
+	margin-right: -916px;
+	width: 345px;
+	font-size: 0;
+	line-height: 0;
+	text-align: right;
+}
+
+#wrapper #header nav .util li {
+	display: inline-block;
+	margin-left: 19px;
+	height: 44px;
+	vertical-align: top;
+}
+
+#wrapper #header nav .util .dropdown li {
+	display: block;
+	margin: 0; padding 0;
+	height: 24px;
+	vertical-align: middle;
+}
+
+#wrapper #header nav .util li:first-child {
+	margin-left: 0;
+}
+
+#wrapper #header nav .util li a {
+	display: block;
+	width: 44px;
+	height: 44px;
+	line-height: 44px;
+}
+
+#wrapper #header nav .util .dropdown li a {
+	width: 240px;
+	height: 24px;
+	line-height: 18px;
+}
+
+#wrapper #header nav .util li.join a {
+	padding-right: 32px;
+	width: auto;
+	background: url('/resources/img/common/login.png') no-repeat right center;
+	background-size: 33px 33px;
+	color: #fff;
+	font-size: 12px;
+}
+
+#wrapper #header nav .util li.login {
+	margin-left: 24px;
+	padding-left: 24px;
+	border-left: 2px solid #b1b1b1;
+}
+
+#wrapper #header nav .util li.login a {
+	padding-right: 32px;
+	width: auto;
+	background: url('/resources/img/common/icon_login.png') no-repeat right center;
+	color: #fff;
+	font-size: 12px;
+}
+
+#wrapper #header.fixed nav {
+	top: 0;
+}
+
+#wrapper #header.fixed nav .nav_wrap {
+	margin-left: -770px;
+}
+
+.content .sub_top {
+	position: relative;
+	margin-bottom: 60px !important;
+	padding: 0;
+	max-width: 100% !important;
+	height: 460px;
+	background: #000;
+}
+
+.content .sub_top h2 {
+	position: absolute;
+	z-index: 5;
+	left: 50%;
+	bottom: 22px;
+	margin-left: -600px;
+	color: #fff;
+	font-size: 80px;
+	font-weight: 400;
+	line-height: 90px
+}
+
+.content .sub_top video {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 1920px;
+	height: 460px;
+	-webkit-transform: translate3d(-50%, 0, 0);
+	-moz-transform: translate3d(-50%, 0, 0);
+	-o-transform: translate3d(-50%, 0, 0);
+	-ms-transform: translate3d(-50%, 0, 0);
+	transform: translate3d(-50%, 0, 0);
+}

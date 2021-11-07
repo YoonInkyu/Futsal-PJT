@@ -10,7 +10,8 @@
 <body>
 
 
-	<div class="container">
+
+	<div class="container col-5 mx-auto">
 
 		<div class="row">
 			<h5 class="mb-3" style="border-bottom: 2px solid blue;">자 유 게 시 판</h5>
@@ -45,20 +46,26 @@
 							<tr>
 								<td>${freeInfo.boardNumFree }</td>
 
-								<c:if test="${freeInfo.writerFree eq loginInfo.memberId}">
-									<td>${freeInfo.writerFree }</td>
-								</c:if>
-								<c:if test="${freeInfo.writerFree ne loginInfo.memberId}">
-									<td>
-										<div class="btn-group dropend">
-											<button type="button" class="btn btn-outline-primary dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${freeInfo.writerFree }">${freeInfo.writerFree }</button>
-											<ul class="dropdown-menu">
-												<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addMemberBlackModal" style="cursor: pointer;">블랙리스트 추가</li>
-												<li class="dropdown-item">소속 팀 보기</li>
-											</ul>
-										</div>
-									</td>
-								</c:if>
+								<c:choose>
+
+									<c:when test="${freeInfo.writerFree eq loginInfo.memberId}">
+										<td>${freeInfo.writerFree }</td>
+									</c:when>
+
+									<c:otherwise>
+										<td>
+											<div class="btn-group dropend">
+												<button type="button" class="btn link-primary dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${freeInfo.writerFree }">${freeInfo.writerFree }</button>
+												<ul class="dropdown-menu">
+													<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addMemberBlackModal" style="cursor: pointer;">블랙리스트 추가</li>
+													<li class="dropdown-item">소속 팀 보기</li>
+												</ul>
+											</div>
+										</td>
+									</c:otherwise>
+
+								</c:choose>
+
 								<td>${freeInfo.createDateFree }</td>
 								<td>${freeInfo.readCntFree }</td>
 							</tr>
@@ -114,8 +121,7 @@
 		<!-- 댓글 입력란 -->
 		<div class="row my-5" style="border-top: 1px solid gray;">
 
-
-			<div class="col-8 mx-auto my-5">
+			<div class="col-8 mx-auto my-5 shadow-sm p-3 mb-5 bg-body rounded">
 
 				<div class="mb-3">총 ${replyFreeList.size() }건의 댓글이 있습니다.</div>
 
@@ -170,111 +176,119 @@
 
 		</div>
 
-	</div>
+
+
+		<c:forEach items="${replyFreeList }" var="replyFree">
+
+			<!-- 댓글 목록 -->
+			<div class="row mb-5 align-items-center">
+
+				<!-- 로그인 이미지(이미지 불러 오고 링크 걸어서 정보로 갈수 있게 할 예정) -->
+				<div class="col-3 text-end">
+					<i class="bi bi-camera-fill"></i> <img src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="30%;" height="30%;">
+				</div>
 
 
 
-	<c:forEach items="${replyFreeList }" var="replyFree">
+				<!-- 댓글 정보	 -->
+				<div class="col">
 
-		<!-- 댓글 목록 -->
-		<div class="row mb-5 align-items-center">
+					<table class="table">
 
-			<!-- 로그인 이미지(이미지 불러 오고 링크 걸어서 정보로 갈수 있게 할 예정) -->
-			<div class="col-3 text-end">
-				<i class="bi bi-camera-fill"></i> <img src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="30%;" height="30%;">
+						<thead>
+
+							<tr>
+								<th scope="col" width="*%">작 성 자</th>
+								<th scope="col" width="*%">작 성 일 자</th>
+							</tr>
+
+						</thead>
+
+						<tbody>
+							<tr>
+								<c:if test="${replyFree.writerFree eq loginInfo.memberId}">
+									<td>${replyFree.writerFree }</td>
+								</c:if>
+								<c:if test="${replyFree.writerFree ne loginInfo.memberId}">
+									<td>
+										<div class="btn-group dropend">
+											<button type="button" class="btn link-primary dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${replyFree.writerFree }">${replyFree.writerFree }</button>
+											<ul class="dropdown-menu">
+												<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addMemberBlackModal" style="cursor: pointer;">블랙리스트 추가</li>
+												<li class="dropdown-item">소속 팀 보기</li>
+											</ul>
+										</div>
+									</td>
+								</c:if>
+								<td>${replyFree.createDateFree }</td>
+							</tr>
+
+							<tr>
+								<td colspan="2" style="word-break: break-all;">내용 : ${replyFree.contentFree }</td>
+							</tr>
+
+						</tbody>
+
+					</table>
+
+				</div>
+
+
+
+				<!-- 댓글 버튼	 -->
+				<div class="col-3 ">
+
+					<!-- 관리자 또는 로그인 대상자가 댓글 작성자 아이디가 동일 하면 삭제가 활성화 됨 -->
+					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' or sessionScope.loginInfo.memberId eq replyFree.writerFree }">
+
+						<input type="button" class="btn btn-outline-danger btn-lg d-flex  " value="삭제" onclick="location.href='/reply/deleteReplyFree?replyNumFree=${replyFree.replyNumFree}&boardNumFree=${freeInfo.boardNumFree}';">
+
+					</c:if>
+
+				</div>
+
 			</div>
 
-
-
-			<!-- 댓글 정보	 -->
-			<div class="col">
-
-				<table class="table">
-
-					<thead>
-
-						<tr>
-							<th scope="col" width="*%">작 성 자</th>
-							<th scope="col" width="*%">작 성 일 자</th>
-						</tr>
-
-					</thead>
-
-					<tbody>
-						<tr>
-							<c:if test="${replyFree.writerFree eq loginInfo.memberId}">
-								<td>${replyFree.writerFree }</td>
-							</c:if>
-							<c:if test="${replyFree.writerFree ne loginInfo.memberId}">
-								<td>
-									<div class="btn-group dropend">
-										<button type="button" class="btn btn-outline-primary dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${replyFree.writerFree }">${replyFree.writerFree }</button>
-										<ul class="dropdown-menu">
-											<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addMemberBlackModal" style="cursor: pointer;">블랙리스트 추가</li>
-											<li class="dropdown-item">소속 팀 보기</li>
-										</ul>
-									</div>
-								</td>
-							</c:if>
-							<td>${replyFree.createDateFree }</td>
-						</tr>
-
-						<tr>
-							<td colspan="2" style="word-break: break-all;">내용 : ${replyFree.contentFree }</td>
-						</tr>
-
-					</tbody>
-
-				</table>
-
-			</div>
+		</c:forEach>
 
 
 
-			<!-- 댓글 버튼	 -->
-			<div class="col-3 ">
+		<div class="modal fade" id="addMemberBlackModal" tabindex="-1">
 
-				<!-- 관리자 또는 로그인 대상자가 댓글 작성자 아이디가 동일 하면 삭제가 활성화 됨 -->
-				<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' or sessionScope.loginInfo.memberId eq replyFree.writerFree }">
+			<div class="modal-dialog">
 
-					<input type="button" class="btn btn-outline-danger btn-lg d-flex  " value="삭제" onclick="location.href='/reply/deleteReplyFree?replyNumFree=${replyFree.replyNumFree}&boardNumFree=${freeInfo.boardNumFree}';">
+				<div class="modal-content addMemberBlackDiv">
 
-				</c:if>
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">블랙리스트 추가</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+
+					<div class="modal-body">
+
+						<div class="form-floating">
+							<textarea class="form-control" placeholder="Leave a comment here" id="blackComment" style="height: 10rem;" required></textarea>
+							<label for="floatingTextarea2">사 유</label>
+						</div>
+
+						<div class="my-3" style="font-size: 13px; color: red;">블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김 처리됩니다.</div>
+
+						<div class="modal-footer d-flex justify-content-between">
+							<button style="width: 10rem;" type="button" class=" btn btn-outline-danger" onclick="addMemberBlack()">추 가</button>
+							<button style="width: 10rem;" type="button" class="btn btn-primary" data-bs-dismiss="modal">취 소</button>
+						</div>
+
+					</div>
+
+				</div>
 
 			</div>
 
 		</div>
 
-	</c:forEach>
-
-
-
-
-	<div class="modal fade" id="addMemberBlackModal" tabindex="-1">
-		<div class="modal-dialog">
-			<div class="modal-content addMemberBlackDiv">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">블랙리스트 추가</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div class="form-floating">
-  						<textarea class="form-control" placeholder="Leave a comment here" id="blackComment" style="height: 100px"></textarea>
-  						<label for="floatingTextarea2" style="color: gray;">사 유 입력란<br><br>블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청<br> 현황이 숨김처리됩니다.</label>
-					</div>
-					<div class="modal-footer">
-						<!-- <p>블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김처리됩니다.</p> -->
-						<button type="button" class="btn btn-primary" onclick="addMemberBlack()">추 가 하 기</button>
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫 기</button>
-					</div>
-				</div>
-				<!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
-			</div>
-		</div>
 	</div>
+
+
 
 	<!-- ============================== 스크립트 부분 ============================== -->
 

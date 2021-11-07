@@ -15,13 +15,14 @@ tr {
 <body>
 
 
-	<div class="container">
+
+	<div class="container col-5 mx-auto">
+
 
 
 		<div class="row m-5 text-center justify-content-center">
 			<h2>공 지 사 항</h2>
 			<div class="col-3" style="border-bottom: 3px solid gray;"></div>
-
 		</div>
 
 
@@ -59,6 +60,13 @@ tr {
 
 						<!-- 공지사항은 관리자만 입력함으로 비밀번호 없음 -->
 						<c:forEach items="${noticeList }" var="noticeInfo">
+
+							<!-- 왜 안되는거 확인 필요 -->
+							<c:if test="${empty noticeInfo.boardNumNotice }">
+								<tr>
+									<td colspan="5" style="text-align: center;">등록된 글이 없습니다.</td>
+								</tr>
+							</c:if>
 
 							<tr onclick="location.href='/board/goNoticeDetail?boardNumNotice=' + ${noticeInfo.boardNumNotice };">
 								<td>${noticeInfo.boardNumNotice }</td>
@@ -117,7 +125,7 @@ tr {
 
 		<!-- 페이징 기능 -->
 		<c:if test="${boardNoticeVO.totalCnt != 0 }">
-		
+
 			<div class="row mt-5">
 
 				<div class="col">
@@ -141,7 +149,7 @@ tr {
 				</div>
 
 			</div>
-			
+
 		</c:if>
 
 

@@ -16,33 +16,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
 <style type="text/css">
-.container-fluid {
-	width: 80%;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
-}
-
 body {
-	line-height: 1;
 	font-family: 'S-CoreDream-5Medium';
-	font-size: 18px;
 }
 </style>
 
 </head>
 <body>
 
-	<div class="container-fluid">
-
-
-		<div class="col">
-
-			<tiles:insertAttribute name="body" />
-
-		</div>
-
-	</div>
-
+	<tiles:insertAttribute name="body" />
 
 </body>
 </html>

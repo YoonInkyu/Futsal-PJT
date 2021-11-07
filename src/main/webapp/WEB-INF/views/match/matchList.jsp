@@ -1,60 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-$(document).ready(function() {
-	var matchDetailModal = document.getElementById('matchDetailModal');
-	//모달 닫히면 페이지 리로드
-	//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
-	matchDetailModal.addEventListener('hidden.bs.modal', function (event) {
-		location.reload();
-	})
-});
+	$(document).ready(function() {
+		var matchDetailModal = document.getElementById('matchDetailModal');
+		//모달 닫히면 페이지 리로드
+		//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
+		matchDetailModal.addEventListener('hidden.bs.modal', function(event) {
+			location.reload();
+		})
+	});
 </script>
 </head>
 <body>
-<div class="row my-5">
-		<div class="col-3 mx-auto" style="font-size: 40px; text-align: center; border-bottom: 3px solid black;">매치 게시판</div>
-	</div>
-	<div class="row">
-		<div class="row mt-5">
-			<div class="col-8 mx-auto">
-				<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-					<button class="btn btn-primary col-3" type="button" style="font-size: 30px;" onclick="location.href='/match/goMatchRegForm'">등록하기</button>
-				</div>
+	<div class="container col-5 mx-auto">
+		<div class="row m-5 text-center justify-content-center">
+			<h2>매 치 게 시 판</h2>
+			<div class="col-3" style="border-bottom: 3px solid gray;"></div>
+		</div>
+		<div class="row">
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+				<button class="btn btn-outline-primary col-2" type="button" onclick="location.href='/match/goMatchRegForm'">등록하기</button>
+			</div>
+
+			<div class="col text-center">
+
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th scope="col">지역</th>
-							<th scope="col">매치일자</th>
-							<th scope="col">신청팀</th>
-							<th scope="col">작성팀</th>
-							<th scope="col">작성일자</th>
-							<th scope="col">신청</th>
+							<th scope="col" width="10%">지역</th>
+							<th scope="col" width="*%">매치일자</th>
+							<th scope="col" width="15%">신청팀</th>
+							<th scope="col" width="15%">작성팀</th>
+							<th scope="col" width="15%">작성일자</th>
+							<th scope="col" width="10%">신청</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${matchList }" var="match">
-						<tr data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo('${match.matchCode}')">
-							<td>${match.matchLocation }</td>
-							<td>${match.matchDate } ${match.matchStartTime } ~ ${match.matchEndTime }</td>
-							<td>${match.matchApplyNum }명</td>
-							<td>${match.matchWriter }</td>
-							<td>${match.matchRegdate }</td>
-							<c:choose>
-								<c:when test="${match.matchPossible eq '1' }">
-									<td><button type="button" class="btn btn-info">신청</button></td>
-								</c:when>
-								<c:otherwise>
-									<td><button type="button" class="btn btn-danger">마감</button></td>
-								</c:otherwise>
-							</c:choose>
-						</tr>
+							<tr data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo('${match.matchCode}')">
+								<td>${match.matchLocation }</td>
+								<td>${match.matchDate }${match.matchStartTime }~${match.matchEndTime }</td>
+								<td>${match.matchApplyNum }명</td>
+								<td>${match.matchWriter }</td>
+								<td>${match.matchRegdate }</td>
+								<c:choose>
+									<c:when test="${match.matchPossible eq '1' }">
+										<td><button type="button" class="btn btn-info">신청</button></td>
+									</c:when>
+									<c:otherwise>
+										<td><button type="button" class="btn btn-danger">마감</button></td>
+									</c:otherwise>
+								</c:choose>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -62,10 +64,10 @@ $(document).ready(function() {
 		</div>
 		<!-- 검색관련 내용 -->
 		<div class="row mt-5">
-			<div class="col-6 mx-auto m-0 p-0">
+			<div class="col-8 mx-auto m-0 p-0">
 				<form action="/match/matchList" method="post">
 					<div class="row mx-auto">
-						<div class="col-3">
+						<div class="col-2">
 							<select class="form-select form-select" aria-label=".form-select-lg example" name="searchLocation">
 								<c:if test="${matchVO.searchLocation == null }">
 									<option value="">지역</option>
@@ -111,20 +113,15 @@ $(document).ready(function() {
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
 						<c:if test="${matchVO.prev eq true}">
-							<li class="page-item">
-								<a class="page-link" href="/match/matchList?nowPage=${matchVO.beginPage - 1 }">Prev</a>
-							</li>
+							<li class="page-item"><a class="page-link" href="/match/matchList?nowPage=${matchVO.beginPage - 1 }">Prev</a></li>
 						</c:if>
 						<c:forEach begin="${matchVO.beginPage }" end="${matchVO.endPage }" var="pageNumber">
 							<li class="page-item <c:if test="${matchVO.nowPage == pageNumber }">active</c:if>">
-								<!-- 여기 href 수정 -->
-								<a class="page-link" href="/match/matchList?nowPage=${pageNumber }&searchLocation=${matchVO.searchLocation}&searchKeyword=${matchVO.searchKeyword}&searchValue=${matchVO.searchValue}">${pageNumber }</a>
+								<!-- 여기 href 수정 --> <a class="page-link" href="/match/matchList?nowPage=${pageNumber }&searchLocation=${matchVO.searchLocation}&searchKeyword=${matchVO.searchKeyword}&searchValue=${matchVO.searchValue}">${pageNumber }</a>
 							</li>
 						</c:forEach>
 						<c:if test="${matchVO.next eq true}">
-							<li class="page-item">
-								<a class="page-link" href="/match/matchList?nowPage=${matchVO.endPage + 1 }">Next</a>
-							</li>
+							<li class="page-item"><a class="page-link" href="/match/matchList?nowPage=${matchVO.endPage + 1 }">Next</a></li>
 						</c:if>
 					</ul>
 				</nav>
@@ -133,15 +130,14 @@ $(document).ready(function() {
 	</div>
 	<!-- js파일 새로 만들어서 넣어야 함. -->
 	<script type="text/javascript">
-	    function recruitInfo(matchCode){
+		function recruitInfo(matchCode) {
 			$(".modal-content").load("/match/matchDetail?matchCode=" + matchCode);
 		}
 	</script>
-		<!-- tr 클릭시 상세보기 모달창이고, match_detail.jsp을 불러와서 div class=content안에 내용 넣음 --> 
+	<!-- tr 클릭시 상세보기 모달창이고, match_detail.jsp을 불러와서 div class=content안에 내용 넣음 -->
 	<div class="modal fade" tabindex="-1" id="matchDetailModal">
 		<div class="modal-dialog modal-lg">
-			<div class="modal-content matchDetail">
-			</div>
+			<div class="modal-content matchDetail"></div>
 		</div>
 	</div>
 </body>

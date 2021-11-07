@@ -20,93 +20,61 @@
 
 
 <style type="text/css">
-.container-fluid {
-	width: 80%;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
+.l_side1 {
+	
 }
 
 body {
-	line-height: 1;
 	font-family: 'S-CoreDream-5Medium';
-	font-size: 18px;
-}
-
-.side1 {
-	background-color: red;
-}
-
-.l_side1 {
-/* 	background-color: yellow; */
-}
-
-.body1 {
-/*  	background-color: gray; */
 }
 
 .bottom1 {
 	background-color: #2a2a2a;
 	color: #a9a9a9;
+	margin-top: 10rem;
 }
 
 .menu1 {
-
-height: 10rem;
-/*  background-color: yellow; */
-
+	height: 30rem;
 }
-
 </style>
 
 
 </head>
 <body>
 
-	<div class="container-fluid">
 
-		<div class="row">
 
-			<div class="col menu1">
+	<div class="row menu1">
 
-				<tiles:insertAttribute name="menu" />
+		<tiles:insertAttribute name="menu" />
 
-			</div>
+	</div>
 
-		</div>
 
-		<div class="row my-3">
+	<div class="row">
 
-			<div class="col-2 pt-5 l_side1">
+		<div class="col-3 l_side1">
 
-				<tiles:insertAttribute name="leftSide" />
-
-			</div>
-
-			<div class="col-8 p-5 body1">
-
-				<tiles:insertAttribute name="body" />
-
-			</div>
-
-			<div class="col-2 p-5 side1">
-
-				<tiles:insertAttribute name="side" />
-
-			</div>
+			<tiles:insertAttribute name="leftSide" />
 
 		</div>
 
-		<div class="row bottom1">
+		<div class="col-9 body1">
 
-			<div class="col p-3">
-
-				<tiles:insertAttribute name="bottom" />
-
-			</div>
+			<tiles:insertAttribute name="body" />
 
 		</div>
 
 	</div>
+
+
+	<div class="row bottom1">
+
+		<tiles:insertAttribute name="bottom" />
+
+	</div>
+
 
 
 

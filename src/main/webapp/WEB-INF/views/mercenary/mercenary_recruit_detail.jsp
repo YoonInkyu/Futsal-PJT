@@ -1,170 +1,262 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-$(document).ready(function() {
-	$(document).on('click', '#change', function() {
-		var mercBoardCode = $(this).next().val()
-		
-		$.ajax({
-	        url: '/mercenary/recruitDetailAjax', //요청경로
-	        type: 'post',
-	        data:{'mercBoardCode':mercBoardCode}, //필요한 데이터
-	        success: function(result) {
-	        	//ajax 실행 성공 시 실행되는 구간
-	        	$('.location').remove()
-	        	var str='';
-	        	str += '<td>';
-	        	str += '<select class="form-select" name="mercBoardLocation">'
-	        	if(result.mercBoardLocation == '서울'){
-	        		str += '<option value="서울" selected>서울</option>';
-	        		str += '<option value="경기">경기</option>';
-	        		str += '<option value="대전">대전</option>';
-	        		str += '<option value="대구">대구</option>';
-	        	}
-	        	else if(result.mercBoardLocation == '경기'){
-	        		str += '<option value="서울">서울</option>';
-	        		str += '<option value="경기" selected>경기</option>';
-	        		str += '<option value="대전">대전</option>';
-	        		str += '<option value="대구">대구</option>';
-	        	}
-	        	else if(result.mercBoardLocation == '대전'){
-	        		str += '<option value="서울">서울</option>';
-	        		str += '<option value="경기">경기</option>';
-	        		str += '<option value="대전" selected>대전</option>';
-	        		str += '<option value="대구">대구</option>';
-	        	}
-	        	else if(result.mercBoardLocation == '대구'){
-	        		str += '<option value="서울">서울</option>';
-	        		str += '<option value="경기">경기</option>';
-	        		str += '<option value="대전">대전</option>';
-	        		str += '<option value="대구" selected>대구</option>';
-	        	}
-	        	str += '</select>';
-	        	str += '</td>';
-	        	$('.locationTr').append(str);
-	        	
-	        	$('.matchDate').remove()
-	        	var str1='';
-	        	str1 += '<td><input type="date" name="mercBoardDate" class="form-control" value="' + result.mercBoardDate + '">';
-	        	str1 += '<input type="time" name="mercBoardStartTime" class="form-control" value="' + result.mercBoardStartTime + '">';
-	        	str1 += '<input type="time" name="mercBoardEndTime" class="form-control" value="' + result.mercBoardEndTime + '"></td>';
-	        	$('.matchDateTr').append(str1);
-	        	
-	        	$('.intro').remove()
-	        	var str2='';
-	        	str2 += '<td><textarea rows="10px" name="mercBoardIntro" class="form-control" >' + result.mercBoardIntro + '</textarea></td>';
-	        	$('.introTr').append(str2);
-	        	
-	        	$('.change').val('수정')
-	        	$('.formChange').attr('action', '/mercenary/detailUpdate?mercBoardCode=' + result.mercBoardCode)
-	        	$('.change').attr('type', 'submit')
-	        },
-	        error: function(){
-	        	//ajax 실행 실패 시 실행되는 구간
-	        	alert('실패');
-	        }
-	  });
+	$(document).ready(function() {
+		$(document).on('click', '#change', function() {
+			var mercBoardCode = $(this).next().val()
+
+			$.ajax({
+				url : '/mercenary/recruitDetailAjax', //요청경로
+				type : 'post',
+				data : {
+					'mercBoardCode' : mercBoardCode
+				}, //필요한 데이터
+				success : function(result) {
+					//ajax 실행 성공 시 실행되는 구간
+					$('.location').remove()
+					var str = '';
+					str += '<td>';
+					str += '<select class="form-select" name="mercBoardLocation">'
+					if (result.mercBoardLocation == '서울') {
+						str += '<option value="서울" selected>서울</option>';
+						str += '<option value="경기">경기</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구">대구</option>';
+					} else if (result.mercBoardLocation == '경기') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="경기" selected>경기</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구">대구</option>';
+					} else if (result.mercBoardLocation == '대전') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="경기">경기</option>';
+						str += '<option value="대전" selected>대전</option>';
+						str += '<option value="대구">대구</option>';
+					} else if (result.mercBoardLocation == '대구') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="경기">경기</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구" selected>대구</option>';
+					}
+					str += '</select>';
+					str += '</td>';
+					$('.locationTr').append(str);
+
+					$('.matchDate').remove()
+					var str1 = '';
+					str1 += '<td><input type="date" name="mercBoardDate" class="form-control" value="' + result.mercBoardDate + '">';
+					str1 += '<input type="time" name="mercBoardStartTime" class="form-control" value="' + result.mercBoardStartTime + '">';
+					str1 += '<input type="time" name="mercBoardEndTime" class="form-control" value="' + result.mercBoardEndTime + '"></td>';
+					$('.matchDateTr').append(str1);
+
+					$('.intro').remove()
+					var str2 = '';
+					str2 += '<td><textarea rows="10px" name="mercBoardIntro" class="form-control" >' + result.mercBoardIntro + '</textarea></td>';
+					$('.introTr').append(str2);
+
+					$('.change').val('수정')
+					$('.formChange').attr('action', '/mercenary/detailUpdate?mercBoardCode=' + result.mercBoardCode)
+					$('.change').attr('type', 'submit')
+				},
+				error : function() {
+					//ajax 실행 실패 시 실행되는 구간
+					alert('실패');
+				}
+			});
+		});
 	});
-});
 </script>
 </head>
 <body>
-<!-- 용병 구인 상세보기 모달 내용 -->
-	<div class="modal-header">
-		<h3 class="modal-title">상세보기</h3>
-		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	</div>
-	<form action="#" method="post" id="formAt" class="formChange">
-		<div class="modal-body">
-			<table class="table">
-				<tbody>
-					<tr class="sortTr">
-						<th scope="row">구분</th>
-						<td class="al_left sort">${mercVO.mercBoardSort }</td>
-					</tr>
-					<tr class="writerTr">
-						<th scope="row">작성자</th>
-						<td class="al_left writer">${mercVO.memberId }</td>
-					</tr>
-					<tr class="locationTr">
-						<th scope="row">지역</th>
-						<td class="al_left location" colspan="3">${mercVO.mercBoardLocation }</td>
-					</tr>
-					<tr class="matchDateTr">
-						<th scope="row">매치일자</th>
-						<td class="al_left matchDate" colspan="3">${mercVO.mercBoardDate } ${mercVO.mercBoardStartTime } ~ ${mercVO.mercBoardEndTime } </td>
-					</tr>
-					<tr class="applyNumTr">
-						<th scope="row">신청한 사람</th>
-						<td class="al_left applyNum">${mercVO.mercBoardApplyNumber }명</td>
-					</tr>
-					<tr class="possibleTr">
-						<th scope="row">신청가능여부</th>
-						<td class="">
-							<c:choose>
-								<c:when test="${mercVO.mercBoardPossible eq '1' }">
-									가능							
-								</c:when>
-								<c:otherwise>
-									마감
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-					<tr class="introTr">
-						<td class="al_left intro" colspan="4"><div class="match_meno">${mercVO.mercBoardIntro }</div></td>
-					</tr>
-				</tbody>
-			</table>
+	<!-- 용병 구인 상세보기 모달 내용 -->
+
+
+	<div class="container">
+
+		<div class="modal-header">
+			<h3 class="modal-title">상세보기</h3>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
-		<div class="modal-footer">
-			 <c:choose>
-				<c:when test="${sessionScope.loginInfo.memberName eq mercVO.mercBoardWriter }">
-					<input type="button" class="btn btn-primary change" value="수정하기" id="change">
-					<input type="hidden" value="${mercVO.mercBoardCode}">
-					<input type="button" class="btn btn-danger delete" value="삭제하기" onclick="location.href='/mercenary/deleteMerc?mercBoardCode=${mercVO.mercBoardCode}'">
-				</c:when>
-				<c:otherwise>
-					<c:if test="${mercVO.mercBoardPossible eq '1' }">
-						<input type="button" class="btn btn-primary" value="신청하기" onclick="location.href='/mercenary/updateRecruitCnt?mercBoardCode=${mercVO.mercBoardCode}&memberCode=${sessionScope.loginInfo.memberCode}&memberTell=${mercVO.memberTell }&teamCode=${sessionScope.loginInfo.teamCode }'">
-					</c:if>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</form>
-	<h3 class="modal-title2">지원 용병 리스트</h3>
-	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">지원자</th>
-				<th scope="col">포지션</th>
-				<th scope="col">수락/거절</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${mercList }" var="merc">
-				<tr>
-					<td>${merc.memberId }</td>
-					<td>${merc.position }</td>
-					<td>
+
+		<form action="#" method="post" id="formAt" class="formChange">
+
+			<div class="modal-body">
+
+				<div class="row my-3">
+
+					<div class="col">
+						<label for="aaa" class="form-label">구분</label> <input type="text" class="form-control" id="aaa" value="${mercVO.mercBoardSort }" readonly>
+					</div>
+
+					<div class="col">
+						<label for="aaa" class="form-label">작성자</label> <input type="text" class="form-control" id="aaa" value="${mercVO.memberId }" readonly>
+					</div>
+
+					<div class="col">
+						<label for="aaa" class="form-label">지역</label> <input type="text" class="form-control" id="aaa" value="${mercVO.mercBoardLocation }" readonly>
+					</div>
+
+				</div>
+
+				<div class="row my-3">
+
+					<div class="col">
+						<label for="aaa" class="form-label">매치일자</label> <input type="text" class="form-control" id="aaa" value="${mercVO.mercBoardDate } / ${mercVO.mercBoardStartTime } ~ ${mercVO.mercBoardEndTime }" readonly>
+					</div>
+
+					<div class="col-3">
+						<label for="aaa" class="form-label">신청한 사람</label> <input type="text" class="form-control" id="aaa" value="${mercVO.mercBoardApplyNumber }명" readonly>
+					</div>
+
+					<div class="col-3">
+
 						<c:choose>
-							<c:when test="${sessionScope.loginInfo.memberName eq mercVO.mercBoardWriter && mercVO.mercBoardPossible eq '1'}">
-								<button type="button" class="btn btn-info" onclick="location.href='/mercenary/updateResponse?mercBoardCode=${mercVO.mercBoardCode}&mercListCode=${merc.mercListCode}'">수락</button>
+							<c:when test="${mercVO.mercBoardPossible eq '1' }">
+								<label for="aaa" class="form-label">신청가능 여부</label>
+								<input type="text" class="form-control" id="aaa" value="가능" readonly>
 							</c:when>
+
 							<c:otherwise>
-								${merc.mercListResponse }
+								<label for="aaa" class="form-label">신청가능 여부</label>
+								<input type="text" class="form-control" id="aaa" value="마감" readonly>
 							</c:otherwise>
 						</c:choose>
-					</td>
+
+					</div>
+
+				</div>
+
+				<div class="row mt-4">
+
+					<div class="col">
+						<label for="aaa">내 용</label>
+						<textarea class="form-control" id="aaa" style="height: 10rem;" readonly>${mercVO.mercBoardIntro }</textarea>
+					</div>
+
+				</div>
+
+			</div>
+
+
+
+			<!-- 인규씨 확인 ::::::::::::::::::::: 기존에 있던거, 클래서 위에다 걸어야 에이작스 사용 가능 할 듯 -->
+
+			<!-- 				<table class="table"> -->
+			<!-- 					<tbody> -->
+
+			<!-- 						<tr class="sortTr"> -->
+			<!-- 							<th scope="row">구분</th> -->
+			<%-- 							<td class="al_left sort">${mercVO.mercBoardSort }</td> --%>
+			<!-- 						</tr> -->
+			<!-- 						<tr class="writerTr"> -->
+			<!-- 							<th scope="row">작성자</th> -->
+			<%-- 							<td class="al_left writer">${mercVO.memberId }</td> --%>
+			<!-- 						</tr> -->
+			<!-- 						<tr class="locationTr"> -->
+			<!-- 							<th scope="row">지역</th> -->
+			<%-- 							<td class="al_left location" colspan="3">${mercVO.mercBoardLocation }</td> --%>
+			<!-- 						</tr> -->
+			<!-- 						<tr class="matchDateTr"> -->
+			<!-- 							<th scope="row">매치일자</th> -->
+			<%-- 							<td class="al_left matchDate" colspan="3">${mercVO.mercBoardDate }/${mercVO.mercBoardStartTime }~${mercVO.mercBoardEndTime }</td> --%>
+			<!-- 						</tr> -->
+			<!-- 						<tr class="applyNumTr"> -->
+			<!-- 							<th scope="row">신청한사람</th> -->
+			<%-- 							<td class="al_left applyNum">${mercVO.mercBoardApplyNumber }명</td> --%>
+			<!-- 						</tr> -->
+			<!-- 						<tr class="possibleTr"> -->
+			<!-- 							<th scope="row">신청가능여부</th> -->
+			<%-- 							<td class=""><c:choose> --%>
+			<%-- 									<c:when test="${mercVO.mercBoardPossible eq '1' }"> --%>
+			<!-- 									가능							 -->
+			<%-- 								</c:when> --%>
+			<%-- 									<c:otherwise> --%>
+			<!-- 									마감 -->
+			<%-- 								</c:otherwise> --%>
+			<%-- 								</c:choose></td> --%>
+			<!-- 						</tr> -->
+			<!-- 						<tr class="introTr"> -->
+			<%-- 							<td class="al_left intro" colspan="4"><div class="match_meno">${mercVO.mercBoardIntro }</div></td> --%>
+			<!-- 						</tr> -->
+			<!-- 					</tbody> -->
+			<!-- 				</table> -->
+
+
+
+
+
+
+
+
+
+
+			<!-- 인규씨 확인 :::::::::::::::: 삭제하기 할때 얼럿 함 나와야 될거 같음 너무 바로 삭제됨 -->
+
+			<div class="modal-footer d-flex justify-content-around mb-5">
+				<c:choose>
+					<c:when test="${sessionScope.loginInfo.memberName eq mercVO.mercBoardWriter }">
+						<input type="hidden" value="${mercVO.mercBoardCode}">
+						<input style="width: 10rem;" type="button" class="btn btn-outline-danger delete" value="삭제하기" onclick="location.href='/mercenary/deleteMerc?mercBoardCode=${mercVO.mercBoardCode}'">
+						<input style="width: 10rem;" type="button" class="btn btn-primary change" value="수정하기" id="change">
+					</c:when>
+					<c:otherwise>
+						<c:if test="${mercVO.mercBoardPossible eq '1' }">
+							<input style="width: 10rem;" type="button" class="btn btn-primary" value="신청하기" onclick="location.href='/mercenary/updateRecruitCnt?mercBoardCode=${mercVO.mercBoardCode}&memberCode=${sessionScope.loginInfo.memberCode}&memberTell=${mercVO.memberTell }&teamCode=${sessionScope.loginInfo.teamCode }'">
+						</c:if>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</form>
+
+
+
+
+
+
+
+		<div class="row m-5" style="border-bottom: 2px solid blue;"></div>
+
+
+		<div class="col m-3">
+			<h3 class="modal-title2">지원 용병 리스트</h3>
+		</div>
+
+		<table class="table table-striped table-hover text-center">
+			<thead>
+				<tr>
+					<th scope="col">지원자</th>
+					<th scope="col">포지션</th>
+					<th scope="col">수락 / 거절</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:forEach items="${mercList }" var="merc">
+					<tr>
+						<td>${merc.memberId }</td>
+						<td>${merc.position }</td>
+						<td><c:choose>
+								<c:when test="${sessionScope.loginInfo.memberName eq mercVO.mercBoardWriter && mercVO.mercBoardPossible eq '1'}">
+									<button type="button" class="btn btn-info" onclick="location.href='/mercenary/updateResponse?mercBoardCode=${mercVO.mercBoardCode}&mercListCode=${merc.mercListCode}'">수락</button>
+								</c:when>
+								<c:otherwise>
+									${merc.mercListResponse }
+								</c:otherwise>
+							</c:choose></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+
+
+
+
+
+
 </body>
 </html>

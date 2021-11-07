@@ -9,7 +9,8 @@
 <body>
 
 
-	<div class="container">
+
+	<div class="container col-5 mx-auto">
 
 		<div class="row">
 			<h5 class="mb-3" style="border-bottom: 2px solid blue;">공 지 사 항</h5>
@@ -75,6 +76,7 @@
 		<div class="row mb-3" style="border-bottom: 1px solid gray; height: 30rem; word-break: break-all;">${noticeInfo.contentNotice }</div>
 
 
+
 		<!-- 버튼 -->
 		<div class="row m-5">
 
@@ -100,7 +102,7 @@
 		<div class="row my-5" style="border-top: 1px solid gray;">
 
 
-			<div class="col-8 mx-auto my-5">
+			<div class="col-8 mx-auto my-5 shadow-sm p-3 mb-5 bg-body rounded">
 
 				<div class="mb-3">총 ${replyNoticeList.size() }건의 댓글이 있습니다.</div>
 
@@ -155,70 +157,70 @@
 
 		</div>
 
+
+
+		<c:forEach items="${replyNoticeList }" var="replyNotice">
+
+			<!-- 댓글 목록 -->
+			<div class="row mb-5 align-items-center">
+
+				<!-- 로그인 이미지(이미지 불러 오고 링크 걸어서 정보로 갈수 있게 할 예정) -->
+				<div class="col-3 text-end">
+					<i class="bi bi-camera-fill"></i> <img src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="30%;" height="30%;">
+				</div>
+
+
+
+				<!-- 댓글 정보	 -->
+				<div class="col">
+
+					<table class="table">
+
+						<thead>
+
+							<tr>
+								<th scope="col" width="*%">작 성 자</th>
+								<th scope="col" width="*%">작 성 일 자</th>
+							</tr>
+
+						</thead>
+
+						<tbody>
+
+							<tr>
+								<td>${replyNotice.writerNotice }</td>
+								<td>${replyNotice.createDateNotice }</td>
+							</tr>
+
+							<tr>
+								<td colspan="2" style="word-break: break-all;">내용 : ${replyNotice.contentNotice }</td>
+							</tr>
+
+						</tbody>
+
+					</table>
+
+				</div>
+
+
+
+				<!-- 댓글 버튼	 -->
+				<div class="col-3 ">
+
+					<!-- 관리자 또는 로그인 대상자가 댓글 작성자 아이디가 동일 하면 삭제가 활성화 됨 -->
+					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' or sessionScope.loginInfo.memberId eq replyNotice.writerNotice }">
+
+						<input type="button" class="btn btn-outline-danger btn-lg d-flex  " value="삭제" onclick="location.href='/reply/deleteReplyNotice?replyNumNotice=${replyNotice.replyNumNotice}&boardNumNotice=${noticeInfo.boardNumNotice}';">
+
+					</c:if>
+
+				</div>
+
+			</div>
+
+		</c:forEach>
+
 	</div>
-
-
-
-	<c:forEach items="${replyNoticeList }" var="replyNotice">
-
-		<!-- 댓글 목록 -->
-		<div class="row mb-5 align-items-center">
-
-			<!-- 로그인 이미지(이미지 불러 오고 링크 걸어서 정보로 갈수 있게 할 예정) -->
-			<div class="col-3 text-end">
-				<i class="bi bi-camera-fill"></i> <img src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="30%;" height="30%;">
-			</div>
-
-
-
-			<!-- 댓글 정보	 -->
-			<div class="col">
-
-				<table class="table">
-
-					<thead>
-
-						<tr>
-							<th scope="col" width="*%">작 성 자</th>
-							<th scope="col" width="*%">작 성 일 자</th>
-						</tr>
-
-					</thead>
-
-					<tbody>
-
-						<tr>
-							<td>${replyNotice.writerNotice }</td>
-							<td>${replyNotice.createDateNotice }</td>
-						</tr>
-
-						<tr>
-							<td colspan="2" style="word-break: break-all;">내용 : ${replyNotice.contentNotice }</td>
-						</tr>
-
-					</tbody>
-
-				</table>
-
-			</div>
-
-
-
-			<!-- 댓글 버튼	 -->
-			<div class="col-3 ">
-
-				<!-- 관리자 또는 로그인 대상자가 댓글 작성자 아이디가 동일 하면 삭제가 활성화 됨 -->
-				<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' or sessionScope.loginInfo.memberId eq replyNotice.writerNotice }">
-
-					<input type="button" class="btn btn-outline-danger btn-lg d-flex  " value="삭제" onclick="location.href='/reply/deleteReplyNotice?replyNumNotice=${replyNotice.replyNumNotice}&boardNumNotice=${noticeInfo.boardNumNotice}';">
-
-				</c:if>
-
-			</div>
-
-		</div>
-
-	</c:forEach>
 
 
 

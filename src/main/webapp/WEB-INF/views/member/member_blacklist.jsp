@@ -10,25 +10,31 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
+
+
+
+
+
+	<div class="container col-5 mx-auto">
+	
 		<div class="row my-3 align-items-center">
-			<div class="col-3 text-end">
-				<img alt="" src="/resources/img/common/Death_Note.png" width="40%;" class="pr-5">
+			<div class="col-4 text-end">
+				<img alt="" src="/resources/img/common/bg5.png" width="50%;" class="pr-5">
 			</div>
-			<div class="col-7">
-				<h1 style="border-bottom: 3px solid gray;">BLACK LIST</h1>
+			<div class="col-5">
+				<h2 style="border-bottom: 3px solid gray;">BLACK LIST</h2>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row ">
 			<div class="row mt-5">
 				<div class="col-8 mx-auto">
-					<table class="table table-striped table-hover">
+					<table class="table table-striped table-hover text-center">
 						<thead>
 							<tr>
-								<th scope="col" width="15%">사 진</th>
-								<th scope="col" width="15%">이 름</th>
-								<th scope="col">등록 날짜</th>
-								<th scope="col" width="15%">상세보기</th>
+								<th scope="col" width="*%">사 진</th>
+								<th scope="col" width="20%">이 름</th>
+								<th scope="col" width="20%">등록 날짜</th>
+								<th scope="col" width="20%">상세 보기</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -39,7 +45,7 @@
 										<c:if test="${not empty blackInfo.blackImg }">
 											<td><img src="/resources/img/member/${blackInfo.blackImg }" width="30%"></td>
 										</c:if>
-										<c:if test="${empty blackInfo.blackImg }">
+										<c:if test="${empty blackInfo.blackImg }">	
 											<td><img src="/resources/img/member/nullImg.png" width="30%"></td>
 										</c:if>
 										<td>${blackInfo.blackName }</td>
@@ -110,8 +116,8 @@
 														
 														
 														<div class="modal-footer d-flex justify-content-between">
-															<button type="button" class="btn btn-outline-danger" onclick="location.href='/member/deleteMemberBlack?blackmemberCode=${blackInfo.blackmemberCode}';">블럭 삭제</button>
-															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+															<button style="width: 10rem;" type="button" class="btn btn-outline-danger" onclick="location.href='/member/deleteMemberBlack?blackmemberCode=${blackInfo.blackmemberCode}';">블럭 삭제</button>
+															<button style="width: 10rem;" type="button" class="btn btn-primary" data-bs-dismiss="modal">취 소</button>
 														</div>
 														
 														

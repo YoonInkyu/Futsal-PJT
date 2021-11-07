@@ -20,15 +20,14 @@ a {
 
 			<div class="row align-items-center">
 
-				<div class="col-4 text-end">
-					<img src="/resources/img/common/logo.png" width="20%" height="">
+				<div class="col-5 text-end">
+					<img src="/resources/img/common/bg3.png" width="20%" height="">
 				</div>
 
-				<div class="col ">
-
-
+				<div class="col mx-3">
 
 					<div class="row">
+					
 						<div class="col">
 
 							<!-- Button trigger modal -->
@@ -165,7 +164,7 @@ a {
 											<h5 class="modal-title" id="exampleModalLabel">메일주소무단수집거부</h5>
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
-										
+
 										<div class="modal-body">
 											<p>우리 울산KH정보교육원 회원에게 무차별적으로 보내지는 타사의 메일을 차단하기 위해,</p>
 											<p>본 웹사이트에 게시된 이메일 주소가 전자우편 수집 프로그램이나 그 밖의 기술적 장치를 이용하여</p>
@@ -185,14 +184,21 @@ a {
 
 
 
-					<div class="row my-3">
+					<div class="row mb-2">
 						<div class="col">주 소 : (446-77) 울산광역시 남구 삼산로35번길 19 (신정동) / 전 화 : 052-257-7600</div>
 					</div>
 
-					<div class="row">
+					<div class="row mb-2">
 						<div class="col">(디지털컨버전스)Java기반 스마트기기 융합 응용SW구축 / 3조 팀 프로젝트( 조장 : 윤인규 / 조원 : 박성환, 김승수, 송영준)</div>
 					</div>
 
+					<div class="row mb-2">
+						<div class="col">윤인규 : 용병 및 매치 시스템 전체 담당 / 박성환 : 공지사항, 자유게시판 및 CSS 전체 담당</div>
+					</div>
+
+					<div class="row">
+						<div class="col">김승수 : 맴버 시스템 전체 담당 / 송영준 : 팀 시스템 전체 담당</div>
+					</div>
 				</div>
 
 			</div>

@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="/resources/board/js/board_free_list.js?ver=1"></script>
 <style type="text/css">
-tr {
+.c_td {
 	cursor: pointer;
 }
 </style>
@@ -15,14 +16,14 @@ tr {
 <body>
 
 
-	<div class="container">
+
+	<div class="container col-5 mx-auto">
 
 
 
 		<div class="row m-5 text-center justify-content-center">
 			<h2>자 유 게 시 판</h2>
 			<div class="col-3" style="border-bottom: 3px solid gray;"></div>
-
 		</div>
 
 
@@ -63,13 +64,34 @@ tr {
 							<c:choose>
 
 								<c:when test="${empty freeInfo.boardPwFree }">
-									<tr onclick="location.href='/board/goFreeDetail?boardNumFree=' + ${freeInfo.boardNumFree };">
 
-										<td>${freeInfo.boardNumFree }</td>
-										<td>${freeInfo.titleFree }</td>
-										<td>${freeInfo.writerFree }</td>
-										<td>${freeInfo.createDateFree }</td>
-										<td>${freeInfo.readCntFree }</td>
+									<tr>
+
+										<td class="c_td" onclick="location.href='/board/goFreeDetail?boardNumFree=' + ${freeInfo.boardNumFree };">${freeInfo.boardNumFree }</td>
+										<td class="c_td" onclick="location.href='/board/goFreeDetail?boardNumFree=' + ${freeInfo.boardNumFree };">${freeInfo.titleFree }</td>
+
+										<c:choose>
+
+											<c:when test="${freeInfo.writerFree eq loginInfo.memberId}">
+												<td>${freeInfo.writerFree }</td>
+											</c:when>
+
+											<c:otherwise>
+												<td>
+													<div class="btn-group dropend">
+														<button type="button" class="btn link-primary dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${freeInfo.writerFree }">${freeInfo.writerFree }</button>
+														<ul class="dropdown-menu">
+															<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addMemberBlackModal" style="cursor: pointer;">블랙리스트 추가</li>
+															<li class="dropdown-item">소속 팀 보기</li>
+														</ul>
+													</div>
+												</td>
+											</c:otherwise>
+
+										</c:choose>
+
+										<td class="c_td" onclick="location.href='/board/goFreeDetail?boardNumFree=' + ${freeInfo.boardNumFree };">${freeInfo.createDateFree }</td>
+										<td class="c_td" onclick="location.href='/board/goFreeDetail?boardNumFree=' + ${freeInfo.boardNumFree };">${freeInfo.readCntFree }</td>
 
 									</tr>
 
@@ -106,9 +128,6 @@ tr {
 			</div>
 
 		</div>
-
-		<!-- 이거 머지? 승수씨한테 물어 볼것-->
-		<a href="location"></a>
 
 
 
@@ -207,6 +226,41 @@ tr {
 					</div>
 
 					<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" id="checkPw" onclick="checkPwFree();">확 인</button>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+	<div class="modal fade" id="addMemberBlackModal" tabindex="-1">
+
+		<div class="modal-dialog">
+
+			<div class="modal-content addMemberBlackDiv">
+
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">블랙리스트 추가</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body">
+
+					<div class="form-floating">
+						<textarea class="form-control" placeholder="Leave a comment here" id="blackComment" style="height: 10rem;" required></textarea>
+						<label for="floatingTextarea2">사 유</label>
+					</div>
+
+					<div class="my-3" style="font-size: 13px; color: red;">블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김 처리됩니다.</div>
+
+					<div class="modal-footer d-flex justify-content-between">
+						<button style="width: 10rem;" type="button" class=" btn btn-outline-danger" onclick="addMemberBlack()">추 가</button>
+						<button style="width: 10rem;" type="button" class="btn btn-primary" data-bs-dismiss="modal">취 소</button>
+					</div>
 
 				</div>
 

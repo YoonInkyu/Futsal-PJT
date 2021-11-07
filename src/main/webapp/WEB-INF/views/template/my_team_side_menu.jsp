@@ -16,7 +16,7 @@
 <body>
 
 
-	<div class="container">
+	<div class="container d-flex justify-content-end">
 
 		<div class="b-example-divider"></div>
 

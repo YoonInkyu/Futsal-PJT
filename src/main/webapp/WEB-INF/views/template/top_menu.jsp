@@ -8,103 +8,133 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/top_menu.js?ver=5"></script>
+<link rel="stylesheet" href="/resources/template/css/top_menu.css">
+<script type="text/javascript" src="/resources/template/js/top_menu.js?ver=6"></script>
+
+<style type="text/css">
+
+</style>
+
+
+
 </head>
 <body>
 
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2 text-dark bg-opacity-75 fixed-top" id="navbar">
+	<div id="wrapper">
 
-		<div class="container-fluid">
+		<section id="container">
 
-			<div>
-				<a class="navbar-brand" href="/templateLayout/main_page"><img src="/resources/img/common/logo.png" width="26%" height="">FootBall</a>
-			</div>
+			<div class="content">
 
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+				<div class="sub_top">
 
-			<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+					<!-- 여기 조건 걸어서 페이지 클릭 할때마다 다른 값이 들어 가야됨(매치면 매치, 공지사항이면 공지사항 등) -->
+					<h2>고객센터</h2>
 
-				<ul class="navbar-nav">
+					<!-- 페이지 선택시 동영상 변경					 -->
+					<video id="video01" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title="">
+						<source src="/resources/img/common/tmv01.mp4" type="video/mp4">
+					</video>
 
-					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">매치</a>
+<!-- 					<video id="video02" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title=""> -->
+<!-- 						<source src="/resources/img/common/tmv02.mp4" type="video/mp4"> -->
+<!-- 					</video> -->
 
-						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-							<li><a class="dropdown-item" href="/match/matchList">매치 신청</a></li>
-						</ul></li>
+<!-- 					<video id="video03" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title=""> -->
+<!-- 						<source src="/resources/img/common/tmv03.mp4" type="video/mp4"> -->
+<!-- 					</video> -->
 
-					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">용병</a>
+<!-- 					<video id="video04" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title=""> -->
+<!-- 						<source src="/resources/img/common/tmv04.mp4" type="video/mp4"> -->
+<!-- 					</video> -->
 
-						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-							<li><a class="dropdown-item" href="/mercenary/recruit">용병 구인</a></li>
-						</ul></li>
+<!-- 					<video id="video05" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title=""> -->
+<!-- 						<source src="/resources/img/common/tmv05.mp4" type="video/mp4"> -->
+<!-- 					</video> -->
 
-					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">팀 관리</a>
-
-						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-							<li><a class="dropdown-item" href="/team/selectTeamMemberManage">MY TEAM</a></li>
-							<li><a class="dropdown-item" href="/team/goRegTeam">팀 생성</a></li>
-							<li><a class="dropdown-item" href="/team/selectTeamList">팀 목록</a></li>
-						</ul></li>
-
-					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
-
-						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-							<li><a class="dropdown-item" href="/board/goNoticeList">공지 사항</a></li>
-							<li><a class="dropdown-item" href="/board/goFreeList">자유 게시판</a></li>
-						</ul></li>
-
-				</ul>
-
-			</div>
-
-
-
-			<c:if test="${empty sessionScope.loginInfo }">
-
-				<div style="text-align: right;">
-					<a class="navbar-brand" href="/member/goJoin"><img src="/resources/img/common/login.png" width="8%" height="">JOIN</a>
-					<!-- <a class="navbar-brand" href="/member/goLogin"><img src="/resources/img/common/login.png" width="8%" height="">LOGIN</a> -->
-					<span class="navbar-brand" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;"><img src="/resources/img/common/login.png" width="8%" height="">LOGIN</span>
 				</div>
 
-			</c:if>
+			</div>
+
+		</section>
 
 
 
-			<c:if test="${not empty sessionScope.loginInfo }">
+		<section id="header">
 
-				<div class="d-flex flex-wrap ">
 
-					<div class="dropdown" style="text-align: right;">
-						<a href="#" class="navbar-brand d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <c:choose>
-								<c:when test="${sessionScope.loginInfo.memberImgAttachedName != null }">
-									<img src="/resources/img/member/${sessionScope.loginInfo.memberImgAttachedName }" alt="mdo" width="32" height="32" class="rounded-circle"> ${sessionScope.loginInfo.memberName } 님 환영합니다.
-						</c:when>
-								<c:otherwise>
-									<img src="/resources/img/member/nullImg.png" alt="mdo" width="32" height="32" class="rounded-circle"> ${sessionScope.loginInfo.memberName } 님 환영합니다.
-						</c:otherwise>
-							</c:choose>
-						</a>
-						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownUser1">
-							<li><a class="dropdown-item" href="/member/myPage">마이페이지</a></li>
-							<li><a class="dropdown-item" href="/member/goMemberBlacklist">블랙리스트 관리</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="/member/logout">LOGOUT</a></li>
+			<nav>
+
+				<div class="nav_wrap">
+					<!-- 온클릭으로 데이터 넘겨서 비디오와 고객샌터 글자 자리 바꾸고 싶다 -->
+					<ul>
+						<li><a href="/"><span class="hide"><img src="/resources/img/common/bg1.png" width="130%" height="" style="margin-top: -75px;"></span></a></li>
+						<li><a href="/match/matchList" onclick="topMenuVideo(tmv01);">매치 신청</a></li>
+						<li><a href="/mercenary/recruit">용병 구인</a></li>
+						<li><a href="/team/selectTeamMemberManage">나의 팀</a></li>
+						<li><a href="/team/goRegTeam">팀 생성</a></li>
+						<li><a href="/team/selectTeamList">팀 목록/랭킹</a></li>
+						<li><a href="/board/goNoticeList">공지 사항</a></li>
+						<li><a href="/board/goFreeList">자유 게시판</a></li>
+					</ul>
+
+				</div>
+
+				<div class="util">
+
+					<c:if test="${empty sessionScope.loginInfo }">
+
+						<ul>
+							<li class="join"><a href="/member/goJoin">JOIN &nbsp;</a></li>
+							<li class="login"><a href="/member/goLogin" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</a></li>
 						</ul>
-					</div>
+
+					</c:if>
+
+
+
+					<c:if test="${not empty sessionScope.loginInfo }">
+
+						<div class="d-flex flex-wrap">
+
+							<div class="dropdown" style="text-align: right;">
+
+								<a href="#" class="navbar-brand d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <c:choose>
+										<c:when test="${sessionScope.loginInfo.memberImgAttachedName != null }">
+											<img src="/resources/img/member/${sessionScope.loginInfo.memberImgAttachedName }" alt="mdo" width="32" height="32" class="rounded-circle">
+											<span style="color: #bababa; font-size: 18px;"> ${sessionScope.loginInfo.memberName } 님 환영합니다. </span>
+										</c:when>
+
+										<c:otherwise>
+											<img src="/resources/img/member/nullImg.png" alt="mdo" width="32" height="32" class="rounded-circle">
+											<span style="color: #bababa; font-size: 18px;"> ${sessionScope.loginInfo.memberName } 님 환영합니다. </span>
+										</c:otherwise>
+									</c:choose>
+								</a>
+
+								<ul style="vertical-align: middle;" class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownUser1">
+									<li><a class="dropdown-item" href="/member/myPage">마이페이지</a></li>
+									<li><a class="dropdown-item" href="/member/goMemberBlacklist">블랙리스트 관리</a></li>
+									<li style="height: 6px;"><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item" href="/member/logout">LOGOUT</a></li>
+								</ul>
+
+							</div>
+
+						</div>
+
+					</c:if>
 
 				</div>
 
-			</c:if>
+			</nav>
+
+		</section>
+
+	</div>
 
 
-
-		</div>
-
-	</nav>
 
 	<!-- Login Modal -->
 	<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -127,104 +157,9 @@
 						</div>
 					</form>
 				</div>
-				<!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
 			</div>
 		</div>
 	</div>
-
-
-
-<!-- 	<video id="video01" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title="video element"> -->
-<!-- 		<source src="/resources/img/common/sub_03.mp4" type="video/mp4"> -->
-<!-- 	</video> -->
-
-
-
-
-
-
-
-	<!-- 세컷 이미지 회전 하는거 아직 확인중 -->
-
-	<!-- 	<div class="col text-center"> -->
-
-	<!-- 		<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel"> -->
-
-	<!-- 			<div class="carousel-indicators"> -->
-	<!-- 				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button> -->
-	<!-- 				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button> -->
-	<!-- 				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
-	<!-- 			</div> -->
-
-	<!-- 			<div class="carousel-inner"> -->
-
-	<!-- 				<div class="carousel-item active"> -->
-	<!-- 					<img src="/resources/img/common/main1.jpg" class="d-block w-100" alt="..." > -->
-	<!-- 					<div class="carousel-caption d-none d-md-block"> -->
-	<!-- 						<h5>First slide label</h5> -->
-	<!-- 						<p>Some representative placeholder content for the first slide.</p> -->
-	<!-- 					</div> -->
-	<!-- 				</div> -->
-
-	<!-- 				<div class="carousel-item"> -->
-	<!-- 					<img src="/resources/img/common/main2.jpg" class="d-block w-100" alt="..."> -->
-	<!-- 					<div class="carousel-caption d-none d-md-block"> -->
-	<!-- 						<h5>Second slide label</h5> -->
-	<!-- 						<p>Some representative placeholder content for the second slide.</p> -->
-	<!-- 					</div> -->
-	<!-- 				</div> -->
-
-	<!-- 				<div class="carousel-item"> -->
-	<!-- 					<img src="/resources/img/common/main3.jpg" class="d-block w-100" alt="..."> -->
-	<!-- 					<div class="carousel-caption d-none d-md-block"> -->
-	<!-- 						<h5>Third slide label</h5> -->
-	<!-- 						<p>Some representative placeholder content for the third slide.</p> -->
-	<!-- 					</div> -->
-	<!-- 					Wx` -->
-	<!-- 				</div> -->
-
-	<!-- 			</div> -->
-
-	<!-- 			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev"> -->
-	<!-- 				<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span> -->
-	<!-- 			</button> -->
-
-	<!-- 			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next"> -->
-	<!-- 				<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> -->
-	<!-- 			</button> -->
-
-	<!-- 		</div> -->
-
-	<!-- 	</div> -->
-
-
-
-
-
-	<!-- 스크립트 사용해서 탑바 이동 하게 만드는것, 현재 보류 중 -->
-
-	<!-- 	<script> -->
-	<!-- // 		window.onscroll = function() { -->
-	<!-- // 			myFunction() -->
-	<!-- // 		}; -->
-
-	<!-- // 		var navbar = document.getElementById("navbar"); -->
-	<!-- // 		var sticky = navbar.offsetTop; -->
-
-	<!-- // 		function myFunction() { -->
-	<!-- // 			if (window.pageYOffset >= sticky) { -->
-	<!-- // 				navbar.classList.add("sticky") -->
-	<!-- // 			} else { -->
-	<!-- // 				navbar.classList.remove("sticky"); -->
-	<!-- // 			} -->
-	<!-- // 		} -->
-	<!-- 	</script> -->
-
-
-
 
 
 
@@ -235,7 +170,98 @@
 
 
 
+<!-- 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2 text-dark bg-opacity-75 fixed-top" id="navbar"> -->
 
+<!-- 		<div class="container-fluid"> -->
+
+<!-- 			<div> -->
+<!-- 				<a class="navbar-brand" href="/templateLayout/main_page"><img src="/resources/img/common/logo.png" width="26%" height="">FootBall</a> -->
+<!-- 			</div> -->
+
+<!-- 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation"> -->
+<!-- 				<span class="navbar-toggler-icon"></span> -->
+<!-- 			</button> -->
+
+<!-- 			<div class="collapse navbar-collapse" id="navbarNavDarkDropdown"> -->
+
+<!-- 				<ul class="navbar-nav"> -->
+
+<!-- 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">매치</a> -->
+
+<!-- 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink"> -->
+<!-- 							<li><a class="dropdown-item" href="/match/matchList">매치 신청</a></li> -->
+<!-- 						</ul></li> -->
+
+<!-- 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">용병</a> -->
+
+<!-- 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink"> -->
+<!-- 							<li><a class="dropdown-item" href="/mercenary/recruit">용병 구인</a></li> -->
+<!-- 						</ul></li> -->
+
+<!-- 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">팀 관리</a> -->
+
+<!-- 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink"> -->
+<!-- 							<li><a class="dropdown-item" href="/team/selectTeamMemberManage">MY TEAM</a></li> -->
+<!-- 							<li><a class="dropdown-item" href="/team/goRegTeam">팀 생성</a></li> -->
+<!-- 							<li><a class="dropdown-item" href="/team/selectTeamList">팀 목록</a></li> -->
+<!-- 						</ul></li> -->
+
+<!-- 					<li class="nav-item dropdown mx-5"><a class="nav-link dropdown-toggle" href="/sample/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a> -->
+
+<!-- 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink"> -->
+<!-- 							<li><a class="dropdown-item" href="/board/goNoticeList">공지 사항</a></li> -->
+<!-- 							<li><a class="dropdown-item" href="/board/goFreeList">자유 게시판</a></li> -->
+<!-- 						</ul></li> -->
+
+<!-- 				</ul> -->
+
+<!-- 			</div> -->
+
+
+
+<%-- 			<c:if test="${empty sessionScope.loginInfo }"> --%>
+
+<!-- 				<div style="text-align: right;"> -->
+<!-- 					<a class="navbar-brand" href="/member/goJoin"><img src="/resources/img/common/login.png" width="8%" height="">JOIN</a> -->
+<!-- 					<a class="navbar-brand" href="/member/goLogin"><img src="/resources/img/common/login.png" width="8%" height="">LOGIN</a> -->
+<!-- 					<span class="navbar-brand" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;"><img src="/resources/img/common/login.png" width="8%" height="">LOGIN</span> -->
+<!-- 				</div> -->
+
+<%-- 			</c:if> --%>
+
+
+
+<%-- 			<c:if test="${not empty sessionScope.loginInfo }"> --%>
+
+<!-- 				<div class="d-flex flex-wrap "> -->
+
+<!-- 					<div class="dropdown" style="text-align: right;"> -->
+<%-- 						<a href="#" class="navbar-brand d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <c:choose> --%>
+<%-- 								<c:when test="${sessionScope.loginInfo.memberImgAttachedName != null }"> --%>
+<%-- 									<img src="/resources/img/member/${sessionScope.loginInfo.memberImgAttachedName }" alt="mdo" width="32" height="32" class="rounded-circle"> ${sessionScope.loginInfo.memberName } 님 환영합니다. --%>
+<%-- 						</c:when> --%>
+<%-- 								<c:otherwise> --%>
+<%-- 									<img src="/resources/img/member/nullImg.png" alt="mdo" width="32" height="32" class="rounded-circle"> ${sessionScope.loginInfo.memberName } 님 환영합니다. --%>
+<%-- 						</c:otherwise> --%>
+<%-- 							</c:choose> --%>
+<!-- 						</a> -->
+<!-- 						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownUser1"> -->
+<!-- 							<li><a class="dropdown-item" href="/member/myPage">마이페이지</a></li> -->
+<!-- 							<li><a class="dropdown-item" href="/member/goMemberBlacklist">블랙리스트 관리</a></li> -->
+<!-- 							<li><hr class="dropdown-divider"></li> -->
+<!-- 							<li><a class="dropdown-item" href="/member/logout">LOGOUT</a></li> -->
+<!-- 						</ul> -->
+<!-- 					</div> -->
+
+<!-- 				</div> -->
+
+<%-- 			</c:if> --%>
+
+
+
+<!-- 		</div> -->
+
+<!-- 	</nav> -->
 
 
 
