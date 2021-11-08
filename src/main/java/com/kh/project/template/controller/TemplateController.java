@@ -3,17 +3,27 @@
 
 package com.kh.project.template.controller;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.project.menu.service.MenuService;
 
 @Controller
 @RequestMapping("/templateLayout")
 public class TemplateController {
+	@Resource(name = "menuService")
+	private MenuService menuService;
 
 	// 메인 화면 레이아웃
 	@GetMapping("/main_page")
-	public String mainPage() {
+	public String mainPage(Model model, String menuVideo, String menuName) {
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		return "mainPage/main_page";
 	}
 

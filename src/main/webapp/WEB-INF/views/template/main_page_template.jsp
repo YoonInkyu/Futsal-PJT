@@ -16,7 +16,15 @@
 <!-- 부트스트랩 사용을 위해 css, js를 로딩 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+<script type="text/javascript">
+(function($) {
+	selectMenu = function(menuPath, menuVideo, menuName){
+		var str = "?menuVideo="+menuVideo+"&menuName="+menuName
+		location.href = menuPath+str
+	};
 
+})(jQuery);
+</script>
 <style type="text/css">
 
 </style>
@@ -42,20 +50,22 @@
 			<ul>
 
 				<li><span><img src="/resources/img/common/bg2.png" width="60%" height=""></span></li>
+						<c:forEach items="${menuList }" var="menuList">
+						<li><a href="javascript:void(0)" onclick="selectMenu('${menuList.menuPath }', '${menuList.menuVideo }', '${menuList.menuName }')"><span>${menuList.menuEngname }</span><span class="ov">${menuList.menuName }</span></a></li>
+						</c:forEach>
+<!-- 				<li><a href="/match/matchList"><span>MATCHING</span><span class="ov">매치 신청</span></a></li> -->
 
-				<li><a href="/match/matchList"><span>MATCHING</span><span class="ov">매치 신청</span></a></li>
+<!-- 				<li><a href="/mercenary/recruit"><span>MERCENARIES</span><span class="ov">용병 구인</span></a></li> -->
 
-				<li><a href="/mercenary/recruit"><span>MERCENARIES</span><span class="ov">용병 구인</span></a></li>
+<!-- 				<li><a href="/team/teamInfo"><span>MY TEAM</span><span class="ov">나의 팀</span></a></li> -->
 
-				<li><a href="/team/teamInfo"><span>MY TEAM</span><span class="ov">나의 팀</span></a></li>
+<!-- 				<li><a href="/team/goRegTeam"><span>FORMATION</span><span class="ov">팀 생성</span></a></li> -->
 
-				<li><a href="/team/goRegTeam"><span>FORMATION</span><span class="ov">팀 생성</span></a></li>
+<!-- 				<li><a href="/team/selectTeamList"><span>TEAM LIST</span><span class="ov">팀 목록</span></a></li> -->
 
-				<li><a href="/team/selectTeamList"><span>TEAM LIST</span><span class="ov">팀 목록</span></a></li>
+<!-- 				<li><a href="/board/goNoticeList"><span>NOTICE</span><span class="ov">공지사항</span></a></li> -->
 
-				<li><a href="/board/goNoticeList"><span>NOTICE</span><span class="ov">공지사항</span></a></li>
-
-				<li><a href="/board/goFreeList"><span>BOARD</span><span class="ov">자유게시판</span></a></li>
+<!-- 				<li><a href="/board/goFreeList"><span>BOARD</span><span class="ov">자유게시판</span></a></li> -->
 
 				<li><a></a></li>
 

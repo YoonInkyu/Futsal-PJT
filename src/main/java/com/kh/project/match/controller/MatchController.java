@@ -17,6 +17,7 @@ import com.kh.project.match.vo.MatchManageVO;
 import com.kh.project.match.vo.MatchResultVO;
 import com.kh.project.match.vo.MatchVO;
 import com.kh.project.member.vo.MemberVO;
+import com.kh.project.menu.service.MenuService;
 
 //윤인규 1027 매치 구현 시작
 
@@ -25,32 +26,40 @@ import com.kh.project.member.vo.MemberVO;
 public class MatchController {
 	@Resource(name = "matchService")
 	private MatchService matchService;
+	@Resource(name = "menuService")
+	private MenuService menuService;
 	
 	//매치 리스트 조회(첫화면)
 	@GetMapping("/matchList")
-	public String matchList(Model model, MatchVO matchVO) {
+	public String matchList(Model model, MatchVO matchVO, String menuVideo, String menuName) {
 		//전체 데이터 수
 		int dataCnt = matchService.selectMatchCnt(matchVO);
 		matchVO.setTotalCnt(dataCnt);
 		//페이징 처리
 		matchVO.setPageInfo();
 		model.addAttribute("matchList", matchService.selectMatchList(matchVO));
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		return "match/matchList";
 	}
 	//검색 조건 사용했을 때 리스트 조회
 	@PostMapping("/matchList")
-	public String matchList2(Model model, MatchVO matchVO) {
+	public String matchList2(Model model, MatchVO matchVO, String menuVideo, String menuName) {
 		//전체 데이터 수
 		int dataCnt = matchService.selectMatchCnt(matchVO);
 		matchVO.setTotalCnt(dataCnt);
 		//페이징 처리
 		matchVO.setPageInfo();
 		model.addAttribute("matchList", matchService.selectMatchList(matchVO));
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		return "match/matchList";
 	}
 	//매치 게시글 등록 폼으로 이동
 	@GetMapping("/goMatchRegForm")
-	public String goMatchRegForm(HttpSession session, Model model) {
+	public String goMatchRegForm(HttpSession session, Model model, String menuVideo, String menuName) {
 		//로그인 여부 확인
 		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
 		if(memberCode == null) {
@@ -67,6 +76,9 @@ public class MatchController {
 		}
 		model.addAttribute("today", CurrentDateTime.today());
 		model.addAttribute("time", CurrentDateTime.nowTime());
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		//팀이 있는 경우 매치 등록 폼으로 이동
 		return "match/match_regForm";
 	}
@@ -81,6 +93,7 @@ public class MatchController {
 		matchVO.setTeamCode(teamCode);
 		
 		matchService.insertMatchBoard(matchVO);
+		
 		return "redirect:/match/matchList";
 	}
 	//매치 상세보기

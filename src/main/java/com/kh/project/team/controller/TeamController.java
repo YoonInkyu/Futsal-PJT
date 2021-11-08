@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.project.member.service.MemberService;
 import com.kh.project.member.vo.MemberVO;
+import com.kh.project.menu.service.MenuService;
 import com.kh.project.team.service.TeamService;
 import com.kh.project.team.vo.TeamApplyVO;
 import com.kh.project.team.vo.TeamLogoImgVO;
@@ -33,13 +34,18 @@ public class TeamController {
 	private TeamService teamService;
 	@Resource(name = "memberService")
 	private MemberService memberService;
+	@Resource(name = "menuService")
+	private MenuService menuService;
 	
 	
 	// 팀생성 페이지로 이동
 	@GetMapping("/goRegTeam")
-	public String goRegTeam(HttpSession session, Model model) {
+	public String goRegTeam(HttpSession session, Model model, String menuVideo, String menuName) {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 		if(teamCode == null) {
+			model.addAttribute("menuList", menuService.selectMenu());
+			model.addAttribute("menuVideo", menuVideo);
+			model.addAttribute("menuName", menuName);
 			return "team/submenu_team_create";
 		}
 		else {
@@ -66,7 +72,7 @@ public class TeamController {
 	
 	//나의팀 -> (서브메뉴)팀정보 페이지 이동
 	@GetMapping("/teamInfo")
-	public String teamInfo(HttpSession session, Model model) {
+	public String teamInfo(HttpSession session, Model model, String menuVideo, String menuName) {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 		if(teamCode == null) {
 			model.addAttribute("msg", "팀 가입후 이용가능합니다.");
@@ -74,6 +80,9 @@ public class TeamController {
 			return "team/alert";
 		}
 		model.addAttribute("myTeam", teamService.teamManage(teamCode));
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		return "myTeamLayout/team/team_info";
 	} 
 	
@@ -121,10 +130,13 @@ public class TeamController {
 	
 	// 팀 삭제
 		@GetMapping("/deleteTeam")
-		public String teamDelete(HttpSession session) {
+		public String teamDelete(HttpSession session, String menuVideo, String menuName, Model model) {
 			String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 			teamService.deleteTeam(teamCode);
-			return "team/submenu_team_list";
+			model.addAttribute("menuList", menuService.selectMenu());
+			model.addAttribute("menuVideo", menuVideo);
+			model.addAttribute("menuName", menuName);
+			return "redirect:/team/selectTeamList";
 		}
 	
 		
@@ -180,61 +192,65 @@ public class TeamController {
 		
 		
 		
-		return "mainPage/main_page";
+		return "redirect:/templateLayout/main_page";
 	}
 	
 	// 팀 리스트 조회 
 	@GetMapping("/selectTeamList")
-	public String selectTeamList(Model model, TeamVO teamVO) {
+	public String selectTeamList(Model model, TeamVO teamVO, String menuVideo, String menuName) {
 		model.addAttribute("teamList", teamService.selectTeamList(teamVO)); 
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		return "team/submenu_team_list";
 	}
 	// 팀 리스트 조회 -> 상세보기
 	@GetMapping("/teamDetail")
-	public String teamDetail(String teamCode, Model model, HttpSession session) {
+	public String teamDetail(String teamCode, Model model, HttpSession session, String menuVideo, String menuName) {
 		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
 		model.addAttribute("teamDetail", teamService.selectTeamDetail(teamCode));
 		model.addAttribute("teamCode", teamCode);
 		model.addAttribute("memberCode", memberCode);
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		return "logPage/team/team_detail";
 	}
 	
 	// 팀관리 팀원조회
 	@GetMapping("/selectTeamMemberManage")
-	public String selectTeamMemberManage(HttpSession session, Model model) {
+	public String selectTeamMemberManage(HttpSession session, Model model, String menuVideo, String menuName) {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 		String teamAdmin = ((MemberVO)session.getAttribute("loginInfo")).getTeamAdmin();
 		model.addAttribute("memberList",teamService.selectTeamMemberManage(teamCode));
 		model.addAttribute("applyMember",teamService.selectApplyMember(teamCode));
 		model.addAttribute("teamAdmin",teamAdmin);
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		return "myTeamLayout/team/submenu_team_manage";
 	}
 	
 	// 팀관리 -> 팀원조회 -> 팀원상세 조회
 	@GetMapping("/teamMemberDetail")
-	public String teamMemberDetail(String memberCode, Model model, HttpSession session) {
+	public String teamMemberDetail(String memberCode, Model model, HttpSession session, String menuVideo, String menuName) {
 		String teamAdmin = ((MemberVO)session.getAttribute("loginInfo")).getTeamAdmin();
 		model.addAttribute("memberDetail",teamService.selectTeamMemberDetail(memberCode));
 		model.addAttribute("teamAdmin",teamAdmin);
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		return "logPage/team/team_member_detail";
 	}
 	
 	// 팀가입 신청
 	@GetMapping("/insertTeamApply")
-	public String insertTeamApply(TeamApplyVO teamApplyVO, Model model, HttpSession session) {
-		String teamAdmin = ((MemberVO)session.getAttribute("loginInfo")).getTeamAdmin();
-		if(teamAdmin == null) {
-			teamService.insertTeamApply(teamApplyVO);
-			model.addAttribute("msg", "가입신청이 완료되었습니다.");
-			model.addAttribute("url", "selectTeamList");
-			return "team/alert";
-		}
-		else {
-			model.addAttribute("msg", "팀가입은 한곳만 가능합니다.");
-			model.addAttribute("url", "selectTeamList");
-					return "team/alert";
-		}
-			
+	public String insertTeamApply(TeamApplyVO teamApplyVO, Model model) {
+		
+		teamService.insertTeamApply(teamApplyVO);
+		model.addAttribute("msg", "가입신청이 완료되었습니다.");
+		model.addAttribute("url", "selectTeamList");
+		return "team/alert";
 	}
 	// 팀가입 승인
 	@GetMapping("/teamApplyApproval")
@@ -284,10 +300,13 @@ public class TeamController {
 	
 	// 매치관리 페이지 이동
 	@GetMapping("/myMatchManage")
-	public String myMatchManage(HttpSession session, Model model) {
+	public String myMatchManage(HttpSession session, Model model, String menuVideo, String menuName) {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 		model.addAttribute("matchAfterManage", teamService.myAfterMatchManage(teamCode));
 		model.addAttribute("matchBeforeManage", teamService.myBeforeMatchManage(teamCode));
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		return "myTeamLayout/team/myTeam_match_manage";
 	}
 	

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 모든 SQL문을 mapper태그 안에 작성 -->
+<!-- 윤인규 10/23 용병 구인구직 게시글 등록 구현중-->
+<!-- 윤인규 10/25 용병 구인구직 게시글 지원자 vo 작성 -->
+<mapper namespace="menuMapper">
+	<resultMap type="com.kh.project.menu.vo.MenuVO" id="menu">
+		<!-- 용병 구인구직 -->
+		<id column="MENU_CODE" 				property="menuCode"/>
+		<result column="MENU_NAME" 			property="menuName"/>
+		<result column="MENU_PATH" 			property="menuPath"/>
+		<result column="MENU_VIDEO" 		property="menuVideo"/>
+		<result column="MENU_ENGNAME" 		property="menuEngname"/>
+	</resultMap>
+	
+	<select id="selectMenu" resultMap="menu">
+		SELECT *
+		FROM TITLE_MENU
+		ORDER BY MENU_CODE
+	</select>
+	
+	
+</mapper>
+
+
+

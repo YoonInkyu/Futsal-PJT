@@ -26,6 +26,7 @@ import com.kh.project.board.vo.BoardNoticeVO;
 import com.kh.project.board.vo.FreeImgVO;
 import com.kh.project.board.vo.NoticeImgVO;
 import com.kh.project.common.util.CurrentDateTime;
+import com.kh.project.menu.service.MenuService;
 
 @Controller
 @RequestMapping("/board")
@@ -42,6 +43,9 @@ public class BoardController {
 
 	@Resource(name = "replyNoticeService")
 	private ReplyNoticeService replyNoticeService;
+	
+	@Resource(name = "menuService")
+	private MenuService menuService;
 
 	// ==============================// 공지사항 //==============================//
 	// ==============================// 공지사항 //==============================//
@@ -49,7 +53,7 @@ public class BoardController {
 
 	// 공지사항 리스트로 이동
 	@RequestMapping("/goNoticeList")
-	public String goNoticeList(Model model, BoardNoticeVO boardNoticeVO) {
+	public String goNoticeList(Model model, BoardNoticeVO boardNoticeVO, String menuVideo, String menuName) {
 
 		// 공지사항 등록된 글 수 카운트
 		boardNoticeVO.setTotalCnt(boardNoticeService.selectBoardCntNotice(boardNoticeVO));
@@ -58,6 +62,9 @@ public class BoardController {
 		boardNoticeVO.setPageInfo();
 
 		model.addAttribute("noticeList", boardNoticeService.selectBoardNoticeList(boardNoticeVO));
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 
 		return "board/board_notice_list";
 
@@ -65,7 +72,7 @@ public class BoardController {
 
 	// 공지사항 상세 페이지로 이동
 	@GetMapping("/goNoticeDetail")
-	public String goNoticeDetail(Model model, int boardNumNotice) {
+	public String goNoticeDetail(Model model, int boardNumNotice, String menuVideo, String menuName) {
 
 		// 상세 조회 시, 내용 부분 엔터 값 적용
 		BoardNoticeVO result = boardNoticeService.selectBoardNoticeDetail(boardNumNotice);
@@ -80,15 +87,23 @@ public class BoardController {
 
 		// 조회수 증가
 		boardNoticeService.updateReadCntNotice(boardNumNotice);
+		
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 
 		return "board/board_notice_detail";
 	}
 
 	// 공지사항 글 쓰기 폼으로 이동
 	@GetMapping("/goNoticeWriteForm")
-	public String goNoticeWriteForm(Model model) {
+	public String goNoticeWriteForm(Model model, String menuVideo, String menuName) {
 
 		model.addAttribute("nowDate", getNowDateToString());
+		
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 
 		return "board/board_notice_write_form";
 
@@ -175,11 +190,15 @@ public class BoardController {
 
 	// 공지사항 글 수정 폼으로 이동
 	@GetMapping("/goUpdateBoardNotice")
-	public String goUpdateBoardNotice(Model model, int boardNumNotice) {
+	public String goUpdateBoardNotice(Model model, int boardNumNotice, String menuVideo, String menuName) {
 
 		model.addAttribute("nowDate", getNowDateToString());
 
 		model.addAttribute("noticeInfo", boardNoticeService.selectBoardNoticeDetail(boardNumNotice));
+		
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 
 		return "board/board_notice_update_form";
 
@@ -211,7 +230,7 @@ public class BoardController {
 
 	// 자유게시판 리스트로 이동
 	@RequestMapping("/goFreeList")
-	public String goFreeList(Model model, BoardFreeVO boardFreeVO) {
+	public String goFreeList(Model model, BoardFreeVO boardFreeVO, String menuVideo, String menuName) {
 
 		// 자유게시판 등록된 글 수 카운트
 		boardFreeVO.setTotalCnt(boardFreeService.selectBoardCntFree(boardFreeVO));
@@ -220,13 +239,17 @@ public class BoardController {
 		boardFreeVO.setPageInfo();
 
 		model.addAttribute("freeList", boardFreeService.selectBoardFreeList(boardFreeVO));
+		
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 
 		return "board/board_free_list";
 	}
 
 	// 자유게시판 상세 페이지로 이동
 	@GetMapping("/goFreeDetail")
-	public String goFreeDetail(Model model, int boardNumFree) {
+	public String goFreeDetail(Model model, int boardNumFree, String menuVideo, String menuName) {
 
 		// 상세 조회 시, 내용 부분 엔터 값 적용
 		BoardFreeVO result = boardFreeService.selectBoardFreeDetail(boardNumFree);
@@ -243,15 +266,23 @@ public class BoardController {
 
 		// 조회수 증가
 		boardFreeService.updateReadCntFree(boardNumFree);
+		
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 
 		return "board/board_free_detail";
 	}
 
 	// 자유게시판 글 쓰기 폼으로 이동
 	@GetMapping("/goFreeWriteForm")
-	public String goFreeWriteForm(Model model) {
+	public String goFreeWriteForm(Model model, String menuVideo, String menuName) {
 
 		model.addAttribute("nowDate", getNowDateToString());
+		
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 
 		return "board/board_free_write_form";
 
@@ -339,11 +370,15 @@ public class BoardController {
 
 	// 자유게시판 글 수정 폼으로 이동
 	@GetMapping("/goUpdateBoardFree")
-	public String goUpdateBoardFree(Model model, int boardNumFree) {
+	public String goUpdateBoardFree(Model model, int boardNumFree, String menuVideo, String menuName) {
 
 		model.addAttribute("nowDate", getNowDateToString());
 
 		model.addAttribute("freeInfo", boardFreeService.selectBoardFreeDetail(boardNumFree));
+		
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 
 		return "board/board_free_update_form";
 

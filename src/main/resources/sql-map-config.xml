@@ -15,6 +15,7 @@
 		<mapper resource="/mapper/board-Mapper.xml"/>
 		<mapper resource="/mapper/reply-Mapper.xml"/>
 		<mapper resource="/mapper/match-Mapper.xml"/>
+		<mapper resource="/mapper/menu-Mapper.xml"/>
 	</mappers>
 </configuration>
 

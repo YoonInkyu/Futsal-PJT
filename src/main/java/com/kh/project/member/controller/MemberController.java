@@ -27,6 +27,7 @@ import com.kh.project.member.service.MemberService;
 import com.kh.project.member.vo.MemberBlacklistVO;
 import com.kh.project.member.vo.MemberImgVO;
 import com.kh.project.member.vo.MemberVO;
+import com.kh.project.menu.service.MenuService;
 import com.kh.project.mercenary.service.MercenaryService;
 
 @Controller
@@ -38,6 +39,8 @@ public class MemberController {
 	private MercenaryService mercenaryService;
 	@Resource(name = "matchService")
 	private MatchService matchService;
+	@Resource(name = "menuService")
+	private MenuService menuService;
 	
 	//회원가입 페이지로 이동
 	@GetMapping("/goJoin")
@@ -126,28 +129,31 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(MemberVO memberVO, HttpSession session) {
 		session.setAttribute("loginInfo", memberService.selectMemberInfo(memberService.login(memberVO)));
-		return  "mainPage/main_page";
+		return  "redirect:/templateLayout/main_page";
 	}
 	//로그아웃 하기
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginInfo");
-		return  "mainPage/main_page";
+		return  "redirect:/templateLayout/main_page";
 	}
 	//마이페이지 가기
 	@GetMapping("/myPage")
-	public String mypage(HttpSession session, Model model) {
+	public String mypage(HttpSession session, Model model, String menuVideo, String menuName) {
 		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 		model.addAttribute("member",memberService.myPage(memberCode));
 		model.addAttribute("MymercBoardList",mercenaryService.MyMercBoard(memberCode));
 		model.addAttribute("matchList", matchService.MyMatchList(teamCode));
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		
 		return  "member/my_page";
 	}
 	//회원정보 수정페이지 가기
 	@GetMapping("/goUpdateMember")
-	public String goUpdateMember(HttpSession session, Model model) {
+	public String goUpdateMember(HttpSession session, Model model, String menuVideo, String menuName) {
 		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
 		MemberVO memberVO = new MemberVO(); 
 		memberVO = memberService.myPage(memberCode);
@@ -157,6 +163,9 @@ public class MemberController {
 		
 		memberVO.setUpdateTells(updateTells);
 		model.addAttribute("member",memberVO);
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		return  "member/update_member_info2";
 	}
 	//회원정보 수정하기
@@ -221,9 +230,12 @@ public class MemberController {
 	
 	//멤버 블랙리스트 관리페이지
 	@GetMapping("/goMemberBlacklist")
-	public String goMemberBlacklist(HttpSession session, Model model) {
+	public String goMemberBlacklist(HttpSession session, Model model, String menuVideo, String menuName) {
 		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
 		model.addAttribute("black",memberService.memberBlackList(memberCode));
+		model.addAttribute("menuList", menuService.selectMenu());
+		model.addAttribute("menuVideo", menuVideo);
+		model.addAttribute("menuName", menuName);
 		return  "member/member_blacklist";
 	}
 

@@ -10,6 +10,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/resources/template/css/top_menu.css">
 <script type="text/javascript" src="/resources/template/js/top_menu.js?ver=6"></script>
+<script type="text/javascript">
+(function($) {
+	selectMenu = function(menuPath, menuVideo, menuName){
+		var str = "?menuVideo="+menuVideo+"&menuName="+menuName
+		location.href = menuPath+str
+	};
+
+})(jQuery);
+</script>
 
 <style type="text/css">
 
@@ -30,28 +39,38 @@
 				<div class="sub_top">
 
 					<!-- 여기 조건 걸어서 페이지 클릭 할때마다 다른 값이 들어 가야됨(매치면 매치, 공지사항이면 공지사항 등) -->
-					<h2>고객센터</h2>
+					<h2>${menuName }</h2>
 
 					<!-- 페이지 선택시 동영상 변경					 -->
+					<c:if test="${menuVideo == 'video1'}">
 					<video id="video01" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title="">
 						<source src="/resources/img/common/tmv01.mp4" type="video/mp4">
 					</video>
+					</c:if>
 
-<!-- 					<video id="video02" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title=""> -->
-<!-- 						<source src="/resources/img/common/tmv02.mp4" type="video/mp4"> -->
-<!-- 					</video> -->
+					<c:if test="${menuVideo eq 'video2' }">
+					<video id="video02" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title="">
+						<source src="/resources/img/common/tmv02.mp4" type="video/mp4">
+					</video>
+					</c:if>
 
-<!-- 					<video id="video03" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title=""> -->
-<!-- 						<source src="/resources/img/common/tmv03.mp4" type="video/mp4"> -->
-<!-- 					</video> -->
+					<c:if test="${menuVideo eq 'video3' }">
+					<video id="video03" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title="">
+						<source src="/resources/img/common/tmv03.mp4" type="video/mp4">
+					</video>
+					</c:if>
 
-<!-- 					<video id="video04" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title=""> -->
-<!-- 						<source src="/resources/img/common/tmv04.mp4" type="video/mp4"> -->
-<!-- 					</video> -->
+					<c:if test="${menuVideo eq 'video4' }">
+					<video id="video04" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title="">
+						<source src="/resources/img/common/tmv04.mp4" type="video/mp4">
+					</video>
+					</c:if>
 
-<!-- 					<video id="video05" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title=""> -->
-<!-- 						<source src="/resources/img/common/tmv05.mp4" type="video/mp4"> -->
-<!-- 					</video> -->
+					<c:if test="${menuVideo eq 'video5' }">
+					<video id="video05" autoplay="" playsinline="" muted="" loop="" height="460" width="100%" title="">
+						<source src="/resources/img/common/tmv05.mp4" type="video/mp4">
+					</video>
+					</c:if>
 
 				</div>
 
@@ -70,13 +89,16 @@
 					<!-- 온클릭으로 데이터 넘겨서 비디오와 고객샌터 글자 자리 바꾸고 싶다 -->
 					<ul>
 						<li><a href="/"><span class="hide"><img src="/resources/img/common/bg1.png" width="130%" height="" style="margin-top: -75px;"></span></a></li>
-						<li><a href="/match/matchList" onclick="topMenuVideo(tmv01);">매치 신청</a></li>
-						<li><a href="/mercenary/recruit">용병 구인</a></li>
-						<li><a href="/team/teamInfo">나의 팀</a></li>
-						<li><a href="/team/goRegTeam">팀 생성</a></li>
-						<li><a href="/team/selectTeamList">팀 목록</a></li>
-						<li><a href="/board/goNoticeList">공지 사항</a></li>
-						<li><a href="/board/goFreeList">자유 게시판</a></li>
+						<c:forEach items="${menuList }" var="menuList">
+						<li><a href="javascript:void(0)" onclick="selectMenu('${menuList.menuPath }', '${menuList.menuVideo }', '${menuList.menuName }')">${menuList.menuName }</a></li>
+						</c:forEach>
+<!-- 						<li><a href="/match/matchList" onclick="topMenuVideo(tmv01);">매치 신청</a></li> -->
+<!-- 						<li><a href="/mercenary/recruit">용병 구인</a></li> -->
+<!-- 						<li><a href="/team/teamInfo">나의 팀</a></li> -->
+<!-- 						<li><a href="/team/goRegTeam">팀 생성</a></li> -->
+<!-- 						<li><a href="/team/selectTeamList">팀 목록</a></li> -->
+<!-- 						<li><a href="/board/goNoticeList">공지 사항</a></li> -->
+<!-- 						<li><a href="/board/goFreeList">자유 게시판</a></li> -->
 					</ul>
 
 				</div>
