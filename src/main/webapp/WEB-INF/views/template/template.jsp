@@ -22,6 +22,7 @@
 <style type="text/css">
 body {
 	font-family: 'S-CoreDream-5Medium';
+	
 }
 
 .bottom1 {
