@@ -14,6 +14,9 @@ table {
 </head>
 <body>
 	<div>
+	
+	
+	지난 경기=======================
 		<table class="table table-striped">
  		<colgroup>
 			<col width="*">
@@ -23,7 +26,7 @@ table {
 		</colgroup>
 	  <thead>
 	    <tr>
-	      <th scope="col">경기 결과</th>
+	      <th scope="col">경기 결과(날짜 / 시간)</th>
 	      <th scope="col" colspan="2">HOME TEAM</th>
 	      <th scope="col"></th>
 	      <th scope="col" colspan="2">AWAY TEAM</th>
@@ -32,7 +35,7 @@ table {
 	  <tbody>
 	  	<c:forEach items="${matchAfterManage }" var="afterMatch">
 	    <tr>
-	      <th scope="row">${afterMatch.matchDate }  ${afterMatch.matchStartTime} ${afterMatch.matchEndTime}</th>
+	      <th scope="row">${afterMatch.matchDate } / ${afterMatch.matchStartTime} ~ ${afterMatch.matchEndTime}</th>
 	      <td>${afterMatch.homeTeamName}</td>
 	      <td>${afterMatch.matchResultHometeamScore }</td>
 	      <td>:</td>
@@ -44,6 +47,10 @@ table {
 	</table>
 	</div>
 	<div>
+	
+	
+	
+	경기 예정===================
 	<table class="table table-striped">
  		<colgroup>
 			<col width="*">

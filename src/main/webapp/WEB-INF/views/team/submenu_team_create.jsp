@@ -29,7 +29,7 @@
 
 
 
-			<div class="row  justify-content-center">
+			<div class="row justify-content-center">
 
 				<div class="col-8 p-3 shadow-lg p-3 mb-5 bg-body rounded">
 

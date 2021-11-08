@@ -21,7 +21,6 @@
 
 <style type="text/css">
 .l_side1 {
-	
 }
 
 body {
@@ -35,9 +34,10 @@ body {
 }
 
 .menu1 {
-	height: 30rem;
+	height: 36rem;
 }
 </style>
+
 
 
 </head>

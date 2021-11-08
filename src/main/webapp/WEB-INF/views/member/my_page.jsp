@@ -38,6 +38,10 @@
 					선수 소개 <span style="display: inline-block; float: right;"><button type="button" class="btn link-danger" data-bs-toggle="modal" data-bs-target="#deleteMemberModal">회원탈퇴</button></span>
 				</h2>
 			</div>
+			
+			
+			
+			
 			<section class="about-me-section p-3 p-lg-5 theme-bg-light">
 				<div class="container">
 					<div class="profile-teaser row">
@@ -70,6 +74,9 @@
 					</div>
 				</div>
 			</section>
+			
+			
+			
 			<div class="col mx-5 mt-5">
 				<h2 style="border-bottom: 3px solid gray;">나의 최신 게시글</h2>
 			</div>
