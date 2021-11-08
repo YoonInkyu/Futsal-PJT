@@ -133,6 +133,7 @@ public class TeamController {
 		public String teamDelete(HttpSession session, String menuVideo) {
 			String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 			teamService.deleteTeam(teamCode);
+			session.setAttribute("loginInfo", memberService.selectMemberInfo(((MemberVO)session.getAttribute("loginInfo")).getMemberCode()));
 			return "redirect:/team/selectTeamList";
 		}
 	
@@ -171,11 +172,7 @@ public class TeamController {
 		TeamLogoImgVO teamLogoImg = new TeamLogoImgVO();
 		teamLogoImg.setTeamCode(selectTeamCode);
 		teamLogoImg.setTeamLogoImgOrignName(file.getOriginalFilename());
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(teamLogoImg.getTeamLogoImgOrignName());
 		teamLogoImg.setTeamLogoImgAttachedName(teamLogoImgAttachedName);
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(teamLogoImg.getTeamLogoImgAttachedName());
 		
 		// 팀코드 VO에 입력
 		teamVO.setTeamCode(selectTeamCode);
@@ -228,7 +225,7 @@ public class TeamController {
 		model.addAttribute("teamAdmin",teamAdmin);
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video3");
-		model.addAttribute("menuName", "나의팀 > 팀 관리");
+		model.addAttribute("menuName", "나의팀");
 		return "myTeamLayout/team/submenu_team_manage";
 	}
 	
@@ -240,7 +237,7 @@ public class TeamController {
 		model.addAttribute("teamAdmin",teamAdmin);
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video3");
-		model.addAttribute("menuName", "나의팀 > 팀 관리");
+		model.addAttribute("menuName", "나의팀");
 		return "logPage/team/team_member_detail";
 	}
 	
@@ -262,7 +259,7 @@ public class TeamController {
 		teamService.teamApplyApproval(teamVO);
 		model.addAttribute("msg", "가입이 승인되었습니다..");
 		model.addAttribute("url", "selectTeamMemberManage");
-
+		
 		
 		return "team/alert";
 	}
@@ -305,7 +302,7 @@ public class TeamController {
 		model.addAttribute("matchBeforeManage", teamService.myBeforeMatchManage(teamCode));
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video3");
-		model.addAttribute("menuName", "나의 팀 > 매치 관리");
+		model.addAttribute("menuName", "나의 팀");
 		return "myTeamLayout/team/myTeam_match_manage";
 	}
 	
