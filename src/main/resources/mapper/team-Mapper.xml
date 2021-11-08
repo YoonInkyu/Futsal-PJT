@@ -103,8 +103,8 @@
 		INSERT INTO TEAM_LOGO_IMG
 		VALUES(
 			(SELECT 'TEAM_IMG_' || LPAD(NVL(MAX(TO_NUMBER(SUBSTR(TEAM_LOGO_IMG_CODE, 10, 3))), 0)+1, 3, '0') FROM TEAM_LOGO_IMG)
-			, #{teamLogoImgAttachedName}
 			, #{teamLogoImgOrignName}
+			, #{teamLogoImgAttachedName}
 			, #{teamCode}
 		)
 	</insert>
