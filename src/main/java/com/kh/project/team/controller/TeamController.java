@@ -37,8 +37,18 @@ public class TeamController {
 	
 	// 팀생성 페이지로 이동
 	@GetMapping("/goRegTeam")
-	public String goRegTeam() {
-		return "team/submenu_team_create";
+	public String goRegTeam(HttpSession session, Model model) {
+		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		if(teamCode == null) {
+			return "team/submenu_team_create";
+		}
+		else {
+			model.addAttribute("msg", "이미 팀이있습니다.");
+			model.addAttribute("url", "/mainPage/main_page");
+
+			return "team/alert"; 
+		}
+			
 	} 
 	// 팀삭제 페이지로 이동
 	@GetMapping("/goTeamDelete")
@@ -187,15 +197,19 @@ public class TeamController {
 	@GetMapping("/selectTeamMemberManage")
 	public String selectTeamMemberManage(HttpSession session, Model model) {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		String teamAdmin = ((MemberVO)session.getAttribute("loginInfo")).getTeamAdmin();
 		model.addAttribute("memberList",teamService.selectTeamMemberManage(teamCode));
 		model.addAttribute("applyMember",teamService.selectApplyMember(teamCode));
+		model.addAttribute("teamAdmin",teamAdmin);
 		return "myTeamLayout/team/submenu_team_manage";
 	}
 	
 	// 팀관리 -> 팀원조회 -> 팀원상세 조회
 	@GetMapping("/teamMemberDetail")
-	public String teamMemberDetail(String memberCode, Model model) {
+	public String teamMemberDetail(String memberCode, Model model, HttpSession session) {
+		String teamAdmin = ((MemberVO)session.getAttribute("loginInfo")).getTeamAdmin();
 		model.addAttribute("memberDetail",teamService.selectTeamMemberDetail(memberCode));
+		model.addAttribute("teamAdmin",teamAdmin);
 		return "logPage/team/team_member_detail";
 	}
 	
@@ -255,10 +269,12 @@ public class TeamController {
 	}
 	
 	// 매치관리 페이지 이동
-	@GetMapping("/matchManage")
-	public String matchManage() {
-		
-		return "team/";
+	@GetMapping("/myMatchManage")
+	public String myMatchManage(HttpSession session, Model model) {
+		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		model.addAttribute("matchAfterManage", teamService.myAfterMatchManage(teamCode));
+		model.addAttribute("matchBeforeManage", teamService.myBeforeMatchManage(teamCode));
+		return "myTeamLayout/team/myTeam_match_manage";
 	}
 	
 	

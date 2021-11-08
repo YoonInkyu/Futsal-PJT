@@ -84,58 +84,59 @@
 										</div>
 									</div>
 								</div>
-								
-								<div class="accordion-item">
-									<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-										<button class="accordion-button collapsed" type="button"
-											data-bs-toggle="collapse"
-											data-bs-target="#panelsStayOpen-collapseTwo"
-											aria-expanded="false"
-											aria-controls="panelsStayOpen-collapseTwo">
-											<img src="/resources/img/common/2.png" width="10%"> 가입
-											요청 대기 리스트
-										</button>
-									</h2>
-
-									<div id="panelsStayOpen-collapseTwo"
-										class="accordion-collapse collapse"
-										aria-labelledby="panelsStayOpen-headingTwo">
-										<div class="accordion-body">
-											<div class="row">
-												<table class="table table-striped table-hover text-center">
-													<thead>
-														<tr>
-															<th scope="col" width="20%">가입 요청</th>
-															<th scope="col" width="20%">사진</th>
-															<th scope="col" width="20%">이름</th>
-															<th scope="col" width="20%">포지션</th>
-															<th scope="col" width="20%">상세 정보</th>
-														</tr>
-													</thead>
-													<tbody>
-														<c:forEach items="${applyMember }" var="applyMember">
-																<tr>
-																	<td>
-																		<img src="/resources/img/member/${applyMember.memberImgAttachedName }" width="30%">
-																	</td>
-																	<td>${applyMember.memberName }</td>
-																	<td>${applyMember.memberCode }</td>
-																	<td>${applyMember.position }</td>
-																	<td>${applyMember.memberGender }</td>
-																	<td>${applyMember.memberTell }</td>
-																	<td>
-																	<td>
-																		<button type="button" class="btn btn-primary" onclick="location.href='teamApplyApproval?memberCode=${applyMember.memberCode}'">승인</button>
-																		<button type="button" class="btn btn-danger" onclick="location.href='teamApplyReject?memberCode=${applyMember.memberCode}'">거절</button>
-																	</td>
-																</tr>
-														</c:forEach>
-													</tbody>
-												</table>
+								<c:if test="${teamAdmin eq '3' }">
+									<div class="accordion-item">
+										<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+											<button class="accordion-button collapsed" type="button"
+												data-bs-toggle="collapse"
+												data-bs-target="#panelsStayOpen-collapseTwo"
+												aria-expanded="false"
+												aria-controls="panelsStayOpen-collapseTwo">
+												<img src="/resources/img/common/2.png" width="10%"> 가입
+												요청 대기 리스트
+											</button>
+										</h2>
+	
+										<div id="panelsStayOpen-collapseTwo"
+											class="accordion-collapse collapse"
+											aria-labelledby="panelsStayOpen-headingTwo">
+											<div class="accordion-body">
+												<div class="row">
+													<table class="table table-striped table-hover text-center">
+														<thead>
+															<tr>
+																<th scope="col" width="20%">가입 요청</th>
+																<th scope="col" width="20%">사진</th>
+																<th scope="col" width="20%">이름</th>
+																<th scope="col" width="20%">포지션</th>
+																<th scope="col" width="20%">상세 정보</th>
+															</tr>
+														</thead>
+														<tbody>
+															<c:forEach items="${applyMember }" var="applyMember">
+																	<tr>
+																		<td>
+																			<img src="/resources/img/member/${applyMember.memberImgAttachedName }" width="30%">
+																		</td>
+																		<td>${applyMember.memberName }</td>
+																		<td>${applyMember.memberCode }</td>
+																		<td>${applyMember.position }</td>
+																		<td>${applyMember.memberGender }</td>
+																		<td>${applyMember.memberTell }</td>
+																		<td>
+																		<td>
+																			<button type="button" class="btn btn-primary" onclick="location.href='teamApplyApproval?memberCode=${applyMember.memberCode}'">승인</button>
+																			<button type="button" class="btn btn-danger" onclick="location.href='teamApplyReject?memberCode=${applyMember.memberCode}'">거절</button>
+																		</td>
+																	</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
+								</c:if>
 							</div>
 						</div>
 					</div>

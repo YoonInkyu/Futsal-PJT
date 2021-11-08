@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import com.kh.project.member.vo.MemberVO;
 import com.kh.project.team.vo.TeamApplyVO;
 import com.kh.project.team.vo.TeamLogoImgVO;
+import com.kh.project.team.vo.TeamMatchVO;
 import com.kh.project.team.vo.TeamVO;
 
 public interface TeamService {
@@ -64,7 +65,10 @@ public interface TeamService {
 	// 팀이름 중복확인
 	boolean checkTeamName(String teamName);
 	
-	
+	// My팀 매치 경기전 일정 관리
+	List<TeamMatchVO> myBeforeMatchManage(String teamCode);
+	// My팀 매치 경기 결과 관리
+	List<TeamMatchVO> myAfterMatchManage(String teamCode);
 	
 	
 }

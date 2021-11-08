@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import com.kh.project.member.vo.MemberVO;
 import com.kh.project.team.vo.TeamApplyVO;
 import com.kh.project.team.vo.TeamLogoImgVO;
+import com.kh.project.team.vo.TeamMatchVO;
 import com.kh.project.team.vo.TeamVO;
 
 
@@ -126,6 +127,17 @@ public class TeamServiceImpl implements TeamService{
 	public boolean checkTeamName(String teamName) {
 		String result = sqlSession.selectOne("teamMapper.checkTeamName", teamName);
 		return result == null ? true : false;
+	}
+	
+	// My팀 매치 경기전 일정
+	@Override
+	public List<TeamMatchVO> myBeforeMatchManage(String teamCode) {
+		return sqlSession.selectList("teamMapper.myBeforeMatchManage", teamCode);
+	}
+	// My팀 매치 경기 후 결과
+	@Override
+	public List<TeamMatchVO> myAfterMatchManage(String teamCode) {
+		return sqlSession.selectList("teamMapper.myAfterMatchManage", teamCode);
 	}
 
 

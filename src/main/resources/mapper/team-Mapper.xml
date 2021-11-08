@@ -46,6 +46,19 @@
 		<result column="MEMBER_CODE" 					property="memberCode"/>
 		<result column="APPLY_SORT" 					property="applySort"/>
 	</resultMap>
+	
+	<resultMap type="com.kh.project.team.vo.TeamMatchVO" id="MyTeamMatchManage">
+		<id column="MATCH_CODE" 							property="matchCode"/>
+		<result column="HOME_TEAM_NAME" 					property="homeTeamName" />	
+		<result column="AWAY_TEAM_NAME" 					property="awayTeamName" />	
+		<result column="MATCH_RESULT_HOMETEAM_SCORE" 		property="matchResultHometeamScore"/>
+		<result column="MATCH_RESULT_AWAYTEAM_SCORE" 		property="matchResultAwayteamScore"/>
+		<result column="MATCH_DATE" 						property="matchDate"/>
+		<result column="MATCH_START_TIME" 					property="matchStartTime"/>
+		<result column="MATCH_END_TIME" 					property="matchEndTime"/>
+	</resultMap>
+	
+	
 
 	
 	<insert id="insertTeam">
@@ -257,6 +270,45 @@
 		SELECT TEAM_NAME
 		FROM TEAM 
 		WHERE TEAM_NAME = #{teamName}
+	</select>
+	
+	<!-- 팀 매치 경기결과 관리 -->
+	<select id="myAfterMatchManage" resultMap="MyTeamMatchManage">
+	SELECT MATCH.MATCH_CODE
+    , MATCH_WRITER AS HOME_TEAM_NAME
+    , (SELECT TEAM_NAME FROM TEAM WHERE TEAM.TEAM_CODE = MATCH_MANAGE.TEAM_CODE_AWAY AND MATCH_MANAGE.MATCH_MANAGE_RESPONSE = '수락') AS AWAY_TEAM_NAME
+    , MATCH_RESULT_HOMETEAM_SCORE
+    , MATCH_RESULT_AWAYTEAM_SCORE
+    , MATCH_DATE
+    , MATCH_START_TIME
+    , MATCH_END_TIME
+		FROM MATCH, MATCH_RESULT, MATCH_MANAGE
+		WHERE MATCH.MATCH_CODE = MATCH_RESULT.MATCH_CODE(+)
+		AND MATCH.MATCH_CODE = MATCH_MANAGE.MATCH_CODE
+		AND (MATCH.TEAM_CODE = #{teamCode} OR MATCH.TEAM_CODE_AWAY = #{teamCode})
+		AND MATCH.MATCH_POSSIBLE = '2'
+		AND MATCH_MANAGE.MATCH_MANAGE_RESPONSE = '수락'
+		AND MATCH_RESULT_HOMETEAM_SCORE IS NOT NULL
+		ORDER BY MATCH_CODE
+	</select>
+	<!-- 팀 매치 경기 전 일정 관리 -->
+	<select id="myBeforeMatchManage" resultMap="MyTeamMatchManage">
+	SELECT MATCH.MATCH_CODE
+    , MATCH_WRITER AS HOME_TEAM_NAME
+    , (SELECT TEAM_NAME FROM TEAM WHERE TEAM.TEAM_CODE = MATCH_MANAGE.TEAM_CODE_AWAY AND MATCH_MANAGE.MATCH_MANAGE_RESPONSE = '수락') AS AWAY_TEAM_NAME
+    , MATCH_RESULT_HOMETEAM_SCORE
+    , MATCH_RESULT_AWAYTEAM_SCORE
+    , MATCH_DATE
+    , MATCH_START_TIME
+    , MATCH_END_TIME
+		FROM MATCH, MATCH_RESULT, MATCH_MANAGE
+		WHERE MATCH.MATCH_CODE = MATCH_RESULT.MATCH_CODE(+)
+		AND MATCH.MATCH_CODE = MATCH_MANAGE.MATCH_CODE
+		AND (MATCH.TEAM_CODE = #{teamCode} OR MATCH.TEAM_CODE_AWAY = #{teamCode})
+		AND MATCH.MATCH_POSSIBLE = '2'
+		AND MATCH_MANAGE.MATCH_MANAGE_RESPONSE = '수락'
+		AND MATCH_RESULT_HOMETEAM_SCORE IS NULL
+		ORDER BY MATCH_CODE
 	</select>
 	
 </mapper>

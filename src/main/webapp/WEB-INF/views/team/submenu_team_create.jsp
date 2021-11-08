@@ -28,7 +28,7 @@
 					<!-- 사진 이미지, 고정 사이즈 적용 예정 -->
 					<div class="col-4">
 					<i class="bi bi-camera-fill"></i>
-						<img src="/resources/img/common/nonimg.png" id="preview" class="img-thumbnail" style="width: 46%;">
+						<img src="/resources/img/common/addImg.PNG" id="preview" class="img-thumbnail">
 					</div>
 
 					<div class="col-8">
