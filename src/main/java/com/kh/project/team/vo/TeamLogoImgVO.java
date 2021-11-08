@@ -5,7 +5,7 @@ package com.kh.project.team.vo;
 public class TeamLogoImgVO {
 	private String teamLogoImgCode;
 	private String teamLogoImgOrignName;
-	private String TeamLogoImgAttachedName;
+	private String teamLogoImgAttachedName;
 	private String teamCode;
 	
 	public String getTeamLogoImgCode() {
@@ -21,10 +21,10 @@ public class TeamLogoImgVO {
 		this.teamLogoImgOrignName = teamLogoImgOrignName;
 	}
 	public String getTeamLogoImgAttachedName() {
-		return TeamLogoImgAttachedName;
+		return teamLogoImgAttachedName;
 	}
 	public void setTeamLogoImgAttachedName(String teamLogoImgAttachedName) {
-		TeamLogoImgAttachedName = teamLogoImgAttachedName;
+		this.teamLogoImgAttachedName = teamLogoImgAttachedName;
 	}
 	public String getTeamCode() {
 		return teamCode;

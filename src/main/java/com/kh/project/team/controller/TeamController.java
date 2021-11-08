@@ -174,7 +174,11 @@ public class TeamController {
 		TeamLogoImgVO teamLogoImg = new TeamLogoImgVO();
 		teamLogoImg.setTeamCode(selectTeamCode);
 		teamLogoImg.setTeamLogoImgOrignName(file.getOriginalFilename());
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(teamLogoImg.getTeamLogoImgOrignName());
 		teamLogoImg.setTeamLogoImgAttachedName(teamLogoImgAttachedName);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(teamLogoImg.getTeamLogoImgAttachedName());
 		
 		// 팀코드 VO에 입력
 		teamVO.setTeamCode(selectTeamCode);
@@ -245,12 +249,10 @@ public class TeamController {
 	
 	// 팀가입 신청
 	@GetMapping("/insertTeamApply")
-	public String insertTeamApply(TeamApplyVO teamApplyVO, Model model) {
+	public String insertTeamApply(TeamApplyVO teamApplyVO, Model model, HttpSession session) {
 		
-		teamService.insertTeamApply(teamApplyVO);
-		model.addAttribute("msg", "가입신청이 완료되었습니다.");
-		model.addAttribute("url", "selectTeamList");
-		return "team/alert";
+		 teamService.insertTeamApply(teamApplyVO);
+	      return "redirect:/team/selectTeamList";
 	}
 	// 팀가입 승인
 	@GetMapping("/teamApplyApproval")

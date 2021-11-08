@@ -62,7 +62,7 @@ $(document).ready(function() {
 	<table>
 		<tr class="a">
 			<td class="aa">
-				<img alt="" src="/resources/img/team/${myTeam.teamLogoImgOrignName }">
+				<img alt="" src="/resources/img/team/${myTeam.teamLogoImgAttachedName }">
 			</td> 
 		</tr>
 		<tr class="b">
