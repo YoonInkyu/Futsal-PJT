@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -76,6 +77,9 @@ $(document).ready(function() {
 			<td class="ee">${myTeam.teamName }</td>
 		</tr>
 	</table>
+
+
+
 
 
 <input type="button" value="수정" id="change">

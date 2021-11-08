@@ -44,7 +44,7 @@ public class TeamController {
 		}
 		else {
 			model.addAttribute("msg", "이미 팀이있습니다.");
-			model.addAttribute("url", "/mainPage/main_page");
+			model.addAttribute("url", "selectTeamList");
 
 			return "team/alert"; 
 		}
