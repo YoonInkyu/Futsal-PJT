@@ -152,7 +152,7 @@
 	<!-- 게시글 수 -->
 	<select id="selectMercCnt" resultType="int">
 		SELECT COUNT(MERC_BOARD_CODE)
-		FROM MERCENARY_BOARD MB, MEMBER M
+		FROM MERCENARY_BOARD
 		WHERE 1 = 1
         <if test="searchSort != null and !searchSort.equals('')">
        	 	AND MERC_BOARD_SORT = '${searchSort}'
@@ -164,7 +164,7 @@
         	AND MERC_BOARD_POSSIBLE = '${searchKeyword}'
         </if>
         <if test="searchValue != null and !searchValue.equals('')">
-       		AND MEMBER_ID LIKE '%'||#{searchValue}||'%'
+       		AND MERC_BOARD_WRITER LIKE '%'||#{searchValue}||'%'
         </if>
 	</select>
 	

@@ -125,7 +125,7 @@
 								</select>
 							</div>
 							<div class="col">
-								<input class="form-control" type="search" placeholder="작성팀 검색" aria-label="Search" name="searchValue" value="${mercenaryVO.searchValue }">
+								<input class="form-control" type="search" placeholder="작성자 검색" aria-label="Search" name="searchValue" value="${mercenaryVO.searchValue }">
 							</div>
 							<div class="col-1">
 								<button class="btn btn-primary " type="submit">Search</button>
@@ -135,25 +135,31 @@
 				</div>
 			</div>
 			<!-- 페이징 처리 -->
-			<div class="row mt-5">
-				<div class="col">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">
-							<c:if test="${mercenaryVO.prev eq true}">
-								<li class="page-item"><a class="page-link" href="/mercenary/recruit?nowPage=${mercenaryVO.beginPage - 1 }">Prev</a></li>
-							</c:if>
-							<c:forEach begin="${mercenaryVO.beginPage }" end="${mercenaryVO.endPage }" var="pageNumber">
-								<li class="page-item <c:if test="${mercenaryVO.nowPage == pageNumber }">active</c:if>">
-									<!-- 여기 href 수정 --> <a class="page-link" href="/mercenary/recruit?nowPage=${pageNumber }&searchLocation=${mercenaryVO.searchLocation}&searchKeyword=${mercenaryVO.searchKeyword}&searchValue=${mercenaryVO.searchValue}">${pageNumber }</a>
+			<c:if test="${mercenaryVO.totalCnt != 0}">
+				<div class="row mt-5">
+					<div class="col">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination justify-content-center">
+								<li class="page-item <c:if test="${!matchVO.prev }">disabled</c:if>">
+									<a class="page-link" href="/mercenary/recruit?nowPage=${mercenaryVO.beginPage - 1 }">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
 								</li>
-							</c:forEach>
-							<c:if test="${mercenaryVO.next eq true}">
-								<li class="page-item"><a class="page-link" href="/mercenary/recruit?nowPage=${mercenaryVO.endPage + 1 }">Next</a></li>
-							</c:if>
-						</ul>
-					</nav>
+								<c:forEach begin="${mercenaryVO.beginPage }" end="${mercenaryVO.endPage }" var="pageNumber">
+									<li class="page-item <c:if test="${mercenaryVO.nowPage == pageNumber }">active</c:if>">
+										<a class="page-link" href="/mercenary/recruit?nowPage=${pageNumber }&searchLocation=${mercenaryVO.searchLocation}&searchKeyword=${mercenaryVO.searchKeyword}&searchValue=${mercenaryVO.searchValue}">${pageNumber }</a>
+									</li>
+								</c:forEach>
+								<li class="page-item <c:if test="${!mercenaryVO.next }">disabled</c:if>">
+									<a class="page-link" href="/mercenary/recruit?nowPage=${mercenaryVO.endPage + 1 }">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
 				</div>
-			</div>
+			</c:if>
 		</div>
 	</div>
 	<!-- js파일 새로 만들어서 넣어야 함. -->

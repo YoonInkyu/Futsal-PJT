@@ -108,25 +108,31 @@
 			</div>
 		</div>
 		<!-- 페이징 처리 -->
-		<div class="row mt-5">
-			<div class="col">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-						<c:if test="${matchVO.prev eq true}">
-							<li class="page-item"><a class="page-link" href="/match/matchList?nowPage=${matchVO.beginPage - 1 }">Prev</a></li>
-						</c:if>
-						<c:forEach begin="${matchVO.beginPage }" end="${matchVO.endPage }" var="pageNumber">
-							<li class="page-item <c:if test="${matchVO.nowPage == pageNumber }">active</c:if>">
-								<!-- 여기 href 수정 --> <a class="page-link" href="/match/matchList?nowPage=${pageNumber }&searchLocation=${matchVO.searchLocation}&searchKeyword=${matchVO.searchKeyword}&searchValue=${matchVO.searchValue}">${pageNumber }</a>
+		<c:if test="${matchVO.totalCnt != 0}">
+			<div class="row mt-5">
+				<div class="col">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<li class="page-item <c:if test="${!matchVO.prev }">disabled</c:if>">
+								<a class="page-link" href="/match/matchList?nowPage=${matchVO.beginPage - 1 }">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
 							</li>
-						</c:forEach>
-						<c:if test="${matchVO.next eq true}">
-							<li class="page-item"><a class="page-link" href="/match/matchList?nowPage=${matchVO.endPage + 1 }">Next</a></li>
-						</c:if>
-					</ul>
-				</nav>
+							<c:forEach begin="${matchVO.beginPage }" end="${matchVO.endPage }" var="pageNumber">
+								<li class="page-item <c:if test="${matchVO.nowPage == pageNumber }">active</c:if>">
+									<a class="page-link" href="/match/matchList?nowPage=${pageNumber }&searchLocation=${matchVO.searchLocation}&searchKeyword=${matchVO.searchKeyword}&searchValue=${matchVO.searchValue}">${pageNumber }</a>
+								</li>
+							</c:forEach>
+							<li class="page-item <c:if test="${!matchVO.next }">disabled</c:if>">
+								<a class="page-link" href="/match/matchList?nowPage=${matchVO.endPage + 1 }">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
 			</div>
-		</div>
+		</c:if>
 	</div>
 	<!-- js파일 새로 만들어서 넣어야 함. -->
 	<script type="text/javascript">
