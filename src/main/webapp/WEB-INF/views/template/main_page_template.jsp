@@ -47,7 +47,7 @@
 
 				<li><a href="/mercenary/recruit"><span>MERCENARIES</span><span class="ov">용병 구인</span></a></li>
 
-				<li><a href="/team/selectTeamMemberManage"><span>MY TEAM</span><span class="ov">나의 팀</span></a></li>
+				<li><a href="/team/teamInfo"><span>MY TEAM</span><span class="ov">나의 팀</span></a></li>
 
 				<li><a href="/team/goRegTeam"><span>FORMATION</span><span class="ov">팀 생성</span></a></li>
 

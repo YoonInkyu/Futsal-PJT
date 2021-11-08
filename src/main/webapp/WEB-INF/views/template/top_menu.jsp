@@ -72,7 +72,7 @@
 						<li><a href="/"><span class="hide"><img src="/resources/img/common/bg1.png" width="130%" height="" style="margin-top: -75px;"></span></a></li>
 						<li><a href="/match/matchList" onclick="topMenuVideo(tmv01);">매치 신청</a></li>
 						<li><a href="/mercenary/recruit">용병 구인</a></li>
-						<li><a href="/team/selectTeamMemberManage">나의 팀</a></li>
+						<li><a href="/team/teamInfo">나의 팀</a></li>
 						<li><a href="/team/goRegTeam">팀 생성</a></li>
 						<li><a href="/team/selectTeamList">팀 목록</a></li>
 						<li><a href="/board/goNoticeList">공지 사항</a></li>
