@@ -108,7 +108,7 @@ public class MercenaryController {
 	@ResponseBody
 	@PostMapping("/recruitDetailAjax")
 	public MercenaryVO recruitDetailAjax(String mercBoardCode) {
-		//상세보기 데이터 ajax reusult 값으로 넘김
+		//상세보기 데이터 ajax에 reusult 값으로 넘김
 		return mercenaryService.selectMercDetail(mercBoardCode);
 	}
 	//상세보기 수정
