@@ -221,12 +221,20 @@ public class TeamController {
 	
 	// 팀가입 신청
 	@GetMapping("/insertTeamApply")
-	public String insertTeamApply(TeamApplyVO teamApplyVO, Model model) {
-		
-		teamService.insertTeamApply(teamApplyVO);
-		model.addAttribute("msg", "가입신청이 완료되었습니다.");
-		model.addAttribute("url", "selectTeamList");
-		return "team/alert";
+	public String insertTeamApply(TeamApplyVO teamApplyVO, Model model, HttpSession session) {
+		String teamAdmin = ((MemberVO)session.getAttribute("loginInfo")).getTeamAdmin();
+		if(teamAdmin == null) {
+			teamService.insertTeamApply(teamApplyVO);
+			model.addAttribute("msg", "가입신청이 완료되었습니다.");
+			model.addAttribute("url", "selectTeamList");
+			return "team/alert";
+		}
+		else {
+			model.addAttribute("msg", "팀가입은 한곳만 가능합니다.");
+			model.addAttribute("url", "selectTeamList");
+					return "team/alert";
+		}
+			
 	}
 	// 팀가입 승인
 	@GetMapping("/teamApplyApproval")

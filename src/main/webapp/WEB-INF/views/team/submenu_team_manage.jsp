@@ -49,13 +49,13 @@
 												<tbody>
 													<c:forEach items="${memberList }" var="member" >
 														<tr>
-															<c:if test="${not empty member.memberImgAttachedName } }">
+															<c:if test="${not empty member.memberImgAttachedName }">
 															<td>
 																<img src="/resources/img/member/${member.memberImgAttachedName }"
 																width="30%">
 															</td>
 															</c:if>
-															<c:if test="${empty member.memberImgAttachedName } }">
+															<c:if test="${empty member.memberImgAttachedName }">
 															<td>
 																<img src="/resources/img/member/nullImg.png"
 																width="30%">
@@ -63,7 +63,7 @@
 															</c:if>
 															<td>${member.memberName }</td>
 															<td>${member.position }</td>
-															<td>${member.memberCode }</td>
+															<%-- <td>${member.memberCode }</td> --%>
 															<td>
 															<!-- Button trigger modal -->
 															<button type="button" class="btn btn-primary"
@@ -123,9 +123,18 @@
 														<tbody>
 															<c:forEach items="${applyMember }" var="applyMember">
 																	<tr>
-																		<td>
-																			<img src="/resources/img/member/${applyMember.memberImgAttachedName }" width="30%">
-																		</td>
+																		<c:if test="${not empty applyMember.memberImgAttachedName } }">
+															<td>
+																<img src="/resources/img/member/${applyMember.memberImgAttachedName }"
+																width="30%">
+															</td>
+															</c:if>
+															<c:if test="${empty applyMember.memberImgAttachedName } }">
+															<td>
+																<img src="/resources/img/member/nullImg.png"
+																width="30%">
+															</td>
+															</c:if>
 																		<td>${applyMember.memberName }</td>
 																		<td>${applyMember.memberCode }</td>
 																		<td>${applyMember.position }</td>
