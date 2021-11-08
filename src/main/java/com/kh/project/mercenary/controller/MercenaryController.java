@@ -46,8 +46,8 @@ public class MercenaryController {
 			//구인구직 리스트 셀렉트
 			model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
 			model.addAttribute("menuList", menuService.selectMenu());
-			model.addAttribute("menuVideo", menuVideo);
-			model.addAttribute("menuName", menuName);
+			model.addAttribute("menuVideo", "video2");
+			model.addAttribute("menuName", "용병 구인");
 		}
 		else {
 			String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
@@ -60,8 +60,8 @@ public class MercenaryController {
 			mercenaryVO.setMemberCode(memberCode);
 			model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
 			model.addAttribute("menuList", menuService.selectMenu());
-			model.addAttribute("menuVideo", menuVideo);
-			model.addAttribute("menuName", menuName);
+			model.addAttribute("menuVideo", "video2");
+			model.addAttribute("menuName", "용병 구인");
 		}
 		return "mercenary/mercenary_recruit";
 	}
@@ -78,8 +78,8 @@ public class MercenaryController {
 			//구인구직 리스트 셀렉트
 			model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
 			model.addAttribute("menuList", menuService.selectMenu());
-			model.addAttribute("menuVideo", menuVideo);
-			model.addAttribute("menuName", menuName);
+			model.addAttribute("menuVideo", "video2");
+			model.addAttribute("menuName", "용병 구인");
 		}
 		else {
 			String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
@@ -92,8 +92,8 @@ public class MercenaryController {
 			mercenaryVO.setMemberCode(memberCode);
 			model.addAttribute("mercBoardList", mercenaryService.selectMercBoardList(mercenaryVO));
 			model.addAttribute("menuList", menuService.selectMenu());
-			model.addAttribute("menuVideo", menuVideo);
-			model.addAttribute("menuName", menuName);
+			model.addAttribute("menuVideo", "video2");
+			model.addAttribute("menuName", "용병 구인");
 		}
 		return "mercenary/mercenary_recruit";
 	}
@@ -147,8 +147,8 @@ public class MercenaryController {
 		model.addAttribute("today", CurrentDateTime.today());
 		model.addAttribute("time", CurrentDateTime.nowTime());
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video2");
+		model.addAttribute("menuName", "용병 구인");
 		return "mercenary/mercenary_recruit_regform";
 	}
 	//용병 구인구직 등록

@@ -39,8 +39,8 @@ public class MatchController {
 		matchVO.setPageInfo();
 		model.addAttribute("matchList", matchService.selectMatchList(matchVO));
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video1");
+		model.addAttribute("menuName", "매치 신청");
 		return "match/matchList";
 	}
 	//검색 조건 사용했을 때 리스트 조회
@@ -53,8 +53,8 @@ public class MatchController {
 		matchVO.setPageInfo();
 		model.addAttribute("matchList", matchService.selectMatchList(matchVO));
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video1");
+		model.addAttribute("menuName", "매치 신청");
 		return "match/matchList";
 	}
 	//매치 게시글 등록 폼으로 이동
@@ -77,8 +77,8 @@ public class MatchController {
 		model.addAttribute("today", CurrentDateTime.today());
 		model.addAttribute("time", CurrentDateTime.nowTime());
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video1");
+		model.addAttribute("menuName", "매치 신청");
 		//팀이 있는 경우 매치 등록 폼으로 이동
 		return "match/match_regForm";
 	}

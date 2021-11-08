@@ -146,8 +146,8 @@ public class MemberController {
 		model.addAttribute("MymercBoardList",mercenaryService.MyMercBoard(memberCode));
 		model.addAttribute("matchList", matchService.MyMatchList(teamCode));
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video3");
+		model.addAttribute("menuName", "마이 페이지");
 		
 		return  "member/my_page";
 	}
@@ -164,8 +164,8 @@ public class MemberController {
 		memberVO.setUpdateTells(updateTells);
 		model.addAttribute("member",memberVO);
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video3");
+		model.addAttribute("menuName", "마이 페이지");
 		return  "member/update_member_info2";
 	}
 	//회원정보 수정하기
@@ -234,8 +234,8 @@ public class MemberController {
 		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
 		model.addAttribute("black",memberService.memberBlackList(memberCode));
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video4");
+		model.addAttribute("menuName", "블랙 리스트");
 		return  "member/member_blacklist";
 	}
 

@@ -44,8 +44,8 @@ public class TeamController {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 		if(teamCode == null) {
 			model.addAttribute("menuList", menuService.selectMenu());
-			model.addAttribute("menuVideo", menuVideo);
-			model.addAttribute("menuName", menuName);
+			model.addAttribute("menuVideo", "video4");
+			model.addAttribute("menuName", "팀 생성");
 			return "team/submenu_team_create";
 		}
 		else {
@@ -81,8 +81,8 @@ public class TeamController {
 		}
 		model.addAttribute("myTeam", teamService.teamManage(teamCode));
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video3");
+		model.addAttribute("menuName", "나의 팀");
 		return "myTeamLayout/team/team_info";
 	} 
 	
@@ -130,12 +130,9 @@ public class TeamController {
 	
 	// 팀 삭제
 		@GetMapping("/deleteTeam")
-		public String teamDelete(HttpSession session, String menuVideo, String menuName, Model model) {
+		public String teamDelete(HttpSession session, String menuVideo) {
 			String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 			teamService.deleteTeam(teamCode);
-			model.addAttribute("menuList", menuService.selectMenu());
-			model.addAttribute("menuVideo", menuVideo);
-			model.addAttribute("menuName", menuName);
 			return "redirect:/team/selectTeamList";
 		}
 	
@@ -204,8 +201,8 @@ public class TeamController {
 	public String selectTeamList(Model model, TeamVO teamVO, String menuVideo, String menuName) {
 		model.addAttribute("teamList", teamService.selectTeamList(teamVO)); 
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video5");
+		model.addAttribute("menuName", "팀 목록");
 		return "team/submenu_team_list";
 	}
 	// 팀 리스트 조회 -> 상세보기
@@ -216,8 +213,8 @@ public class TeamController {
 		model.addAttribute("teamCode", teamCode);
 		model.addAttribute("memberCode", memberCode);
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video5");
+		model.addAttribute("menuName", "팀 목록");
 		return "logPage/team/team_detail";
 	}
 	
@@ -230,8 +227,8 @@ public class TeamController {
 		model.addAttribute("applyMember",teamService.selectApplyMember(teamCode));
 		model.addAttribute("teamAdmin",teamAdmin);
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video3");
+		model.addAttribute("menuName", "나의팀 > 팀 관리");
 		return "myTeamLayout/team/submenu_team_manage";
 	}
 	
@@ -242,8 +239,8 @@ public class TeamController {
 		model.addAttribute("memberDetail",teamService.selectTeamMemberDetail(memberCode));
 		model.addAttribute("teamAdmin",teamAdmin);
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video3");
+		model.addAttribute("menuName", "나의팀 > 팀 관리");
 		return "logPage/team/team_member_detail";
 	}
 	
@@ -307,8 +304,8 @@ public class TeamController {
 		model.addAttribute("matchAfterManage", teamService.myAfterMatchManage(teamCode));
 		model.addAttribute("matchBeforeManage", teamService.myBeforeMatchManage(teamCode));
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video3");
+		model.addAttribute("menuName", "나의 팀 > 매치 관리");
 		return "myTeamLayout/team/myTeam_match_manage";
 	}
 	

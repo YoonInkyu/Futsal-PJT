@@ -63,8 +63,8 @@ public class BoardController {
 
 		model.addAttribute("noticeList", boardNoticeService.selectBoardNoticeList(boardNoticeVO));
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video1");
+		model.addAttribute("menuName", "공지 사항");
 
 		return "board/board_notice_list";
 
@@ -89,8 +89,8 @@ public class BoardController {
 		boardNoticeService.updateReadCntNotice(boardNumNotice);
 		
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video1");
+		model.addAttribute("menuName", "공지 사항");
 
 		return "board/board_notice_detail";
 	}
@@ -102,8 +102,8 @@ public class BoardController {
 		model.addAttribute("nowDate", getNowDateToString());
 		
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video1");
+		model.addAttribute("menuName", "공지 사항");
 
 		return "board/board_notice_write_form";
 
@@ -197,8 +197,8 @@ public class BoardController {
 		model.addAttribute("noticeInfo", boardNoticeService.selectBoardNoticeDetail(boardNumNotice));
 		
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video1");
+		model.addAttribute("menuName", "공지 사항");
 
 		return "board/board_notice_update_form";
 
@@ -241,8 +241,8 @@ public class BoardController {
 		model.addAttribute("freeList", boardFreeService.selectBoardFreeList(boardFreeVO));
 		
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video2");
+		model.addAttribute("menuName", "자유 게시판");
 
 		return "board/board_free_list";
 	}
@@ -268,8 +268,8 @@ public class BoardController {
 		boardFreeService.updateReadCntFree(boardNumFree);
 		
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video2");
+		model.addAttribute("menuName", "자유 게시판");
 
 		return "board/board_free_detail";
 	}
@@ -281,8 +281,8 @@ public class BoardController {
 		model.addAttribute("nowDate", getNowDateToString());
 		
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video2");
+		model.addAttribute("menuName", "자유 게시판");
 
 		return "board/board_free_write_form";
 
@@ -377,8 +377,8 @@ public class BoardController {
 		model.addAttribute("freeInfo", boardFreeService.selectBoardFreeDetail(boardNumFree));
 		
 		model.addAttribute("menuList", menuService.selectMenu());
-		model.addAttribute("menuVideo", menuVideo);
-		model.addAttribute("menuName", menuName);
+		model.addAttribute("menuVideo", "video2");
+		model.addAttribute("menuName", "자유 게시판");
 
 		return "board/board_free_update_form";
 
