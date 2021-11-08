@@ -68,8 +68,6 @@ $(document).ready(function() {
 									<tr>
 										<th scope="col" width="20%">팀 마크</th>
 
-										<th scope="col" width="20%">랭 킹</th>
-
 										<th scope="col" width="20%">팀 이름</th>
 
 										<th scope="col" width="20%">인 원</th>
@@ -83,7 +81,6 @@ $(document).ready(function() {
 									<c:forEach items="${teamList }" var="teamList">
 									<tr>
 										<td><img src="/resources/img/team/${teamList.teamLogoImgOrignName }" width="30%"></td>
-										<td>${teamList.rankTotalScore }</td>
 										<td>${teamList.teamName }</td>
 										<td>${teamList.memberCount }</td>
 										<td>
