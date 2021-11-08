@@ -9,10 +9,11 @@ $(document).ready(function(){
        var teamCode =  $("#teamCodeInput").val(); 
        var MyTeamCode =  $("#myTeamCodeInput").val(); 
        
-       if(MyTeamCode != null){
-          alert('이미 팀이 있습니다.');
+       if(MyTeamCode != null && MyTeamCode != ''){
+    	   alert('이미 팀이 있습니다.');
        }
        else{
+    	   alert('가입신청이 되었습니다.');
           location.href='insertTeamApply?teamCode='+teamCode+'&memberCode='+memberCode;
        }
            

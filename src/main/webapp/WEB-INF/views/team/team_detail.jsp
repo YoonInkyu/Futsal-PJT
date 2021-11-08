@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/team/js/team_detail.js?ver=2"></script>
+<script type="text/javascript" src="/resources/team/js/team_detail.js?ver=16"></script>
 </head>
 <body>
 
