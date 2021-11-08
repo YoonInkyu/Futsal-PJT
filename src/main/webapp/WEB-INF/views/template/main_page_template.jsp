@@ -47,11 +47,11 @@
 
 				<li><a href="/mercenary/recruit"><span>MERCENARIES</span><span class="ov">용병 구인</span></a></li>
 
-				<li><a href="/team/selectTeamMemberManage"><span>TEAM</span><span class="ov">나의 팀</span></a></li>
+				<li><a href="/team/selectTeamMemberManage"><span>MY TEAM</span><span class="ov">나의 팀</span></a></li>
 
 				<li><a href="/team/goRegTeam"><span>FORMATION</span><span class="ov">팀 생성</span></a></li>
 
-				<li><a href="/team/selectTeamList"><span>LIST/RANKING</span><span class="ov">팀 목록/순위</span></a></li>
+				<li><a href="/team/selectTeamList"><span>TEAM LIST</span><span class="ov">팀 목록</span></a></li>
 
 				<li><a href="/board/goNoticeList"><span>NOTICE</span><span class="ov">공지사항</span></a></li>
 

@@ -136,11 +136,11 @@
 								<input type="password" class="form-control" id="memberPw" placeholder="Password" name="MemberPw" required> <label for="floatingPassword">새 비밀번호</label>
 								<div class="mt-2" id="pwJDiv" style="color: red; font-size: 12px; margin-top: 2px;"></div>
 							</div>
-							<div class="form-floating">
+							<div class="form-floating mb-5">
 								<input type="password" class="form-control" id="memberPwCheck" placeholder="Password" required> <label for="floatingPassword">새 비밀번호 확인</label>
 								<div class="mt-2" id="pwCheckDiv" style="color: red; font-size: 12px; margin-top: 2px;"></div>
 							</div>
-							<div class="col-12 d-grid mt-3">
+							<div class="col-12 d-grid my-3">
 								<input type="button" class="btn btn-outline-primary disabled" value="변 경 하 기" id="changePwButt">
 							</div>
 							<input type="hidden" value="${member.memberCode }" name="memberCode" id="memberCode">

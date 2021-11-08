@@ -182,9 +182,9 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">정말 탈퇴하시겠습니까?</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" onclick="location.href='/member/deleteMember'">Y E S</button>
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<div class="modal-footer d-flex justify-content-around">
+					<button style="width: 10rem;" type="button" class="btn btn-outline-danger" onclick="location.href='/member/deleteMember'">탈 퇴</button>
+					<button style="width: 10rem;" type="button" class="btn btn-primary" data-bs-dismiss="modal">취 소</button>
 				</div>
 			</div>
 		</div>

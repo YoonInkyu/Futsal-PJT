@@ -74,7 +74,7 @@
 						<li><a href="/mercenary/recruit">용병 구인</a></li>
 						<li><a href="/team/selectTeamMemberManage">나의 팀</a></li>
 						<li><a href="/team/goRegTeam">팀 생성</a></li>
-						<li><a href="/team/selectTeamList">팀 목록/랭킹</a></li>
+						<li><a href="/team/selectTeamList">팀 목록</a></li>
 						<li><a href="/board/goNoticeList">공지 사항</a></li>
 						<li><a href="/board/goFreeList">자유 게시판</a></li>
 					</ul>

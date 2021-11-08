@@ -30,10 +30,28 @@ $(document).ready(function(){
 		              		 
 		                  alert("사용가능한 팀이름입니다.");
 		                  $('#createTeam').remove()
-		                  str = '<button class="btn btn-primary col-2 mx-auto" id="createTeam" type="submit">팀 등록</button>'
+		                  
+		                  str = '<button style="width: 10rem;" class="btn btn-outline-primary" id="createTeam" type="submit">등 록</button>'
+		                	  
 		                  $('#buttonDiv').prepend(str)
 		              	 }
 		                  
+		   
+		              	 
+//		              	 영준씨 확인 하고 정리 부탁드립니다.
+
+//							<div class="d-flex justify-content-around" id="buttonDiv">
+//								<button style="width: 10rem;" class="btn btn-outline-primary" id="createTeam" type="submit" disabled>등 록</button>
+//								<button style="width: 10rem;" class="btn btn-danger" type="button">취 소</button>
+//							</div>
+
+		              	 
+		              	 
+		              	 
+		              	 
+		              	 
+		              	 
+		              	 
 		              }
 		          },
 		          error : function(error) {
