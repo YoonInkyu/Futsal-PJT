@@ -262,9 +262,7 @@
 	SET TEAM_CODE = NULL
 		, TEAM_ADMIN = '1'
 	WHERE MEMBER_CODE = #{memberCode}
-	
 	</update>
-	
 	<!-- 팀이름 중복체크 -->
 	<select id="checkTeamName" resultType="String">
 		SELECT TEAM_NAME
@@ -311,6 +309,7 @@
 		ORDER BY MATCH_CODE
 	</select>
 	
+
 </mapper>
 
 

@@ -58,15 +58,21 @@ public class TeamController {
 	
 	// My 팀 페이지 이동
 	@GetMapping("/submenuTeamManage") 
-	public String teamManage_admin() { 
-		return "myTeamLayout/team/submenu_team_manage";
+	public String teamManage_admin() {
+
+	return "myTeamLayout/team/submenu_team_manage";
+			
 	}
 	
 	//나의팀 -> (서브메뉴)팀정보 페이지 이동
 	@GetMapping("/teamInfo")
 	public String teamInfo(HttpSession session, Model model) {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
-		
+		if(teamCode == null) {
+			model.addAttribute("msg", "팀 가입후 이용가능합니다.");
+			model.addAttribute("url", "redirect:/templateLayout/main_page");
+			return "team/alert";
+		}
 		model.addAttribute("myTeam", teamService.teamManage(teamCode));
 		return "myTeamLayout/team/team_info";
 	} 
@@ -275,6 +281,17 @@ public class TeamController {
 		model.addAttribute("matchAfterManage", teamService.myAfterMatchManage(teamCode));
 		model.addAttribute("matchBeforeManage", teamService.myBeforeMatchManage(teamCode));
 		return "myTeamLayout/team/myTeam_match_manage";
+	}
+	
+	// 매치관리 페이지 이동
+	@GetMapping("/myTeamDelete")
+	public String myTeamDelete(HttpSession session) {
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+		TeamVO teamVO = new TeamVO();
+		teamVO.setMemberCode(memberCode);
+		teamService.teamMemberDelete(teamVO);
+		session.setAttribute("loginInfo", memberService.selectMemberInfo(memberCode));
+		return "redirect:/team/selectTeamList";
 	}
 	
 	
