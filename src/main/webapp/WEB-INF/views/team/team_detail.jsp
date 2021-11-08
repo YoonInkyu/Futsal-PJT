@@ -43,7 +43,12 @@
 						<c:forEach items="${teamDetail }" var="teamDetail">
 
 							<tr>
-								<td><img src="/resources/img/member/${teamDetail.memberImgAttachedName }"></td>
+								<c:if test="${not empty teamDetail.memberImgAttachedName  }">
+								<td><img width="30%;" src="/resources/img/member/${teamDetail.memberImgAttachedName }"></td>
+								</c:if>
+								<c:if test="${empty teamDetail.memberImgAttachedName  }">
+								<td><img width="30%;" src="/resources/img/member/nullImg.png"></td>
+								</c:if>
 								<td>${teamDetail.memberName }</td>
 								<td>${teamDetail.memberGender }</td>
 								<td>${teamDetail.memberTell }</td>

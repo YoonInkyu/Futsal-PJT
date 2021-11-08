@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/join.js?ver=1"></script>
+<script type="text/javascript" src="/resources/member/js/join.js?ver=2"></script>
 <style type="text/css">
 body {
 	background-image: url("/resources/img/common/main3.jpg");
@@ -104,15 +104,15 @@ body {
 									<label for="inputTell" class="form-label">연락처</label>
 
 									<div class="col">
-										<input type="text" class="form-control tells" id="tell1" name="tells">
+										<input type="text" class="form-control tells" id="tell1" name="tells" required>
 									</div>
 
 									<div class="col">
-										<input type="text" class="form-control tells" id="tell2" name="tells">
+										<input type="text" class="form-control tells" id="tell2" name="tells" required>
 									</div>
 
 									<div class="col">
-										<input type="text" class="form-control tells" id="tell3" name="tells">
+										<input type="text" class="form-control tells" id="tell3" name="tells" required>
 									</div>
 
 								</div>

@@ -251,7 +251,7 @@
 				<div class="modal-body">
 
 					<div class="form-floating">
-						<textarea class="form-control" placeholder="Leave a comment here" id="blackComment" style="height: 10rem;" required></textarea>
+						<textarea class="form-control" placeholder="Leave a comment here" id="blackComment" style="height: 10rem; resize: none;" required></textarea>
 						<label for="floatingTextarea2">사 유</label>
 					</div>
 

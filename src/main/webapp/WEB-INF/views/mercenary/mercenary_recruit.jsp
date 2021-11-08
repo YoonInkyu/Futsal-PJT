@@ -181,7 +181,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-floating">
-						<textarea class="form-control" placeholder="Leave a comment here" id="blackComment" style="height: 10rem"></textarea>
+						<textarea class="form-control" placeholder="Leave a comment here" id="blackComment" style="height: 10rem; resize: none;"></textarea>
 						<label for="floatingTextarea2" >사 유</label>
 
 						<div class="my-3" style="font-size: 13px; color: red;">블랙리스트 추가시 해당회원의 용병구인 게시글 및 신청 현황이 숨김 처리됩니다.</div>

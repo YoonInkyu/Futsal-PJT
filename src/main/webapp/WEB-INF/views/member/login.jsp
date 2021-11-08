@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="/resources/template/js/top_menu.js?ver=6"></script>
 <style type="text/css">
 a {
 	color: inherit;
@@ -36,18 +37,18 @@ body {
 							<a class="navbar-brand" href="/templateLayout/main_page"><img src="/resources/img/common/bg1.png" width="50%" height=""></a>
 						</div>
 
-						<form action="/member/login" method="post">
+						<form action="/member/login" method="post" id="loginForm">
 
 							<div class="col-12 mb-3">
-								<label for="inputId" class="form-label">아이디</label> <input type="text" class="form-control" id="inputId memberId" placeholder="아이디를 입력하세요!" name="memberId">
+								<label for="inputId" class="form-label">아이디</label> <input type="text" class="form-control" id="loginId" placeholder="아이디를 입력하세요!" name="memberId">
 							</div>
 
 							<div class="col-12 mb-3">
-								<label for="inputPw" class="form-label">비밀번호</label> <input type="password" class="form-control" id="inputPw memberPw" placeholder="비밀번호를 입력하세요!" name="memberPw">
+								<label for="inputPw" class="form-label">비밀번호</label> <input type="password" class="form-control" id="loginPw" placeholder="비밀번호를 입력하세요!" name="memberPw">
 							</div>
 
 							<div class="d-grid gap-2">
-								<input class="btn btn-primary my-3" type="submit" value="로그인">
+								<input class="btn btn-primary my-3" type="button" value="로그인" onclick="checkLogin();">
 							</div>
 
 							<div class="d-grid gap-2  my-3">
