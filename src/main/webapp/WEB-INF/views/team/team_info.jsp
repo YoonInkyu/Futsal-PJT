@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/team/js/team_info.js?ver=1"></script>
+<script type="text/javascript" src="/resources/team/js/team_info.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$(document).on('click', '#change', function() {
@@ -86,7 +86,6 @@ $(document).ready(function() {
 <input type="button" value="팀 수정" id="change">
 <input type="hidden" value="${myTeam.teamCode }" class="gg">
 <input type="button" value="팀 삭제" onclick="location.href='goTeamDelete'">
-<input type="button" value="팀 탈퇴" id="myTeamDelete">
 </c:if>
 <c:if test="${loginInfo.teamAdmin eq '2' }">
 <input type="button" value="팀 탈퇴" id="myTeamDelete">

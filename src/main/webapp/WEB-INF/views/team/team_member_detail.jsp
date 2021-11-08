@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 	<div class="modal-body">
 		<p>
-			<img src="/resources/img/common/${memberDetail.memberImgAttachedName }" width="30%">
+			<img src="/resources/img/member/${memberDetail.memberImgAttachedName }" width="30%">
 		</p>
 		<table>
 			<tr>

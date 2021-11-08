@@ -49,10 +49,18 @@
 												<tbody>
 													<c:forEach items="${memberList }" var="member" >
 														<tr>
+															<c:if test="${not empty member.memberImgAttachedName } }">
 															<td>
 																<img src="/resources/img/member/${member.memberImgAttachedName }"
 																width="30%">
 															</td>
+															</c:if>
+															<c:if test="${empty member.memberImgAttachedName } }">
+															<td>
+																<img src="/resources/img/member/nullImg.png"
+																width="30%">
+															</td>
+															</c:if>
 															<td>${member.memberName }</td>
 															<td>${member.position }</td>
 															<td>${member.memberCode }</td>
