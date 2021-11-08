@@ -204,6 +204,7 @@
 		FROM MATCH MC, TEAM T, MEMBER M
 		WHERE MC.TEAM_CODE = T.TEAM_CODE
 		AND MC.TEAM_CODE = M.TEAM_CODE
+		AND M.MEMBER_CODE = T.MEMBER_CODE
 		AND MATCH_CODE = #{matchCode}
 	</select>
 	
@@ -255,6 +256,7 @@
 		FROM MATCH_MANAGE M, TEAM T, MEMBER MB
         WHERE M.TEAM_CODE_AWAY = T.TEAM_CODE
         AND M.TEAM_CODE_AWAY = MB.TEAM_CODE
+        AND MB.MEMBER_CODE = T.MEMBER_CODE
         AND MATCH_CODE = #{matchCode}
 	</select>
 <!-- 	<select id="matchApplyList" resultMap="matchManage"> -->
