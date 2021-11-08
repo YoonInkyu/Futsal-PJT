@@ -76,7 +76,7 @@ public class TeamController {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 		if(teamCode == null) {
 			model.addAttribute("msg", "팀 가입후 이용가능합니다.");
-			model.addAttribute("url", "redirect:/templateLayout/main_page");
+			model.addAttribute("url", "selectTeamList");
 			return "team/alert";
 		}
 		model.addAttribute("myTeam", teamService.teamManage(teamCode));
