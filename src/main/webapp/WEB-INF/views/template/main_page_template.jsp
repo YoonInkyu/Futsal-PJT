@@ -8,7 +8,7 @@
 <title><tiles:insertAttribute name="title" /></title>
 <!-- 태그 초기화 작업 -->
 <link rel="stylesheet" href="/resources/common/reset.css">
-<link rel="stylesheet" href="/resources/template/css/main_page_template.css?ver=1">
+<link rel="stylesheet" href="/resources/template/css/main_page_template.css?ver=2">
 
 <!-- 제이쿼리 문법을 로딩 -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -99,10 +99,10 @@
 							</a>
 
 							<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownUser1" style="width: 240px;">
-								<li><a style="font-size: 18px; height: 24px; padding-top: 16px;" class="dropdown-item" href="/member/myPage">마이페이지</a></li>
-								<li><a style="font-size: 18px; height: 24px; padding-top: 16px;" class="dropdown-item" href="/member/goMemberBlacklist">블랙리스트 관리</a></li>
+								<li><a style="font-size: 18px; height: 26px; padding-top: 12px;" class="dropdown-item" href="/member/myPage">마이페이지</a></li>
+								<li><a style="font-size: 18px; height: 26px; padding-top: 12px;" class="dropdown-item" href="/member/goMemberBlacklist">블랙리스트 관리</a></li>
 								<li><hr class="dropdown-divider"></li>
-								<li><a style="font-size: 18px; height: 24px; padding-top: 16px;" class="dropdown-item" href="/member/logout">LOGOUT</a></li>
+								<li><a style="font-size: 18px; height: 26px; padding-top: 12px;" class="dropdown-item" href="/member/logout">LOGOUT</a></li>
 							</ul>
 
 						</div>
