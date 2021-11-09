@@ -20,30 +20,55 @@
 				success : function(result) {
 					//ajax 실행 성공 시 실행되는 구간
 					//셀렉트바로 수정해야 함.
-					$('.aa').remove()
+					//$('.aa').remove()
 					var str = '';
-					str += '<td><input type="file" name="teamLogo" onchange="readURL(this);">'
-					str += '<img src="/resources/img/common/'+result.teamLogoImgAttachedName+'" id="preview" class="img-thumbnail"></td>'
-					$('.a').append(str);
+					str += '<input type="file" name="teamLogo" onclick="clickImg()" onchange="readURL(this);">'
+					str += '<img src="/resources/img/common/'+result.teamLogoImgAttachedName+'" id="preview" class="img-thumbnail">'
+					$('.a').prepend(str);
 
-					$('.bb').remove()
-					var str = '';
-					str += '<td><input type="text" name="teamCode" value="' + result.teamCode + '"></td>';
-					$('.b').append(str);
 					$('.cc').remove()
 					var str = '';
-					str += '<td><input type="text" name="teamLocation" value="' + result.teamLocation + '"></td>';
-					$('.c').append(str);
+					str += '<div class="mb-3 cc">지 역 :'
+					str += '<select class="form-select" name="teamLocation">'
+					if (result.teamLocation == '서울') {
+						str += '<option value="서울" selected>서울</option>';
+						str += '<option value="경기">경기</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구">대구</option>';
+					} else if (result.teamLocation == '경기') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="경기" selected>경기</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구">대구</option>';
+					} else if (result.teamLocation == '대전') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="경기">경기</option>';
+						str += '<option value="대전" selected>대전</option>';
+						str += '<option value="대구">대구</option>';
+					} else if (result.teamLocation == '대구') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="경기">경기</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구" selected>대구</option>';
+					}
+					str += '</select>';
+					str += '</div>';
+					$('.c').prepend(str);
+					
+					
 					$('.dd').remove()
 					var str = '';
-					str += '<td><input type="text" name="teamIntro" value="' + result.teamIntro + '"></td>';
-					$('.d').append(str);
+					str += '<textarea class="form-control dd" id="floatingTextarea2" name="teamIntro" style="width: 26rem; height: 16rem;">'+ result.teamIntro +'</textarea>';
+					$('.d').prepend(str);
+
 					$('.ee').remove()
 					var str = '';
-					str += '<td><input type="text" name="teamName" value="' + result.teamName + '"></td>';
+					str += '<h5 class="ee">팀명 : <input type="text" name="teamName" value="' + result.teamName + '"></h5>';
+					
 					$('.e').append(str);
 
 					$('#change').attr('type', 'submit')
+					$('#change').attr('value', '확인')
 					$('#formId').attr('action', '/team/updateInfo')
 
 				},
@@ -67,16 +92,30 @@
 
 		<section class="about-me-section py-5  theme-bg-light">
 			<div class="container">
+			
+			
+			  <div class="row my-5">
+		      
+		         <div class="col-1 text-end">
+		            <img alt="" src="/resources/img/common/bg1.png" width="100%;" class="pr-5">
+		         </div>
+         
+		         <div class="col-6 text-starts align-self-center">
+		            <h2 style="border-bottom: 3px solid gray;">팀 정보</h2>
+		         </div>
+         
+     		 	</div>
+			
+			
 				<div class="row">
 					<div class="col-5">
-						<h3 class="name font-weight-bold mb-3">팀 정보</h3>
 						<div class="e mx-3 my-4">
 							<h5 class="ee">팀 명 : ${myTeam.teamName }</h5>
 						</div>
-						<div class="mx-5 mb-4">
+						<div class="c mx-5 mb-4">
 							<div class="mb-3 cc">지 역 : ${myTeam.teamLocation }</div>
 							
-							<div class="mb-3 cc">구 단 주 : 팀장 이름 가져 올수 있음 가져오기</div>
+							<div class="mb-3 ">구 단 주 : ${myTeam.masterName }</div>
 
 							<div class="form-floating mb-3 d">
 								<textarea class="form-control dd" placeholder="Leave a comment here" id="floatingTextarea2" name="contentFree" style="width: 26rem; height: 16rem;">${myTeam.teamIntro }</textarea>
@@ -90,9 +129,9 @@
 
 
 							<c:if test="${loginInfo.teamAdmin eq '3' }">
-								<input type="hidden" value="${myTeam.teamCode }" class="gg">
 								<input class="btn btn-danger" style="width: 10rem;" type="button" value="팀 삭제" onclick="location.href='goTeamDelete'">
 								<input class="btn btn-outline-primary" style="width: 10rem;" type="button" value="팀 수정" id="change">
+								<input type="hidden" value="${myTeam.teamCode }" class="gg">
 							</c:if>
 							<c:if test="${loginInfo.teamAdmin eq '2' }">
 								<input class="btn btn-danger" style="width: 10rem;" type="button" value="팀 탈퇴" id="myTeamDelete">
@@ -154,6 +193,11 @@
 			} else {
 				document.getElementById('preview').src = "";
 			}
+		}
+	</script>
+	<script type="text/javascript">
+		function clickImg() {
+			$('.aa').remove()
 		}
 	</script>
 </body>

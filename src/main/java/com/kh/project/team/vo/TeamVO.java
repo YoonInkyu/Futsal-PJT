@@ -20,7 +20,18 @@ public class TeamVO {
 	private String memberTell;
 	private String memberImgAttachedName;
 	private String position;
+	private String masterName;
 	
+	
+	
+	
+	
+	public String getMasterName() {
+		return masterName;
+	}
+	public void setMasterName(String masterName) {
+		this.masterName = masterName;
+	}
 	public String getMemberName() {
 		return memberName;
 	}

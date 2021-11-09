@@ -14,6 +14,7 @@
 		<result column="TEAM_LOGO_IMG_CODE" 			property="teamLogoImgCode"/>
 		<result column="RANK_TOTAL_SCORE" 				property="rankTotalScore"/>
 		<result column="MEMBERCOUNT" 					property="memberCount"/>
+		<result column="MASTER_NAME" 					property="masterName"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.team.vo.TeamLogoImgVO" id="teamLogoImg">
@@ -117,6 +118,10 @@
 			, TEAM_LOCATION
 			, I.TEAM_LOGO_IMG_ATTACHED_NAME
 			, I.TEAM_LOGO_IMG_CODE
+			, (SELECT MEMBER_NAME
+				FROM MEMBER
+                WHERE TEAM_CODE = #{teamCode}
+				AND TEAM_ADMIN = '3') AS MASTER_NAME
 		FROM TEAM T, TEAM_LOGO_IMG I
 		WHERE T.TEAM_CODE = I.TEAM_CODE
 		AND T.TEAM_CODE = #{teamCode}
