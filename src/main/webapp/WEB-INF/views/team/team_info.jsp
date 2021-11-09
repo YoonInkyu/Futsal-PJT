@@ -20,11 +20,11 @@
 				success : function(result) {
 					//ajax 실행 성공 시 실행되는 구간
 					//셀렉트바로 수정해야 함.
-					//$('.aa').remove()
-			
+		
+					$('.aa').remove()
 					var str = '';
-					str += '<input type="file" name="teamLogo" onclick="clickImg()" onchange="readURL(this);">'
-					str += '<img src="/resources/img/common/'+result.teamLogoImgAttachedName+'" id="preview" class="img-thumbnail">'
+					str += '<input type="file" class="form-control" id="inputGroupFile01" name="teamLogo" onchange="readURL(this);">'
+					str += '<img src="/resources/img/team/'+result.teamLogoImgAttachedName+'" id="preview" class="img-thumbnail">'
 					$('.a').prepend(str);
 
 					$('.cc').remove()
@@ -58,7 +58,7 @@
 					$('.dd').remove()
 					var str = '';
 					str += '<textarea style="height: 15rem;" class="dd form-control mercBoardIntro" id="mercBoardIntro" name="teamIntro">' + result.teamIntro + '</textarea>';
-					$('.d').prepend(str);
+					$('.d').append(str);
 						
 					
 					$('.ee').remove()
@@ -129,8 +129,8 @@
 
 				<div class="col-3">
 
-					<div class="mx-3 my-4 inputIntroDiv">
-						<label for="mercBoardIntro" class="d"> 팀 소개</label>
+					<div class="d mx-3 my-4 inputIntroDiv">
+						<label for="mercBoardIntro" > 팀 소개</label>
 						<textarea style="height: 15rem;" class="dd form-control mercBoardIntro" id="mercBoardIntro" readonly>${myTeam.teamIntro }</textarea>
 					</div>
 
@@ -141,6 +141,24 @@
 
 					<div class="a col-md-5 col-lg-5 align-self-center">
 						<img class="aa profile-image img-fluid mb-3 mb-lg-0 me-md-0" src="/resources/img/team/${myTeam.teamLogoImgAttachedName }" alt="">
+							<script type="text/javascript">
+								function readURL(input) {
+									if (input.files && input.files[0]) {
+										var reader = new FileReader();
+										reader.onload = function(e) {
+											document.getElementById('preview').src = e.target.result;
+										};
+										reader.readAsDataURL(input.files[0]);
+									} else {
+										document.getElementById('preview').src = "";
+									}
+								}
+							</script>
+							<script type="text/javascript">
+								function clickImg() {
+									$('.aa').remove()
+								}
+							</script>
 					</div>
 
 				</div>
@@ -171,27 +189,6 @@
 		</div>
 
 	</form>
-
-
-
-	<script type="text/javascript">
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					document.getElementById('preview').src = e.target.result;
-				};
-				reader.readAsDataURL(input.files[0]);
-			} else {
-				document.getElementById('preview').src = "";
-			}
-		}
-	</script>
-	<script type="text/javascript">
-		function clickImg() {
-			$('.aa').remove()
-		}
-	</script>
 
 </body>
 </html>
