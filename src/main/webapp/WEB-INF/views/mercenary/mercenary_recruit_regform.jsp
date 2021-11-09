@@ -86,11 +86,9 @@
 						<input class="form-check-input" type="radio" name="mercBoardPossible" id="inlineRadio2" value="2"> <label class="form-check-label" for="inlineRadio2">모집완료</label>
 					</div>
 				</div>
-				<div class="d-grid gap-2 mt-5">
-					<input class="btn btn-primary" type="submit" id="mercReg" value="모집 등록">
-				</div>
-				<div class="d-grid gap-2 my-3">
-					<button type="button" class="btn btn-outline-danger" onclick="location.href='/mercenary/recruit';">취 소</button>
+				<div class="d-flex justify-content-around mt-5 mb-3">
+					<input style="width: 10rem;" class="btn btn-outline-primary" type="submit" id="mercReg" value="모집 등록">
+					<button style="width: 10rem;" type="button" class="btn btn-outline-danger" onclick="location.href='/mercenary/recruit';">취 소</button>
 				</div>
 			</form>
 		</div>

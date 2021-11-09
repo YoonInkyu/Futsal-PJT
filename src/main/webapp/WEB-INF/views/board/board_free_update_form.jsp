@@ -69,7 +69,7 @@
 
 						<div class="col d-flex justify-content-evenly">
 							<input style="width: 13rem;" class="btn btn-outline-primary" type="submit" value="수 정">
-							<button style="width: 13rem;" type="button" class="btn btn-danger" onclick="location.href='/board/goFreeList';">취 소</button>
+							<button style="width: 13rem;" type="button" class="btn btn-outline-danger" onclick="location.href='/board/goFreeList';">취 소</button>
 						</div>
 
 					</div>

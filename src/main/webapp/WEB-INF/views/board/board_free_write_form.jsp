@@ -26,7 +26,7 @@
 					<!-- 글정보 -->
 					<div class="row">
 
-						<div class="col-12 mb-3">
+						<div class="col mb-3">
 							<label for="titleFree" class="form-label">제 목</label> <input type="text" class="form-control" name="titleFree" required>
 						</div>
 
@@ -52,7 +52,7 @@
 					<!-- 파일 업로드 -->
 					<div class="row">
 
-						<div class="col-12 mb-5">
+						<div class="col mb-5">
 							<label for="fileFree" class="form-label">파 일 등 록</label> <input type="file" class="form-control" name="fileFree" multiple>
 						</div>
 
@@ -80,7 +80,7 @@
 
 						<div class="col d-flex justify-content-evenly">
 							<input style="width: 13rem;" class="btn btn-outline-primary" type="submit" value="등 록">
-							<button style="width: 13rem;" type="button" class="btn btn-danger" onclick="location.href='/board/goFreeList';">취 소</button>
+							<button style="width: 13rem;" type="button" class="btn btn-outline-danger" onclick="location.href='/board/goFreeList';">취 소</button>
 						</div>
 
 					</div>

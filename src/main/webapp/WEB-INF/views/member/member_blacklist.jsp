@@ -51,7 +51,7 @@
 										<td>${blackInfo.blackName }</td>
 										<td>${blackInfo.blackDate }</td>
 										<td>
-											<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop${status.index }">Detail</button> <!-- Modal -->
+											<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop${status.index }">Detail</button> <!-- Modal -->
 											<div class="modal fade  " id="staticBackdrop${status.index }" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 												<div class="modal-dialog">
 													<div class="modal-content">
@@ -117,7 +117,7 @@
 														
 														<div class="modal-footer d-flex justify-content-between">
 															<button style="width: 10rem;" type="button" class="btn btn-outline-danger" onclick="location.href='/member/deleteMemberBlack?blackmemberCode=${blackInfo.blackmemberCode}';">블럭 삭제</button>
-															<button style="width: 10rem;" type="button" class="btn btn-primary" data-bs-dismiss="modal">취 소</button>
+															<button style="width: 10rem;" type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">취 소</button>
 														</div>
 														
 														

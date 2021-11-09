@@ -119,7 +119,7 @@
 						<input type="text" class="cc form-control" id="mercBoardSort" value="${myTeam.teamLocation }" readonly>
 					</div>
 
-					<div class="mx-3 my-4">
+					<div class="row mx-3 my-4">
 						<label for="mercBoardSort" class="form-label">구 단 주</label> 
 						<input type="text" class="form-control" id="mercBoardSort" value="${myTeam.masterName }" readonly>
 					</div>

@@ -262,7 +262,7 @@ input[type=number] {
 						<c:if test="${matchVO.matchPossible eq '1' && empty matchResult}">
 							<!-- 신청 마감이거나, 결과가 등록되어 있으면 수정,삭제 불가능 -->
 							<input style="width: 10rem;" type="button" class="btn btn-outline-danger delete" value="삭제하기" onclick="location.href='/match/deleteMatch?matchCode=${matchVO.matchCode}'">
-							<input style="width: 10rem;" type="button" class="btn btn-primary change" value="수정하기" id="change">
+							<input style="width: 10rem;" type="button" class="btn btn-outline-primary change" value="수정하기" id="change">
 						</c:if>
 						<c:if test="${matchVO.matchPossible eq '2' && empty matchResult}">
 							<input style="width: 10rem;" type="button" class="btn btn-info matchResult" value="매치 결과 등록" id="matchResult">

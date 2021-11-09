@@ -52,7 +52,11 @@
 								<td colspan="4">첨부파일 : <c:forEach items="${imgListNotice }" var="imgNotice">
 
 										<c:if test="${not empty imgNotice.noticeImgOrignName }">
-											<a class="mx-1 btn btn-outline-success  btn-sm" href="<c:url value="..\\resources\\img\\board\\${imgNotice.noticeImgAttachedName }" ></c:url>" download="${imgNotice.noticeImgOrignName }">${imgNotice.noticeImgOrignName }</a>
+											<a class="mx-1 btn btn-outline-success  btn-sm" href="<c:url value="..\\resources\\img\\board\\${imgNotice.noticeImgAttachedName }" ></c:url>" download="${imgNotice.noticeImgOrignName }">
+											<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+											  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+											  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+											</svg>&nbsp;${imgNotice.noticeImgOrignName }</a>
 										</c:if>
 
 									</c:forEach>
@@ -118,11 +122,10 @@
 
 								<span class="input-group-text" id="basic-addon1">댓글 입력</span> <input type="text" class="form-control" name="contentNotice" placeholder="입력..." aria-label="Username" aria-describedby="basic-addon1" onkeyup="contentNoticeReply_checkByte(this);" required>
 
-								<button type="submit" class="btn btn-success">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
-									  <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
-									</svg>
-									등록
+								<button type="submit" class="btn btn-success">등록&nbsp;
+								<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 22 22">
+								  <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+								</svg>
 								</button>
 
 							</div>
@@ -140,12 +143,11 @@
 						<div class="input-group ">
 							<span class="input-group-text" id="basic-addon1">댓글 입력</span> <input type="text" class="form-control" placeholder="로그인을 하셔야 댓글 입력이 가능 합니다." aria-label="Username" aria-describedby="basic-addon1" readonly>
 
-							<button type="submit" class="btn btn-success">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
-								  <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+							<button type="submit" class="btn btn-success">등록&nbsp;
+								<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 22 22">
+								  <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
 								</svg>
-								등록
-							</button>
+								</button>
 
 						</div>
 

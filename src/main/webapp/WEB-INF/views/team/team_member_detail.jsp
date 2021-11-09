@@ -43,7 +43,7 @@
 		<c:if test="${teamAdmin eq '3' }">
 			<button style="width: 10rem;" type="button" class="btn btn-outline-danger" onclick="location.href='teamMemberDelete?memberCode=${memberDetail.memberCode}'">팀원 추방</button>
 		</c:if>
-		<button style="width: 10rem;" type="button" class="btn btn-primary" data-bs-dismiss="modal">취 소</button>
+		<button style="width: 10rem;" type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">취 소</button>
 	</div>
 
 

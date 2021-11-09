@@ -177,7 +177,7 @@
 					</c:when>
 					<c:otherwise>
 						<c:if test="${mercVO.mercBoardPossible eq '1' }">
-							<input style="width: 10rem;" type="button" class="btn btn-primary" value="신청하기" onclick="location.href='/mercenary/updateRecruitCnt?mercBoardCode=${mercVO.mercBoardCode}&memberCode=${sessionScope.loginInfo.memberCode}&memberTell=${mercVO.memberTell }&teamCode=${sessionScope.loginInfo.teamCode }'">
+							<input style="width: 10rem;" type="button" class="btn btn-outline-primary" value="신청하기" onclick="location.href='/mercenary/updateRecruitCnt?mercBoardCode=${mercVO.mercBoardCode}&memberCode=${sessionScope.loginInfo.memberCode}&memberTell=${mercVO.memberTell }&teamCode=${sessionScope.loginInfo.teamCode }'">
 						</c:if>
 					</c:otherwise>
 				</c:choose>

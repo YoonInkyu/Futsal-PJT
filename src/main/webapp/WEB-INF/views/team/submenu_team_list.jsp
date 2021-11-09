@@ -47,7 +47,7 @@
 
 					<div class="row mx-auto">
 
-						<div class="col-3">
+						<div class="col-2">
 							<select name="searchKeyword" class="form-select form-select" aria-label=".form-select-lg example">
 							<c:if test="${teamVO.searchKeyword == null}">
 								<option value="T.TEAM_NAME" selected>팀 이름</option>
@@ -70,8 +70,11 @@
 							<input name="searchValue" class="form-control" type="search" placeholder="Search" aria-label="Search" value="${teamVO.searchValue}">
 						</div>
 
-						<div class="col-1">
-							<button class="btn btn-primary " type="submit">Search</button>
+						<div class="col-2">
+							<button class="btn btn-outline-primary " type="submit">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+							 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+							</svg>&nbsp;검 색</button>
 						</div>
 
 					</div>
@@ -86,7 +89,7 @@
 
 		<div class="row mt-5">
 
-			<div class="col text-center">
+			<div class="col text-center shadow-lg p-3 mb-5 bg-body rounded">
 
 				<table class="table table-striped table-hover">
 

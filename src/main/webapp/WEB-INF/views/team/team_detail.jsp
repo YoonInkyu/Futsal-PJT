@@ -78,7 +78,7 @@
 
       <div class="modal-footer d-flex justify-content-around">
          <button style="width: 10rem;" type="button" class="btn btn-outline-primary" id="addTeambutt">가입 신청</button>
-         <button style="width: 10rem;" type="button" class="btn btn-danger" data-bs-dismiss="modal">취 소</button>
+         <button style="width: 10rem;" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">취 소</button>
       </div>
 
 
