@@ -15,7 +15,9 @@
 
 
       <div class="modal-header">
-         <h5 class="modal-title" id="staticBackdropLabel">팀 이름 불러서 넣어라</h5>
+      <c:forEach items="${teamDetail }" var="teamDetail" begin="0" end="0">
+         <h5 class="modal-title" id="staticBackdropLabel">${teamDetail.teamName }</h5>
+         </c:forEach>
          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
@@ -54,7 +56,14 @@
                         <td>${teamDetail.memberGender }</td>
                         <td>${teamDetail.memberTell }</td>
                         <td>${teamDetail.position }</td>
-                        <td>${teamDetail.teamAdmin }</td>
+                        <td>
+                        	<c:if test="${teamDetail.teamAdmin eq '3' }" >
+                        	관리자
+                        	</c:if>
+                        	<c:if test="${teamDetail.teamAdmin eq '2' }" >
+							 팀원        	
+                        	</c:if>
+                        </td>
                      </tr>
 
                   </c:forEach>

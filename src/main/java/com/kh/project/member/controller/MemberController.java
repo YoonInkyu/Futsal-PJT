@@ -56,7 +56,7 @@ public class MemberController {
 		
 		// 첨부될 폴더 경로 지정
 		//String uploadPath = "D:\\자바\\workspaceSTS\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Football\\resources\\img\\member\\";
-		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\member\\";
+		String uploadPath = "C:\\Users\\kh202-30\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\member\\";
 		// join.jsp input파일의 name값 가져옴
 		MultipartFile file = multi.getFile("memberImg");
 		
@@ -176,7 +176,7 @@ public class MemberController {
 		memberService.updateMemberInfo(memberVO);
 		// 첨부될 폴더 경로 지정
 		//String uploadPath = "D:\\자바\\workspaceSTS\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Football\\resources\\img\\member\\";
-		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\member\\";
+		String uploadPath = "C:\\Users\\kh202-30\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\member\\";
 		
 		// join.jsp input파일의 name값 가져옴
 		MultipartFile file = multi.getFile("memberImg");

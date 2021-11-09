@@ -110,7 +110,7 @@ public class TeamServiceImpl implements TeamService{
 	@Override
 	public int teamApplyApproval(TeamVO teamVO) {
 		sqlSession.update("teamMapper.teamApplyApproval", teamVO);
-		return sqlSession.delete("teamMapper.teamApplyReject", teamVO);
+		return sqlSession.delete("teamMapper.teamApplyApprovalDelete", teamVO);
 	}
 	
 	// 팀가입 거부

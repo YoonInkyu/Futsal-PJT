@@ -171,41 +171,26 @@
 		SELECT TEAM_CODE
             , TEAM_NAME
             , TEAM_LOGO_IMG_ATTACHED_NAME
-            , RANK_WIN
-            , RANK_DRAW
-            , RANK_LOSE
-            , RANK_TOTAL_SCORE
             , MEMBERCOUNT
 		    , ROW_NUM
 		FROM (
 		    SELECT TEAM_CODE
                     , TEAM_NAME
                     , TEAM_LOGO_IMG_ATTACHED_NAME
-                    , RANK_WIN
-                    , RANK_DRAW
-                    , RANK_LOSE
-                    , RANK_TOTAL_SCORE
                     , MEMBERCOUNT
 		        , ROWNUM AS ROW_NUM
 		    FROM (
 		            SELECT T.TEAM_CODE
                     , T.TEAM_NAME
                     , TI.TEAM_LOGO_IMG_ATTACHED_NAME
-                    , R.RANK_WIN
-                    , R.RANK_DRAW
-                    , R.RANK_LOSE
-                    , R.RANK_TOTAL_SCORE
                     , (SELECT COUNT(INNER_M.MEMBER_CODE) FROM MEMBER INNER_M , TEAM INNER_T
                         WHERE INNER_T.TEAM_CODE = INNER_M.TEAM_CODE
                         AND INNER_T.TEAM_CODE = T.TEAM_CODE) AS MEMBERCOUNT
-                    FROM RANK R, TEAM_LOGO_IMG TI, TEAM T, MEMBER M
-                    WHERE 1=1
-                    AND T.TEAM_CODE = TI.TEAM_CODE 
-                    AND T.TEAM_CODE = R.TEAM_CODE
+                    FROM TEAM_LOGO_IMG TI, TEAM T
+                    WHERE T.TEAM_CODE = TI.TEAM_CODE
                     <if test="searchValue != null and !searchValue.equals('')">
                     AND ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
                     </if>
-		            ORDER BY RANK_TOTAL_SCORE DESC
 		        )
 		)
 		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
@@ -243,6 +228,9 @@
 		 , MEMBER_TELL
 		 , TEAM_ADMIN	 
 		 , POSITION
+		 , (SELECT TEAM_NAME
+		 	FROM TEAM
+		 	WHERE TEAM_CODE = #{teamCode}) AS TEAM_NAME
          , (SELECT MEMBER_IMG_ATTACHED_NAME
             	FROM MEMBER_IMG
             	WHERE MEMBER_CODE = M.MEMBER_CODE) AS MEMBER_IMG_ATTACHED_NAME 
@@ -313,6 +301,11 @@
 	</update>
 	
 	<!-- 팀가입 승인 및 삭제  -->
+	<delete id="teamApplyApprovalDelete">
+	DELETE FROM TEAM_APPLY
+		WHERE MEMBER_CODE = #{memberCode}
+	</delete>
+	<!-- 팀가입 삭제  -->
 	<delete id="teamApplyReject">
 	DELETE FROM TEAM_APPLY
 		WHERE MEMBER_CODE = #{memberCode}

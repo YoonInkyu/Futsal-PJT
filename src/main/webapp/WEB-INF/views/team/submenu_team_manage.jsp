@@ -69,20 +69,6 @@
 																	<td><img src="/resources/img/member/nullImg.png" width="30%"></td>
 																</c:otherwise>
 															</c:choose>
-
-
-
-															<!-- 																기존에 있던 이프문 데이터를 둘다 안받아옴 확인 할것 -->
-
-															<%-- 																<c:if test="${not empty applyMember.memberImgAttachedName } }"> --%>
-															<%-- 																	<td><img src="/resources/img/member/${applyMember.memberImgAttachedName }" width="30%"></td> --%>
-															<%-- 																</c:if> --%>
-															<%-- 																<c:if test="${empty applyMember.memberImgAttachedName } }"> --%>
-															<!-- 																	<td><img src="/resources/img/member/nullImg.png" width="30%"></td> -->
-															<%-- 																</c:if> --%>
-
-
-
 															<td>${applyMember.memberName }</td>
 															<td>${applyMember.position }</td>
 															<td>${applyMember.memberGender }</td>
