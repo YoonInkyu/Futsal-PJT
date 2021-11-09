@@ -9,7 +9,7 @@
 	$(document).ready(function() {
 		//수정 ajax
 		$(document).on('click', '#change', function() {
-			var matchCode = $(this).prev().val()
+			var matchCode = $(this).prev().prev().val()
 
 			$.ajax({
 				url : '/match/matchDetailAjax', //요청경로
@@ -158,6 +158,12 @@ input[type=number] {
 								<input type="text" class="form-control" id="aaa" value="마감" readonly>
 							</c:otherwise>
 						</c:choose>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col">
+						<label for="matchRank">작성팀 매치전적</label>
+						<input type="text" class="form-control" id="matchRank" value="${matchVO.rankWin }승 / ${matchVO.rankDraw }무 / ${matchVO.rankLose }패" readonly>
 					</div>
 				</div>
 				<div class="row mt-4">

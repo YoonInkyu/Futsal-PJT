@@ -141,7 +141,7 @@ public class MercenaryController {
 		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
 		if(memberCode == null) {
 			model.addAttribute("msg", "로그인해야 등록 가능 합니다.");
-			model.addAttribute("url", "recruit");
+			model.addAttribute("url", "/member/goLogin");
 			return "mercenary/alert";
 		}
 		model.addAttribute("today", CurrentDateTime.today());
@@ -174,7 +174,7 @@ public class MercenaryController {
 		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
 		if(memberCode == null) {
 			model.addAttribute("msg", "로그인해야 신청 가능 합니다.");
-			model.addAttribute("url", "recruit");
+			model.addAttribute("url", "/member/goLogin");
 			return "mercenary/alert";
 		}
 		

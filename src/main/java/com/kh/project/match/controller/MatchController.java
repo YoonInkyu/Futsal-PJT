@@ -64,14 +64,14 @@ public class MatchController {
 		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
 		if(memberCode == null) {
 			model.addAttribute("msg", "로그인해야 등록 가능 합니다.");
-			model.addAttribute("url", "matchList");
+			model.addAttribute("url", "/member/goLogin");
 			return "match/alert";
 		}
-		//팀이 여부 확인
+		//팀 여부 확인
 		String teamName = ((MemberVO)session.getAttribute("loginInfo")).getTeamName();
 		if(teamName == null) {
 			model.addAttribute("msg", "소속팀이 있어야 매치 등록이 가능합니다.");
-			model.addAttribute("url", "matchList");
+			model.addAttribute("url", "/team/selectTeamList");
 			return "match/alert";
 		}
 		model.addAttribute("today", CurrentDateTime.today());
@@ -129,14 +129,14 @@ public class MatchController {
 		MemberVO memberCode = (MemberVO)session.getAttribute("loginInfo");
 		if(memberCode == null) {
 			model.addAttribute("msg", "로그인해야 등록 가능 합니다.");
-			model.addAttribute("url", "matchList");
+			model.addAttribute("url", "/member/goLogin");
 			return "match/alert";
 		}
 		//팀 여부 확인
 		String teamName = ((MemberVO)session.getAttribute("loginInfo")).getTeamName();
 		if(teamName == null) {
 			model.addAttribute("msg", "소속팀이 있어야 매치 신청이 가능합니다.");
-			model.addAttribute("url", "matchList");
+			model.addAttribute("url", "/team/selectTeamList");
 			return "match/alert";
 		}
 		//신청 가능 여부 확인
