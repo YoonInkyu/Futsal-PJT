@@ -43,7 +43,7 @@ public class BoardController {
 
 	@Resource(name = "replyNoticeService")
 	private ReplyNoticeService replyNoticeService;
-	
+
 	@Resource(name = "menuService")
 	private MenuService menuService;
 
@@ -87,7 +87,7 @@ public class BoardController {
 
 		// 조회수 증가
 		boardNoticeService.updateReadCntNotice(boardNumNotice);
-		
+
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video1");
 		model.addAttribute("menuName", "공지 사항");
@@ -100,7 +100,7 @@ public class BoardController {
 	public String goNoticeWriteForm(Model model, String menuVideo, String menuName) {
 
 		model.addAttribute("nowDate", getNowDateToString());
-		
+
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video1");
 		model.addAttribute("menuName", "공지 사항");
@@ -195,7 +195,7 @@ public class BoardController {
 		model.addAttribute("nowDate", getNowDateToString());
 
 		model.addAttribute("noticeInfo", boardNoticeService.selectBoardNoticeDetail(boardNumNotice));
-		
+
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video1");
 		model.addAttribute("menuName", "공지 사항");
@@ -239,7 +239,7 @@ public class BoardController {
 		boardFreeVO.setPageInfo();
 
 		model.addAttribute("freeList", boardFreeService.selectBoardFreeList(boardFreeVO));
-		
+
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video2");
 		model.addAttribute("menuName", "자유 게시판");
@@ -266,7 +266,7 @@ public class BoardController {
 
 		// 조회수 증가
 		boardFreeService.updateReadCntFree(boardNumFree);
-		
+
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video2");
 		model.addAttribute("menuName", "자유 게시판");
@@ -279,7 +279,7 @@ public class BoardController {
 	public String goFreeWriteForm(Model model, String menuVideo, String menuName) {
 
 		model.addAttribute("nowDate", getNowDateToString());
-		
+
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video2");
 		model.addAttribute("menuName", "자유 게시판");
@@ -375,7 +375,7 @@ public class BoardController {
 		model.addAttribute("nowDate", getNowDateToString());
 
 		model.addAttribute("freeInfo", boardFreeService.selectBoardFreeDetail(boardNumFree));
-		
+
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video2");
 		model.addAttribute("menuName", "자유 게시판");
@@ -403,8 +403,6 @@ public class BoardController {
 		return "redirect:/board/goFreeList";
 
 	}
-	
-	
 
 	// ==============================// 오늘 날짜 메소드 //==============================//
 	// ==============================// 오늘 날짜 메소드 //==============================//

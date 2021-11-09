@@ -59,6 +59,12 @@
 
 					<tbody>
 
+						<c:if test="${freeList.size() eq 0 }">
+							<tr>
+								<td colspan="5" style="text-align: center;">등록된 글이 없습니다.</td>
+							</tr>
+						</c:if>
+
 						<c:forEach items="${freeList }" var="freeInfo">
 
 							<c:choose>

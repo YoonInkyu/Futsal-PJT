@@ -58,25 +58,27 @@ tr {
 
 					<tbody>
 
-						<!-- 공지사항은 관리자만 입력함으로 비밀번호 없음 -->
-						<c:forEach items="${noticeList }" var="noticeInfo">
+						<c:choose>
 
-							<!-- 왜 안되는거 확인 필요 -->
-							<c:if test="${empty noticeInfo.boardNumNotice }">
+							<c:when test="${noticeList.size() eq 0 }">
 								<tr>
 									<td colspan="5" style="text-align: center;">등록된 글이 없습니다.</td>
 								</tr>
-							</c:if>
+							</c:when>
 
-							<tr onclick="location.href='/board/goNoticeDetail?boardNumNotice=' + ${noticeInfo.boardNumNotice };">
-								<td>${noticeInfo.boardNumNotice }</td>
-								<td>${noticeInfo.titleNotice }</td>
-								<td>${noticeInfo.writerNotice }</td>
-								<td>${noticeInfo.createDateNotice }</td>
-								<td>${noticeInfo.readCntNotice }</td>
-							</tr>
+							<c:otherwise>
+								<c:forEach items="${noticeList }" var="noticeInfo">
+									<tr onclick="location.href='/board/goNoticeDetail?boardNumNotice=' + ${noticeInfo.boardNumNotice };">
+										<td>${noticeInfo.boardNumNotice }</td>
+										<td>${noticeInfo.titleNotice }</td>
+										<td>${noticeInfo.writerNotice }</td>
+										<td>${noticeInfo.createDateNotice }</td>
+										<td>${noticeInfo.readCntNotice }</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
 
-						</c:forEach>
+						</c:choose>
 
 					</tbody>
 
