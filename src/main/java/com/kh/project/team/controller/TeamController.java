@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.kh.project.board.vo.NoticeImgVO;
+import com.kh.project.common.util.CurrentDateTime;
 import com.kh.project.member.service.MemberService;
 import com.kh.project.member.vo.MemberVO;
 import com.kh.project.menu.service.MenuService;
@@ -104,28 +106,37 @@ public class TeamController {
 		// regTeam.jsp input파일의 name값 가져옴
 		MultipartFile file = multi.getFile("teamLogo");
 		String teamLogoImgAttachedName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-		
-		try {
-			file.transferTo(new File(uploadPath + teamLogoImgAttachedName));
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		// 로그인 회원의 팀코드 가지고옴
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		
+		if (file.getOriginalFilename().equals("")) {
+			teamVO.setTeamCode(teamCode);
+			// 업데이트 실행
+			teamService.updateInfo(teamVO);
+			return "redirect:/team/teamInfo";
+		}
+		else {
+			try {
+				file.transferTo(new File(uploadPath + teamLogoImgAttachedName));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		// 가지고온 팀코드를 teamVO에 업로드
 		teamVO.setTeamCode(teamCode);
 		// 수정된 이미지파일 teamVO에 업로드
 		teamVO.setTeamLogoImgAttachedName(teamLogoImgAttachedName);
 		teamVO.setTeamLogoImgOrignName(file.getOriginalFilename());
 		
-		// 업데이트 실행
-		teamService.updateInfo(teamVO);
-		
+		teamService.updateInfoToImg(teamVO);
 		return "redirect:/team/teamInfo";
+		}
+		
+		
+		
 	}
 	
 	// 팀 삭제

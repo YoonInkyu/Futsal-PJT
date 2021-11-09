@@ -13,6 +13,9 @@ public class TeamVO {
 	private String teamLogoImgAttachedName;
 	private String teamLogoImgOrignName;
 	private String teamLogoImgCode;
+	private String rankWin;
+	private String rankDraw;
+	private String rankLose;
 	private String rankTotalScore;
 	private int memberCount;
 	private String memberName;
@@ -22,10 +25,24 @@ public class TeamVO {
 	private String position;
 	private String masterName;
 	
-	
-	
-	
-	
+	public String getRankWin() {
+		return rankWin;
+	}
+	public void setRankWin(String rankWin) {
+		this.rankWin = rankWin;
+	}
+	public String getRankDraw() {
+		return rankDraw;
+	}
+	public void setRankDraw(String rankDraw) {
+		this.rankDraw = rankDraw;
+	}
+	public String getRankLose() {
+		return rankLose;
+	}
+	public void setRankLose(String rankLose) {
+		this.rankLose = rankLose;
+	}
 	public String getMasterName() {
 		return masterName;
 	}

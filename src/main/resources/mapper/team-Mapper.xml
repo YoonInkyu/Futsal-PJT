@@ -29,6 +29,9 @@
 		<result column="TEAM_NAME" 					property="teamName" />				
 		<result column="TEAM_INTRO" 				property="teamIntro"/>
 		<result column="TEAM_LOGO_IMG_ATTACHED_NAME"	property="teamLogoImgAttachedName"/>
+		<result column="RANK_WIN"					property="rankWin"/>
+		<result column="RANK_DRAW"					property="rankDraw"/>
+		<result column="RANK_LOSE"					property="rankLose"/>
 		<result column="RANK_TOTAL_SCORE"			property="rankTotalScore"/>
 		<result column="MEMBER_NAME"				property="memberName"/>
 		<result column="MEMBER_GENDER"				property="memberGender"/>

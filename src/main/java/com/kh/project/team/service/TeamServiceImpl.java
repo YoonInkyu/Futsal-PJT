@@ -58,6 +58,9 @@ public class TeamServiceImpl implements TeamService{
 	// 팀정보 수정
 	@Override
 	public int updateInfo(TeamVO teamVO) {
+		return sqlSession.update("teamMapper.updateInfo", teamVO);
+	}
+	public int updateInfoToImg(TeamVO teamVO) {
 		sqlSession.update("teamMapper.updateInfo", teamVO);
 		return sqlSession.update("teamMapper.updateImgInfo", teamVO);
 	}
