@@ -44,7 +44,7 @@
 						<c:forEach items="${matchList }" var="match">
 							<tr data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo('${match.matchCode}')">
 								<td>${match.matchLocation }</td>
-								<td>${match.matchDate } / ${match.matchStartTime } ~ ${match.matchEndTime }</td>
+								<td>${match.matchDate }&nbsp;/&nbsp;${match.matchStartTime }&nbsp;~&nbsp;${match.matchEndTime }</td>
 								<td>${match.matchApplyNum }명</td>
 								<td>${match.matchWriter }</td>
 								<td>${match.matchRegdate }</td>

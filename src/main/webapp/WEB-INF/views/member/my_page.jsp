@@ -103,7 +103,7 @@
 									<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo1('${mercBoard.mercBoardCode}')">
 										<td>${mercBoard.mercBoardSort }</td>
 										<td>${mercBoard.mercBoardLocation }</td>
-										<td>${mercBoard.mercBoardDate } / ${mercBoard.mercBoardStartTime } ~ ${mercBoard.mercBoardEndTime }</td>
+										<td>${mercBoard.mercBoardDate }&nbsp;/&nbsp;${mercBoard.mercBoardStartTime }&nbsp;~&nbsp;${mercBoard.mercBoardEndTime }</td>
 										<td>${mercBoard.mercBoardApplyNumber }명</td>
 										<td>${mercBoard.memberId }</td>
 										<td>${mercBoard.mercBoardRegdate }</td>
@@ -143,7 +143,7 @@
 								<c:forEach items="${matchList }" var="match" begin="0" end="4">
 									<tr data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo2('${match.matchCode}')">
 										<td>${match.matchLocation }</td>
-										<td>${match.matchDate }${match.matchStartTime }~${match.matchEndTime }</td>
+										<td>${match.matchDate }&nbsp;/&nbsp;${match.matchStartTime }&nbsp;~&nbsp;${match.matchEndTime }</td>
 										<td>${match.matchApplyNum }명</td>
 										<td>${match.matchWriter }</td>
 										<td>${match.matchRegdate }</td>
@@ -189,7 +189,7 @@
 									<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo1('${requestMercBoard.mercBoardCode}')">
 										<td>${requestMercBoard.mercBoardSort }</td>
 										<td>${requestMercBoard.mercBoardLocation }</td>
-										<td>${requestMercBoard.mercBoardDate } / ${requestMercBoard.mercBoardStartTime } ~ ${requestMercBoard.mercBoardEndTime }</td>
+										<td>${requestMercBoard.mercBoardDate }&nbsp;/&nbsp;${requestMercBoard.mercBoardStartTime }&nbsp;~&nbsp;${requestMercBoard.mercBoardEndTime }</td>
 										<td>${requestMercBoard.mercBoardApplyNumber }명</td>
 										<td>${requestMercBoard.memberId }</td>
 										<td>${requestMercBoard.mercBoardRegdate }</td>
@@ -229,7 +229,7 @@
 								<c:forEach items="${requestMatchList }" var="requestMatch" begin="0" end="4">
 									<tr data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo2('${requestMatch.matchCode}')">
 										<td>${requestMatch.matchLocation }</td>
-										<td>${requestMatch.matchDate }${requestMatch.matchStartTime }~${requestMatch.matchEndTime }</td>
+										<td>${requestMatch.matchDate }&nbsp;/&nbsp;${requestMatch.matchStartTime }&nbsp;~&nbsp;${requestMatch.matchEndTime }</td>
 										<td>${requestMatch.matchApplyNum }명</td>
 										<td>${requestMatch.matchWriter }</td>
 										<td>${requestMatch.matchRegdate }</td>

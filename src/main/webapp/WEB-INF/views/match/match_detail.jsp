@@ -14,7 +14,9 @@
 			$.ajax({
 				url : '/match/matchDetailAjax', //요청경로
 				type : 'post',
-				data : {'matchCode' : matchCode}, //필요한 데이터
+				data : {
+					'matchCode' : matchCode
+				}, //필요한 데이터
 				success : function(result) {
 					//ajax 실행 성공 시 실행되는 구간
 					$('.selectLocation').remove()
@@ -75,7 +77,9 @@
 			$.ajax({
 				url : '/match/matchDetailAjax', //요청경로
 				type : 'post',
-				data : {'matchCode' : matchCode}, //필요한 데이터
+				data : {
+					'matchCode' : matchCode
+				}, //필요한 데이터
 				success : function(result) {
 					//ajax 실행 성공 시 실행되는 구간
 					var str = '';
@@ -131,22 +135,18 @@ input[type=number] {
 			<div class="modal-body">
 				<div class="row my-3">
 					<div class="col">
-						<label for="matchApplyNum" class="form-label">신청한 팀</label> 
-						<input type="text" class="form-control" id="matchApplyNum" value="${matchVO.matchApplyNum }팀" readonly>
+						<label for="matchApplyNum" class="form-label">신청한 팀</label> <input type="text" class="form-control" id="matchApplyNum" value="${matchVO.matchApplyNum }팀" readonly>
 					</div>
 					<div class="col">
-						<label for="matchWriter" class="form-label">작성팀</label> 
-						<input type="text" class="form-control" id="matchWriter" value="${matchVO.matchWriter }" readonly>
+						<label for="matchWriter" class="form-label">작성팀</label> <input type="text" class="form-control" id="matchWriter" value="${matchVO.matchWriter }" readonly>
 					</div>
 					<div class="col selectLocationDiv">
-						<label for="aaa" class="form-label">지역</label> 
-						<input type="text" class="form-control selectLocation" id="selectLocation" value="${matchVO.matchLocation }" readonly>
+						<label for="aaa" class="form-label">지역</label> <input type="text" class="form-control selectLocation" id="selectLocation" value="${matchVO.matchLocation }" readonly>
 					</div>
 				</div>
 				<div class="row my-3">
 					<div class="col inputDateDiv">
-						<label for="aaa" class="form-label">매치일자</label> 
-						<input type="text" class="form-control matchDate" id="matchDate" value="${matchVO.matchDate } / ${matchVO.matchStartTime } ~ ${matchVO.matchEndTime }" readonly>
+						<label for="aaa" class="form-label">매치일자</label> <input type="text" class="form-control matchDate" id="matchDate" value="${matchVO.matchDate } / ${matchVO.matchStartTime } ~ ${matchVO.matchEndTime }" readonly>
 					</div>
 					<div class="col-3">
 						<c:choose>
@@ -161,12 +161,28 @@ input[type=number] {
 						</c:choose>
 					</div>
 				</div>
+				
+				
 				<div class="row mt-4">
-					<div class="col">
+					<div class="mb-2">
 						<label for="matchRank">작성팀 매치전적</label>
-						<input type="text" class="form-control" id="matchRank" value="${matchVO.rankWin }승 / ${matchVO.rankDraw }무 / ${matchVO.rankLose }패" readonly>
+					</div>
+					<div class="col-2">
+						<input type="text" class="form-control" id="matchRank" value="${matchVO.rankWin }승" readonly>
+					</div>
+					<div class="col-2">
+						<input type="text" class="form-control" id="matchRank" value="${matchVO.rankDraw }무" readonly>
+					</div>
+					<div class="col-2">
+						<input type="text" class="form-control" id="matchRank" value="${matchVO.rankLose }패" readonly>
+					</div>
+					<div class="col">
+						<input type="text" class="form-control" id="matchRank" value="승율 : ${(matchVO.rankWin / (matchVO.rankWin + matchVO.rankDraw + matchVO.rankLose)) * 100  } %" readonly>
 					</div>
 				</div>
+				
+				
+				
 				<div class="row mt-4">
 					<div class="col inputIntroDiv">
 						<label for="matchIntro">내 용</label>
@@ -273,27 +289,33 @@ input[type=number] {
 				<c:forEach items="${teamList }" var="team">
 					<tr>
 						<td>${team.teamName }</td>
-						<td>${team.rankWin }승 / ${team.rankDraw }무 / ${team.rankLose }패</td>
-						<td>
-							<c:choose>
+						<td>${team.rankWin }승/ ${team.rankDraw }무 / ${team.rankLose }패</td>
+						<td><c:choose>
 								<c:when test="${sessionScope.loginInfo.teamName eq matchVO.matchWriter && matchVO.matchPossible eq '1'}">
 									<button type="button" class="btn btn-info" id="matchResponse">수락</button>
-									<input type="hidden" value="${matchVO.matchCode }">	<!-- 매치코드 -->
-									<input type="hidden" value="${team.matchManageCode }"> <!-- 매치 매니지 코드 -->
-									<input type="hidden" value="${team.matchDate }"> <!-- 매치 시간 -->
-									<input type="hidden" value="${team.teamCodeAway }"> <!-- 신청자 팀코드 -->
-									<input type="hidden" value="${team.memberTell }"> <!-- 신청자 핸드폰번호 -->
-									<input type="hidden" value="${team.teamName }"> <!-- 신청자 팀이름 -->
-									<input type="hidden" value="${matchVO.memberTell }"> <!-- 작성자 핸드폰 번호 -->
-									<input type="hidden" value="${matchVO.matchWriter }"> <!-- 작성자 팀이름 -->
+									<input type="hidden" value="${matchVO.matchCode }">
+									<!-- 매치코드 -->
+									<input type="hidden" value="${team.matchManageCode }">
+									<!-- 매치 매니지 코드 -->
+									<input type="hidden" value="${team.matchDate }">
+									<!-- 매치 시간 -->
+									<input type="hidden" value="${team.teamCodeAway }">
+									<!-- 신청자 팀코드 -->
+									<input type="hidden" value="${team.memberTell }">
+									<!-- 신청자 핸드폰번호 -->
+									<input type="hidden" value="${team.teamName }">
+									<!-- 신청자 팀이름 -->
+									<input type="hidden" value="${matchVO.memberTell }">
+									<!-- 작성자 핸드폰 번호 -->
+									<input type="hidden" value="${matchVO.matchWriter }">
+									<!-- 작성자 팀이름 -->
 									<!-- 문자 알림을 위해 수락 기능 js로 수정함. -->
 									<%-- <button type="button" class="btn btn-info" onclick="location.href='/match/updateResponse?matchCode=${matchVO.matchCode }&matchManageCode=${team.matchManageCode}&teamCodeAway=${team.teamCodeAway}'">수락</button> --%>
 								</c:when>
 								<c:otherwise>
 								${team.matchManageResponse }
 							</c:otherwise>
-							</c:choose>
-						</td>
+							</c:choose></td>
 					</tr>
 				</c:forEach>
 			</tbody>

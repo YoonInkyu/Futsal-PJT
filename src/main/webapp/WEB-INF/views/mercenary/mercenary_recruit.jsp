@@ -45,7 +45,7 @@
 							<tr>
 								<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">${mercBoard.mercBoardSort }</td>
 								<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">${mercBoard.mercBoardLocation }</td>
-								<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">${mercBoard.mercBoardDate } / ${mercBoard.mercBoardStartTime } ~ ${mercBoard.mercBoardEndTime }</td>
+								<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">${mercBoard.mercBoardDate }&nbsp;/&nbsp;${mercBoard.mercBoardStartTime }&nbsp;~&nbsp;${mercBoard.mercBoardEndTime }</td>
 								<td data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo('${mercBoard.mercBoardCode}')">${mercBoard.mercBoardApplyNumber }명</td>
 								<c:if test="${mercBoard.memberId  eq loginInfo.memberId}">
 									<td>${mercBoard.memberId}</td>
