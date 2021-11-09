@@ -18,7 +18,7 @@
 </script>
 </head>
 <body>
-	<div class="container col-5 mx-auto">
+	<div class="container col-6 mx-auto">
 		<div class="row m-5 text-center justify-content-center">
 			<h2>용 병 게 시 판</h2>
 			<div class="col-3" style="border-bottom: 3px solid gray;"></div>

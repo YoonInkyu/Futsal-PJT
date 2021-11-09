@@ -31,7 +31,7 @@
 </script>
 </head>
 <body>
-	<div class="container col-5 mx-auto">
+	<div class="container col-6 mx-auto">
 		<div class="row shadow-lg p-3 mb-5 bg-body rounded">
 			<div class="col m-5">
 				<h2 style="border-bottom: 3px solid gray;">

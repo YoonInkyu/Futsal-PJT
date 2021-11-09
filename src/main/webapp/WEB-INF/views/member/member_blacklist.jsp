@@ -15,7 +15,7 @@
 
 
 
-	<div class="container col-5 mx-auto">
+	<div class="container col-6 mx-auto">
 	
 		<div class="row my-3 align-items-center">
 			<div class="col-4 text-end">

@@ -16,7 +16,7 @@ tr {
 
 
 
-	<div class="container col-5 mx-auto">
+	<div class="container col-6 mx-auto">
 
 
 
