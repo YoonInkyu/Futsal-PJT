@@ -220,6 +220,7 @@ public class TeamController {
 	public String selectTeamMemberManage(HttpSession session, Model model, String menuVideo, String menuName) {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 		String teamAdmin = ((MemberVO)session.getAttribute("loginInfo")).getTeamAdmin();
+		model.addAttribute("myTeam", teamService.teamManage(teamCode));
 		model.addAttribute("memberList",teamService.selectTeamMemberManage(teamCode));
 		model.addAttribute("applyMember",teamService.selectApplyMember(teamCode));
 		model.addAttribute("teamAdmin",teamAdmin);
@@ -298,6 +299,7 @@ public class TeamController {
 	@GetMapping("/myMatchManage")
 	public String myMatchManage(HttpSession session, Model model, String menuVideo, String menuName) {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
+		model.addAttribute("myTeam", teamService.teamManage(teamCode));
 		model.addAttribute("matchAfterManage", teamService.myAfterMatchManage(teamCode));
 		model.addAttribute("matchBeforeManage", teamService.myBeforeMatchManage(teamCode));
 		model.addAttribute("menuList", menuService.selectMenu());
@@ -306,7 +308,7 @@ public class TeamController {
 		return "myTeamLayout/team/myTeam_match_manage";
 	}
 	
-	// 매치관리 페이지 이동
+	// 개인 회원 팀 탈퇴
 	@GetMapping("/myTeamDelete")
 	public String myTeamDelete(HttpSession session) {
 		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
