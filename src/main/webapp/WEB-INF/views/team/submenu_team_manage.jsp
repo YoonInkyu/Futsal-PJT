@@ -27,7 +27,7 @@
 			</div>
 
 			<div class="col-6 text-starts align-self-center">
-				<h2 style="border-bottom: 3px solid gray;">팀 관리</h2>
+				<h2 style="border-bottom: 3px solid gray;">팀 관 리</h2>
 			</div>
 
 		</div>
@@ -42,7 +42,7 @@
 							<div class="accordion-item">
 								<h2 class="accordion-header" id="panelsStayOpen-headingOne">
 									<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-										<img src="/resources/img/common/img2.png" width="6%">가입 요청 리스트
+										<img style="margin-right: 1rem;" src="/resources/img/common/img2.png" width="6%">가입 요청 리스트
 									</button>
 								</h2>
 								<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
