@@ -13,7 +13,7 @@ $(document).ready(function(){
     	   alert('이미 팀이 있습니다.');
        }
        else{
-    	   alert('가입신청이 되었습니다.');
+    	   
           location.href='insertTeamApply?teamCode='+teamCode+'&memberCode='+memberCode;
        }
            

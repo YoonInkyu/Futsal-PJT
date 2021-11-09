@@ -96,7 +96,7 @@
 
 							<tr>
 
-								<td><img src="/resources/img/team/${teamList.teamLogoImgOrignName }" width="30%"></td>
+								<td><img src="/resources/img/team/${teamList.teamLogoImgAttachedName }" width="30%"></td>
 								<td>${teamList.teamName }</td>
 								<td>${teamList.memberCount }</td>
 								<td>

@@ -70,6 +70,8 @@ public interface TeamService {
 	// My팀 매치 경기 결과 관리
 	List<TeamMatchVO> myAfterMatchManage(String teamCode);
 	
+	// 가입신청 중복확인
+	String teamApplyCheck(TeamApplyVO teamApplyVO);
 	
 }
 

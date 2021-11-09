@@ -246,8 +246,25 @@ public class TeamController {
 	@GetMapping("/insertTeamApply")
 	public String insertTeamApply(TeamApplyVO teamApplyVO, Model model, HttpSession session) {
 		
-		 teamService.insertTeamApply(teamApplyVO);
-	      return "redirect:/team/selectTeamList";
+		if(teamService.teamApplyCheck(teamApplyVO) == null) {
+			
+			teamService.insertTeamApply(teamApplyVO);
+			model.addAttribute("msg", "신청 완료되었습니다");
+			model.addAttribute("url", "selectTeamList");
+			
+			
+			return "team/alert";
+			
+		}
+		else {
+			
+			model.addAttribute("msg", "이미 신청 되었습니다");
+			model.addAttribute("url", "selectTeamList");
+			
+			
+			return "team/alert";
+		}
+			
 	}
 	// 팀가입 승인
 	@GetMapping("/teamApplyApproval")

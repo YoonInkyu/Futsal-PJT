@@ -28,7 +28,7 @@
 		<id column="TEAM_CODE" 						property="teamCode"/>
 		<result column="TEAM_NAME" 					property="teamName" />				
 		<result column="TEAM_INTRO" 				property="teamIntro"/>
-		<result column="TEAM_LOGO_IMG_ORIGN_NAME"	property="teamLogoImgOrignName"/>
+		<result column="TEAM_LOGO_IMG_ATTACHED_NAME"	property="teamLogoImgAttachedName"/>
 		<result column="RANK_TOTAL_SCORE"			property="rankTotalScore"/>
 		<result column="MEMBER_NAME"				property="memberName"/>
 		<result column="MEMBER_GENDER"				property="memberGender"/>
@@ -168,6 +168,9 @@
 		SELECT T.TEAM_CODE
 	    , T.TEAM_NAME
 	    , TI.TEAM_LOGO_IMG_ATTACHED_NAME
+	    , R.RANK_WIN
+	    , R.RANK_DRAW
+	    , R.RANK_LOSE
 	    , R.RANK_TOTAL_SCORE
 	    , (SELECT COUNT(INNER_M.MEMBER_CODE) FROM MEMBER INNER_M , TEAM INNER_T
 	        WHERE INNER_T.TEAM_CODE = INNER_M.TEAM_CODE
@@ -311,6 +314,14 @@
 		AND MATCH_MANAGE.MATCH_MANAGE_RESPONSE = '수락'
 		AND MATCH_RESULT_HOMETEAM_SCORE IS NULL
 		ORDER BY MATCH_CODE
+	</select>
+	
+	<select id="teamApplyCheck" resultType="String">
+		SELECT 
+		    TEAM_CODE
+		FROM TEAM_APPLY
+		WHERE TEAM_CODE = #{teamCode}
+		AND MEMBER_CODE = #{memberCode} 
 	</select>
 	
 

@@ -140,6 +140,11 @@ public class TeamServiceImpl implements TeamService{
 		return sqlSession.selectList("teamMapper.myAfterMatchManage", teamCode);
 	}
 
+	@Override
+	public String teamApplyCheck(TeamApplyVO teamApplyVO) {
+		return sqlSession.selectOne("teamMapper.teamApplyCheck", teamApplyVO);
+	}
+
 
 	
 	
