@@ -76,8 +76,8 @@ public interface TeamService {
 	// 가입신청 중복확인
 	String teamApplyCheck(TeamApplyVO teamApplyVO);
 	
-	
-	//
+	// 팀 리스트 데이터 개수 조회
+	int selectTeamCnt(TeamVO teamVO);
 	
 }
 

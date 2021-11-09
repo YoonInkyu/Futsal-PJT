@@ -148,6 +148,12 @@ public class TeamServiceImpl implements TeamService{
 		return sqlSession.selectOne("teamMapper.teamApplyCheck", teamApplyVO);
 	}
 
+	//팀 리스트 데이터 개수 조회
+	@Override
+	public int selectTeamCnt(TeamVO teamVO) {
+		return sqlSession.selectOne("teamMapper.selectTeamCnt", teamVO);
+	}
+
 
 	
 	

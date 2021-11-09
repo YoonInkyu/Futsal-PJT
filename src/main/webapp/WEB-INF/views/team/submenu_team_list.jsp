@@ -39,7 +39,7 @@
 
 
 		<!-- 검색 기능 -->
-		<form action="/board/goNoticeList" method="post">
+		<form action="/team/selectTeamList" method="post">
 
 			<div class="row my-5">
 
@@ -49,13 +49,25 @@
 
 						<div class="col-3">
 							<select name="searchKeyword" class="form-select form-select" aria-label=".form-select-lg example">
-								<option value="팀이름" selected>팀 이름</option>
-								<option value="팀원">팀 원</option>
+							<c:if test="${teamVO.searchKeyword == null}">
+								<option value="T.TEAM_NAME" selected>팀 이름</option>
+								<option value="M.MEMBER_NAME">팀 원</option>
+							</c:if>
+							<c:if test="${teamVO.searchKeyword != null}">
+								<c:if test="${teamVO.searchKeyword eq 'T.TEAM_NAME' }">
+								<option value="T.TEAM_NAME" selected>팀 이름</option>
+								<option value="M.MEMBER_NAME">팀 원</option>
+								</c:if>
+								<c:if test="${teamVO.searchKeyword eq 'M.MEMBER_NAME' }">
+								<option value="T.TEAM_NAME">팀 이름</option>
+								<option value="M.MEMBER_NAME" selected>팀 원</option>
+								</c:if>
+							</c:if>
 							</select>
 						</div>
 
 						<div class="col">
-							<input name="searchValue" class="form-control" type="search" placeholder="Search" aria-label="Search" value="${boardNoticeVO.searchValue}">
+							<input name="searchValue" class="form-control" type="search" placeholder="Search" aria-label="Search" value="${teamVO.searchValue}">
 						</div>
 
 						<div class="col-1">
@@ -126,7 +138,7 @@
 
 
 		<!-- 페이징 기능 -->
-		<c:if test="${boardNoticeVO.totalCnt != 0 }">
+		<c:if test="${teamVO.totalCnt != 0 }">
 
 			<div class="row mt-5">
 
@@ -135,14 +147,14 @@
 					<nav aria-label="Page navigation example">
 
 						<ul class="pagination justify-content-center m-0 p-0">
-							<li class="page-item <c:if test="${!boardNoticeVO.prev }">disabled</c:if>"><a class="page-link" aria-label="Previous" href="/board/goNoticeList?nowPage=${boardNoticeVO.beginPage - 1 }"> <span aria-hidden="true">&laquo;</span>
+							<li class="page-item <c:if test="${!teamVO.prev }">disabled</c:if>"><a class="page-link" aria-label="Previous" href="/board/goNoticeList?nowPage=${teamVO.beginPage - 1 }"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
 
-							<c:forEach begin="${boardNoticeVO.beginPage }" end="${boardNoticeVO.endPage }" var="pageNumber">
-								<li class="page-item <c:if test="${boardNoticeVO.nowPage eq pageNumber }">active</c:if>"><a class="page-link" href="/board/goNoticeList?nowPage=${pageNumber }&searchKeyword=${boardNoticeVO.searchKeyword}&searchValue=${boardNoticeVO.searchValue}">${pageNumber }</a></li>
+							<c:forEach begin="${teamVO.beginPage }" end="${teamVO.endPage }" var="pageNumber">
+								<li class="page-item <c:if test="${teamVO.nowPage eq pageNumber }">active</c:if>"><a class="page-link" href="/board/goNoticeList?nowPage=${pageNumber }&searchKeyword=${teamVO.searchKeyword}&searchValue=${teamVO.searchValue}">${pageNumber }</a></li>
 							</c:forEach>
 
-							<li class="page-item <c:if test="${!boardNoticeVO.next }">disabled</c:if>"><a class="page-link" href="/board/goNoticeList?nowPage=${boardNoticeVO.endPage + 1 }"> <span aria-hidden="true">&raquo;</span></a></li>
+							<li class="page-item <c:if test="${!teamVO.next }">disabled</c:if>"><a class="page-link" href="/board/goNoticeList?nowPage=${teamVO.endPage + 1 }"> <span aria-hidden="true">&raquo;</span></a></li>
 
 						</ul>
 

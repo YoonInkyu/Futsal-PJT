@@ -205,8 +205,14 @@ public class TeamController {
 	}
 	
 	// 팀 리스트 조회 
-	@GetMapping("/selectTeamList")
+	@RequestMapping("/selectTeamList")
 	public String selectTeamList(Model model, TeamVO teamVO, String menuVideo, String menuName) {
+		// 팀 리스트 개수 조회
+		teamVO.setTotalCnt(teamService.selectTeamCnt(teamVO));
+		
+		//페이징 처리
+		teamVO.setPageInfo();
+		
 		model.addAttribute("teamList", teamService.selectTeamList(teamVO)); 
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video5");

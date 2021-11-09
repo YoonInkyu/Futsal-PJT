@@ -3,7 +3,9 @@
 
 package com.kh.project.team.vo;
 
-public class TeamVO {
+import com.kh.project.common.vo.PageVO;
+
+public class TeamVO extends PageVO {
 	private String teamCode;
 	private String teamName;
 	private String memberCode;

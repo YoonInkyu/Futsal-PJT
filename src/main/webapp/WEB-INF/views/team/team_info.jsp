@@ -21,6 +21,7 @@
 					//ajax 실행 성공 시 실행되는 구간
 					//셀렉트바로 수정해야 함.
 					//$('.aa').remove()
+			
 					var str = '';
 					str += '<input type="file" name="teamLogo" onclick="clickImg()" onchange="readURL(this);">'
 					str += '<img src="/resources/img/common/'+result.teamLogoImgAttachedName+'" id="preview" class="img-thumbnail">'
@@ -28,8 +29,7 @@
 
 					$('.cc').remove()
 					var str = '';
-					str += '<div class="mb-3 cc">지 역 :'
-					str += '<select class="form-select" name="teamLocation">'
+					str += '<select class=" cc form-control" id="mercBoardSort" name="teamLocation">'
 					if (result.teamLocation == '서울') {
 						str += '<option value="서울" selected>서울</option>';
 						str += '<option value="경기">경기</option>';
@@ -53,17 +53,17 @@
 					}
 					str += '</select>';
 					str += '</div>';
-					$('.c').prepend(str);
+					$('.c').append(str);
 
 					$('.dd').remove()
 					var str = '';
-					str += '<textarea class="form-control dd" id="floatingTextarea2" name="teamIntro" style="width: 26rem; height: 16rem;">' + result.teamIntro + '</textarea>';
+					str += '<textarea style="height: 15rem;" class="dd form-control mercBoardIntro" id="mercBoardIntro" name="teamIntro">' + result.teamIntro + '</textarea>';
 					$('.d').prepend(str);
-
+						
+					
 					$('.ee').remove()
 					var str = '';
-					str += '<h5 class="ee">팀명 : <input type="text" name="teamName" value="' + result.teamName + '"></h5>';
-
+					str += '<input type="text" class="ee form-control" id="mercBoardSort" name="teamName" value="' + result.teamName + '">';
 					$('.e').append(str);
 
 					$('#change').attr('type', 'submit')
@@ -111,15 +111,15 @@
 
 					<div class="e row mx-3 my-4">
 						<label for="mercBoardSort" class="form-label">팀 명</label> 
-						<input type="text" class="form-control" id="mercBoardSort" value="${myTeam.teamName }" readonly>
+						<input type="text" class="ee form-control" id="mercBoardSort" value="${myTeam.teamName }" readonly>
 					</div>
 
-					<div class="e row mx-3 my-4">
-						<label for="mercBoardSort" class="form-label">지 역</label> 
-						<input type="text" class="form-control" id="mercBoardSort" value="${myTeam.teamLocation }" readonly>
+					<div class="c row mx-3 my-4">
+						<label for="mercBoardSort" class=" form-label">지 역</label> 
+						<input type="text" class="cc form-control" id="mercBoardSort" value="${myTeam.teamLocation }" readonly>
 					</div>
 
-					<div class="e mx-3 my-4">
+					<div class="mx-3 my-4">
 						<label for="mercBoardSort" class="form-label">구 단 주</label> 
 						<input type="text" class="form-control" id="mercBoardSort" value="${myTeam.masterName }" readonly>
 					</div>
@@ -130,8 +130,8 @@
 				<div class="col-3">
 
 					<div class="mx-3 my-4 inputIntroDiv">
-						<label for="mercBoardIntro"> 팀 소개</label>
-						<textarea style="height: 15rem;" class="form-control mercBoardIntro" id="mercBoardIntro" readonly>${myTeam.teamIntro }</textarea>
+						<label for="mercBoardIntro" class="d"> 팀 소개</label>
+						<textarea style="height: 15rem;" class="dd form-control mercBoardIntro" id="mercBoardIntro" readonly>${myTeam.teamIntro }</textarea>
 					</div>
 
 				</div>
