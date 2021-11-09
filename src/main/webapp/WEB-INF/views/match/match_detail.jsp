@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		//수정 ajax
 		$(document).on('click', '#change', function() {
 			var matchCode = $(this).prev().prev().val()
@@ -168,16 +170,17 @@ input[type=number] {
 						<label for="matchRank">작성팀 매치전적</label>
 					</div>
 					<div class="col-2">
-						<input type="text" class="form-control" id="matchRank" value="${matchVO.rankWin }승" readonly>
+						<input type="text" class="form-control" id="matchWin" value="${matchVO.rankWin }승" readonly>
 					</div>
 					<div class="col-2">
-						<input type="text" class="form-control" id="matchRank" value="${matchVO.rankDraw }무" readonly>
+						<input type="text" class="form-control" id="matchDraw" value="${matchVO.rankDraw }무" readonly>
 					</div>
 					<div class="col-2">
-						<input type="text" class="form-control" id="matchRank" value="${matchVO.rankLose }패" readonly>
+						<input type="text" class="form-control" id="matchLose" value="${matchVO.rankLose }패" readonly>
 					</div>
 					<div class="col">
-						<input type="text" class="form-control" id="matchRank" value="승율 : ${(matchVO.rankWin / (matchVO.rankWin + matchVO.rankDraw + matchVO.rankLose)) * 100  } %" readonly>
+						<c:set var="matchRate" value="${(matchVO.rankWin / (matchVO.rankWin + matchVO.rankDraw + matchVO.rankLose)) * 100  }"/>
+						<input type="text" class="form-control matchRate" id="matchRate" value="승률 : <fmt:formatNumber value="${matchRate}" pattern="0.00" /> %" readonly>
 					</div>
 				</div>
 				
