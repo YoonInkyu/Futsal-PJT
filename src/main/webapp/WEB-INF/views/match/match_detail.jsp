@@ -69,7 +69,8 @@
 
 		//결과 등록 ajax
 		$(document).on('click', '#matchResult', function() {
-			var matchCode = $(this).prev().prev().val()
+			var matchCode = $(this).prev().val()
+			alert(matchCode)
 
 			$.ajax({
 				url : '/match/matchDetailAjax', //요청경로
@@ -264,8 +265,7 @@ input[type=number] {
 			<thead>
 				<tr>
 					<th scope="col">팀 이름</th>
-					<!-- 가능하면 랭킹순위? -->
-					<!-- <th scope="col">랭킹순위</th> -->
+					<th scope="col">팀 전적</th>
 					<th scope="col">수락/거절</th>
 				</tr>
 			</thead>
@@ -273,6 +273,7 @@ input[type=number] {
 				<c:forEach items="${teamList }" var="team">
 					<tr>
 						<td>${team.teamName }</td>
+						<td>${team.rankWin }승 / ${team.rankDraw }무 / ${team.rankLose }패</td>
 						<td>
 							<c:choose>
 								<c:when test="${sessionScope.loginInfo.teamName eq matchVO.matchWriter && matchVO.matchPossible eq '1'}">

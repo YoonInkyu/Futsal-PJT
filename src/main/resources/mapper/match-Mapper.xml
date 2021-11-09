@@ -37,6 +37,9 @@
 		<result column="MEMBER_CODE"	 				property="memberCode"/>
 		<result column="MEMBER_TELL"	 				property="memberTell"/>
 		<result column="MATCH_DATE" 					property="matchDate"/>
+		<result column="RANK_WIN"	 					property="rankWin"/>
+		<result column="RANK_DRAW"	 					property="rankDraw"/>
+		<result column="RANK_LOSE"	 					property="rankLose"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.match.vo.MatchResultVO" id="matchResult">
@@ -298,10 +301,14 @@
             , MEMBER_NAME
 		    , MB.MEMBER_CODE
 		    , MEMBER_TELL
+            , RANK_WIN
+            , RANK_DRAW
+            , RANK_LOSE
             , (SELECT MATCH_DATE||' '||MATCH_START_TIME||' ~ '||MATCH_END_TIME FROM MATCH WHERE MATCH_CODE = #{matchCode}) AS MATCH_DATE
-		FROM MATCH_MANAGE M, TEAM T, MEMBER MB
+		FROM MATCH_MANAGE M, TEAM T, MEMBER MB, RANK R
         WHERE M.TEAM_CODE_AWAY = T.TEAM_CODE
         AND M.TEAM_CODE_AWAY = MB.TEAM_CODE
+        AND M.TEAM_CODE_AWAY = R.TEAM_CODE
         AND MB.MEMBER_CODE = T.MEMBER_CODE
         AND MATCH_CODE = #{matchCode}
 	</select>

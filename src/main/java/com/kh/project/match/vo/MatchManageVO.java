@@ -10,7 +10,28 @@ public class MatchManageVO {
 	private String memberCode;
 	private String memberTell;
 	private String matchDate;
+	private String rankWin;
+	private String rankDraw;
+	private String rankLose;
 	
+	public String getRankWin() {
+		return rankWin;
+	}
+	public void setRankWin(String rankWin) {
+		this.rankWin = rankWin;
+	}
+	public String getRankDraw() {
+		return rankDraw;
+	}
+	public void setRankDraw(String rankDraw) {
+		this.rankDraw = rankDraw;
+	}
+	public String getRankLose() {
+		return rankLose;
+	}
+	public void setRankLose(String rankLose) {
+		this.rankLose = rankLose;
+	}
 	public String getMatchDate() {
 		return matchDate;
 	}
