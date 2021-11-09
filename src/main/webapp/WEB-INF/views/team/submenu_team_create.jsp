@@ -16,7 +16,7 @@
 
 
 
-	<div class="container col-6 mx-auto">
+	<div class="container col-7 mx-auto">
 
 		<form action="/team/regTeam" method="post" enctype="multipart/form-data">
 
