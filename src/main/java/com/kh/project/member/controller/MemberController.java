@@ -144,7 +144,9 @@ public class MemberController {
 		String teamCode = ((MemberVO)session.getAttribute("loginInfo")).getTeamCode();
 		model.addAttribute("member",memberService.myPage(memberCode));
 		model.addAttribute("MymercBoardList",mercenaryService.MyMercBoard(memberCode));
+		model.addAttribute("MyRequestmercBoardList",mercenaryService.MyRequestMercBoard(memberCode));
 		model.addAttribute("matchList", matchService.MyMatchList(teamCode));
+		model.addAttribute("requestMatchList", matchService.MyRequestMatchList(teamCode));
 		model.addAttribute("menuList", menuService.selectMenu());
 		model.addAttribute("menuVideo", "video3");
 		model.addAttribute("menuName", "마이 페이지");

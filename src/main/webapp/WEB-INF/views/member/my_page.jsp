@@ -162,6 +162,97 @@
 					</div>
 				</div>
 			</section>
+			
+			<div class="col mx-5 mt-5">
+				<h2 style="border-bottom: 3px solid gray;">나의 최신 신청글</h2>
+			</div>
+			<section class="about-me-section p-3 p-lg-5 theme-bg-light">
+				<div class="container">
+					<div class="m-5">
+						<h3 style="border-bottom: 2px solid blue;">용 병 구인 / 구직</h3>
+					</div>
+					<div class="profile-teaser text-center">
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th scope="col" width="10%">구분</th>
+									<th scope="col" width="10%">지역</th>
+									<th scope="col" width="*%">매치일자</th>
+									<th scope="col" width="10%">신청인원</th>
+									<th scope="col" width="15%">작성자</th>
+									<th scope="col" width="15%">작성일자</th>
+									<th scope="col" width="10%">신청</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${MyRequestmercBoardList }" var="requestMercBoard" begin="0" end="4">
+									<tr data-bs-toggle="modal" data-bs-target="#recruitDetailModal" onclick="recruitInfo1('${requestMercBoard.mercBoardCode}')">
+										<td>${requestMercBoard.mercBoardSort }</td>
+										<td>${requestMercBoard.mercBoardLocation }</td>
+										<td>${requestMercBoard.mercBoardDate } / ${requestMercBoard.mercBoardStartTime } ~ ${requestMercBoard.mercBoardEndTime }</td>
+										<td>${requestMercBoard.mercBoardApplyNumber }명</td>
+										<td>${requestMercBoard.memberId }</td>
+										<td>${requestMercBoard.mercBoardRegdate }</td>
+										<c:choose>
+											<c:when test="${requestMercBoard.mercBoardPossible eq '1' }">
+												<td><button type="button" class="btn btn-info">신청</button></td>
+											</c:when>
+											<c:otherwise>
+												<td><button type="button" class="btn btn-danger">마감</button></td>
+											</c:otherwise>
+										</c:choose>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+			<section class="about-me-section p-3 p-lg-5 theme-bg-light">
+				<div class="container">
+					<div class="m-5">
+						<h3 style="border-bottom: 2px solid blue;">매 치 신 청</h3>
+					</div>
+					<div class="profile-teaser text-center">
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th scope="col" width="10%">지역</th>
+									<th scope="col" width="*%">매치일자</th>
+									<th scope="col" width="15%">신청팀</th>
+									<th scope="col" width="15%">작성팀</th>
+									<th scope="col" width="15%">작성일자</th>
+									<th scope="col" width="10%">신청</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${requestMatchList }" var="requestMatch" begin="0" end="4">
+									<tr data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo2('${requestMatch.matchCode}')">
+										<td>${requestMatch.matchLocation }</td>
+										<td>${requestMatch.matchDate }${requestMatch.matchStartTime }~${requestMatch.matchEndTime }</td>
+										<td>${requestMatch.matchApplyNum }명</td>
+										<td>${requestMatch.matchWriter }</td>
+										<td>${requestMatch.matchRegdate }</td>
+										<c:choose>
+											<c:when test="${requestMatch.matchPossible eq '1' }">
+												<td><button type="button" class="btn btn-info">신청</button></td>
+											</c:when>
+											<c:otherwise>
+												<td><button type="button" class="btn btn-danger">마감</button></td>
+											</c:otherwise>
+										</c:choose>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+			
+			
+			
+			
+			
 		</div>
 	</div>
 

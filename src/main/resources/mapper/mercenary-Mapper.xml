@@ -228,6 +228,62 @@
 		        )
 		)
 	</select>
+	<!-- 나의 용병 구인구직 신청글보기-->
+	<select id="MyRequestMercBoard" resultMap="mercenary">
+		SELECT MERC_BOARD_CODE
+            , MERC_BOARD_SORT
+            , MERC_BOARD_WRITER
+            , MERC_BOARD_INTRO
+            , MERC_BOARD_REGDATE
+            , MERC_BOARD_APPLYNUMBER
+            , MERC_BOARD_DATE
+            , MERC_BOARD_START_TIME
+            , MERC_BOARD_END_TIME
+            , MERC_BOARD_POSSIBLE
+            , MERC_BOARD_LOCATION
+            , TEAM_CODE
+            , MEMBER_CODE
+            , MEMBER_ID
+		    , ROW_NUM
+		FROM (
+		    SELECT MERC_BOARD_CODE
+                , MERC_BOARD_SORT
+                , MERC_BOARD_WRITER
+                , MERC_BOARD_INTRO
+                , MERC_BOARD_REGDATE
+                , MERC_BOARD_APPLYNUMBER
+                , MERC_BOARD_DATE
+                , MERC_BOARD_START_TIME
+                , MERC_BOARD_END_TIME
+                , MERC_BOARD_POSSIBLE
+                , MERC_BOARD_LOCATION
+                , TEAM_CODE
+                , MEMBER_CODE
+                , MEMBER_ID
+		        , ROWNUM AS ROW_NUM
+		    FROM (
+		            SELECT A.MERC_BOARD_CODE
+                        , MERC_BOARD_SORT
+                        , MERC_BOARD_WRITER
+                        , MERC_BOARD_INTRO
+                        , TO_CHAR(MERC_BOARD_REGDATE, 'YYYY-MM-DD') AS MERC_BOARD_REGDATE
+                        , MERC_BOARD_APPLYNUMBER
+                        , MERC_BOARD_DATE
+                        , MERC_BOARD_START_TIME
+                        , MERC_BOARD_END_TIME
+                        , MERC_BOARD_POSSIBLE
+                        , MERC_BOARD_LOCATION
+                        , MB.TEAM_CODE AS TEAM_CODE
+                        , MB.MEMBER_CODE AS MEMBER_CODE
+                        , MEMBER_ID
+                    FROM MERCENARY_BOARD MB, MEMBER M, MERC_APPLYLIST A
+                    WHERE MB.MEMBER_CODE = M.MEMBER_CODE 
+                    AND MB.MERC_BOARD_CODE = A.MERC_BOARD_CODE
+                    AND A.MEMBER_CODE = #{memberCode}
+		            ORDER BY MERC_BOARD_CODE DESC
+		        )
+		)
+	</select>
 	
 	<!-- 용병 구인구직 상세보기 -->
 	<select id="selectMercDetail" resultMap="mercenary">

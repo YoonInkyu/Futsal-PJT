@@ -104,6 +104,10 @@ public class MatchServiceImpl implements MatchService {
 	public List<MatchVO> MyMatchList(String teamCode) {
 		return sqlSession.selectList("matchMapper.MyMatchList", teamCode);
 	}
+	@Override
+	public List<MatchVO> MyRequestMatchList(String teamCode) {
+		return sqlSession.selectList("matchMapper.MyRequestMatchList", teamCode);
+	}
 
 	//매치 신청 가능 여부 확인
 	@Override
@@ -111,6 +115,7 @@ public class MatchServiceImpl implements MatchService {
 		String result = sqlSession.selectOne("matchMapper.checkMatchApply", matchManageVO);
 		return result == null ? true : false;
 	}
+
 
 	//홈팀 랭킹 입력
 	//@Override

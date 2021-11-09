@@ -77,6 +77,10 @@ public class MercenaryServiceImpl implements MercenaryService{
 	public List<MercenaryVO> MyMercBoard(String memberCode) {
 		return sqlSession.selectList("mercenaryMapper.MyMercBoard", memberCode);
 	}
+	@Override
+	public List<MercenaryVO> MyRequestMercBoard(String memberCode) {
+		return sqlSession.selectList("mercenaryMapper.MyRequestMercBoard", memberCode);
+	}
 
 	//용병 구인구직 삭제
 	@Override
@@ -91,6 +95,7 @@ public class MercenaryServiceImpl implements MercenaryService{
 		String result = sqlSession.selectOne("mercenaryMapper.checkMercApply", mercenaryListVO);
 		return result == null ? true : false;
 	}
+
 
 	
 
