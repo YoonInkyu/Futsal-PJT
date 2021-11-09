@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/board/js/board_free_detail.js?ver=1"></script>
+<script type="text/javascript" src="/resources/board/js/board_free_detail.js?ver=3"></script>
 </head>
 <body>
 

@@ -7,6 +7,12 @@ $(document).ready(function(){
 	addMemberBlack = function(){
 		var blackMemberId = $('#memberMenuButt').val();
 		var blackComment = $('#blackComment').val();
+		
+		if(blackComment == ''){
+			alert('사유를 입력해주세요.');
+			
+		}
+		else{
 			$.ajax({
 	            url: '/member/checkMemberBlack', //요청경로
 	            type: 'post',
@@ -44,5 +50,6 @@ $(document).ready(function(){
 	               alert('실패');
 	            }
 	      });
+		}
 	}
 })(jQuery);
