@@ -34,7 +34,7 @@
 			</div>
 
 			<div class="col">
-				<img src="/resources/img/member/${memberDetail.memberImgAttachedName }" style="height: 180px; object-fit: cover;">
+				<i class="bi bi-camera-fill"></i><img class="img-thumbnail" src="/resources/img/member/${memberDetail.memberImgAttachedName }" style="height: 180px; object-fit: cover;">
 			</div>
 		</div>
 

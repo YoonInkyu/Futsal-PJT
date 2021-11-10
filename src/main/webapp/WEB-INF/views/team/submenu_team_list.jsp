@@ -47,7 +47,7 @@
 
 					<div class="row mx-auto">
 
-						<div class="col-2">
+						<div class="col-3">
 							<select name="searchKeyword" class="form-select form-select" aria-label=".form-select-lg example">
 							<c:if test="${teamVO.searchKeyword == null}">
 								<option value="T.TEAM_NAME" selected>팀 이름</option>
@@ -105,7 +105,7 @@
 
 							<tr>
 
-								<td><img src="/resources/img/team/${teamList.teamLogoImgAttachedName }" width="30%"></td>
+								<td><i class="bi bi-camera-fill"></i><img class="img-thumbnail" src="/resources/img/team/${teamList.teamLogoImgAttachedName }" style="height: 38px; object-fit: cover;"></td>
 								<td>${teamList.teamName }</td>
 								<td>${teamList.memberCount }</td>
 								<td>

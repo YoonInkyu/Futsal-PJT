@@ -47,10 +47,10 @@
 
                      <tr>
                         <c:if test="${not empty teamDetail.memberImgAttachedName  }">
-                        <td><img style="height: 38px; object-fit: cover;" src="/resources/img/member/${teamDetail.memberImgAttachedName }"></td>
+                        <td><i class="bi bi-camera-fill"></i><img class="img-thumbnail"  style="height: 38px; object-fit: cover;" src="/resources/img/member/${teamDetail.memberImgAttachedName }"></td>
                         </c:if>
                         <c:if test="${empty teamDetail.memberImgAttachedName  }">
-                        <td><img style="height: 38px; object-fit: cover;" src="/resources/img/member/nullImg.png"></td>
+                        <td><i class="bi bi-camera-fill"></i><img class="img-thumbnail"  style="height: 38px; object-fit: cover;" src="/resources/img/member/nullImg.png"></td>
                         </c:if>
                         <td>${teamDetail.memberName }</td>
                         <td>${teamDetail.memberGender }</td>

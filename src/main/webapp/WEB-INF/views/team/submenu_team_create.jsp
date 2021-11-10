@@ -95,7 +95,7 @@
 
 						<div class="d-flex justify-content-around" id="buttonDiv">
 							<button style="width: 10rem;" class="btn btn-outline-primary" id="createTeam" type="submit" disabled>등 록</button>
-							<button style="width: 10rem;" class="btn btn-danger" type="button">취 소</button>
+							<a style="width: 10rem;" class="btn btn-danger" type="button" href="/team/selectTeamList">취 소</a>
 						</div>
 
 
