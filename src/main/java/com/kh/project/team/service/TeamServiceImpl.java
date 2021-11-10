@@ -142,7 +142,7 @@ public class TeamServiceImpl implements TeamService{
 	public List<TeamMatchVO> myAfterMatchManage(String teamCode) {
 		return sqlSession.selectList("teamMapper.myAfterMatchManage", teamCode);
 	}
-
+	// 팀가입 신청시 팀가입여부 확인
 	@Override
 	public String teamApplyCheck(TeamApplyVO teamApplyVO) {
 		return sqlSession.selectOne("teamMapper.teamApplyCheck", teamApplyVO);

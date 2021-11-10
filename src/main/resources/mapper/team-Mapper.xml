@@ -186,28 +186,15 @@
                     , (SELECT COUNT(INNER_M.MEMBER_CODE) FROM MEMBER INNER_M , TEAM INNER_T
                         WHERE INNER_T.TEAM_CODE = INNER_M.TEAM_CODE
                         AND INNER_T.TEAM_CODE = T.TEAM_CODE) AS MEMBERCOUNT
-                    FROM TEAM_LOGO_IMG TI, TEAM T
+                    FROM TEAM_LOGO_IMG TI, TEAM T, MEMBER M
                     WHERE T.TEAM_CODE = TI.TEAM_CODE
+                    AND   T.MEMBER_CODE = M.MEMBER_CODE
                     <if test="searchValue != null and !searchValue.equals('')">
                     AND ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
                     </if>
 		        )
 		)
 		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
-<!-- 		SELECT T.TEAM_CODE -->
-<!-- 	    , T.TEAM_NAME -->
-<!-- 	    , TI.TEAM_LOGO_IMG_ATTACHED_NAME -->
-<!-- 	    , R.RANK_WIN -->
-<!-- 	    , R.RANK_DRAW -->
-<!-- 	    , R.RANK_LOSE -->
-<!-- 	    , R.RANK_TOTAL_SCORE -->
-<!-- 	    , (SELECT COUNT(INNER_M.MEMBER_CODE) FROM MEMBER INNER_M , TEAM INNER_T -->
-<!-- 	        WHERE INNER_T.TEAM_CODE = INNER_M.TEAM_CODE -->
-<!-- 	       AND INNER_T.TEAM_CODE = T.TEAM_CODE) AS MEMBERCOUNT      -->
-<!-- 		FROM RANK R, TEAM_LOGO_IMG TI, TEAM T -->
-<!-- 		WHERE T.TEAM_CODE = TI.TEAM_CODE  -->
-<!-- 		AND T.TEAM_CODE = R.TEAM_CODE -->
-<!-- 		ORDER BY RANK_TOTAL_SCORE DESC -->
 	</select>
 	
 	<!-- 팀 리스트 데이터 개수 조회 -->
@@ -264,7 +251,7 @@
         FROM MEMBER M
         WHERE M.MEMBER_CODE = #{memberCode}
 	</select>
-	
+	<!-- 가입 신청시 신청정보  -->
 	<insert id="insertTeamApply">
 	INSERT INTO TEAM_APPLY(
     APPLY_CODE
@@ -276,7 +263,7 @@
     	, #{memberCode}
     	)
 	</insert>
-	
+	<!--팀 가입 신청  -->
 	<select id="selectApplyMember" resultMap="teamView">
 		SELECT 
 		M.MEMBER_CODE
@@ -365,6 +352,7 @@
 		ORDER BY MATCH_CODE
 	</select>
 	
+	<!--  팀가입 신청시 팀가입여부 확인 -->
 	<select id="teamApplyCheck" resultType="String">
 		SELECT 
 		    TEAM_CODE
