@@ -196,7 +196,7 @@
 		        , MATCH_POSSIBLE
 		        , ROWNUM AS ROW_NUM
 		    FROM (
-		            SELECT MATCH_CODE
+		            SELECT MATCH.MATCH_CODE
 		                , MATCH_LOCATION
 		                , MATCH_DATE
 		                , MATCH_START_TIME
@@ -205,9 +205,10 @@
 		                , MATCH_WRITER
 		                , TO_CHAR(MATCH_REGDATE, 'YYYY-MM-DD') AS MATCH_REGDATE
 		                , MATCH_POSSIBLE
-		            FROM MATCH
+		            FROM MATCH MATCH, MATCH_MANAGE MANAGE
 		            WHERE 1 = 1
-		            AND TEAM_CODE_AWAY = #{teamCode}
+                    AND MATCH.MATCH_CODE = MANAGE.MATCH_CODE
+                    AND MANAGE.TEAM_CODE_AWAY = #{teamCode}
 		            ORDER BY MATCH_CODE DESC
 		        )
 		)
