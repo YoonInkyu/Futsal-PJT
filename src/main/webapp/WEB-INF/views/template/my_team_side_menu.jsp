@@ -22,7 +22,7 @@
 
 		<div class="flex-shrink-0 p-3 bg-white my-5" style="width: 280px;">
 			<a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"> 
-			<img alt="" src="/resources/img/team/${myTeam.teamLogoImgAttachedName }" width="30%" height="30%"> <span class="fs-5 fw-semibold">${myTeam.teamName }</span>
+			<img alt="" src="/resources/img/team/${myTeam.teamLogoImgAttachedName }" style="height: 100px; object-fit: cover;"> <span class="fs-5 fw-semibold">&nbsp;&nbsp;&nbsp;${myTeam.teamName }</span>
 			</a>
 
 			<ul class="list-unstyled ps-0">

@@ -34,7 +34,7 @@
 			</div>
 
 			<div class="col">
-				<img src="/resources/img/member/${memberDetail.memberImgAttachedName }" width="70%">
+				<img src="/resources/img/member/${memberDetail.memberImgAttachedName }" style="height: 180px; object-fit: cover;">
 			</div>
 		</div>
 
@@ -45,14 +45,6 @@
 		</c:if>
 		<button style="width: 10rem;" type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">취 소</button>
 	</div>
-
-
-
-
-
-
-
-
 
 </body>
 </html>

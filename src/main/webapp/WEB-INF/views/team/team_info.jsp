@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/team/js/team_info.js"></script>
+<script type="text/javascript" src="/resources/team/js/team_info.js?ver1"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(document).on('click', '#change', function() {
@@ -24,7 +24,7 @@
 					$('.aa').remove()
 					var str = '';
 					str += '<input type="file" class="form-control" id="inputGroupFile01" name="teamLogo" onchange="readURL(this);">'
-					str += '<img src="/resources/img/team/'+result.teamLogoImgAttachedName+'" id="preview" class="img-thumbnail">'
+					str += '<img src="/resources/img/team/'+result.teamLogoImgAttachedName+'" style="height: 260px; object-fit: cover;" id="preview" class="img-thumbnail">'
 					$('.a').prepend(str);
 
 					$('.cc').remove()
@@ -140,7 +140,7 @@
 				<div class="col">
 
 					<div class="a col-md-5 col-lg-5 align-self-center">
-						<img class="aa profile-image img-fluid mb-3 mb-lg-0 me-md-0" src="/resources/img/team/${myTeam.teamLogoImgAttachedName }" alt="">
+						<img class="aa profile-image img-fluid mb-3 mb-lg-0 me-md-0" style="height: 300px; object-fit: cover;" src="/resources/img/team/${myTeam.teamLogoImgAttachedName }" alt="">
 							<script type="text/javascript">
 								function readURL(input) {
 									if (input.files && input.files[0]) {

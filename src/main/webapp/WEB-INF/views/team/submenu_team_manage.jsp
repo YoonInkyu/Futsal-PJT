@@ -65,10 +65,10 @@
 														<tr>
 															<c:choose>
 																<c:when test="${not empty applyMember.memberImgAttachedName }">
-																	<td><img src="/resources/img/member/${applyMember.memberImgAttachedName }" width="30%"></td>
+																	<td><img src="/resources/img/member/${applyMember.memberImgAttachedName }" style="height: 38px; object-fit: cover;"></td>
 																</c:when>
 																<c:otherwise>
-																	<td><img src="/resources/img/member/nullImg.png" width="30%"></td>
+																	<td><img src="/resources/img/member/nullImg.png" style="height: 38px; object-fit: cover;"></td>
 																</c:otherwise>
 															</c:choose>
 															<td>${applyMember.memberName }</td>
@@ -132,10 +132,10 @@
 							<c:forEach items="${memberList }" var="member">
 								<tr>
 									<c:if test="${not empty member.memberImgAttachedName }">
-										<td><img src="/resources/img/member/${member.memberImgAttachedName }" width="30%"></td>
+										<td><img src="/resources/img/member/${member.memberImgAttachedName }" style="height: 38px; object-fit: cover;"></td>
 									</c:if>
 									<c:if test="${empty member.memberImgAttachedName }">
-										<td><img src="/resources/img/member/nullImg.png" width="30%"></td>
+										<td><img src="/resources/img/member/nullImg.png" style="height: 38px; object-fit: cover;"></td>
 									</c:if>
 									<td>${member.memberName }</td>
 									<td>${member.position }</td>
