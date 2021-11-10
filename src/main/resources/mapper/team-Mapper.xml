@@ -208,21 +208,23 @@
 	</select>
 	
 	
-	<!-- 팀 목록에서 팀원정보 조회 -->
-	<select id="selectTeamDetail" resultMap="teamView">
-		SELECT M.MEMBER_NAME
-		 , MEMBER_GENDER
-		 , MEMBER_TELL
-		 , TEAM_ADMIN	 
-		 , POSITION
-		 , (SELECT TEAM_NAME
-		 	FROM TEAM
-		 	WHERE TEAM_CODE = #{teamCode}) AS TEAM_NAME
-         , (SELECT MEMBER_IMG_ATTACHED_NAME
-            	FROM MEMBER_IMG
-            	WHERE MEMBER_CODE = M.MEMBER_CODE) AS MEMBER_IMG_ATTACHED_NAME 
-			FROM MEMBER M
-			WHERE M.TEAM_CODE = #{teamCode}
+	<!-- 팀 목록에서 팀상세정보 조회 -->
+	<select id="selectTeamDetail" resultMap="team">
+		SELECT 
+		    TI.TEAM_LOGO_IMG_ATTACHED_NAME
+		    , TEAM_NAME
+		    , TEAM_LOCATION
+		    , TEAM_INTRO
+		    , (SELECT COUNT(MEMBER_CODE)
+		        FROM MEMBER
+		        WHERE TEAM_CODE = #{teamCode}) AS MEMBERCOUNT
+		    , (SELECT MEMBER_NAME
+		        FROM MEMBER
+		        WHERE TEAM_CODE = #{teamCode}
+		        AND TEAM_ADMIN = '3') AS MASTER_NAME
+		FROM TEAM T, TEAM_LOGO_IMG TI
+		WHERE T.TEAM_CODE = TI.TEAM_CODE
+		AND T.TEAM_CODE = #{teamCode}
 	</select>
 	
 	<!-- 팀관리 팀원 조회 -->

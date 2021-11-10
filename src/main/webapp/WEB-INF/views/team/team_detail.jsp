@@ -14,12 +14,12 @@
    <div class="container">
 
 
-      <div class="modal-header">
+     <%--  <div class="modal-header">
       <c:forEach items="${teamDetail }" var="teamDetail" begin="0" end="0">
          <h5 class="modal-title" id="staticBackdropLabel">${teamDetail.teamName }</h5>
          </c:forEach>
          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+      </div> --%>
 
 
       <div class="modal-body my-3">
@@ -31,42 +31,38 @@
                <thead>
 
                   <tr>
-                     <th scope="col" width="15%">사 진</th>
-                     <th scope="col" width="15%">이 름</th>
-                     <th scope="col" width="15%">성 별</th>
-                     <th scope="col" width="*%">연 락 처</th>
-                     <th scope="col" width="15%">포 지 션</th>
-                     <th scope="col" width="15%">등 급</th>
+                     <th scope="col" width="15%">팀로고</th>
+                     <th scope="col" width="15%">팀 이 름</th>
+                     <th scope="col" width="15%">지 역</th>
+                     <th scope="col" width="*%">팀 소개</th>
+                     <th scope="col" width="15%">회원 수</th>
+                     <th scope="col" width="15%">팀장</th>
                   </tr>
 
                </thead>
 
                <tbody>
 
-                  <c:forEach items="${teamDetail }" var="teamDetail">
 
                      <tr>
-                        <c:if test="${not empty teamDetail.memberImgAttachedName  }">
-                        <td><i class="bi bi-camera-fill"></i><img class="img-thumbnail"  style="height: 38px; object-fit: cover;" src="/resources/img/member/${teamDetail.memberImgAttachedName }"></td>
+                        <%-- <c:if test="${not empty teamDetail.memberImgAttachedName  }">
+                        <td><img style="height: 38px; object-fit: cover;" src="/resources/img/member/${teamDetail.memberImgAttachedName }"></td>
                         </c:if>
                         <c:if test="${empty teamDetail.memberImgAttachedName  }">
-                        <td><i class="bi bi-camera-fill"></i><img class="img-thumbnail"  style="height: 38px; object-fit: cover;" src="/resources/img/member/nullImg.png"></td>
-                        </c:if>
-                        <td>${teamDetail.memberName }</td>
-                        <td>${teamDetail.memberGender }</td>
-                        <td>${teamDetail.memberTell }</td>
-                        <td>${teamDetail.position }</td>
-                        <td>
-                        	<c:if test="${teamDetail.teamAdmin eq '3' }" >
-                        	관리자
-                        	</c:if>
-                        	<c:if test="${teamDetail.teamAdmin eq '2' }" >
-							 팀원        	
-                        	</c:if>
-                        </td>
+                        <td><img style="height: 38px; object-fit: cover;" src="/resources/img/member/nullImg.png"></td>
+                        </c:if> --%>
+                        
+                        <td><img style="height: 38px; object-fit: cover;" src="/resources/img/team/${teamDetail.teamLogoImgAttachedName }"></td>
+                        <td>${teamDetail.teamName }</td>
+                        <td>${teamDetail.teamLocation}</td>
+                        <td>${teamDetail.teamIntro }</td>
+                        <td>${teamDetail.memberCount}</td>
+                        <td>${teamDetail.masterName }</td>
+ 
                      </tr>
 
-                  </c:forEach>
+                  <%-- <c:forEach items="${teamDetail }" var="teamDetail">
+                  </c:forEach> --%>
 
                </tbody>
 

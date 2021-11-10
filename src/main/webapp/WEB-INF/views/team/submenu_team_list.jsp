@@ -47,7 +47,7 @@
 
 					<div class="row mx-auto">
 
-						<div class="col-3">
+						<div class="col-2">
 							<select name="searchKeyword" class="form-select form-select" aria-label=".form-select-lg example">
 							<c:if test="${teamVO.searchKeyword == null}">
 								<option value="T.TEAM_NAME" selected>팀 이름</option>
@@ -105,12 +105,14 @@
 
 							<tr>
 
-								<td><i class="bi bi-camera-fill"></i><img class="img-thumbnail" src="/resources/img/team/${teamList.teamLogoImgAttachedName }" style="height: 38px; object-fit: cover;"></td>
+								<td><img src="/resources/img/team/${teamList.teamLogoImgAttachedName }" width="30%"></td>
 								<td>${teamList.teamName }</td>
 								<td>${teamList.memberCount }</td>
 								<td>
 									<!-- Button trigger modal -->
-									<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="teamDetail('${teamList.teamCode}')">상세보기</button> <!-- Modal --> <script type="text/javascript">
+									<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="teamDetail('${teamList.teamCode}')">상세보기</button>
+									 <!-- Modal --> 
+									<script type="text/javascript">
 										function teamDetail(teamCode) {
 											$(".modal-content").load("/team/teamDetail?teamCode=" + teamCode);
 										}
