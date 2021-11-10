@@ -67,10 +67,10 @@
 						<div class="col-md-5 col-lg-5 align-self-center" style="width: 300px;">
 							<c:choose>
 								<c:when test="${empty member.memberImgAttachedName}">
-									<img class="profile-image img-fluid mb-3 mb-lg-0 me-md-0" src="/resources/img/member/nullImg.png" alt="">
+									<img style="height: 330px; object-fit: cover;" class="profile-image img-fluid mb-3 mb-lg-0 me-md-0" src="/resources/img/member/nullImg.png" alt="">
 								</c:when>
 								<c:otherwise>
-									<img class="profile-image img-fluid mb-3 mb-lg-0 me-md-0" src="/resources/img/member/${member.memberImgAttachedName }" alt="">
+									<img style="height: 330px; object-fit: cover;" class="profile-image img-fluid mb-3 mb-lg-0 me-md-0" src="/resources/img/member/${member.memberImgAttachedName }" alt="">
 								</c:otherwise>
 							</c:choose>
 						</div>

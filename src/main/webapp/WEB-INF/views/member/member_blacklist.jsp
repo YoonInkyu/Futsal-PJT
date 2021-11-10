@@ -43,10 +43,10 @@
 								<c:if test="${blackInfo.blackName != null }">
 									<tr>
 										<c:if test="${not empty blackInfo.blackImg }">
-											<td><img src="/resources/img/member/${blackInfo.blackImg }" width="30%"></td>
+											<td><img src="/resources/img/member/${blackInfo.blackImg }" style="height: 38px; object-fit: cover;"></td>
 										</c:if>
 										<c:if test="${empty blackInfo.blackImg }">	
-											<td><img src="/resources/img/member/nullImg.png" width="30%"></td>
+											<td><img src="/resources/img/member/nullImg.png" style="height: 38px; object-fit: cover;"></td>
 										</c:if>
 										<td>${blackInfo.blackName }</td>
 										<td>${blackInfo.blackDate }</td>
@@ -73,7 +73,7 @@
 
 																<div class="col text-center">
 																	<div>
-																		<img alt="" src="/resources/img/member/nullImg.png" width="80%">
+																		<img alt="" src="/resources/img/member/nullImg.png" style="height: 180px; object-fit: cover;">
 																	</div>
 																</div>
 
