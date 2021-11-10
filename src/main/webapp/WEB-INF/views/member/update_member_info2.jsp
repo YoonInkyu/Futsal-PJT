@@ -24,10 +24,10 @@
 								<i class="bi bi-camera-fill"></i>
 								<c:choose>
 									<c:when test="${empty member.memberImgAttachedName}">
-										<img style="height: 200px; object-fit: cover;" src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="50%;" height="50%;">
+										<img style="height: 200px; object-fit: cover;" src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" >
 									</c:when>
 									<c:otherwise>
-										<img style="height: 200px; object-fit: cover;" src="/resources/img/member/${member.memberImgAttachedName }" id="preview" class="img-thumbnail" width="50%;" height="50%;">
+										<img style="height: 200px; object-fit: cover;" src="/resources/img/member/${member.memberImgAttachedName }" id="preview" class="img-thumbnail" >
 									</c:otherwise>
 								</c:choose>
 							</div>

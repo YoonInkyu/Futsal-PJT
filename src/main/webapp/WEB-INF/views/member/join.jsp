@@ -30,7 +30,7 @@ body {
 								<a class="navbar-brand" href="/templateLayout/main_page"><img src="/resources/img/common/bg4.png" width="50%" height=""></a>
 							</div>
 							<div class="text-center mb-5">
-								<i class="bi bi-camera-fill"></i> <img src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="50%;" height="50%;">
+								<i class="bi bi-camera-fill"></i> <img style="height: 190px; object-fit: cover;" src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="50%;" height="50%;">
 							</div>
 							<div class="input-group mb-5">
 								<label class="input-group-text bg-primary text-white" for="inputGroupFile01">선수 사진 등록</label> <input type="file" class="form-control" id="inputGroupFile01" name="memberImg" onchange="readURL(this);">
