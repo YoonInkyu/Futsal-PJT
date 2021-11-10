@@ -187,7 +187,7 @@
 
 				<!-- 로그인 이미지(이미지 불러 오고 링크 걸어서 정보로 갈수 있게 할 예정) -->
 				<div class="col-3 text-end">
-					<i class="bi bi-camera-fill"></i> <img src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="30%;" height="30%;">
+					<img style="height: 60px; object-fit: cover;" src="/resources/img/member/nullImg.png"  src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="30%;" height="30%;">
 				</div>
 
 
