@@ -46,7 +46,7 @@
 				<h5 class="mb-3" style="border-bottom: 2px solid blue;">매 치</h5>
 			</div>
 
-			<h3 class="m-5">팀 등록</h3>
+			<h3 class="m-5">매치 등록</h3>
 
 
 
@@ -67,13 +67,13 @@
 					<textarea rows="10px" name="matchIntro" class="form-control" id="inputIntro" required></textarea>
 				</div>
 				<div class="col mb-3">
-					<label for="selectDate" class="form-label">매치 날짜?</label> <input type="date" name="matchDate" class="form-control" id="selectDate" value="${today }" min="${today }" required>
+					<label for="selectDate" class="form-label">매치 날짜</label> <input type="date" name="matchDate" class="form-control" id="selectDate" value="${today }" min="${today }" required>
 				</div>
 				<div class="col mb-3">
-					<label for="selectTime" class="form-label">매치 시작 시간?</label> <input type="time" name="matchStartTime" class="form-control matchStartTime" id="selectTime" value="${time }" min="09:00" required>
+					<label for="selectTime" class="form-label">매치 시작 시간</label> <input type="time" name="matchStartTime" class="form-control matchStartTime" id="selectTime" value="${time }" min="09:00" required>
 				</div>
 				<div class="col mb-3">
-					<label for="selectTime" class="form-label">매치 끝나는 시간?</label> <input type="time" name="matchEndTime" class="form-control matchEndTime" id="selectTime" value="${time }" required>
+					<label for="selectTime" class="form-label">매치 끝나는 시간</label> <input type="time" name="matchEndTime" class="form-control matchEndTime" id="selectTime" value="${time }" required>
 				</div>
 				<div class="col mb-3">
 					<div class="row">

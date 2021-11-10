@@ -110,7 +110,6 @@
 		//결과 등록 ajax
 		$(document).on('click', '#matchResult', function() {
 			var matchCode = $(this).prev().val()
-			alert(matchCode)
 
 			$.ajax({
 				url : '/match/matchDetailAjax', //요청경로

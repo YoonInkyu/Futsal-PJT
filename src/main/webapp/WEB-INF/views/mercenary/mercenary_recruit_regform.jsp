@@ -26,7 +26,7 @@
 			var inputIntro = $('#inputIntro').val()
 
 			if (inputIntro == '') {
-				alert('팀 소개를 먼저 입력 해주세요.')
+				alert('자기 소개를 먼저 입력 해주세요.')
 			} else {
 				alert('용병 등록이 완료되었습니다.')
 			}
@@ -66,17 +66,17 @@
 					</select>
 				</div>
 				<div class="col mb-3">
-					<label for="inputIntro" class="form-label">팀 소개</label>
+					<label for="inputIntro" class="form-label">자기 소개</label>
 					<textarea rows="10px" name="mercBoardIntro" class="form-control" id="inputIntro" required></textarea>
 				</div>
 				<div class="col mb-3">
-					<label for="selectDate" class="form-label">매치 날짜?</label> <input type="date" name="mercBoardDate" class="form-control" id="selectDate" value="${today }" min="${today }" required>
+					<label for="selectDate" class="form-label">매치 날짜</label> <input type="date" name="mercBoardDate" class="form-control" id="selectDate" value="${today }" min="${today }" required>
 				</div>
 				<div class="col mb-3">
-					<label for="selectTime" class="form-label">매치 시작 시간?</label> <input type="time" name="mercBoardStartTime" class="form-control mercBoardStartTime" id="selectTime" value="${time }" min="09:00" required>
+					<label for="selectTime" class="form-label">매치 시작 시간</label> <input type="time" name="mercBoardStartTime" class="form-control mercBoardStartTime" id="selectTime" value="${time }" min="09:00" required>
 				</div>
 				<div class="col mb-3">
-					<label for="selectTime" class="form-label">매치 끝나는 시간?</label> <input type="time" name="mercBoardEndTime" class="form-control mercBoardEndTime" id="selectTime" value="${time }" required>
+					<label for="selectTime" class="form-label">매치 끝나는 시간</label> <input type="time" name="mercBoardEndTime" class="form-control mercBoardEndTime" id="selectTime" value="${time }" required>
 				</div>
 				<div class="col mb-3">
 					<div class="row">
