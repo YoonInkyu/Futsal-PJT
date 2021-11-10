@@ -105,7 +105,7 @@
 
 							<tr>
 
-								<td><img src="/resources/img/team/${teamList.teamLogoImgAttachedName }" width="30%"></td>
+								<td><i class="bi bi-camera-fill"></i><img class="img-thumbnail" src="/resources/img/team/${teamList.teamLogoImgAttachedName }" style="height: 38px; object-fit: cover;"></td>
 								<td>${teamList.teamName }</td>
 								<td>${teamList.memberCount }</td>
 								<td>

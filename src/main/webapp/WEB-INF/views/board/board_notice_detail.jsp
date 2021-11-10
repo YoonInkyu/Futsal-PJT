@@ -167,9 +167,17 @@
 			<div class="row mb-5 align-items-center">
 
 				<!-- 로그인 이미지(이미지 불러 오고 링크 걸어서 정보로 갈수 있게 할 예정) -->
+				<c:if test="${not empty replyNotice.writerImg}">
 				<div class="col-3 text-end">
-					<img style="height: 60px; object-fit: cover;" src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail" width="30%;" height="30%;">
+					<img style="height: 60px; object-fit: cover;" src="/resources/img/member/${replyNotice.writerImg }" id="preview" class="img-thumbnail" >
 				</div>
+				</c:if>
+				<c:if test="${empty replyNotice.writerImg}">
+				<div class="col-3 text-end">
+					<img style="height: 60px; object-fit: cover;" src="/resources/img/member/nullImg.png" id="preview" class="img-thumbnail">
+				</div>
+				</c:if>
+				
 
 
 

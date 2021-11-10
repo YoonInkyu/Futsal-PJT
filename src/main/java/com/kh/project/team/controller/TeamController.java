@@ -100,7 +100,7 @@ public class TeamController {
 	@PostMapping("/updateInfo") 
 	public String updateInfo(TeamVO teamVO, HttpSession session, MultipartHttpServletRequest multi) { 
 		// 첨부될 폴더 경로 지정
-		String uploadPath = "C:\\Users\\kh202-30\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\team\\";
+		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\team\\";
 		//String uploadPath = "C:\\Users\\User\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\team\\";
 		
 		// regTeam.jsp input파일의 name값 가져옴
@@ -159,7 +159,7 @@ public class TeamController {
 		//Iterator<String> inputName = multi.getFileNames();
 		
 		// 첨부될 폴더 경로 지정
-		String uploadPath = "C:\\Users\\kh202-30\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\team\\";
+		String uploadPath = "C:\\Users\\kh202-09\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\team\\";
 		//String uploadPath = "C:\\Users\\User\\git\\ProjectTest\\src\\main\\webapp\\resources\\img\\team\\";
 		
 		// regTeam.jsp input파일의 name값 가져옴

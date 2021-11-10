@@ -7,6 +7,15 @@ public class ReplyNoticeVO {
 	private String writerNotice;
 	private String createDateNotice;
 	private int boardNumNotice;
+	private String writerImg;
+
+	public String getWriterImg() {
+		return writerImg;
+	}
+
+	public void setWriterImg(String writerImg) {
+		this.writerImg = writerImg;
+	}
 
 	public int getReplyNumNotice() {
 		return replyNumNotice;

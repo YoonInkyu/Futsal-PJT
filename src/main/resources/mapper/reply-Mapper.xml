@@ -39,9 +39,12 @@
 		, TO_CHAR(CREATE_DATE_NOTICE, 'YYYY.MM.DD. HH24:MI') AS CREATE_DATE_NOTICE
 		, CONTENT_NOTICE
 		, REPLY_NUM_NOTICE
-		FROM REPLY_NOTICE
-		WHERE BOARD_NUM_NOTICE = #{boardNumNotice}
-		ORDER BY REPLY_NUM_NOTICE DESC
+		, MEMBER_IMG_ATTACHED_NAME AS WRITER_IMG
+		FROM REPLY_NOTICE R, MEMBER_VIEW M
+		WHERE MEMBER_ID = WRITER_NOTICE
+		AND BOARD_NUM_NOTICE = #{boardNumNotice}
+		ORDER
+		BY REPLY_NUM_NOTICE DESC
 	</select>
 
 
@@ -71,7 +74,7 @@
 
 
 
-	<!-- 공지사항 댓글 등록 -->
+	<!-- 자유게시판 댓글 등록 -->
 	<insert id="insertReplyFree">
 		INSERT INTO REPLY_FREE (
 		REPLY_NUM_FREE
@@ -87,21 +90,22 @@
 	</insert>
 
 
-	<!-- 공지사항 댓글 목록 조회 -->
+	<!-- 자유게시판 댓글 목록 조회 -->
 	<select id="selectReplyFreeList" resultMap="replyFree">
 		SELECT WRITER_FREE
 		, TO_CHAR(CREATE_DATE_FREE, 'YYYY.MM.DD. HH24:MI') AS CREATE_DATE_FREE
 		, CONTENT_FREE
-		, REPLY_NUM_FREE 
-        , MEMBER_IMG_ATTACHED_NAME AS WRITER_IMG
+		, REPLY_NUM_FREE
+		, MEMBER_IMG_ATTACHED_NAME AS WRITER_IMG
 		FROM REPLY_FREE R , MEMBER_VIEW M
 		WHERE MEMBER_ID = WRITER_FREE
-        AND BOARD_NUM_FREE = #{bardNumFree}
-		ORDER BY REPLY_NUM_FREE DESC
+		AND BOARD_NUM_FREE = #{bardNumFree}
+		ORDER BY REPLY_NUM_FREE
+		DESC
 	</select>
 
 
-	<!-- 공지사항 댓글 삭제 -->
+	<!-- 자유게시판 댓글 삭제 -->
 	<delete id="deleteReplyFree">
 		DELETE REPLY_FREE
 		WHERE REPLY_NUM_FREE = #{replyNumFree}

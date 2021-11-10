@@ -26,6 +26,7 @@ import com.kh.project.board.vo.BoardNoticeVO;
 import com.kh.project.board.vo.FreeImgVO;
 import com.kh.project.board.vo.NoticeImgVO;
 import com.kh.project.common.util.CurrentDateTime;
+import com.kh.project.member.service.MemberService;
 import com.kh.project.menu.service.MenuService;
 
 @Controller
@@ -46,6 +47,10 @@ public class BoardController {
 
 	@Resource(name = "menuService")
 	private MenuService menuService;
+	
+	@Resource(name = "memberService")
+	private MemberService memberService;
+	
 
 	// ==============================// 공지사항 //==============================//
 	// ==============================// 공지사항 //==============================//
@@ -82,6 +87,7 @@ public class BoardController {
 		// 댓글 조회
 		model.addAttribute("replyNoticeList", replyNoticeService.selectReplyNoticeList(boardNumNotice));
 
+		
 		// 이미지 조회
 		model.addAttribute("imgListNotice", boardNoticeService.selectImgListNotice(boardNumNotice));
 
