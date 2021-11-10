@@ -51,10 +51,12 @@
 								<label for="inputTell" class="form-label">지 역</label>
 								<div class="col mb-3 d-grid gap-2 d-md-flex">
 									<select name="teamLocation" class="form-select" aria-label="Default select example" id="inputTell">
-										<option value="서울" selected>서울</option>
+										<option selected value="서울">서울</option>
+										<option value="인천">인천</option>
 										<option value="대전">대전</option>
 										<option value="대구">대구</option>
 										<option value="부산">부산</option>
+										<option value="광주">광주</option>
 										<option value="울산">울산</option>
 									</select>
 

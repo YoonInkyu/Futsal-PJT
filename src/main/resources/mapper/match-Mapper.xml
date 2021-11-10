@@ -122,7 +122,7 @@
 		            	AND MATCH_POSSIBLE = '${searchKeyword}'
 		            </if>
 		            <if test="searchValue != null and !searchValue.equals('')">
-		           		AND MATCH_WRITER LIKE '%'||#{searchValue}||'%'
+		           		AND MATCH_WRITER LIKE '%'||LOWER(#{searchValue})||'%'
 		            </if>
 		            ORDER BY MATCH_CODE DESC
 		        )

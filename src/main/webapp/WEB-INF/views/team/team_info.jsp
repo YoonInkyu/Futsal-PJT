@@ -32,24 +32,60 @@
 					str += '<select class=" cc form-control" id="mercBoardSort" name="teamLocation">'
 					if (result.teamLocation == '서울') {
 						str += '<option value="서울" selected>서울</option>';
-						str += '<option value="경기">경기</option>';
+						str += '<option value="인천">인천</option>';
 						str += '<option value="대전">대전</option>';
 						str += '<option value="대구">대구</option>';
-					} else if (result.teamLocation == '경기') {
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산">울산</option>';
+					} else if (result.teamLocation == '인천') {
 						str += '<option value="서울">서울</option>';
-						str += '<option value="경기" selected>경기</option>';
+						str += '<option value="인천" selected>인천</option>';
 						str += '<option value="대전">대전</option>';
 						str += '<option value="대구">대구</option>';
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산">울산</option>';
 					} else if (result.teamLocation == '대전') {
 						str += '<option value="서울">서울</option>';
-						str += '<option value="경기">경기</option>';
+						str += '<option value="인천">인천</option>';
 						str += '<option value="대전" selected>대전</option>';
 						str += '<option value="대구">대구</option>';
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산">울산</option>';
 					} else if (result.teamLocation == '대구') {
 						str += '<option value="서울">서울</option>';
-						str += '<option value="경기">경기</option>';
+						str += '<option value="인천">인천</option>';
 						str += '<option value="대전">대전</option>';
 						str += '<option value="대구" selected>대구</option>';
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산">울산</option>';
+					} else if (result.teamLocation == '부산') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="인천">인천</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구">대구</option>';
+						str += '<option value="부산" selected>부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산">울산</option>';
+					} else if (result.teamLocation == '광주') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="인천">인천</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구">대구</option>';
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주" selected>광주</option>';
+						str += '<option value="울산">울산</option>';
+					} else if (result.teamLocation == '울산') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="인천">인천</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구">대구</option>';
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산" selected>울산</option>';
 					}
 					str += '</select>';
 					str += '</div>';

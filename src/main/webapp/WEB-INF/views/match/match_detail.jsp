@@ -26,24 +26,60 @@
 					str += '<select class="form-select" name="matchLocation">'
 					if (result.matchLocation == '서울') {
 						str += '<option value="서울" selected>서울</option>';
-						str += '<option value="경기">경기</option>';
+						str += '<option value="인천">인천</option>';
 						str += '<option value="대전">대전</option>';
 						str += '<option value="대구">대구</option>';
-					} else if (result.matchLocation == '경기') {
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산">울산</option>';
+					} else if (result.matchLocation == '인천') {
 						str += '<option value="서울">서울</option>';
-						str += '<option value="경기" selected>경기</option>';
+						str += '<option value="인천" selected>인천</option>';
 						str += '<option value="대전">대전</option>';
 						str += '<option value="대구">대구</option>';
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산">울산</option>';
 					} else if (result.matchLocation == '대전') {
 						str += '<option value="서울">서울</option>';
-						str += '<option value="경기">경기</option>';
+						str += '<option value="인천">인천</option>';
 						str += '<option value="대전" selected>대전</option>';
 						str += '<option value="대구">대구</option>';
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산">울산</option>';
 					} else if (result.matchLocation == '대구') {
 						str += '<option value="서울">서울</option>';
-						str += '<option value="경기">경기</option>';
+						str += '<option value="인천">인천</option>';
 						str += '<option value="대전">대전</option>';
 						str += '<option value="대구" selected>대구</option>';
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산">울산</option>';
+					} else if (result.matchLocation == '부산') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="인천">인천</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구">대구</option>';
+						str += '<option value="부산" selected>부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산">울산</option>';
+					} else if (result.matchLocation == '광주') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="인천">인천</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구">대구</option>';
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주" selected>광주</option>';
+						str += '<option value="울산">울산</option>';
+					} else if (result.matchLocation == '울산') {
+						str += '<option value="서울">서울</option>';
+						str += '<option value="인천">인천</option>';
+						str += '<option value="대전">대전</option>';
+						str += '<option value="대구">대구</option>';
+						str += '<option value="부산">부산</option>';
+						str += '<option value="광주">광주</option>';
+						str += '<option value="울산" selected>울산</option>';
 					}
 					str += '</select>';
 					$('.selectLocationDiv').append(str);
@@ -180,7 +216,14 @@ input[type=number] {
 					</div>
 					<div class="col">
 						<c:set var="matchRate" value="${(matchVO.rankWin / (matchVO.rankWin + matchVO.rankDraw + matchVO.rankLose)) * 100  }"/>
-						<input type="text" class="form-control matchRate" id="matchRate" value="승률 : <fmt:formatNumber value="${matchRate}" pattern="0.00" /> %" readonly>
+						<c:if test="${matchRate eq 'NaN'}">
+							<input type="text" class="form-control matchRate" id="matchRate" value="승률 : 0.00%" readonly>
+						</c:if>
+						<c:if test="${matchRate ne 'NaN'}">
+							<input type="text" class="form-control matchRate" id="matchRate" value="승률 : <fmt:formatNumber value="${matchRate}" pattern="0.00" /> %" readonly>
+						</c:if>
+					</div>
+					<div class="col">
 					</div>
 				</div>
 				

@@ -57,9 +57,12 @@
 				<div class="col mb-3">
 					<label for="selectLocation" class="form-label">지역</label> <select class="form-select" aria-label="Default select example" name="mercBoardLocation">
 						<option selected value="서울">서울</option>
-						<option value="경기">경기</option>
+						<option value="인천">인천</option>
 						<option value="대전">대전</option>
 						<option value="대구">대구</option>
+						<option value="부산">부산</option>
+						<option value="광주">광주</option>
+						<option value="울산">울산</option>
 					</select>
 				</div>
 				<div class="col mb-3">
@@ -81,9 +84,6 @@
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" name="mercBoardPossible" id="inlineRadio1" value="1" checked> <label class="form-check-label" for="inlineRadio1">모집중</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="mercBoardPossible" id="inlineRadio2" value="2"> <label class="form-check-label" for="inlineRadio2">모집완료</label>
 					</div>
 				</div>
 				<div class="d-flex justify-content-around mt-5 mb-3">

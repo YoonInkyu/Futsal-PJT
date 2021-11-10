@@ -141,7 +141,7 @@
 		            	AND MERC_BOARD_POSSIBLE = '${searchKeyword}'
 		            </if>
 		            <if test="searchValue != null and !searchValue.equals('')">
-		           		AND MEMBER_ID LIKE '%'||#{searchValue}||'%'
+		           		AND MEMBER_ID LIKE '%'||LOWER(#{searchValue})||'%'
 		            </if>
 		            ORDER BY MERC_BOARD_CODE DESC
 		        )

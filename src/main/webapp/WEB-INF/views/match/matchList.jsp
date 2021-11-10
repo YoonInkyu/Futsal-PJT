@@ -85,15 +85,23 @@
 							<select class="form-select form-select" aria-label=".form-select-lg example" name="searchLocation">
 								<c:if test="${matchVO.searchLocation == null }">
 									<option value="">지역</option>
-									<option value="서울">서울</option>
-									<option value="대구">대구</option>
-									<option value="대전">대전</option>
+										<option value="서울">서울</option>
+										<option value="인천">인천</option>
+										<option value="대전">대전</option>
+										<option value="대구">대구</option>
+										<option value="부산">부산</option>
+										<option value="광주">광주</option>
+										<option value="울산">울산</option>
 								</c:if>
 								<c:if test="${matchVO.searchLocation != null }">
 									<option value="">지역</option>
 									<option value="서울" <c:if test="${matchVO.searchLocation == '서울'}">selected</c:if>>서울</option>
-									<option value="대구" <c:if test="${matchVO.searchLocation == '대구'}">selected</c:if>>대구</option>
+									<option value="대구" <c:if test="${matchVO.searchLocation == '인천'}">selected</c:if>>인천</option>
 									<option value="대전" <c:if test="${matchVO.searchLocation == '대전'}">selected</c:if>>대전</option>
+									<option value="서울" <c:if test="${matchVO.searchLocation == '대구'}">selected</c:if>>대구</option>
+									<option value="대구" <c:if test="${matchVO.searchLocation == '부산'}">selected</c:if>>부산</option>
+									<option value="대전" <c:if test="${matchVO.searchLocation == '광주'}">selected</c:if>>광주</option>
+									<option value="대전" <c:if test="${matchVO.searchLocation == '울산'}">selected</c:if>>울산</option>
 								</c:if>
 							</select>
 						</div>
