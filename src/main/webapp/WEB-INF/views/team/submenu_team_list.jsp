@@ -43,11 +43,11 @@
 
 			<div class="row my-5">
 
-				<div class="col-8 mx-auto m-0 p-0">
+				<div class="col-9 mx-auto m-0 p-0">
 
 					<div class="row mx-auto">
 
-						<div class="col-2">
+						<div class="col-3">
 							<select name="searchKeyword" class="form-select form-select" aria-label=".form-select-lg example">
 							<c:if test="${teamVO.searchKeyword == null}">
 								<option value="T.TEAM_NAME" selected>팀 이름</option>
