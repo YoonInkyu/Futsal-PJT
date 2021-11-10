@@ -25,11 +25,11 @@
 ### 1. 문자 서비스(CoolSMS) SDK
 - 문자 발송을 위해 CoolSMS SDK를 pom.xml에 추가 해야 함.
 ```
-  <dependency>
-		    <groupId>net.nurigo</groupId>
-		    <artifactId>javaSDK</artifactId>
-		    <version>2.2</version>
-		</dependency> 
+<dependency>
+	<groupId>net.nurigo</groupId>
+	<artifactId>javaSDK</artifactId>
+	<version>2.2</version>
+</dependency> 
 ```
 
 # 링크 모음
