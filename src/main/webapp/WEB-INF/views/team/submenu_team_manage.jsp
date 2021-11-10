@@ -139,7 +139,14 @@
 									</c:if>
 									<td>${member.memberName }</td>
 									<td>${member.position }</td>
-									<td>일반회원</td>
+									<td>
+										<c:choose>
+											<c:when test="${member.teamAdmin eq '3'}">팀장</c:when>
+											<c:otherwise> 팀원</c:otherwise>
+										</c:choose>
+									</td>
+								
+									
 									<td>
 										<!-- Button trigger modal -->
 										<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="teamMemberDetail('${member.memberCode}')">상세보기</button> <!-- Modal --> <script type="text/javascript">
