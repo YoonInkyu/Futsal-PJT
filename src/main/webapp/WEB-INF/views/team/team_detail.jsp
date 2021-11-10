@@ -24,7 +24,6 @@
 
 			<div class="col text-center shadow-lg p-3  bg-body rounded">
 
-
 				<div class="row">
 					<div class="col text-start">
 
