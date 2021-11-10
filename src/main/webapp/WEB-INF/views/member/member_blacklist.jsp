@@ -72,11 +72,17 @@
 
 
 																<div class="col text-center">
+																<c:if test="${empty blackInfo.blackImg }">
 																	<div>
 																		<i class="bi bi-camera-fill"></i><img class="img-thumbnail" alt="" src="/resources/img/member/nullImg.png" style="height: 180px; object-fit: cover;">
 																	</div>
+																</c:if>
+																<c:if test="${not empty blackInfo.blackImg }">
+																	<div>
+																		<i class="bi bi-camera-fill"></i><img class="img-thumbnail" alt="" src="/resources/img/member/${blackInfo.blackImg }" style="height: 180px; object-fit: cover;">
+																	</div>
+																</c:if>
 																</div>
-
 															</div>
 															
 															<c:if test="${not empty blackInfo.blackTeam }">
@@ -94,7 +100,7 @@
 
 																	<div class="col text-center">
 																		<div>
-																			<img alt="" src="/resources/img/common/1.png" width="80%">
+																			<i class="bi bi-camera-fill"></i><img class="img-thumbnail" alt="" src="/resources/img/team/${blackInfo.blackTeamLog }" style="height: 180px; object-fit: cover;">
 																		</div>
 																	</div>
 

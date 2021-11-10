@@ -13,6 +13,7 @@
 		<result column="WRITER_NOTICE" property="writerNotice" />
 		<result column="CREATE_DATE_NOTICE" property="createDateNotice" />
 		<result column="BOARD_NUM_NOTICE" property="boardNumNotice" />
+		<result column="WRITER_IMG" property="writerImg" />
 	</resultMap>
 
 
@@ -65,6 +66,7 @@
 		<result column="WRITER_FREE" property="writerFree" />
 		<result column="CREATE_DATE_FREE" property="createDateFree" />
 		<result column="BOARD_NUM_FREE" property="boardNumFree" />
+		<result column="WRITER_IMG" property="writerImg" />
 	</resultMap>
 
 
@@ -90,9 +92,11 @@
 		SELECT WRITER_FREE
 		, TO_CHAR(CREATE_DATE_FREE, 'YYYY.MM.DD. HH24:MI') AS CREATE_DATE_FREE
 		, CONTENT_FREE
-		, REPLY_NUM_FREE
-		FROM REPLY_FREE
-		WHERE BOARD_NUM_FREE = #{boardNumFree}
+		, REPLY_NUM_FREE 
+        , MEMBER_IMG_ATTACHED_NAME AS WRITER_IMG
+		FROM REPLY_FREE R , MEMBER_VIEW M
+		WHERE MEMBER_ID = WRITER_FREE
+        AND BOARD_NUM_FREE = #{bardNumFree}
 		ORDER BY REPLY_NUM_FREE DESC
 	</select>
 

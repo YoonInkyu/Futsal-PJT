@@ -28,6 +28,7 @@
 			location.reload();
 		})
 	});
+	
 </script>
 </head>
 <body>
@@ -233,7 +234,7 @@
 							<h4 style="margin-left: 3rem;">보낸 매칭</h4>
 						</button>
 					</h2>
-					<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+					<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
 						<div class="accordion-body">
 
 

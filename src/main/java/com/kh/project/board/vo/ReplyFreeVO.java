@@ -7,6 +7,16 @@ public class ReplyFreeVO {
 	private String writerFree;
 	private String createDateFree;
 	private int boardNumFree;
+	private String writerImg;
+	
+	
+	public String getWriterImg() {
+		return writerImg;
+	}
+
+	public void setWriterImg(String writerImg) {
+		this.writerImg = writerImg;
+	}
 
 	public int getReplyNumFree() {
 		return replyNumFree;
