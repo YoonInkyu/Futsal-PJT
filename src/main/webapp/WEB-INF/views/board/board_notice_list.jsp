@@ -100,11 +100,11 @@ tr {
 
 			<div class="row mt-5">
 
-				<div class="col-6 mx-auto m-0 p-0">
+				<div class="col-8 mx-auto m-0 p-0">
 
 					<div class="row mx-auto">
 
-						<div class="col-3">
+						<div class="col-2">
 							<select name="searchKeyword" class="form-select form-select" aria-label=".form-select-lg example">
 								<option value="TITLE_NOTICE" selected>제목</option>
 								<option value="CONTENT_NOTICE">내용</option>

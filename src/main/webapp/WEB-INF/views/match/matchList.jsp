@@ -97,7 +97,7 @@
 								</c:if>
 							</select>
 						</div>
-						<div class="col-2">
+						<div class="col-3">
 							<select class="form-select form-select" aria-label=".form-select-lg example" name="searchKeyword">
 								<c:if test="${matchVO.searchKeyword == null}">
 									<option value="">신청여부</option>

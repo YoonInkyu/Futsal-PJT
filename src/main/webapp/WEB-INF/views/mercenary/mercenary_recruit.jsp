@@ -92,7 +92,7 @@
 			</div>
 			<!-- 검색관련 내용 -->
 			<div class="row mt-5">
-				<div class="col-9 mx-auto m-0 p-0">
+				<div class="col-10 mx-auto m-0 p-0">
 					<form action="/mercenary/recruit" method="post">
 						<div class="row mx-auto">
 							<div class="col-2">
@@ -125,7 +125,7 @@
 									</c:if>
 								</select>
 							</div>
-							<div class="col-2">
+							<div class="col-3">
 								<select class="form-select form-select" aria-label=".form-select-lg example" name="searchKeyword">
 									<c:if test="${mercenaryVO.searchKeyword == null}">
 										<option value="">신청여부</option>
