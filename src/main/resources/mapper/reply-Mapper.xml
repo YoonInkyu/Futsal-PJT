@@ -14,6 +14,8 @@
 		<result column="CREATE_DATE_NOTICE" property="createDateNotice" />
 		<result column="BOARD_NUM_NOTICE" property="boardNumNotice" />
 		<result column="WRITER_IMG" property="writerImg" />
+		<result column="TEAM_CODE" property="teamCode" />
+		
 	</resultMap>
 
 
@@ -70,6 +72,7 @@
 		<result column="CREATE_DATE_FREE" property="createDateFree" />
 		<result column="BOARD_NUM_FREE" property="boardNumFree" />
 		<result column="WRITER_IMG" property="writerImg" />
+		<result column="TEAM_CODE" property="teamCode" />
 	</resultMap>
 
 
@@ -97,6 +100,7 @@
 		, CONTENT_FREE
 		, REPLY_NUM_FREE
 		, MEMBER_IMG_ATTACHED_NAME AS WRITER_IMG
+		, TEAM_CODE
 		FROM REPLY_FREE R , MEMBER_VIEW M
 		WHERE MEMBER_ID = WRITER_FREE
 		AND BOARD_NUM_FREE = #{bardNumFree}

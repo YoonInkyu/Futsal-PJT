@@ -62,7 +62,7 @@
 											<button type="button" class="btn link-primary dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${mercBoard.memberId }">${mercBoard.memberId }</button>
 											<ul class="dropdown-menu">
 												<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addMemberBlackModal" style="cursor: pointer;">블랙리스트 추가</li>
-												<li class="dropdown-item">소속 팀 보기</li>
+												<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#teamDetailModal" onclick="teamDetail('${mercBoard.teamCode}')">소속 팀 보기</li>
 											</ul>
 										</div>
 									</td>
@@ -187,6 +187,18 @@
 		function recruitInfo(mercBoardCode) {
 			$(".modal-content").load("/mercenary/recruitDetail?mercBoardCode=" + mercBoardCode);
 		}
+		
+		$(document).ready(function() {
+			var recruitDetailModal = document.getElementById('teamDetailModal');
+			//모달 닫히면 페이지 리로드
+			//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
+			recruitDetailModal.addEventListener('hidden.bs.modal', function(event) {
+				location.reload();
+			})
+		});
+			function teamDetail(teamCode) {
+				$(".modal-content").load("/team/teamDetail?teamCode=" + teamCode);
+			}
 	</script>
 	<!-- 
 		tr 클릭시 상세보기 모달창이고, mercenary_recruit_detail.jsp을 불러와서 div class=content안에 내용 넣음 
@@ -220,7 +232,11 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="modal fade  " id="teamDetailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content"></div>
+		</div>
+	</div>
 
 
 

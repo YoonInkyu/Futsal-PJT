@@ -8,23 +8,24 @@
 	<!-- ============================== 공지사항 ============================== -->
 
 	<resultMap type="com.kh.project.board.vo.BoardNoticeVO" id="boardNotice">
-		<id column="BOARD_NUM_NOTICE" property="boardNumNotice" />
-		<result column="TITLE_NOTICE" property="titleNotice" />
-		<result column="CONTENT_NOTICE" property="contentNotice" />
-		<result column="CREATE_DATE_NOTICE" property="createDateNotice" />
-		<result column="WRITER_NOTICE" property="writerNotice" />
-		<result column="READ_CNT_NOTICE" property="readCntNotice" />
-		<result column="FILE_NAME_NOTICE" property="fileNameNotice" />
-		<result column="BOARD_PW_NOTICE" property="boardPwNotice" />
+		<id column="BOARD_NUM_NOTICE" 			property="boardNumNotice" />
+		<result column="TITLE_NOTICE" 			property="titleNotice" />
+		<result column="CONTENT_NOTICE" 		property="contentNotice" />
+		<result column="CREATE_DATE_NOTICE" 	property="createDateNotice" />
+		<result column="WRITER_NOTICE" 			property="writerNotice" />
+		<result column="READ_CNT_NOTICE" 		property="readCntNotice" />
+		<result column="FILE_NAME_NOTICE" 		property="fileNameNotice" />
+		<result column="BOARD_PW_NOTICE" 		property="boardPwNotice" />
+		<result column="TEAM_CODE" 				property="teamCode" />
 	</resultMap>
 
 
 
 	<resultMap type="com.kh.project.board.vo.NoticeImgVO" id="noticeImg">
-		<id column="NOTICE_IMG_CODE" property="noticeImgCode" />
-		<result column="NOTICE_IMG_ORIGN_NAME" property="noticeImgOrignName" />
-		<result column="NOTICE_IMG_ATTACHED_NAME" property="noticeImgAttachedName" />
-		<result column="BOARD_NUM_NOTICE" property="boardNumNotice" />
+		<id column="NOTICE_IMG_CODE" 					property="noticeImgCode" />
+		<result column="NOTICE_IMG_ORIGN_NAME" 			property="noticeImgOrignName" />
+		<result column="NOTICE_IMG_ATTACHED_NAME" 		property="noticeImgAttachedName" />
+		<result column="BOARD_NUM_NOTICE" 				property="boardNumNotice" />
 	</resultMap>
 
 
@@ -209,23 +210,24 @@
 	<!-- ============================== 자유게시판 ============================== -->
 
 	<resultMap type="com.kh.project.board.vo.BoardFreeVO" id="boardFree">
-		<id column="BOARD_NUM_FREE" property="boardNumFree" />
-		<result column="TITLE_FREE" property="titleFree" />
-		<result column="CONTENT_FREE" property="contentFree" />
-		<result column="CREATE_DATE_FREE" property="createDateFree" />
-		<result column="WRITER_FREE" property="writerFree" />
-		<result column="READ_CNT_FREE" property="readCntFree" />
-		<result column="FILE_NAME_FREE" property="fileNameFree" />
-		<result column="BOARD_PW_FREE" property="boardPwFree" />
+		<id column="BOARD_NUM_FREE" 			property="boardNumFree" />
+		<result column="TITLE_FREE" 			property="titleFree" />
+		<result column="CONTENT_FREE" 			property="contentFree" />
+		<result column="CREATE_DATE_FREE" 		property="createDateFree" />
+		<result column="WRITER_FREE" 			property="writerFree" />
+		<result column="READ_CNT_FREE" 			property="readCntFree" />
+		<result column="FILE_NAME_FREE" 		property="fileNameFree" />
+		<result column="BOARD_PW_FREE" 			property="boardPwFree" />
+		<result column="TEAM_CODE" 				property="teamCode" />
 	</resultMap>
 
 
 
 	<resultMap type="com.kh.project.board.vo.FreeImgVO" id="freeImg">
-		<id column="FREE_IMG_CODE" property="freeImgCode" />
-		<result column="FREE_IMG_ORIGN_NAME" property="freeImgOrignName" />
-		<result column="FREE_IMG_ATTACHED_NAME" property="freeImgAttachedName" />
-		<result column="BOARD_NUM_FREE" property="boardNumFree" />
+		<id column="FREE_IMG_CODE" 					property="freeImgCode" />
+		<result column="FREE_IMG_ORIGN_NAME" 		property="freeImgOrignName" />
+		<result column="FREE_IMG_ATTACHED_NAME" 	property="freeImgAttachedName" />
+		<result column="BOARD_NUM_FREE" 			property="boardNumFree" />
 	</resultMap>
 
 
@@ -240,6 +242,7 @@
 		, READ_CNT_FREE
 		, BOARD_PW_FREE
 		, ROW_NUM
+        , TEAM_CODE
 		FROM
 		(
 		SELECT BOARD_NUM_FREE
@@ -250,18 +253,21 @@
 		, READ_CNT_FREE
 		, BOARD_PW_FREE
 		, ROWNUM AS ROW_NUM
+        , TEAM_CODE
 		FROM
 		(
 		SELECT BOARD_NUM_FREE
 		, TITLE_FREE
 		, CONTENT_FREE
-		, WRITER_FREE
+		, B.WRITER_FREE
 		, TO_CHAR(CREATE_DATE_FREE, 'YYYY-MM-DD') AS CREATE_DATE_FREE
 		, READ_CNT_FREE
 		, BOARD_PW_FREE
-		FROM BOARD_FREE
+        , M.TEAM_CODE
+		FROM BOARD_FREE B, MEMBER M 
+		WHERE B.WRITER_FREE = M.MEMBER_ID 
 		<if test="searchValue != null and !searchValue.equals('')">
-			WHERE ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
+		AND ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
 		</if>
 		ORDER BY BOARD_NUM_FREE DESC
 		)
@@ -291,8 +297,10 @@
 		, WRITER_FREE
 		, FILE_NAME_FREE
 		, READ_CNT_FREE
-		FROM BOARD_FREE
-		WHERE BOARD_NUM_FREE = #{boardNumFree}
+		, TEAM_CODE
+		FROM BOARD_FREE B, MEMBER M  
+        WHERE B.WRITER_FREE = M.MEMBER_ID 
+		AND BOARD_NUM_FREE = #{boardNumFree}
 	</select>
 
 

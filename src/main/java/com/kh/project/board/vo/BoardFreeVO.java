@@ -14,6 +14,17 @@ public class BoardFreeVO extends PageVO {
 	private int readCntFree;
 	private String fileNameFree;
 	private String boardPwFree;
+	private String teamCode;
+	
+	
+
+	public String getTeamCode() {
+		return teamCode;
+	}
+
+	public void setTeamCode(String teamCode) {
+		this.teamCode = teamCode;
+	}
 
 	private List<FreeImgVO> freeImgList;
 

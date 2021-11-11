@@ -8,8 +8,18 @@ public class ReplyFreeVO {
 	private String createDateFree;
 	private int boardNumFree;
 	private String writerImg;
+	private String teamCode;
 	
 	
+	
+	public String getTeamCode() {
+		return teamCode;
+	}
+
+	public void setTeamCode(String teamCode) {
+		this.teamCode = teamCode;
+	}
+
 	public String getWriterImg() {
 		return writerImg;
 	}
