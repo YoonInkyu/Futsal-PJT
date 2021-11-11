@@ -28,6 +28,7 @@
 		<id column="TEAM_CODE" 						property="teamCode"/>
 		<result column="TEAM_NAME" 					property="teamName" />				
 		<result column="TEAM_INTRO" 				property="teamIntro"/>
+		<result column="TEAM_LOCATION" 					property="teamLocation"/>
 		<result column="TEAM_LOGO_IMG_ATTACHED_NAME"	property="teamLogoImgAttachedName"/>
 		<result column="RANK_WIN"					property="rankWin"/>
 		<result column="RANK_DRAW"					property="rankDraw"/>
@@ -42,6 +43,7 @@
 		<result column="POSITION"					property="position"/>
 		<result column="APPLY_CODE"					property="applyCode"/>
 		<result column="APPLY_SORT"					property="applySort"/>
+		<result column="MASTER_NAME" 					property="masterName"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.project.team.vo.TeamApplyVO" id="apply">
@@ -188,10 +190,21 @@
                         AND INNER_T.TEAM_CODE = T.TEAM_CODE) AS MEMBERCOUNT
                     FROM TEAM_LOGO_IMG TI, TEAM T, MEMBER M
                     WHERE T.TEAM_CODE = TI.TEAM_CODE
-                    AND   T.TEAM_CODE = M.TEAM_CODE
-                    <if test="searchValue != null and !searchValue.equals('')">
-                    AND ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
-                    </if>
+                    <choose>
+                    	<when test="searchValue != null and !searchValue.equals('')">
+                    		<if test="searchKeyword.equals('T.TEAM_NAME')">
+                    			AND ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
+                    			AND T.MEMBER_CODE = M.MEMBER_CODE
+                    		</if>
+                    		<if test="searchKeyword.equals('M.MEMBER_NAME')">
+                    			AND ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
+                    			AND T.TEAM_CODE = M.TEAM_CODE
+                    		</if>
+                    	</when>
+                    	<otherwise>
+                    		AND T.MEMBER_CODE = M.MEMBER_CODE
+                    	</otherwise>
+                    </choose>
 		        )
 		)
 		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
@@ -209,7 +222,7 @@
 	
 	
 	<!-- 팀 목록에서 팀상세정보 조회 -->
-	<select id="selectTeamDetail" resultMap="team">
+	<select id="selectTeamDetail" resultMap="teamView">
 		SELECT 
 		    TI.TEAM_LOGO_IMG_ATTACHED_NAME
 		    , TEAM_NAME
@@ -222,9 +235,13 @@
 		        FROM MEMBER
 		        WHERE TEAM_CODE = #{teamCode}
 		        AND TEAM_ADMIN = '3') AS MASTER_NAME
-		FROM TEAM T, TEAM_LOGO_IMG TI
+		    , RANK_WIN
+            , RANK_DRAW
+            , RANK_LOSE
+		FROM TEAM T, TEAM_LOGO_IMG TI, RANK R
 		WHERE T.TEAM_CODE = TI.TEAM_CODE
 		AND T.TEAM_CODE = #{teamCode}
+		AND R.TEAM_CODE = #{teamCode}
 	</select>
 	
 	<!-- 팀관리 팀원 조회 -->

@@ -31,7 +31,7 @@
 						<div class="mb-3">지 역 : ${teamDetail.teamLocation}</div>
 						<div class="mb-3">회원 수 : ${teamDetail.memberCount}</div>
 						<div class="mb-3">팀 장 : ${teamDetail.masterName }</div>
-						<div class="mb-3">승/무/패 : 1승 / 1무 / 1패</div>
+						<div class="mb-3">승/무/패 : ${teamDetail.rankWin }/${teamDetail.rankDraw }/${teamDetail.rankLose }</div>
 						<div class="form-floating">
 							<textarea name="teamIntro" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 19rem;" readonly>${teamDetail.teamIntro }</textarea>
 							<label for="floatingTextarea2">팀 소개</label>
