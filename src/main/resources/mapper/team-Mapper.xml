@@ -255,6 +255,7 @@
             WHERE IM.MEMBER_CODE = M.MEMBER_CODE) AS MEMBER_IMG_ATTACHED_NAME
     	FROM MEMBER M
     	WHERE M.TEAM_CODE = #{teamCode}
+    	ORDER BY TEAM_ADMIN DESC
 	
 	</select>
 	<!-- 팀원 상세조회  -->
