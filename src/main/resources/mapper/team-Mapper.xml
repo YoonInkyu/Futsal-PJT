@@ -188,7 +188,7 @@
                         AND INNER_T.TEAM_CODE = T.TEAM_CODE) AS MEMBERCOUNT
                     FROM TEAM_LOGO_IMG TI, TEAM T, MEMBER M
                     WHERE T.TEAM_CODE = TI.TEAM_CODE
-                    AND   T.MEMBER_CODE = M.MEMBER_CODE
+                    AND   T.TEAM_CODE = M.TEAM_CODE
                     <if test="searchValue != null and !searchValue.equals('')">
                     AND ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
                     </if>
