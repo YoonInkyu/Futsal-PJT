@@ -93,7 +93,7 @@
 														<button type="button" class="btn link-primary dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${freeInfo.writerFree }">${freeInfo.writerFree }</button>
 														<ul class="dropdown-menu">
 															<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addMemberBlackModal" style="cursor: pointer;">블랙리스트 추가</li>
-															<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#teamDetailModal" onclick="teamDetail('${freeInfo.teamCode}')">소속 팀 보기</li>
+															<li class="dropdown-item"  onclick="teamDetail('${freeInfo.teamCode}')">소속 팀 보기</li>
 														</ul>
 													</div>
 												</td>
@@ -301,7 +301,14 @@
 		})
 	});
 		function teamDetail(teamCode) {
-			$(".modal-content").load("/team/teamDetail?teamCode=" + teamCode);
+			
+			if(teamCode == ''){
+				alert('소속팀이 없습니다.')
+			}
+			else{
+				$(".modal-content").load("/team/teamDetail?teamCode=" + teamCode);
+				$('#teamDetailModal').modal('show');
+			}
 		}
 		
 		(function($) {

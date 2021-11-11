@@ -11,7 +11,15 @@
 		//모달 닫히면 페이지 리로드
 		//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
 		matchDetailModal.addEventListener('hidden.bs.modal', function(event) {
-			location.reload();
+		location.reload();
+		})
+	});
+	$(document).ready(function() {
+		var recruitDetailModal = document.getElementById('teamDetailModal');
+		//모달 닫히면 페이지 리로드
+		//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
+		recruitDetailModal.addEventListener('hidden.bs.modal', function(event) {
+		location.reload();
 		})
 	});
 </script>
@@ -48,22 +56,29 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${matchList }" var="match">
-							<tr data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo('${match.matchCode}')">
-								<td>${match.matchLocation }</td>
-								<td>${match.matchDate }&nbsp;/&nbsp;${match.matchStartTime }&nbsp;~&nbsp;${match.matchEndTime }</td>
-								<td>${match.matchApplyNum }명</td>
-								<td>${match.matchWriter }</td>
-								<td>${match.matchRegdate }</td>
+							<tr>
+								<td data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo('${match.matchCode}')">${match.matchLocation }</td>
+								<td data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo('${match.matchCode}')">${match.matchDate }&nbsp;/&nbsp;${match.matchStartTime }&nbsp;~&nbsp;${match.matchEndTime }</td>
+								<td data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo('${match.matchCode}')">${match.matchApplyNum }명</td>
+								<td>
+								<div class="btn-group dropend">
+									<button type="button" class="btn link-primary dropdown-toggle" id="memberMenuButt" data-bs-toggle="dropdown" aria-expanded="false" value="${match.matchWriter }">${match.matchWriter }</button>
+									<ul class="dropdown-menu">
+										<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#teamDetailModal" onclick="teamDetail('${match.teamCode}')">소속 팀 보기</li>
+									</ul>
+								</div>
+								</td>
+								<td data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo('${match.matchCode}')">${match.matchRegdate }</td>
 								<c:choose>
-									<c:when test="${match.matchPossible eq '1' }">
-										<td><button type="button" class="btn btn-success">
+									<c:when test="${match.matchPossible eq '1' }" >
+										<td><button type="button" data-bs-toggle="modal" data-bs-target="#matchDetailModal" class="btn btn-success" onclick="recruitInfo('${match.matchCode}')">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb-fill" viewBox="0 0 16 16">
 												  <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
 												</svg>&nbsp;신청
 											</button></td>
 									</c:when>
 									<c:otherwise>
-										<td><button type="button" class="btn btn-danger">
+										<td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#matchDetailModal" onclick="recruitInfo('${match.matchCode}')">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb-off-fill" viewBox="0 0 16 16">
 												  <path d="M2 6c0-.572.08-1.125.23-1.65l8.558 8.559A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm10.303 4.181L3.818 1.697a6 6 0 0 1 8.484 8.484zM5 14.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5zM2.354 1.646a.5.5 0 1 0-.708.708l12 12a.5.5 0 0 0 .708-.708l-12-12z"/>
 												</svg>&nbsp;마감
@@ -157,11 +172,19 @@
 		function recruitInfo(matchCode) {
 			$(".modal-content").load("/match/matchDetail?matchCode=" + matchCode);
 		}
+		function teamDetail(teamCode) {
+			$(".modal-content").load("/team/teamDetail?teamCode=" + teamCode);
+			}
 	</script>
 	<!-- tr 클릭시 상세보기 모달창이고, match_detail.jsp을 불러와서 div class=content안에 내용 넣음 -->
 	<div class="modal fade" tabindex="-1" id="matchDetailModal">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content matchDetail"></div>
+		</div>
+	</div>
+	<div class="modal fade  " id="teamDetailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content"></div>
 		</div>
 	</div>
 </body>
