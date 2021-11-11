@@ -29,15 +29,27 @@
 				<div class="mb-3">이름 : ${memberDetail.memberName }</div>
 				<div class="mb-3">성별 : ${memberDetail.memberGender }</div>
 				<div class="mb-3">포지션 : ${memberDetail.position }</div>
-				<div class="mb-3">회원등급 : ${memberDetail.teamAdmin }</div>
+				<c:choose>
+					<c:when test="${memberDetail.teamAdmin eq '3' }">
+						<div class="mb-3">회원등급 : 팀장</div>
+					</c:when>
+					<c:otherwise>
+						<div class="mb-3">회원등급 : 팀원</div>
+					</c:otherwise>
+				</c:choose>
 				<div>연락처 : ${memberDetail.memberTell }</div>
 			</div>
-
+			<c:if test="${not empty memberDetail.memberImgAttachedName }">
 			<div class="col">
 				<i class="bi bi-camera-fill"></i><img class="img-thumbnail" src="/resources/img/member/${memberDetail.memberImgAttachedName }" style="height: 180px; object-fit: cover;">
 			</div>
+		</c:if>
+		<c:if test="${empty memberDetail.memberImgAttachedName }">
+			<div class="col">
+				<i class="bi bi-camera-fill"></i><img class="img-thumbnail" src="/resources/img/member/nullImg.png" style="height: 180px; object-fit: cover;">
+			</div>
+		</c:if>
 		</div>
-
 	</div>
 	<div class="modal-footer d-flex justify-content-around">
 		<c:if test="${teamAdmin eq '3' }">

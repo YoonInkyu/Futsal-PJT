@@ -149,7 +149,7 @@
 							<li class="page-item <c:if test="${!teamVO.prev }">disabled</c:if>"><a class="page-link" aria-label="Previous" href="/team/selectTeamList?nowPage=${teamVO.beginPage - 1 }"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
 
-							<c:forEach begin="${teamVO.beginPage }" end="${teamVO.endPage -1 }" var="pageNumber">
+							<c:forEach begin="${teamVO.beginPage }" end="${teamVO.endPage  }" var="pageNumber">
 								<li class="page-item <c:if test="${teamVO.nowPage eq pageNumber }">active</c:if>"><a class="page-link" href="/team/selectTeamList?nowPage=${pageNumber }&searchKeyword=${teamVO.searchKeyword}&searchValue=${teamVO.searchValue}">${pageNumber }</a></li>
 							</c:forEach>
 

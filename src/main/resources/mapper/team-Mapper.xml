@@ -214,7 +214,7 @@
 	<select id="selectTeamCnt" resultType="int">
 		SELECT COUNT(T.TEAM_CODE)
 		FROM TEAM T, MEMBER M
-		WHERE T.TEAM_CODE = M.TEAM_CODE
+		WHERE T.MEMBER_CODE = M.MEMBER_CODE
 		<if test="searchValue != null and !searchValue.equals('')">
 		AND ${searchKeyword} LIKE '%'||#{searchValue}||'%'
 		</if>
