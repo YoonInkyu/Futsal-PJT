@@ -52,7 +52,7 @@ body {
 							<div class="row">
 								<label for="inputId" class="form-label">아이디</label>
 								<div class="col d-grid gap-2 d-md-flex" id="checkIdDiv">
-									<input type="text" class="form-control" id="memberId" name="memberId" required placeholder="1~16 글자수 생성 가능"> <input class="btn btn-primary" type="button" value="중복 체크" id="checkButt" onclick="checkId();">
+									<input type="text" class="form-control" id="memberId" name="memberId" required placeholder="소문자(영문),숫자 4~12자리"> <input class="btn btn-primary" type="button" value="중복 체크" id="checkButt" onclick="checkId();">
 								</div>
 								<div class="mt-2 mb-5" id="idButtCheck" style="color: red; font-size: 12px; margin-top: 2px;">중복체크바랍니다.</div>
 							</div>

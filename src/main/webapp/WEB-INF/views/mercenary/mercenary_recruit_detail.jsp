@@ -203,7 +203,7 @@
 			<!-- 삭제 / 수정 / 신청 버튼 -->
 			<div class="modal-footer d-flex justify-content-around mb-5">
 				<c:choose>
-					<c:when test="${sessionScope.loginInfo.memberName eq mercVO.mercBoardWriter }">
+					<c:when test="${sessionScope.loginInfo.memberId eq mercVO.mercBoardWriter }">
 						<c:if test="${mercVO.mercBoardPossible eq '1' }">
 						<!-- 신청 마감이면 수정,삭제 불가능 -->
 							<input style="width: 10rem;" type="button" class="btn btn-outline-danger delete" value="삭제하기" onclick="location.href='/mercenary/deleteMerc?mercBoardCode=${mercVO.mercBoardCode}'">
@@ -239,7 +239,7 @@
 						<td>${merc.memberId }</td>
 						<td>${merc.position }</td>
 						<td><c:choose>
-								<c:when test="${sessionScope.loginInfo.memberName eq mercVO.mercBoardWriter && mercVO.mercBoardPossible eq '1'}">
+								<c:when test="${sessionScope.loginInfo.memberId eq mercVO.mercBoardWriter && mercVO.mercBoardPossible eq '1'}">
 									<button type="button" class="btn btn-info" onclick="location.href='/mercenary/updateResponse?mercBoardCode=${mercVO.mercBoardCode}&mercListCode=${merc.mercListCode}'">수락</button>
 								</c:when>
 								<c:otherwise>
