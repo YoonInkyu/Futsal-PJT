@@ -14,7 +14,7 @@ $(document).ready(function(){
        }
        else{
     	   
-          location.href='insertTeamApply?teamCode='+teamCode+'&memberCode='+memberCode;
+          location.href='/team/insertTeamApply?teamCode='+teamCode+'&memberCode='+memberCode;
        }
            
    });
