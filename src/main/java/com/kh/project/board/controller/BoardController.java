@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ import com.kh.project.board.vo.FreeImgVO;
 import com.kh.project.board.vo.NoticeImgVO;
 import com.kh.project.common.util.CurrentDateTime;
 import com.kh.project.member.service.MemberService;
+import com.kh.project.member.vo.MemberVO;
 import com.kh.project.menu.service.MenuService;
 
 @Controller
@@ -236,8 +238,10 @@ public class BoardController {
 
 	// 자유게시판 리스트로 이동
 	@RequestMapping("/goFreeList")
-	public String goFreeList(Model model, BoardFreeVO boardFreeVO, String menuVideo, String menuName) {
-
+	public String goFreeList(Model model, BoardFreeVO boardFreeVO, String menuVideo, String menuName, HttpSession session) {
+		String memberCode = ((MemberVO)session.getAttribute("loginInfo")).getMemberCode();
+		
+		boardFreeVO.setMemberCode(memberCode);
 		// 자유게시판 등록된 글 수 카운트
 		boardFreeVO.setTotalCnt(boardFreeService.selectBoardCntFree(boardFreeVO));
 

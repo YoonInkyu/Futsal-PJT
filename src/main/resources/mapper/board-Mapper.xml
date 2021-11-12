@@ -243,6 +243,7 @@
 		, BOARD_PW_FREE
 		, ROW_NUM
         , TEAM_CODE
+        , MEMBER_CODE
 		FROM
 		(
 		SELECT BOARD_NUM_FREE
@@ -254,6 +255,7 @@
 		, BOARD_PW_FREE
 		, ROWNUM AS ROW_NUM
         , TEAM_CODE
+        , MEMBER_CODE
 		FROM
 		(
 		SELECT BOARD_NUM_FREE
@@ -264,8 +266,14 @@
 		, READ_CNT_FREE
 		, BOARD_PW_FREE
         , M.TEAM_CODE
+        , M.MEMBER_CODE
 		FROM BOARD_FREE B, MEMBER M 
 		WHERE B.WRITER_FREE = M.MEMBER_ID 
+        AND M.MEMBER_CODE 
+							NOT IN (
+    							SELECT BLACKMEMBER_CODE 
+    							FROM MEMBER_BLACKLIST 
+    					WHERE MEMBER_CODE = #{memberCode})
 		<if test="searchValue != null and !searchValue.equals('')">
 		AND ${searchKeyword} LIKE '%'||LOWER(#{searchValue})||'%'
 		</if>
