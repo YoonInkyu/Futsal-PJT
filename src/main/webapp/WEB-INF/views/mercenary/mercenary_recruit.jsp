@@ -124,12 +124,12 @@
 									<c:if test="${mercenaryVO.searchLocation != null }">
 										<option value="">지역</option>
 										<option value="서울" <c:if test="${mercenaryVO.searchLocation == '서울'}">selected</c:if>>서울</option>
-										<option value="대구" <c:if test="${mercenaryVO.searchLocation == '인천'}">selected</c:if>>인천</option>
+										<option value="인천" <c:if test="${mercenaryVO.searchLocation == '인천'}">selected</c:if>>인천</option>
 										<option value="대전" <c:if test="${mercenaryVO.searchLocation == '대전'}">selected</c:if>>대전</option>
-										<option value="서울" <c:if test="${mercenaryVO.searchLocation == '대구'}">selected</c:if>>대구</option>
-										<option value="대구" <c:if test="${mercenaryVO.searchLocation == '부산'}">selected</c:if>>부산</option>
-										<option value="대전" <c:if test="${mercenaryVO.searchLocation == '광주'}">selected</c:if>>광주</option>
-										<option value="대전" <c:if test="${mercenaryVO.searchLocation == '울산'}">selected</c:if>>울산</option>
+										<option value="대구" <c:if test="${mercenaryVO.searchLocation == '대구'}">selected</c:if>>대구</option>
+										<option value="부산" <c:if test="${mercenaryVO.searchLocation == '부산'}">selected</c:if>>부산</option>
+										<option value="광주" <c:if test="${mercenaryVO.searchLocation == '광주'}">selected</c:if>>광주</option>
+										<option value="울산" <c:if test="${mercenaryVO.searchLocation == '울산'}">selected</c:if>>울산</option>
 									</c:if>
 								</select>
 							</div>
