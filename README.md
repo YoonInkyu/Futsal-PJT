@@ -39,8 +39,5 @@
 3. 김승수 / sy2003m@naver.com
 4. 박성환 / suremind33@gmail.com
 
-### 프로젝트 동영상
-- 영상 링크 넣으면 됨.
-
-### 프로젝트 설명 PPT
-- 파일 첨부도 되나..?
+### 프로젝트 동영상 & PPT
+https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing
