@@ -32,6 +32,9 @@
 </dependency> 
 ```
 
+# 프로젝트 동영상 & PPT
+- [링크보기](https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing)
+
 # 링크 모음
 ### 참가 인원
 1. 윤인규 / storyik@naver.com
@@ -39,5 +42,4 @@
 3. 김승수 / sy2003m@naver.com
 4. 박성환 / suremind33@gmail.com
 
-### 프로젝트 동영상 & PPT
-- [링크보기](https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing)
+
