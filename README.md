@@ -40,4 +40,4 @@
 4. 박성환 / suremind33@gmail.com
 
 ### 프로젝트 동영상 & PPT
-https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing
+- [링크보기](https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing)
