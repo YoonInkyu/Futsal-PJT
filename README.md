@@ -1,6 +1,8 @@
-# FOOTBALL Project
+# FOOTBALL PJT 개요
 
 같은 지역의 풋살 팀들의 경기를 매칭 시켜주기 위해 제작한 프로젝트 사이트 입니다.
+원하는 날짜와 시간 그리고 팀까지 원하는 대로 모든 것을 직접 매칭할 수 있으며, 팀이 없더라도 용병으로 활동할 수 있습니다.
+
 
 # 기능 리스트 업
 
@@ -15,11 +17,13 @@
 ### 게시판
 - 게시글 작성/수정/삭제/조회, 첨부파일 업로드/다운로드, 댓글 작성/수정/삭제/조회
 
+
 # 개발 환경
 - Java v11.0.11
 - Tomcat v8.5
 - Oracle v11.2.0
 - Spring 5.0.7
+
 
 # 소스 설명
 ### 1. 문자 서비스(CoolSMS) SDK
@@ -32,8 +36,10 @@
 </dependency> 
 ```
 
+
 # 프로젝트 동영상 & PPT
 - [링크보기](https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing)
+
 
 # 링크 모음
 ### 참가 인원
