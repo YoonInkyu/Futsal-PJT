@@ -39,7 +39,7 @@
 
 # 프로젝트 동영상 & PPT
 - [다운로드](https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing)
-- [YouYube](https://youtu.be/INQr-6VKE5k)
+- [YouTube](https://youtu.be/INQr-6VKE5k)
 
 
 # 링크 모음
