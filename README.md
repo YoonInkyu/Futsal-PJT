@@ -38,8 +38,8 @@
 
 
 # 프로젝트 동영상 & PPT
-- [다운로드](https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing)
 - [YouTube](https://youtu.be/INQr-6VKE5k)
+- [다운로드](https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing)
 
 
 # 링크 모음
