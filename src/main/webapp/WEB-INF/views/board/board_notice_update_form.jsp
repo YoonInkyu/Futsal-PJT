@@ -51,13 +51,13 @@
 
 
 					<!-- 파일 업로드 -->
-					<div class="row">
+<!-- 					<div class="row"> -->
 
-						<div class="col mb-5">
-							<label for="fileNotice" class="form-label">파 일 등 록</label> <input type="file" class="form-control" name="fileNotice" multiple>
-						</div>
+<!-- 						<div class="col mb-5"> -->
+<!-- 							<label for="fileNotice" class="form-label">파 일 등 록</label> <input type="file" class="form-control" name="fileNotice" multiple> -->
+<!-- 						</div> -->
 
-					</div>
+<!-- 					</div> -->
 
 
 
