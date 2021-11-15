@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 팀, 회원 상세정보</title>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var recruitDetailModal = document.getElementById('staticBackdrop');

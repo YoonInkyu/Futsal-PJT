@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>용병 게시판 상세보기</title>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(document).on('click', '#change', function() {

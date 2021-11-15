@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>팀 목록</title>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var recruitDetailModal = document.getElementById('staticBackdrop');

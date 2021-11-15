@@ -3,15 +3,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>초기 메인 페이지(현재 미 사용)</title>
 
 
 <style>
-body {
-	background-image: url("/resources/img/common/main2.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
-}
+/* body { */
+/* 	background-image: url("/resources/img/common/main2.jpg"); */
+/* 	background-repeat: no-repeat; */
+/* 	background-size: cover; */
+/* } */
 </style>
 
 

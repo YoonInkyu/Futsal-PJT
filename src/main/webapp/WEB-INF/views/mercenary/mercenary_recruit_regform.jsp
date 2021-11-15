@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>용병 게시판 글 쓰기</title>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(document).on('change', '.mercBoardEndTime', function() {

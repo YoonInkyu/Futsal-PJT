@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>팀 생성</title>
 <script type="text/javascript" src="/resources/team/js/submenu_team_create.js"></script>
 </head>
 <body>

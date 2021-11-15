@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>매치 게시판 상세보기</title>
 <script type="text/javascript">
 	$(document).ready(function() {
 		

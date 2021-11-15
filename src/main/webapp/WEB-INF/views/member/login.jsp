@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 <script type="text/javascript" src="/resources/template/js/top_menu.js?ver=6"></script>
 <style type="text/css">
 a {

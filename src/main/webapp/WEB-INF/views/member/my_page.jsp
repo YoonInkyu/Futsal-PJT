@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 정보</title>
 <script type="text/javascript">
 	function recruitInfo1(mercBoardCode) {
 		$(".modal-content").load("/mercenary/recruitDetail?mercBoardCode=" + mercBoardCode);

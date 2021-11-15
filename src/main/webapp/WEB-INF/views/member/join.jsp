@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 가입</title>
 <script type="text/javascript" src="/resources/member/js/join.js?ver=2"></script>
 <style type="text/css">
 body {

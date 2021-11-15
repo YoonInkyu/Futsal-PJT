@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<!-- <title>Insert title here</title> -->
 <link rel="stylesheet" href="/resources/template/css/top_menu.css">
 <script type="text/javascript" src="/resources/template/js/top_menu.js?ver=6"></script>
 <script type="text/javascript">

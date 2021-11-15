@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자유게시판 목록</title>
 <script type="text/javascript" src="/resources/board/js/board_free_list.js?ver=2"></script>
 <style type="text/css">
 .c_td {

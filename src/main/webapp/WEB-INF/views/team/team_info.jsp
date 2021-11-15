@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 팀, 정보</title>
 <script type="text/javascript" src="/resources/team/js/team_info.js?ver1"></script>
 <script type="text/javascript">
 	$(document).ready(function() {

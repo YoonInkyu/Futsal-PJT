@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title><tiles:insertAttribute name="title" /></title>
+<%-- <title><tiles:insertAttribute name="title" /></title> --%>
 <!-- 태그 초기화 작업 -->
 <link rel="stylesheet" href="/resources/common/reset.css">
 

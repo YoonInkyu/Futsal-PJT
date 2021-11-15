@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 정보 수정</title>
 <script type="text/javascript" src="/resources/member/js/update_member_info2.js?ver=1"></script>
 </head>
 <body>

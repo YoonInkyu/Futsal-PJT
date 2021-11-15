@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자유게시판 상세보기</title>
 <script type="text/javascript" src="/resources/board/js/board_free_detail.js?ver=3"></script>
 </head>
 <body>

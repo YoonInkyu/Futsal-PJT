@@ -40,10 +40,10 @@ public class TemplateController {
 //	}
 	
 	// 나의팀 레이아웃
-	@GetMapping("/templateLayout_myTeam")
-	public String myTeam() {
-		return "myTeam/team/submenu_team_manage";
-	}
+//	@GetMapping("/templateLayout_myTeam")
+//	public String myTeam() {
+//		return "myTeam/team/submenu_team_manage";
+//	}
 
 
 }

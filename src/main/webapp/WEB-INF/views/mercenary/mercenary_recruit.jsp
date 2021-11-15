@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>용병 게시판 목록</title>
 <script type="text/javascript" src="/resources/mercenary/js/mercenary_recruit.js?ver=3"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
