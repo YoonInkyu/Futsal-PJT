@@ -5,24 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>매치 게시판 목록</title>
-<script type="text/javascript">
-	$(document).ready(function() {
-		var matchDetailModal = document.getElementById('matchDetailModal');
-		//모달 닫히면 페이지 리로드
-		//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
-		matchDetailModal.addEventListener('hidden.bs.modal', function(event) {
-		location.reload();
-		})
-	});
-	$(document).ready(function() {
-		var recruitDetailModal = document.getElementById('teamDetailModal');
-		//모달 닫히면 페이지 리로드
-		//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
-		recruitDetailModal.addEventListener('hidden.bs.modal', function(event) {
-		location.reload();
-		})
-	});
-</script>
+<script type="text/javascript" src="/resources/match/js/matchList.js"></script>
 </head>
 <body>
 	<div class="container col-6 mx-auto">
@@ -40,9 +23,7 @@
 					</svg>&nbsp;등 록 하 기
 				</button>
 			</div>
-
 			<div class="col text-center">
-
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
@@ -167,7 +148,7 @@
 			</div>
 		</c:if>
 	</div>
-	<!-- js파일 새로 만들어서 넣어야 함. -->
+	<!-- 모달창 선택 -->
 	<script type="text/javascript">
 		function recruitInfo(matchCode) {
 			$(".modal-content").load("/match/matchDetail?matchCode=" + matchCode);

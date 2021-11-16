@@ -9,47 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <title>매치 게시판 글 쓰기</title>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(document).on('change', '.matchEndTime', function() {
-			var matchStartTime = $('.matchStartTime').val();
-			var matchEndTime = $('.matchEndTime').val();
-
-			if (matchEndTime < matchStartTime) {
-				alert('매치 끝나는 시간이 매치 시작보다 빠릅니다.')
-				$('.matchEndTime').val('');
-			} else {
-			}
-		});
-
-		$(document).on('click', '#matchReg', function() {
-			var inputIntro = $('#inputIntro').val()
-
-			if (inputIntro == '') {
-				alert('매치 소개를 먼저 입력 해주세요.')
-			} else {
-				alert('매치 등록이 완료되었습니다.')
-			}
-		});
-	});
-</script>
+<script type="text/javascript" src="/resources/match/js/match_regForm.js"></script>
 </head>
 <body>
-
-
-
 	<div class="container col-3 mx-auto">
-
 		<div class="row shadow-lg p-3 mb-5 bg-body rounded">
-
 			<div class="row mt-3">
 				<h5 class="mb-3" style="border-bottom: 2px solid blue;">매 치</h5>
 			</div>
-
 			<h3 class="m-5">매치 등록</h3>
-
-
-
 			<form action="/match/matchReg" method="post">
 				<div class="col mb-3">
 					<label for="selectLocation" class="form-label">지역</label> <select class="form-select" aria-label="Default select example" name="matchLocation">
@@ -90,6 +58,5 @@
 			</form>
 		</div>
 	</div>
-
 </body>
 </html>

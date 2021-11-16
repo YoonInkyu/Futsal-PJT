@@ -9,30 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>용병 게시판 글 쓰기</title>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(document).on('change', '.mercBoardEndTime', function() {
-			var mercBoardStartTime = $('.mercBoardStartTime').val();
-			var mercBoardEndTime = $('.mercBoardEndTime').val();
-
-			if (mercBoardEndTime < mercBoardStartTime) {
-				alert('매치 끝나는 시간이 매치 시작보다 빠릅니다.')
-				$('.mercBoardEndTime').val('');
-			} else {
-			}
-		});
-
-		$(document).on('click', '#mercReg', function() {
-			var inputIntro = $('#inputIntro').val()
-
-			if (inputIntro == '') {
-				alert('자기 소개를 먼저 입력 해주세요.')
-			} else {
-				alert('용병 등록이 완료되었습니다.')
-			}
-		});
-	});
-</script>
+<script type="text/javascript" src="/resources/mercenary/js/mercenary_recruit_regform.js"></script>
 </head>
 <body>
 

@@ -6,16 +6,6 @@
 <meta charset="UTF-8">
 <title>용병 게시판 목록</title>
 <script type="text/javascript" src="/resources/mercenary/js/mercenary_recruit.js?ver=3"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		var recruitDetailModal = document.getElementById('recruitDetailModal');
-		//모달 닫히면 페이지 리로드
-		//가끔 모달 닫고 메뉴바가 눌러지지 않아서 강제로 리로드 시킴
-		recruitDetailModal.addEventListener('hidden.bs.modal', function(event) {
-			location.reload();
-		})
-	});
-</script>
 </head>
 <body>
 	<div class="container col-6 mx-auto">
@@ -182,7 +172,7 @@
 			</c:if>
 		</div>
 	</div>
-	<!-- js파일 새로 만들어서 넣어야 함. -->
+	<!-- 모달창 선택 -->
 	<script type="text/javascript">
 		function recruitInfo(mercBoardCode) {
 			$(".modal-content").load("/mercenary/recruitDetail?mercBoardCode=" + mercBoardCode);
