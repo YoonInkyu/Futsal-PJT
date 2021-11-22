@@ -31,6 +31,7 @@
 # 소스 설명
 ### 1. 문자 서비스(CoolSMS) SDK
 - 문자 발송을 위해 CoolSMS SDK를 pom.xml에 추가 해야 함.
+- [CoolSMS 사이트](https://developer.coolsms.co.kr/developer)
 ```
 <dependency>
 	<groupId>net.nurigo</groupId>
