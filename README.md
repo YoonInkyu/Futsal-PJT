@@ -43,7 +43,7 @@
 
 # 프로젝트 동영상 & PPT
 - [YouTube](https://youtu.be/-7R-0i-TMWA)
-- [다운로드](https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing)
+- [구글 드라이브 - 다운로드](https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing)
 
 
 # 링크 모음
