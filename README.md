@@ -18,6 +18,8 @@
 ### 게시판
 - 게시글 작성/수정/삭제/조회, 첨부파일 업로드/다운로드, 댓글 작성/수정/삭제/조회
 
+# 데이터베이스 ERD
+https://github.com/YoonInkyu/Futsal-PJT/issues/1#issue-1059776683
 
 # 개발 환경
 - Java v11.0.11
