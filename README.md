@@ -19,7 +19,7 @@
 - 게시글 작성/수정/삭제/조회, 첨부파일 업로드/다운로드, 댓글 작성/수정/삭제/조회
 
 # 데이터베이스 ERD
-https://github.com/YoonInkyu/Futsal-PJT/issues/1#issue-1059776683
+![Futsal_DB](https://user-images.githubusercontent.com/89242534/142819106-28d828c3-1a4f-4f03-9179-7852c00c1bd9.png)
 
 # 개발 환경
 - Java v11.0.11
