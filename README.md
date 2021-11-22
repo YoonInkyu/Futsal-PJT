@@ -46,8 +46,7 @@
 - [구글 드라이브 - 다운로드](https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing)
 
 
-# 링크 모음
-### 참가 인원
+# 프로젝트 팀원
 1. 윤인규 / storyik@naver.com
 2. 송영준 / tungjun112702@gmail.com
 3. 김승수 / sy2003m@naver.com
