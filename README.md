@@ -42,7 +42,10 @@
 
 
 # 프로젝트 동영상 & PPT
+### 1. 프로젝트 시연 동영상
 - [YouTube](https://youtu.be/-7R-0i-TMWA)
+- 
+### 2. 프로젝트 설명 PPT 및 동영상 다운로드 링크
 - [구글 드라이브 - 다운로드](https://drive.google.com/drive/folders/1f2RWy38Cho7GFt9QEAd32QW9p9VfRCsK?usp=sharing)
 
 
